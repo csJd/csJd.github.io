@@ -205,10 +205,10 @@ highlight_theme: normal
 scroll_to_more: true
 
 
-# Automatically Excerpt. Not recommand.
+# Automatically Excerpt. Not recommand. 自动生成节选，不展示全文
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 

@@ -2,8 +2,9 @@
 title: 我的Hexo使用实践（一）
 date: 2017-02-26 09:36:10
 tags:
-  - Hexo
-  - Practice
+- Hexo
+- Practice
+categories: Experience
 ---
 
 此博客是由Github Pages和Hexo搭建的，分享以下我的使用实践。
@@ -46,5 +47,5 @@ deploy:
 ``` bash
 hexo g -d
 ```
-稍等一会，访问https://yourGithubUserName.github.io/就能看到Hexo的初始页面。
+稍等一会，访问 https://yourGithubUserName.github.io/，就能看到Hexo的初始页面。
 关于`_config.yml`的详细配置可参考[官方文档](https://hexo.io/zh-cn/docs/configuration.html)。
