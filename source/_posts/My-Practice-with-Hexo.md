@@ -47,5 +47,5 @@ deploy:
 ``` bash
 hexo g -d
 ```
-稍等一会，访问 https://yourGithubUserName.github.io/，就能看到Hexo的初始页面。
+稍等一会，访问 <https://yourGithubUserName.github.io>，就能看到Hexo的初始页面。
 关于`_config.yml`的详细配置可参考[官方文档](https://hexo.io/zh-cn/docs/configuration.html)。
