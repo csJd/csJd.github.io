@@ -20,23 +20,23 @@ npm install -g hexo-cli
 
 ## 二. 部署到Github
 ### 1. 创建你的Github Pages repository
-在Github Repositories点击New创建新Repository，命名为**yourGithubUsername.github.io**，**yourGithubUsername**必须是你的Github用户名，如下图。
+在Github Repositories点击New创建新Repository，命名为*yourGithubUsername.github.io*，yourGithubUsername必须是你的Github用户名，如下图。
 ![](https://github.com/csJd/csJd.github.io/raw/res/My-Practice-with-Hexo.png)
 点击下方 Create repository 即可完成创建。
 
 ### 2. 初始化Hexo
-在你想维护你博客的文件夹下clone你刚新建的repository，推荐使用SSH方式（可参考此处，[Cloning with SSH URLs](https://help.github.com/articles/which-remote-url-should-i-use/#cloning-with-ssh-urls)），使用如下命令clone。
+在你想维护你博客的文件夹下clone你刚新建的repository，使用https方式每次push都要输入密码，故推荐使用SSH方式（可参考此处，[Cloning with SSH URLs](https://help.github.com/articles/which-remote-url-should-i-use/#cloning-with-ssh-urls)），在[Github SSH keys管理界面](Github SSH keys管理界面)上传你的PC的SSH key后，就可以使用如下命令clone。
 ``` bash
 git clone git@github.com:csJd/csJd.github.io.git
 ```
-clone完成后进入`yourGithubUserName.github.io`文件夹，执行以下命令初始化Hexo
+clone完成后进入*yourGithubUserName.github.io*文件夹，执行以下命令初始化Hexo
 ``` bash
 hexo init
 npm install
 npm install hexo-deployer-git
 ```
 ### 3. 部署到Github
-进入**yourGithubUserName.github.io**文件夹，编辑站点配置文件**_config.yml**，最下deploy处改为如下，username替换为你的GitHub用户名。
+进入*yourGithubUserName.github.io*文件夹，编辑站点配置文件**_config.yml**，最下deploy处改为如下，username替换为你的GitHub用户名。
 ``` yaml
 deploy:
   type: git

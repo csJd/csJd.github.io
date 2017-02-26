@@ -39,10 +39,10 @@ git push origin hexo    #push本地更改到GitHub Repo
 ``` bash
 git clone git@github.com:csJd/csJd.github.io.git
 ```
-进入站点文件夹(*yourGithubUserName.github.io*文件夹)，输入以下命令就恢复以前的环境了：
+进入站点文件夹（*yourGithubUserName.github.io*文件夹），输入以下命令就恢复以前的环境了：
 ``` bash
 npm install hexo    #安装hexo
 npm install         #安装模块到node_modules
 npm install hexo-deployer-git   #安装部署到Github工具
 ```
-然后就可以像以前一样在*source/_posts*S文件夹编写博客，使用`hexo g -d`即可发布到GitHub Pages。
+然后就可以像以前一样在*source/_posts*文件夹编写博客，使用`hexo g -d`即可发布到GitHub Pages。
