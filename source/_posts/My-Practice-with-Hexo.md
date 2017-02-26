@@ -21,7 +21,7 @@ npm install -g hexo-cli
 ## 二. 部署到Github
 ### 1. 创建你的Github Pages repository
 在Github Repositories点击New创建新Repository，命名为`yourGithubUserName.github.io`,`yourGithubUserName`必须是你的Github用户名，如下图。
-![](\pic\pic20170226225433.png)
+![](https://github.com/csJd/csJd.github.io/raw/res/My-Practice-with-Hexo.png)
 点击下方 Create repository 即可完成创建。
 
 ### 2. 初始化Hexo
