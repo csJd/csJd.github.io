@@ -8,7 +8,7 @@ subtitle:
 description: Don't be evil.
 author: Deng
 avatar: /images/avatar.jpg
-language: 
+language:
 timezone:
 
 # URL
@@ -70,7 +70,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/csJd/csJd.github.io.git
+  repository: git@github.com:csJd/csJd.github.io.git
   branch: master
 
 # Social links
