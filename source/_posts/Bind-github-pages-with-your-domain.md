@@ -24,5 +24,5 @@ ping csJd.github.io
 
 ## 3. 设置CNAME
 在你的`yourusername.github.io`项目点Settings，在Custom domain处填上你刚添加的记录，如 `blog.deng.cf` ，这样就完成了域名的绑定，如下图
-![](/pic/p20170225213223.png)
+![](https://github.com/csJd/res/raw/r/hello-world.png)
 若是使用Hexo搭建，还需在source文件夹下新建CNAME文件，无后缀，内容为你上面填的域名，如blog.deng.cf，然后执行`hexo g -d`部署即可生效
