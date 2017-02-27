@@ -12,6 +12,8 @@ categories: Experience
 ## 一. 设置[主题](https://hexo.io/themes/)
 Hexo官网就提供了很多[主题](https://hexo.io/themes/)，我是用的是[NexT主题](http://theme-next.iissnan.com/)，简单大方且不失美观，以下以NexT主题为例，其余主题也类似。
 
+<!-- more -->
+
 ### 1. 下载NexT
 推荐使用[最新稳定版本](https://github.com/iissnan/hexo-theme-next/releases),下载后解压到你的站点目录下的*themes*目录下，并将 解压后的文件夹名称（hexo-theme-next-5.0.1）更改为 next。
 

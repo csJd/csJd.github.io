@@ -12,6 +12,8 @@ categories: Experience
 ### 1. 安装Node.js和Git
 必须安装了Node.js和Git才能安装使用Hexo，按照[Hexo官方提供的教程](https://hexo.io/zh-cn/docs/index.html)安装即可，Windows用户推荐使用安装包安装，安装过程勾选添加到PATH。
 
+<!-- more -->
+
 ### 2. 安装Hexo
 使用npm一条命令就可完成Hexo的安装，Windwows用户推荐使用Windwows版Git提供的Git Bash执行此命令即后续所有命令（在随意目录鼠标右键点击空白处就有Git Bash Here）。
 ``` bash

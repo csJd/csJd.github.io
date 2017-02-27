@@ -16,6 +16,8 @@ Github提供了GitHub pages绑定到域名的方法，刚好之前申请了一�
 ping csJd.github.io
 ```
 
+<!-- more -->
+
 ## 2. 添加域名DNS记录
 以下两方法选一种即可
 * 进入你的域名管理界面，添加一个A记录到你刚`ping`得的IP，如我添加 *deng.cf* 到 *151.101.100.133*
