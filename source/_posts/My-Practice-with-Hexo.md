@@ -31,14 +31,14 @@ npm install -g hexo-cli
 ``` bash
 git clone git@github.com:csJd/csJd.github.io.git
 ```
-clone完成后进入*yourGithubUserName.github.io*文件夹，执行以下命令初始化Hexo
+clone完成后进入*yourGithubUsername.github.io*文件夹，执行以下命令初始化Hexo
 ``` bash
 hexo init
 npm install
 npm install hexo-deployer-git
 ```
 ### 3. 部署到Github
-进入*yourGithubUserName.github.io*文件夹，编辑站点配置文件**_config.yml**，最下deploy处改为如下，username替换为你的GitHub用户名。
+进入*yourGithubUsername.github.io*文件夹，编辑站点配置文件**_config.yml**，最下deploy处改为如下，username替换为你的GitHub用户名。
 ``` yaml
 deploy:
   type: git
@@ -49,5 +49,5 @@ deploy:
 ``` bash
 hexo g -d
 ```
-稍等一会，访问 <https://yourGithubUserName.github.io>，就能看到Hexo的初始页面。
+稍等一会，访问 <https://yourGithubUsername.github.io>，就能看到Hexo的初始页面。
 关于`_config.yml`的详细配置可参考[官方文档](https://hexo.io/zh-cn/docs/configuration.html)。

@@ -8,6 +8,7 @@ tags:
 - Domain
 - Hexo
 ---
+
 Github提供了GitHub pages绑定到域名的方法，刚好之前申请了一个[freenom](http://www.freenom.com/zh/index.html?lang=zh)的免费域名，用自己的域名有时候会方便一些，下面是方法。
 
 ## 1. Ping
