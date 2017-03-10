@@ -15,7 +15,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.deng.cf
 root: /
-permalink: :year/:title/
+permalink: posts/:title/
 permalink_defaults:
 
 # Directory
@@ -85,5 +85,10 @@ social:
 # Duoshuo
 duoshuo_shortname: csjd
 
+#百度分析ddwust
+baidu_analytics: 09ffdce66330daa350e043a7b029ba2b
+
+#Google 分析
+google_analytics: UA-93363626-1
 
 since: 2016
