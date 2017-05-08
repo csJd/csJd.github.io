@@ -1,5 +1,5 @@
 ---
-title: aries-systemless-root
+title: 小米 2s Magisk 框架实现 Systemless Root
 tags:
   - Phone
 categories:
@@ -30,18 +30,18 @@ fastboot reboot
 * Material Design Xposed Installer - apk，[ xda 发布链接](https://forum.xda-developers.com/xposed/material-design-xposed-installer-t3137758)
 
 # 3. 刷入 Magisk
-在 TWRP Recovery 刷入 *Magisk-v12.0.zip* ，重启进入系统，第一次重启会很慢，是正常的。进入系统后安装 *MagiskManager-v4.3.3.apk*。以上文件名中的版本均为我安装时的最新版。
+在 TWRP Recovery 刷入 **Magisk-v12.0.zip** ，重启进入系统，第一次重启会很慢，是正常的。进入系统后安装 **MagiskManager-v4.3.3.apk**。以上文件名中的版本均为我安装时的最新版。
 打开 Magisk Manager 类似下图就是安装成功了：
 ![](https://raw.githubusercontent.com/csJd/csJd.github.io/res/aries-systemless-root-0.png)
 Magisk 是自带 root 的，不修改 /system 的 root 。
 
 # 4. 安装 xposed 模块
-在上图 Magisk Manager 主界面左划点击模块，添加模块，选择刚下载的 *xposed-v87-sdk21-Magisk-MIUI-edition-by-SolarWarez-20161127.zip* 就行了。
+在上图 Magisk Manager 主界面左划点击模块，添加模块，选择刚下载的 **xposed-v87-sdk21-Magisk-MIUI-edition-by-SolarWarez-20161127.zip** 就行了。
 左划点击下载也能安装更多自己想要的 Magisk 模块。
-然后重启，也很慢，安装 *XposedInstaller_by_dvdandroid_29_04_17.apk* ，xposed 也 ok 了，如下图：
+然后重启，也很慢，安装 **XposedInstaller_by_dvdandroid_29_04_17.apk** ，xposed 也 ok 了，如下图：
 ![](https://raw.githubusercontent.com/csJd/csJd.github.io/res/aries-systemless-root-1.png)
 
 # 5. 尝试 OTA
 都安装好了后，我试了下 OTA ，系统果然是会推送 OTA 的：
 ![](https://raw.githubusercontent.com/csJd/csJd.github.io/res/aries-systemless-root-2.png)
-但要先刷入 *Magisk-uninstaller-20170320.zip*，卸载了 Magisk 才能安装 OTA。不急，安装完 OTA 重启后，再重新刷一下 *Magisk-v12.0.zip* 就行，之前安装的 Magisk 模块不用再重新装了。
+但要先刷入 **Magisk-uninstaller-20170320.zip**，卸载了 Magisk 才能安装 OTA。不急，安装完 OTA 重启后，再重新刷一下 **Magisk-v12.0.zip** 就行，之前安装的 Magisk 模块不用再重新装了。

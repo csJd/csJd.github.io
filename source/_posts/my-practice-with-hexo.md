@@ -15,7 +15,7 @@ categories: Experience
 <!-- more -->
 
 ### 2. 安装Hexo
-使用npm一条命令就可完成Hexo的安装，Windwows用户推荐使用Windwows版Git提供的Git Bash执行此命令即后续所有命令（在随意目录鼠标右键点击空白处就有Git Bash Here）。
+使用npm一条命令就可完成Hexo的安装，Windows用户推荐使用Windows版Git提供的Git Bash执行此命令即后续所有命令（在随意目录鼠标右键点击空白处就有Git Bash Here）。
 ``` bash
 npm install -g hexo-cli
 ```
