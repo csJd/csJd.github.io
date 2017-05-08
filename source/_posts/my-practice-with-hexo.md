@@ -35,7 +35,7 @@ clone完成后进入*yourGithubUsername.github.io*文件夹，执行以下命令
 ``` bash
 hexo init
 npm install
-npm install hexo-deployer-git
+npm install hexo-deployer-git --save
 ```
 ### 3. 部署到Github
 进入*yourGithubUsername.github.io*文件夹，编辑站点配置文件**_config.yml**，最下deploy处改为如下，username替换为你的GitHub用户名。
