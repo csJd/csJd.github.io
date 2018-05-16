@@ -4,7 +4,7 @@ tags:
   - Phone
 categories:
   - Experience
-date: 2017-05-08 16:20:20
+date: 2017-02-08 16:20:20
 ---
 
 听说最近出了个 Magisk 框架，可以在不修改 /system 下实现 root 和 xposed ，这样理论上装了 xposed 框架还能 OTA ，听起来真不错。就拿出了我的 2s 折腾了下，发现真的可以，这里分享一下过程。
