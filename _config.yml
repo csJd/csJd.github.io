@@ -44,6 +44,15 @@ highlight:
   auto_detect: false
   tab_replace:
 
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -74,21 +83,19 @@ deploy:
   branch: master
 
 # Social links
-social:
-  GitHub: https://github.com/csJd
+# social:
+  # GitHub: https://github.com/csJd
   # Twitter: https://twitter.com/your-user-name
-  Weibo: http://weibo.com/iooden
+  # Weibo: http://weibo.com/iooden
   # Douban: http://douban.com/people/your-user-name
   # Zhihu: http://www.zhihu.com/people/your-user-name
   # others
 
-# Duoshuo
-#duoshuo_shortname: csjd
-
 #百度分析ddwust
-baidu_analytics: 09ffdce66330daa350e043a7b029ba2b
+# baidu_analytics: 09ffdce66330daa350e043a7b029ba2b
 
 #Google 分析
-google_analytics: UA-93363626-1
+# google_analytics: UA-93363626-1
 
-since: 2016
+since: 2014
+#
