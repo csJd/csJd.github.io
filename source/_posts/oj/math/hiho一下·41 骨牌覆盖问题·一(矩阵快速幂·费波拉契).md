@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - Mathematics
        - OJ
+       - Mathematics
 
 date: 2015-04-13 17:09:52
 ---

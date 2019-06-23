@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - String
        - OJ
+       - String
 
 date: 2015-01-21 17:49:37
 ---

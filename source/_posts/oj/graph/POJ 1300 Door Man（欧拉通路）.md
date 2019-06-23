@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - Graph
        - OJ
+       - Graph
 
 date: 2014-11-11 15:55:31
 ---

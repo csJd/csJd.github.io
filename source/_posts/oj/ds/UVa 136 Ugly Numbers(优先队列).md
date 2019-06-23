@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - Data structure
        - OJ
+       - Data structure
 
 date: 2015-01-20 20:52:48
 ---

@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - DP
        - OJ
+       - DP
 
 date: 2015-02-07 13:54:46
 ---

@@ -5,8 +5,8 @@ tags:
        - Algorithm
 
 category: 
-       - Search
        - OJ
+       - Search
 
 date: 2015-03-25 20:03:41
 ---
