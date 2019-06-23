@@ -45,6 +45,5 @@ git clone git@github.com:csJd/csJd.github.io.git
 ``` bash
 npm install hexo-cli -g               #安装hexo
 npm install                           #安装模块到node_modules
-npm install hexo-deployer-git --save  #安装部署到Github工具
 ```
 然后就可以像以前一样在*source/_posts*文件夹编写博客，使用`hexo g -d`即可发布到GitHub Pages。
