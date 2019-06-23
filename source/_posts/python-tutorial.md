@@ -1,9 +1,9 @@
 ---
-title: python-basic-tutorial
+title: Python basic tutorial
 tags:
   - Python
 categories:
-  - Tutorial
+  - Tutorials
 date: 2019-01-26 09:22:16
 ---
 
