@@ -1,5 +1,5 @@
 ---
-title: Python basic tutorial
+title: Python Basic Tutorial
 tags:
   - Python
 categories:
