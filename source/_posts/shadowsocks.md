@@ -40,7 +40,7 @@ net.ipv4.tcp_congestion_control = bbr
     "method":"rc4-md5",
 }
 ```
-密码设置自己的，其余可与以上相同，其中每项的具体作用可查阅[Shadowsocks官网](https://shadowsocks.org/en/config/quick-guide.html)。
+密码设置自己的，其余可与以上相同，其中每项的具体作用可查阅 [Shadowsocks 官网](https://shadowsocks.org/en/config/quick-guide.html)。
 
 ## 四. 开启 Shadowsocks 后台服务
 执行以下命令即可开启 Shadowsocks 后台服务：
