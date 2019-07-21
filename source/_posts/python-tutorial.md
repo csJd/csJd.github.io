@@ -7,9 +7,9 @@ categories:
 date: 2019-01-26 09:22:16
 ---
 
-# Python basic tutorial（2019.01.26）
+# Python Basic Tutorial（2019.01.26 @ SCUT）
 
-- [Python basic tutorial（2019.01.26）](#Python-basic-tutorial20190126)
+- [Python Basic Tutorial（2019.01.26 @ SCUT）](#Python-Basic-Tutorial20190126--SCUT)
   - [Prerequisites](#Prerequisites)
   - [Python tutorial ( Forked from CS231)](#Python-tutorial--Forked-from-CS231)
     - [Standard Input & Output](#Standard-Input--Output)
