@@ -60,7 +60,7 @@ remote_port = 22000
 
 ## 启用 frpc 服务
 修改 `/opt/frp/systemd/frpc.service` 中的文件路径 (第 10，11 行) 为
-```
+```service
 ExecStart=/opt/frp/frpc -c /opt/frp/frpc.ini
 ExecReload=/opt/frp/frpc reload -c /opt/frp/frpc.ini
 ```

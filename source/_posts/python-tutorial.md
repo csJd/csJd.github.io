@@ -9,34 +9,34 @@ date: 2019-01-26 09:22:16
 
 # Python Basic Tutorial（2019.01.26 @ SCUT）
 
-- [Python Basic Tutorial（2019.01.26 @ SCUT）](#Python-Basic-Tutorial20190126--SCUT)
-  - [Prerequisites](#Prerequisites)
-  - [Python tutorial ( Forked from CS231)](#Python-tutorial--Forked-from-CS231)
-    - [Standard Input & Output](#Standard-Input--Output)
-    - [Basic data types](#Basic-data-types)
-      - [Numbers](#Numbers)
-      - [Booleans](#Booleans)
-      - [Strings](#Strings)
-      - [None](#None)
-      - [Type casting](#Type-casting)
-      - [Quiz #1: Calclating A + B + C](#Quiz-1-Calclating-A--B--C)
-    - [Containers](#Containers)
-      - [Lists | [value, ]](#Lists--value)
-      - [Quiz #2: Fibonacci numbers](#Quiz-2-Fibonacci-numbers)
-      - [Dictionaries | {key: value, }](#Dictionaries--key-value)
-      - [Sets | {element, }](#Sets--element)
-      - [Quiz #3: Remove repeated values](#Quiz-3-Remove-repeated-values)
-      - [Tuples | (value, )](#Tuples--value)
-    - [Control flow](#Control-flow)
-      - [Condition](#Condition)
-      - [Loops](#Loops)
-    - [Functions](#Functions)
-      - [Quiz #4 : Implement `sqrt()` function](#Quiz-4--Implement-sqrt-function)
-    - [Classes](#Classes)
-    - [File Input & Output](#File-Input--Output)
-      - [Quiz #5: Char count](#Quiz-5-Char-count)
-    - [Exceptions](#Exceptions)
-  - [END](#END)
+- [Python Basic Tutorial（2019.01.26 @ SCUT）](#python-basic-tutorial20190126--scut)
+  - [Prerequisites](#prerequisites)
+  - [Python tutorial ( Forked from CS231)](#python-tutorial--forked-from-cs231)
+    - [Standard Input & Output](#standard-input--output)
+    - [Basic data types](#basic-data-types)
+      - [Numbers](#numbers)
+      - [Booleans](#booleans)
+      - [Strings](#strings)
+      - [None](#none)
+      - [Type casting](#type-casting)
+      - [Quiz #1: Calclating A + B + C](#quiz-1-calclating-a--b--c)
+    - [Containers](#containers)
+      - [Lists | [value, ]](#lists--value)
+      - [Quiz #2: Fibonacci numbers](#quiz-2-fibonacci-numbers)
+      - [Dictionaries | {key: value, }](#dictionaries--key-value)
+      - [Sets | {element, }](#sets--element)
+      - [Quiz #3: Remove repeated values](#quiz-3-remove-repeated-values)
+      - [Tuples | (value, )](#tuples--value)
+    - [Control flow](#control-flow)
+      - [Condition](#condition)
+      - [Loops](#loops)
+    - [Functions](#functions)
+      - [Quiz #4 : Implement `sqrt()` function](#quiz-4--implement-sqrt-function)
+    - [Classes](#classes)
+    - [File Input & Output](#file-input--output)
+      - [Quiz #5: Char count](#quiz-5-char-count)
+    - [Exceptions](#exceptions)
+  - [END](#end)
 
 
 ## Prerequisites
@@ -432,7 +432,7 @@ else:
     print('More')
 ```
 
-There can be zero or more [`elif`](https://docs.python.org/3/reference/compound_stmts.html#elif) parts, and the [`else`](https://docs.python.org/3/reference/compound_stmts.html#else) part is optional. The keyword ‘`elif`’ is short for ‘else if’, and is useful to avoid excessive indentation. An `if` … `elif` … `elif` … sequence is a substitute for the `switch` or `case` statements found in other languages.
+There can be zero or more [`elif`](https://docs.python.org/3/reference/compound_stmts.html#elif) parts, and the [`else`](https://docs.python.org/3/reference/compound_stmts.html#else) part is optional. The keyword ‘`elif`’ is short for ‘else if’, and is useful to avoid excessive indentation. An `if … elif … elif …` sequence is a substitute for the `switch` or `case` statements found in other languages.
 
 
 
@@ -616,7 +616,7 @@ with open('file.txt') as file:
 
 [Download data file here](https://raw.githubusercontent.com/csJd/md-notes/master/review/python_tutorial.md). Calclate all characters' frequencies and save them into `charcount.txt` file like following.
 
-```
+```plain
 char counts
 -----------
 .    233

@@ -15,7 +15,7 @@ date: 2019-07-20 22:19:31
 在 [AWS Educate 主页](https://aws.amazon.com/cn/education/awseducate) 点击 「加入 AWS Educate」 ，身份选择 「Student」，下一步，电子邮件需要填学校的邮箱，收到邮件点击链接就可以完成注册。有信用卡（别人的没用过的也行）的话就继续注册 AWS 账户，没有就直接使用 AWS Educate Starter 账户，但是会有 [一些限制](https://aws.amazon.com/cn/premiumsupport/knowledge-center/educate-starter-account/)，送的抵扣金额也少一些。我注册的是 AWS 账户，以下步骤也是针对 AWS 账户，AWS Educate Starter 账户可能会有所不同。
 
 # 注册 AWS 账户（需信用卡）
-注册 AWS 账户需要信用卡，银联的信用卡也是可以的。在 AWS [账户注册站点](https://portal.aws.amazon.com/billing/signup#/start) 按步骤即可完成注册。注册完成后再 “我的账户” 可以看到账户 ID（12位数字），复制账户 ID，再登录 [AWS Educate](https://www.awseducate.com/signin/SiteLogin) 输入 AWS 账户 ID 就可以得到 $100 的服务抵扣金额的优惠代码，可在 [此处](https://www.awseducate.com/student/s/awssite) 查看。
+注册 AWS 账户需要信用卡，银联的信用卡也是可以的。在 AWS [账户注册站点](https://portal.aws.amazon.com/billing/signup#/start) 按步骤即可完成注册。注册完成后再 “我的账户” 可以看到账户 ID（12 位数字），复制账户 ID，再登录 [AWS Educate](https://www.awseducate.com/signin/SiteLogin) 输入 AWS 账户 ID 就可以得到 $100 的服务抵扣金额的优惠代码，可在 [此处](https://www.awseducate.com/student/s/awssite) 查看。
 
 ![image](https://raw.githubusercontent.com/csJd/res/master/pic/image.png)
 

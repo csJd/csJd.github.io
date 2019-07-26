@@ -13,8 +13,8 @@ date: 2017-02-08 16:20:20
 <!-- more -->
 
 # 1. 刷入 TWRP Recovery
-在[ TWRP 官网](https://dl.twrp.me/aries/)下载小米2s最新的 TWRP Recovery ,使用 fastboot 刷入并重启进入recovery，命令如下
-```
+在[TWRP 官网](https://dl.twrp.me/aries/)下载小米 2s 最新的 TWRP Recovery ,使用 fastboot 刷入并重启进入 recovery，命令如下
+```plain
 fastboot flash recovery twrp-3.1.0-0-aries.img
 fastboot reboot
 ```
@@ -25,9 +25,9 @@ fastboot reboot
 * 最新版 [Magisk - zip](http://tiny.cc/latestmagisk)
 * 最新版 [Magisk Uninstaller - zip](http://tiny.cc/latestuninstaller) 
 * 最新版 [Magisk Manager - apk](http://tiny.cc/latestmanager)
-  这里也给出 Magisk 的[ xda 发布链接](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)。
-* Magisk Xposed for MIUI by SolarWarez - zip，[下载链接](https://forum.xda-developers.com/attachment.php?attachmentid=3950449&d=1480267001)，[ xda 发布链接](https://forum.xda-developers.com/xposed/unofficial-xposed-miui-t3367634)
-* Material Design Xposed Installer - apk，[ xda 发布链接](https://forum.xda-developers.com/xposed/material-design-xposed-installer-t3137758)
+  这里也给出 Magisk 的[xda 发布链接](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)。
+* Magisk Xposed for MIUI by SolarWarez - zip，[下载链接](https://forum.xda-developers.com/attachment.php?attachmentid=3950449&d=1480267001)，[xda 发布链接](https://forum.xda-developers.com/xposed/unofficial-xposed-miui-t3367634)
+* Material Design Xposed Installer - apk，[xda 发布链接](https://forum.xda-developers.com/xposed/material-design-xposed-installer-t3137758)
 
 # 3. 刷入 Magisk
 在 TWRP Recovery 刷入 **Magisk-v12.0.zip** ，重启进入系统，第一次重启会很慢，是正常的。进入系统后安装 **MagiskManager-v4.3.3.apk**。以上文件名中的版本均为我安装时的最新版。
