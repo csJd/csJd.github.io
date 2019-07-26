@@ -45,7 +45,7 @@ sudo service frps start
 修改 `/opt/frp/frpc.ini` 如下
 ```ini
 [common]
-server_addr = a.b.c.d
+server_addr = 1.1.1.1
 server_port = 7000
 
 [ssh]
@@ -54,7 +54,7 @@ local_ip = 127.0.0.1
 local_port = 22
 remote_port = 22000
 ```
-其中 `server_addr]` 为你的服务器公网 ip 或者绑定的域名，也可以使用其他人提供的[免费 frp 服务器](http://www.frps.top/)。
+其中 `server_addr` 为你的服务器公网 ip 或者绑定的域名，也可以使用其他人提供的 [免费 frp 服务器](http://www.frps.top/)。
 `remote_port` 为端口号，可设置为任何不冲突端口号（如 22000），后续外网访问内网 PC 就是使用此端口号。
 
 
@@ -74,7 +74,7 @@ sudo service frps start
 # 外网访问
 现在就可以使用 SSH 外网连接内网 PC 了，端口号和上面配置的相对应就行。
 ```sh
-ssh deng@a.b.c.d -P 22000
+ssh deng@1.1.1.1 -P 22000
 ```
 ---
-更多 frp 的相关应用可以查看[官方文档](https://github.com/fatedier/frp/blob/master/README_zh.md)。
+更多 frp 的相关应用可以查看 [官方文档](https://github.com/fatedier/frp/blob/master/README_zh.md)。
