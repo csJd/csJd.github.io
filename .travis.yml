@@ -1,0 +1,42 @@
+# Travis CI for hexo on GitHub Pages
+
+language: node_js
+node_js: stable
+
+# Travis-CI Caching
+# npm is cached by default on Travis CI
+# cache: npm
+
+# Build on which branches
+branches:
+  only:
+    - hexo
+
+# Build Lifecycle
+install:
+  # `npm ci` is better than `npm install`
+  - npm ci
+
+before_script:
+  # - npm install -g hexo-cli
+
+script:
+  - hexo g
+
+after_script:
+  # - hexo clean
+
+# deply to GitHub Pages https://docs.travis-ci.com/user/deployment/pages/
+deploy:
+  provider: pages
+  local_dir: ./public/
+  target_branch: master
+  skip_cleanup: true
+  committer_from_gh: true
+  # Set in the settings page of your repository, as a secure variable
+  github_token:
+    secure: "Uz0q3HH6giIDDULayqFgtiSGndZRXW/X8AciIWNbNJQDGxKFhqgoCQyY+/NJmQlJK53WYpgwWL5mTA25yehD0faTsgvduhZ2VfJFH/mMmEqcNjCI90du5OSJc46+sp6nfy/FRe9aYfiChUkfAEXDQoad85NnkTCLQ4SPGpz0R5nXQ4CaA/v8a3xcuL3PLgHFxG4MaJGd892QgQOVFTXheO3lRpD65uxlWa7xWUvdBniui+MBqhuSTuT6TzhECdLlfmr/tx5esEZrXOmXiNOGfX5o2FNTqAZoTgPakxmMyV1Oj1Q0c6jj+K5eHZnXuW3vipD4ZjfnCpS9bWmDgPwsN8C9pdshW/GoPCGfNuT+mE9isd3y/CUcu7is8JwHipPJaniPszV5NyJTAcabE65RjWZHnXKXSd1Q740Yoek9/HDrCkNbixSVxjgjXDe9N2NrcDsED8B4jeYdng5VbfwuwtkorDLwUW3NroDwZethFMdi5Rlr+fUOpPWtQFzTOuc4/l3K6Fu/AC5vhvrTnYvx0BrAFO0uMw37a4EepcFuh7/+RnmOdLWo21NuSypFgnD+Sd0pDkL4bP4GTundRzj9ekUGTprl3O7FKs/j/XV1uKcT6bJO3h/nuEN0Zn1Wpp4K/8m+6QVrnS4JfqyAMx0G9kx9G4TdtDwh4TJktw="
+  keep_history: true
+  on:
+    branch: hexo
+
