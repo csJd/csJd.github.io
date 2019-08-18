@@ -43,7 +43,7 @@ date: 2019-08-18 16:25:01
 
 
   def main():
-      # two pointer solution
+      # two pointers solution
       n_cases = int(input())
       while n_cases > 0:
           n_cases -= 1
@@ -52,7 +52,7 @@ date: 2019-08-18 16:25:01
 
           le = ri = 0
           max_length = 0
-          cnt = 0  # the count of non-'N' in current [le, ri] window
+          cnt = 0  # the count of non-'N's in current [le, ri] window
           while ri < length:
               if cnt > 2:
                   if s[le] != 'N':
@@ -96,7 +96,7 @@ date: 2019-08-18 16:25:01
   window = set()
   ans = [0, 0]
   while ri < length:
-      while ri < length and s[ri] in window:
+      while s[ri] in window:
           window.remove(s[le])
           le += 1
       window.add(s[ri])
@@ -109,7 +109,7 @@ date: 2019-08-18 16:25:01
 
 * 字节跳动面试题（190818）
 
-  > 求 arr[j] - arr[i] 的最大值， j > i
+  > 求 arr[j] - arr[i] 的最大值， j >= i
 
   ```python
   """
