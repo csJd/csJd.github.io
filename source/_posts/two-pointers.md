@@ -4,7 +4,7 @@ tags:
   - Algorithm
 categories:
   - Review
-date: 2019-08-18 16:25:01
+date: 2019-07-18 16:25:01
 ---
 
 这里对笔试题中常用到的「双指针技巧」进行简单的归纳，后续遇到会继续补充。
@@ -16,6 +16,7 @@ date: 2019-08-18 16:25:01
 * 已知链表中含有环，返回这个环的起始位置
 * 寻找链表的中点
 * 寻找链表的倒数第 k 个元素
+* 调整数组顺序使得满足某种条件的数（如奇数）位于不满足条件的前面
 * [滑动窗口解决子串问题](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/solution/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/)
 * [LeetCode 相关题目](https://leetcode.com/tag/two-pointers/)
 
