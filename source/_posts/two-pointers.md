@@ -16,9 +16,15 @@ date: 2019-07-18 16:25:01
 * 已知链表中含有环，返回这个环的起始位置
 * 寻找链表的中点
 * 寻找链表的倒数第 k 个元素
-* 调整数组顺序使得满足某种条件的数（如奇数）位于不满足条件的前面
 * [滑动窗口解决子串问题](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/solution/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/)
 * [LeetCode 相关题目](https://leetcode.com/tag/two-pointers/)
+
+## 数组相关问题
+
+* 调整数组顺序使得满足某种条件的数（如奇数）位于不满足条件的前面
+* 排序数组中和为 s 的两个数字
+* 排序数组中和为 s 的所有子数组
+* 和为 s 的连续正数序列
 
 ## 笔试题记录
 
