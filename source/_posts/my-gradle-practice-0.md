@@ -3,13 +3,14 @@ title: 我的 Gradle 使用实践（零）
 tags:
   - Gradle
 categories:
-  - Practices
+  - Practice
 date: 2017-03-11 23:14:38
 ---
 Gradle 是一款非常强大的构建工具，最近学习了下 Gradle 的基础使用，这里记录下我的使用实践。
 <!-- more -->
 
 ## 一. 安装 Gradle
+
 [安装 Gradle](https://gradle.org/install#manually) 直接去官网下载 [最新 zip 包](https://gradle.org/releases)，解压到某个文件夹，然后添加环境变量`GRADLE_HOME`，内容为你解压文文件夹的路径，此目录下含有 `bin` 文件夹。然后再将 `%GRADLE_HOME%\bin` 添加到 PATH 变量中，cmd 执行 `gradle -v`，类似下图则安装成功：
 ![](http://upload-images.jianshu.io/upload_images/1281889-dcb4090d1cc75b47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

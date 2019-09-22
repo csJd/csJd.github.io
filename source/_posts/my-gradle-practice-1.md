@@ -3,7 +3,7 @@ title: 我的 Gradle 使用实践（一）
 tags:
   - Gradle
 categories:
-  - Practices
+  - Practice
 date: 2017-03-12 12:19:50
 ---
 上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 [Getting Started](https://guides.gradle.org/creating-java-applications/)。
