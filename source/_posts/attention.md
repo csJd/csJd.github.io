@@ -81,13 +81,13 @@ $$
   \quad
   \begin{aligned}
   A &= \tanh(HW+b) \quad & (A \in \mathbb{R}^{n\times d_w})\\
-  \alpha &= softmax(Aw) \quad & (w \in \mathbb{R}^{d_w}, \alpha \in \mathbb{R}^{n})\\
+  \alpha &= softmax(Au) \quad & (u \in \mathbb{R}^{d_w}, \alpha \in \mathbb{R}^{n})\\
   r &= \alpha^TH \quad & (r \in \mathbb{R}^{d})
   \end{aligned}
 $$
 
 * input: $H \in \mathbb{R}^{n\times d}$
-* parameters to train: $W \in \mathbb{R}^{d\times d_w}$, $u_w \in \mathbb{R}^{d_w}$
+* parameters to train: $W \in \mathbb{R}^{d\times d_w}$, $u \in \mathbb{R}^{d_w}$
 * output: sentence representation $r \in \mathbb{R}^d$
 
 ## Self-Attention in Transformer
