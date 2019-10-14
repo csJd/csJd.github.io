@@ -16,6 +16,7 @@ date: 2019-07-20 22:19:31
 
 # 注册 AWS 账户（需信用卡）
 注册 AWS 账户需要信用卡，银联的信用卡也是可以的。在 AWS [账户注册站点](https://portal.aws.amazon.com/billing/signup#/start) 按步骤即可完成注册。注册完成后再 “我的账户” 可以看到账户 ID（12 位数字），复制账户 ID，再登录 [AWS Educate](https://www.awseducate.com/signin/SiteLogin) 输入 AWS 账户 ID 就可以得到 $100 的服务抵扣金额的优惠代码，可在 [此处](https://www.awseducate.com/student/s/awssite) 查看。
+复制该优惠代码，在 [AWS 账单 | 服务抵扣金额](https://console.aws.amazon.com/billing/home#/credits) 处粘贴即可绑定该 $100 到 AWS 账户。
 
 ![image](https://raw.githubusercontent.com/csJd/res/master/pic/image.png)
 
