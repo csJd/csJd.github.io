@@ -83,6 +83,8 @@ sudo service shadowsocks-libev status
   sudo setcap cap_net_bind_service+ep /usr/local/bin/obfs-server
   ```
 
-* To enable `simple-obfs` in your client, set `plugin` field as the relaive path of `obfs-local` and set `plugin_opts` field as `obfs=tls;obfs-host=t.cn`
+* To enable `simple-obfs` in your client:
+  * set `plugin` field as the relative path of `obfs-local`
+  * set `plugin_opts` field as `obfs=tls;obfs-host=t.cn`
 
 * [Optimizing](https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks)
