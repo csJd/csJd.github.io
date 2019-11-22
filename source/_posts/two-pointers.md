@@ -25,6 +25,8 @@ date: 2019-07-18 16:25:01
 * 排序数组中和为 s 的两个数字
 * 排序数组中和为 s 的所有子数组
 * 和为 s 的连续正数序列
+* [接雨水问题](https://leetcode.com/problems/trapping-rain-water/description)
+* [颜色排序问题](https://leetcode.com/problems/sort-colors/description/)
 
 ## 笔试题记录
 

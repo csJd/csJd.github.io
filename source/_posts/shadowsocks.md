@@ -43,7 +43,9 @@ net.ipv4.tcp_congestion_control = bbr
     "local_port":1080,
     "password":"setYourPassword",
     "timeout":600,
-    "method":"rc4-md5",
+    "method":"aes-256-gcm",
+    "mode":"tcp_and_udp",
+    "fast_open":true,
 }
 ```
 
@@ -62,3 +64,21 @@ sudo service shadowsocks-libev start
 ```sh
 sudo service shadowsocks-libev status
 ```
+
+## Additional
+
+* Using a well-know port (such as 443) may make it more stable
+* If [`simple-obfs`](https://github.com/shadowsocks/simple-obfs) installed, add following to `config.json` of ss-server
+
+  ```json
+  "plugin":"obfs-server",
+  "plugin_opts":"obfs=tls;failover=127.0.0.1:443",
+  ```
+
+  to enalbe well-know ports binding:
+
+  ```sh
+  setcap cap_net_bind_service+ep /usr/local/bin/obfs-server
+  ```
+
+* [Optimizing](https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks)
