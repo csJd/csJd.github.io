@@ -65,10 +65,12 @@ sudo service shadowsocks-libev start
 sudo service shadowsocks-libev status
 ```
 
-## Additional
+---
 
-* Using a well-know port (such as 443) may make it more stable
-* If [`simple-obfs`](https://github.com/shadowsocks/simple-obfs) installed, add following to `config.json` of ss-server
+## Additional (not required)
+
+* Using a well-know port (such as 443) might make it more stable
+* If you have [simple-obfs](https://github.com/shadowsocks/simple-obfs) installed in your server, add following to `config.json` of `ss-server`
 
   ```json
   "plugin":"obfs-server",
@@ -78,7 +80,9 @@ sudo service shadowsocks-libev status
   to enalbe well-know ports binding:
 
   ```sh
-  setcap cap_net_bind_service+ep /usr/local/bin/obfs-server
+  sudo setcap cap_net_bind_service+ep /usr/local/bin/obfs-server
   ```
+
+* To enable `simple-obfs` in your client, set `plugin` field as the relaive path of `obfs-local` and set `plugin_opts` field as `obfs=tls;obfs-host=t.cn`
 
 * [Optimizing](https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks)
