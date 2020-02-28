@@ -163,6 +163,8 @@ tasks:
 schedules: no
 ```
 
+FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法直接清理种子和下载的文件，若有此需要，可以使用 [`autoremove-torrents`](https://github.com/jerrymakesjelly/autoremove-torrents.git) 工具来实现，具体详见其 [官方文档](https://autoremove-torrents.readthedocs.io/zh_CN/latest/index.html)。
+
 ### FlexGet 测试执行
 
 防止配置文件错误导致的错误执行，可以使用 `--test` 来测试执行，通过其输出可以判断是不是想要执行的。
