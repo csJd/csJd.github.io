@@ -95,6 +95,7 @@ templates:
     # https://flexget.com/Plugins/qbittorrent
     qbittorrent:
       path: /home/ubuntu/downloads/
+      label: rss
       host: localhost
       port: 8080
       username: admin
@@ -139,7 +140,7 @@ tasks:
       - disklimit
       - qb
   
-  # 自动清理旧内容的任务
+  # 自动清理 Transmission 旧种子和数据
   # https://flexget.com/Cookbook/TorrentCleanup
   clean:
     from_transmission:
@@ -163,14 +164,35 @@ tasks:
 schedules: no
 ```
 
-FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法直接清理种子和下载的文件，若有此需要，可以使用 [`autoremove-torrents`](https://github.com/jerrymakesjelly/autoremove-torrents.git) 工具来实现，具体详见其 [官方文档](https://autoremove-torrents.readthedocs.io/zh_CN/latest/index.html)。
-
 ### FlexGet 测试执行
 
 防止配置文件错误导致的错误执行，可以使用 `--test` 来测试执行，通过其输出可以判断是不是想要执行的。
 
 ```sh
 flexget --test execute --tasks frds
+```
+
+### 自动清理 qBittorrent 的种子和数据
+
+FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法直接清理种子和下载的文件，若有此需要，可以使用 [`autoremove-torrents`](https://github.com/jerrymakesjelly/autoremove-torrents.git) 工具来实现，具体详见其 [官方文档](https://autoremove-torrents.readthedocs.io/zh_CN/latest/index.html)。我使用 qBittorrent 时配置的 config 如下：
+
+```yml
+# ~/.config/autoremove-torrents/config.yml
+
+# 任务名称
+qbtask:
+  client: qbittorrent
+  host: http://127.0.0.1:8080
+  # 若将 127.0.0.1 放到了 qBittorrent WebUI 的白名单，可以省略用户名和密码
+  username: admin
+  password: adminadmin
+  strategies:
+    # 删除策略名称
+    rmrss:
+      categories:
+        - rss
+      remove: create_time > 86400 or (seeding_time > 28800 and connected_leecher < 5)
+  delete_data: true
 ```
 
 ### 定时执行任务
@@ -180,6 +202,11 @@ flexget --test execute --tasks frds
 运行 `crontab -e` 来编辑 crontab 实现 [定时执行任务](https://flexget.com/InstallWizard/Partial/Crontab)
 
 ```sh
+# 开机自启 qBittorrent
+@reboot /usr/bin/qbittorrent-nox -d
+# 每半小时执行一次 autoremove-torrents 工具
+*/30  *  *  *  *  /home/ubuntu/.local/bin/autoremove-torrents --conf=/home/ubuntu/.config/autoremove-torrents/config.yml
+
 # 每半小时执行一次 clean 和 frds 任务
 */30  *  *  *  *  /home/ubuntu/.local/bin/flexget --cron execute --tasks clean frds
 ```
