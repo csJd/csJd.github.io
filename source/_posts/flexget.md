@@ -64,7 +64,7 @@ sudo apt install python3 python3-pip
 pip3 install flexget
 ```
 
-使用 Transmission 还需要安装 `transmission-rpc` 用于 FlexGet 和 Transmission 的交互
+使用 Transmission 还需要安装 `transmission-rpc` 用于 FlexGet 和 Transmission 的交互：
 
 ```sh
 pip3 install transmission-rpc
@@ -166,13 +166,19 @@ schedules: no
 
 ### FlexGet 测试执行
 
-防止配置文件错误导致的错误执行，可以使用 `--test` 来测试执行，通过其输出可以判断是不是想要执行的。
+防止配置文件错误导致的错误执行，可以使用 `--test` [选项参数](https://flexget.com/CLI)来测试执行，通过其输出可以判断是不是想要执行的。
 
 ```sh
 flexget --test execute --tasks frds
 ```
 
-### 自动清理 qBittorrent 的种子和数据
+防止 FlexGet 第一次下载时下载 rss 列表中的全部种子，对 `execute` 命令使用 `--learn` [命令选项参数](https://flexget.com/CLI/execute) 将当前 rss 列表的种子标记为 `seen`：
+
+```sh
+flexget execute --learn --tasks frds
+```
+
+## 自动清理 qBittorrent 的种子和数据
 
 FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法直接清理种子和下载的文件，若有此需要，可以使用 [`autoremove-torrents`](https://github.com/jerrymakesjelly/autoremove-torrents.git) 工具来实现，具体详见其 [官方文档](https://autoremove-torrents.readthedocs.io/zh_CN/latest/index.html)。我使用 qBittorrent 时配置的 config 如下：
 
@@ -195,11 +201,11 @@ qbtask:
   delete_data: true
 ```
 
-### 定时执行任务
+## 定时执行任务
 
 运行 `flexget execute --task frds` 即立刻执行一次 `frds` 任务，要实现定时自动执行相关任务，可使用 `cron` 来实现。
 
-运行 `crontab -e` 来编辑 crontab 实现 [定时执行任务](https://flexget.com/InstallWizard/Partial/Crontab)
+运行 `crontab -e` 来编辑 crontab 实现 [定时执行任务](https://flexget.com/InstallWizard/Partial/Crontab)，我编辑的内容如下：
 
 ```sh
 # 开机自启 qBittorrent
@@ -213,4 +219,4 @@ qbtask:
 
 ---
 
-关于 FlexGet 更多详细用法可见 [官方 Cookbook](https://flexget.com/Cookbook)
+关于 FlexGet 更多详细用法可见 [官方 Cookbook](https://flexget.com/Cookbook)。
