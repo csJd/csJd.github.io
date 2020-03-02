@@ -15,7 +15,7 @@ date: 2020-02-17 12:19:07
 
 ### 安装 PT 下载客户端
 
-PT 下载客户端推荐使用 [Transmission](https://transmissionbt.com) 或 [qBittorrent](https://www.qbittorrent.org/download.php)。
+PT 下载客户端推荐使用 [Transmission](https://transmissionbt.com) 或 [qBittorrent](https://www.qbittorrent.org/download.php)，据说 Transmission 更适合保种，qBittorrent 适合下载新/热种赚上传。
 
 #### Transmisson
 
@@ -98,6 +98,9 @@ templates:
       label: rss
       host: localhost
       port: 8080
+      # 设置单种最大下载/上传速度
+      maxdownspeed: 30000
+      maxupspeed: 10000
       username: admin
       password: adminadmin
   tr:
@@ -198,8 +201,14 @@ qbtask:
       categories:
         - rss
       remove: create_time > 86400 or (seeding_time > 28800 and connected_leecher < 5)
+    rmdead:
+      categories:
+        - rss
+      remove: create_time > 1000 and average_downloadspeed < 5
   delete_data: true
 ```
+
+在该配置文件所在目录执行 `autoremove-torrents --view` 可以测试执行而不真正删除种子及数据。
 
 ## 定时执行任务
 
@@ -210,8 +219,8 @@ qbtask:
 ```sh
 # 开机自启 qBittorrent
 @reboot /usr/bin/qbittorrent-nox -d
-# 每半小时执行一次 autoremove-torrents 工具
-*/30  *  *  *  *  /home/ubuntu/.local/bin/autoremove-torrents --conf=/home/ubuntu/.config/autoremove-torrents/config.yml
+# 每半小时执行一次 autoremove-torrents 工具，--conf 指定文件 --log 指定保存 log 文件夹
+*/30  *  *  *  *  /home/ubuntu/.local/bin/autoremove-torrents --conf=/home/ubuntu/.config/autoremove-torrents/config.yml --log=/home/ubuntu/.config/autoremove-torrents
 
 # 每半小时执行一次 clean 和 frds 任务
 */30  *  *  *  *  /home/ubuntu/.local/bin/flexget --cron execute --tasks clean frds
