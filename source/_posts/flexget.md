@@ -94,13 +94,16 @@ templates:
     # qBittorent 插件配置模板
     # https://flexget.com/Plugins/qbittorrent
     qbittorrent:
+      # 下载保存路径
       path: /home/ubuntu/downloads/
+      # 设置下载分类
       label: rss
       host: localhost
       port: 8080
       # 设置单种最大下载/上传速度
       maxdownspeed: 30000
       maxupspeed: 10000
+      # 若在 WebUI 的设置界面勾选了「对本地主机上的客户端跳过身份验证」，可省略用户名和密码
       username: admin
       password: adminadmin
   tr:
@@ -139,6 +142,8 @@ tasks:
     seen:
       fields:
         - url
+    # 接受全部输入
+    accept_all: yes
     template:
       - disklimit
       - qb
@@ -192,7 +197,7 @@ FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法�
 qbtask:
   client: qbittorrent
   host: http://127.0.0.1:8080
-  # 若将 127.0.0.1 放到了 qBittorrent WebUI 的白名单，可以省略用户名和密码
+  # 若在 WebUI 的设置界面勾选了「对本地主机上的客户端跳过身份验证」，可省略用户名和密码
   username: admin
   password: adminadmin
   strategies:
