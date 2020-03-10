@@ -75,12 +75,15 @@ pip3 install transmission-rpc
 FelxGet 的配置文件位于 `~/.config/flexget/config.yml`。先看官方的 [配置指南](https://flexget.com/Configuration)，我的配置文件如下：
 
 ```yml
+# 这里关闭 schedules 功能，后续使用 crontab 来实现定时执行
+schedules: no
+
 templates:
   disklimit:
     # 使用 free_space 插件，指定位置空余空间大于 space (单位为 MB) 时才执行任务
     # https://flexget.com/Plugins/free_space
     free_space:
-      path: /home/ubuntu/downloads
+      path: /home/ubuntu/rss/
       space: 10240
 
     # 使用 content_size 插件，只接受内容大小在 min 到 max (单位为 MB) 之间的 torrent
@@ -95,7 +98,7 @@ templates:
     # https://flexget.com/Plugins/qbittorrent
     qbittorrent:
       # 下载保存路径
-      path: /home/ubuntu/downloads/
+      path: /home/ubuntu/rss/
       # 设置下载分类
       label: rss
       host: localhost
@@ -110,9 +113,11 @@ templates:
     # Transmission 插件配置模板
     # https://flexget.com/Plugins/transmission
     transmission:
-      path: /home/ubuntu/downloads/
+      path: /home/ubuntu/rss/
       host: localhost
       port: 9091
+      max_up_speed: 10000
+      max_down_speed: 30000
       username: transmission
       password: transmission
 
@@ -123,27 +128,31 @@ templates:
 tasks:
   # 任务名称
   frds:
+    # - - - - - - - - - input - - - - - - - - - - - - -
     # PT 站 RSS 地址，需要包含自己的 passkey
     rss: https://pt.keepfrds.com/torrentrss.php?rows=20&passkey=jxxx
     # url 作为标记访问过的条件
     seen:
       fields:
         - url
+    # - - - - - - - - - filter - - - - - - - - - - - - -
     # 正则表达式过滤规则
     regexp:
       accept:
         - ""
+    # - - - - - - - - - output - - - - - - - - - - - - -
     template:
       - disklimit
       - tr
 
-  tjupt:
+  tju:
     rss: https://www.tjupt.org/torrentrss.php?rows=10&passkey=xxx
     seen:
       fields:
         - url
     # 接受全部输入
-    accept_all: yes
+    # https://flexget.com/Plugins/accept_all
+    accept_all: yes 
     template:
       - disklimit
       - qb
@@ -168,8 +177,6 @@ tasks:
       password: transmission
       action: purge
 
-# 这里关闭 schedules 功能，后续使用 crontab 来实现定时执行
-schedules: no
 ```
 
 ### FlexGet 测试执行
@@ -227,8 +234,8 @@ qbtask:
 # 每半小时执行一次 autoremove-torrents 工具，--conf 指定文件 --log 指定保存 log 文件夹
 */30  *  *  *  *  /home/ubuntu/.local/bin/autoremove-torrents --conf=/home/ubuntu/.config/autoremove-torrents/config.yml --log=/home/ubuntu/.config/autoremove-torrents
 
-# 每半小时执行一次 clean 和 frds 任务
-*/30  *  *  *  *  /home/ubuntu/.local/bin/flexget --cron execute --tasks clean frds
+# 每十分钟执行一次 clean 和 frds 任务
+*/10  *  *  *  *  /home/ubuntu/.local/bin/flexget --cron execute --tasks clean frds
 ```
 
 ---

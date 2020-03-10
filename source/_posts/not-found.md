@@ -86,8 +86,9 @@ sudo service shadowsocks-libev status
   * set `plugin` field as the relative path of `v2ray-plugin`
   * set `plugin_opts` field as what you want, keep it empty is ok
 
-* [Optimizing](https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks)
-  Create `/etc/sysctl.d/local.conf` with the following content:
+* [Optimizing](https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks)  
+
+  Append following content to `/etc/sysctl.conf`:
 
   ```conf
   # max open files
@@ -135,5 +136,5 @@ sudo service shadowsocks-libev status
   then run:
 
   ```sh
-  sysctl --system
+  sudo sysctl --system
   ```
