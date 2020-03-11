@@ -20,7 +20,7 @@ Lightsail 的网络管理界面可以控制端口的开启和关闭，不想开�
 sudo iptables -F
 
 # 允许 localhost 的 packet
-sudo iptables -A -i lo -j ACCEPT
+sudo iptables -A INPUT -i lo -j ACCEPT
 # 允许已建立连接的相关 packet
 sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 # 允许 22 端口的 TCP 传入连接，用于 SSH
@@ -29,7 +29,7 @@ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 sudo iptables -A INPUT -p icmp -j ACCEPT
 
 # 设置默认规则
-sudo iptables -P INPUT DROP  # 禁用其他传入连接
+sudo iptables -P INPUT DROP  # 禁止其他传入连接
 sudo iptables -P OUTPUT ACCEPT  # 允许所有传出连接
 sudo iptables -P FORWARD ACCEPT  # 允许所有传出连接
 ```
@@ -62,7 +62,7 @@ sudo iptables -D INPUT 4
 
 ```sh
 sudo apt install iptables-persistent
-sudo iptables-save > /etc/iptables/rules.v4
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ```
 
-这样重启后防火墙的配置也会保留，更新防火墙配置后仍需手动运行 `sudo iptables-save > /etc/iptables/rules.v4` 保存更新的配置。
+这样重启后防火墙的配置也会保留，更新防火墙配置后仍需手动运行 `sudo sh -c "iptables-save > /etc/iptables/rules.v4"` 保存更新的配置。
