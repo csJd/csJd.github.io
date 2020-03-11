@@ -152,7 +152,7 @@ tasks:
         - url
     # 接受全部输入
     # https://flexget.com/Plugins/accept_all
-    accept_all: yes 
+    accept_all: yes
     template:
       - disklimit
       - qb
@@ -209,14 +209,17 @@ qbtask:
   password: adminadmin
   strategies:
     # 删除策略名称
-    rmrss:
+    rm_old:
       categories:
         - rss
       remove: create_time > 86400 or (seeding_time > 28800 and connected_leecher < 5)
-    rmdead:
-      categories:
-        - rss
+    rm_dead:
+      categories: rss
       remove: create_time > 1000 and average_downloadspeed < 5
+    rm_stalled:
+      categories: rss
+      status: StalledDownload
+      remove: progress < 3
   delete_data: true
 ```
 
