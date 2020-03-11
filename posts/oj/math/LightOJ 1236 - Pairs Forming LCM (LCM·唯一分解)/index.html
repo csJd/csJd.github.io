@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 给你一个数n 求满足lcm(a, b) == n， a &amp;lt;= b 的 (a,b) 的个数 容易知道 n 是a, b的所有素因子取在a, b中较大指数的积 先将n分解为素数指数积的形式 n = π(pi^ei) 那么对于每个素因子pi pi在a,b中的指数ai, bi 至少有一个等于pi， 另一个小于等于pi 先不考虑a, b的大小 对于每个素因子pi  在a中的指数 ai == ei">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/math/LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 给你一个数n 求满足lcm(a, b) == n， a &amp;lt;= b 的 (a,b) 的个数 容易知道 n 是a, b的所有素因子取在a, b中较大指数的积 先将n分解为素数指数积的形式 n = π(pi^ei) 那么对于每个素因子pi pi在a,b中的指数ai, bi 至少有一个等于pi， 另一个小于等于pi 先不考虑a, b的大小 对于每个素因子pi  在a中的指数 ai == ei">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)">
+<meta name="twitter:description" content="题意 给你一个数n 求满足lcm(a, b) == n， a &amp;lt;= b 的 (a,b) 的个数 容易知道 n 是a, b的所有素因子取在a, b中较大指数的积 先将n分解为素数指数积的形式 n = π(pi^ei) 那么对于每个素因子pi pi在a,b中的指数ai, bi 至少有一个等于pi， 另一个小于等于pi 先不考虑a, b的大小 对于每个素因子pi  在a中的指数 ai == ei">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/math/LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LightOJ 1236 - Pairs Forming LCM (LCM·唯一分解)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-08-07 09:27:32" itemprop="dateCreated datePublished" datetime="2015-08-07T09:27:32+00:00">2015-08-07</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 给你一个数n 求满足lcm(a, b) == n， a &lt;= b 的 (a,b) 的个数</p>
+<p>容易知道 n 是a, b的所有素因子取在a, b中较大指数的积</p>
+<p>先将n分解为素数指数积的形式 n = π(pi^ei) 那么对于每个素因子pi pi在a,b中的指数ai, bi 至少有一个等于pi， 另一个小于等于pi</p>
+<p>先不考虑a, b的大小 对于每个素因子pi</p>
+<ol type="1">
+<li><p>在a中的指数 ai == ei 那么 pi 在 b 中的指数可取 [0, ei] 中的所有数 有 ei + 1 种情况</p></li>
+<li><p>在a中的指数 ai &lt; ei 即 ai 在 [0, ei) 中 那么 pi 在 b 中的指数只能取 ei 有 ei 种情况</p></li>
+</ol>
+<p>那么对与每个素因子都有 2/<em>ei + 1种情况 也就是满足条件的 (a, b) 有 π(2/</em>ei + 1)个 考虑大小时 除了 (n, n) 所有的情况都出现了两次 那么满足a&lt;=b的有<strong>(</strong>**π(2/*ei + 1)) / 2 + 1** 个</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1e7</span> + <span class="number">5</span>;</span><br><span class="line">int pme[N / <span class="number">10</span>], m;</span><br><span class="line">bool vis[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> initPrime() <span class="comment">//线性筛</span></span><br><span class="line">&#123;</span><br><span class="line">    m = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i &lt; N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i]) pme[m++] = i;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m &amp;&amp; pme[j] * i &lt; N; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            vis[pme[j] * i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % pme[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    initPrime();</span><br><span class="line">    ll n, ans, c;</span><br><span class="line">    int T, cas = <span class="number">0</span>;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">        ans = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(ll(pme[i])*pme[i] &gt; n) <span class="keyword">break</span>;</span><br><span class="line">            c = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>( n % pme[i] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                n /= pme[i];</span><br><span class="line">                ++c;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(c) ans *= c * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(n &gt; <span class="number">1</span>) ans *= <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"Case %d: %lld\n"</span>, ++cas, ans / <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1236 - Pairs Forming LCM Find the result of the following code: long long pairsFormLCM( int n ) { long long res = 0; for( int i = 1; i &lt;= n; i++ ) for( int j = i; j &lt;= n; j++ ) if( lcm(i, j) ==n ) res++; <em>// lcm means least common multiple</em> return res; }</p>
+<p>A straight forward implementation of the code may time out. If you analyze the code, you will find that the code actually counts the number of pairs <strong>(i, j)</strong> for which <strong>lcm(i, j) = n</strong> and <strong>(i ≤ j)</strong>.</p>
+<h1 id="input">Input</h1>
+<p>Input starts with an integer <strong>T (≤ 200)</strong>, denoting the number of test cases.</p>
+<p>Each case starts with a line containing an integer <strong>n (1 ≤ n ≤ 1014)</strong>.</p>
+<h1 id="output">Output</h1>
+<p>For each case, print the case number and the value returned by the function <strong>'pairsFormLCM(n)'</strong>. # Sample Input</p>
+<h1 id="output-for-sample-input-15">Output for Sample Input 15</h1>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>6</p>
+<p>8</p>
+<p>10</p>
+<p>12</p>
+<p>15</p>
+<p>18</p>
+<p>20</p>
+<p>21</p>
+<p>24</p>
+<p>25</p>
+<p>27</p>
+<p>29</p>
+<p>Case 1: 2</p>
+<p>Case 2: 2</p>
+<p>Case 3: 3</p>
+<p>Case 4: 5</p>
+<p>Case 5: 4</p>
+<p>Case 6: 5</p>
+<p>Case 7: 8</p>
+<p>Case 8: 5</p>
+<p>Case 9: 8</p>
+<p>Case 10: 8</p>
+<p>Case 11: 5</p>
+<p>Case 12: 11</p>
+<p>Case 13: 3</p>
+<p>Case 14: 4</p>
+<p>Case 15: 2</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/search/POJ 1167 (DFS·剪枝·公交时刻表)/" rel="next" title="POJ 1167 (DFS·剪枝·公交时刻表)">
+                <i class="fa fa-chevron-left"></i> POJ 1167 (DFS·剪枝·公交时刻表)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/math/UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN))/" rel="prev" title="UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN))">
+                UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN)) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#output"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#output-for-sample-input-15"><span class="nav-text">Output for Sample Input 15</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 Getting Started。">
+<meta name="keywords" content="Gradle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的 Gradle 使用实践（一）">
+<meta property="og:url" content="http://blog.deng.cf/posts/my-gradle-practice-1/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 Getting Started。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1281889-e20543a15366d08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1281889-b0e48588e1bd9920.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1281889-7138a25ea4e025e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的 Gradle 使用实践（一）">
+<meta name="twitter:description" content="上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 Getting Started。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1281889-e20543a15366d08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/my-gradle-practice-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>我的 Gradle 使用实践（一） | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/my-gradle-practice-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">我的 Gradle 使用实践（一）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-03-12 12:19:50" itemprop="dateCreated datePublished" datetime="2017-03-12T12:19:50+00:00">2017-03-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Practice/" itemprop="url" rel="index"><span itemprop="name">Practice</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 <a href="https://guides.gradle.org/creating-java-applications/" target="_blank" rel="noopener">Getting Started</a>。 <a id="more"></a></p>
+<h2 id="一.-build.gradle---plugin">一. build.gradle - plugin</h2>
+<p>为什么 <code>init</code> 后能执行一些新的任务，这是由 <strong>build.gradle</strong> 文件决定的，我们打开这个文件可以看到：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This build file was generated by the Gradle 'init' task.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This generated file contains a sample Java project to get you started.</span></span><br><span class="line"><span class="comment"> * For more details take a look at the Java Quickstart chapter in the Gradle</span></span><br><span class="line"><span class="comment"> * user guide available at https://docs.gradle.org/3.4.1/userguide/tutorial_java_projects.html</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Apply the java plugin to add support for Java</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Apply the application plugin to add support for building an application</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'application'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// In this section you declare where to find the dependencies of your project</span></span><br><span class="line">repositories &#123;</span><br><span class="line">    <span class="comment">// Use jcenter for resolving your dependencies.</span></span><br><span class="line">    <span class="comment">// You can declare any Maven/Ivy/file repository here.</span></span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// This dependency is found on compile classpath of this component and consumers.</span></span><br><span class="line">    compile <span class="string">'com.google.guava:guava:20.0'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use JUnit test framework</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Define the main class for the application</span></span><br><span class="line">mainClassName = <span class="string">'App'</span></span><br></pre></td></tr></table></figure>
+<p>里面注释已经给得挺详细，之所以能够构建 java 项目，是因为 <code>apply plugin: 'java'</code> 这句话，也就是应用 Gradle 提供的 Java 插件，这个插件能提供构建 Java 项目的任务，如 <code>compileJava</code>, <code>jar</code>, <code>build</code> 等，想详细了解可查看 <a href="https://docs.gradle.org/3.4.1/userguide/java_plugin.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<p>同样的，<code>apply plugin: application</code> 是应用 Gradle 给出的运行 Java 应用的插件（<a href="https://docs.gradle.org/3.4.1/userguide/application_plugin.html" target="_blank" rel="noopener">官方文档</a>），它提供了 <code>run</code> 任务，我们必须主动声明 Java 应用的主类，可以看到 <code>build.gradle</code> 里最后一句代码 <code>mainClassName = 'App'</code>，是在声明这个 Java Application 的主类是 <code>./src/main/java/</code> 目录下的 App 类，我们修改 <strong>App.java</strong> 里的内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getGreeting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello world, hello Gradle!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> App().getGreeting());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再执行 <code>gradle run</code> 可以看到：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1281889-e20543a15366d08b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>我们可以去编写我们的项目，然后 <code>gradle run</code> 就能运行了，正是 Gradle plugins 提供了这些功能，关于 plugin 的详细介绍可查阅 <a href="https://docs.gradle.org/3.4.1/userguide/plugins.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<h2 id="二.-build.gradle---repositories">二. build.gradle - repositories</h2>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    <span class="comment">// Use jcenter for resolving your dependencies.</span></span><br><span class="line">    <span class="comment">// You can declare any Maven/Ivy/file repository here.</span></span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里指定 Gradle 下载依赖的仓库，兼容 Maven 仓库，以上代码是使用<code>jcenter</code>仓库作为依赖下载仓库，常见的仓库有： * <a href="http://search.maven.org/" target="_blank" rel="noopener">The Central Repository</a> （Maven 中央仓库） 在<code>repositories</code>块中加入<code>mavenCentral()</code>可使用此仓库，此仓库国内下载较慢 * <a href="https://bintray.com/bintray/jcenter" target="_blank" rel="noopener">Jcenter</a> （JFrog 公司提供的仓库） 在<code>repositories</code>块中加入<code>jcenter()</code>可使用此仓库，新版 Gralde 和 Android Studio 默认仓库，国内下载比中央仓库快。 * 自定义仓库 Gradle 兼容 Maven 仓库和 Ivy 仓库，如在<code>repositories</code>块中加入一下内容就添加了一个自定义 <code>url</code>的 Maven 仓库：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;</span><br><span class="line">        url <span class="string">"http://repo.mycompany.com/maven2"</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>url</code>也可以是本地路径。</p>
+<p>关于 repositories 的更多内容可查阅 <a href="https://docs.gradle.org/3.4.1/userguide/artifact_dependencies_tutorial.html#sec:repositories_tutoria" target="_blank" rel="noopener">官方文档</a>。</p>
+<h2 id="三.-build.gradle---dependencies">三. build.gradle - dependencies</h2>
+<p>这就是 Gradle 项目管理依赖的地方，非常方便，添加某个依赖只需要在 <code>dependencies</code> 块中加入一行代码： <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'group:name:version'</span></span><br></pre></td></tr></table></figure></p>
+<p>如 <strong>build.gradle</strong> 中默认添加了 <code>guava</code> 作为依赖和 <code>junit</code> 作为测试时（执行 <code>gradle test</code> 任务时）的依赖 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.google.guava:guava:20.0'</span></span><br><span class="line">testCompile <span class="string">'junit:junit:4.12'</span></span><br></pre></td></tr></table></figure></p>
+<p>作为实践，我们现在要在项目中输出一个 <code>Json</code> 数组，需要 <a href="http://json.org" class="uri" target="_blank" rel="noopener">http://json.org</a> 提供的 <code>json.jar</code> 依赖，我们直接去 <a href="https://bintray.com/bintray/jcenter" target="_blank" rel="noopener">Jcenter</a>搜索依赖，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1281889-b0e48588e1bd9920.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>点击搜索出的结果即进入 <a href="https://bintray.com/bintray/jcenter/org.json:json" target="_blank" rel="noopener">详细界面</a>，可以看到其给出的 Gradle 依赖语句： <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'org.json:json:20160810'</span></span><br></pre></td></tr></table></figure></p>
+<p>我们把这个加到 <code>dependencies</code> 块中，就是添加了 <code>json</code> 依赖，不用我们自己再去官网下载 <code>jar</code> 文件加入 <code>lib</code>。 编辑 <code>App.java</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.json.JSONArray;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getGreeting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello world, hello Gradle!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> App().getGreeting());</span><br><span class="line"></span><br><span class="line">        JSONArray ja = <span class="keyword">new</span> JSONArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i)&#123;</span><br><span class="line">            JSONObject jo = <span class="keyword">new</span> JSONObject();</span><br><span class="line">            jo.put(<span class="string">"hello gradle!"</span>,i);</span><br><span class="line">            ja.put(jo);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(ja.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后执行 <code>gradle run</code> 任务：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1281889-7138a25ea4e025e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>第一次执行 gradle 会去下载依赖缓存到本地，以后的项目用到相同的依赖就不用再下载了。 关于 Gradle 依赖管理的详细内容可查看 <a href="https://docs.gradle.org/3.4.1/userguide/artifact_dependencies_tutorial.html" target="_blank" rel="noopener">官方文档</a>。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/my-gradle-practice-0/" rel="next" title="我的 Gradle 使用实践（零）">
+                <i class="fa fa-chevron-left"></i> 我的 Gradle 使用实践（零）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/hexo-with-travis-ci/" rel="prev" title="使用 Travis CI 自动构建 Hexo 博客">
+                使用 Travis CI 自动构建 Hexo 博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一.-build.gradle---plugin"><span class="nav-text">一. build.gradle - plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二.-build.gradle---repositories"><span class="nav-text">二. build.gradle - repositories</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三.-build.gradle---dependencies"><span class="nav-text">三. build.gradle - dependencies</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

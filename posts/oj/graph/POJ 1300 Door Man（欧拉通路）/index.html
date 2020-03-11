@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题目描述： 你是一座大庄园的管家。庄园有很多房间，编号为 0、1、2、3，...。你的主人是一个心不在 焉的人，经常沿着走廊随意地把房间的门打开。多年来，你掌握了一个诀窍：沿着一个通道，穿 过这些大房间，并把房门关上。你的问题是能否找到一条路径经过所有开着门的房间，并使得： 1) 通过门后立即把门关上； 2) 关上了的门不再打开； 3) 后回到你自己的房间（房间 0），并且所有的门都已经关闭了。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 1300 Door Man（欧拉通路）">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/graph/POJ 1300 Door Man（欧拉通路）/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题目描述： 你是一座大庄园的管家。庄园有很多房间，编号为 0、1、2、3，...。你的主人是一个心不在 焉的人，经常沿着走廊随意地把房间的门打开。多年来，你掌握了一个诀窍：沿着一个通道，穿 过这些大房间，并把房门关上。你的问题是能否找到一条路径经过所有开着门的房间，并使得： 1) 通过门后立即把门关上； 2) 关上了的门不再打开； 3) 后回到你自己的房间（房间 0），并且所有的门都已经关闭了。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ 1300 Door Man（欧拉通路）">
+<meta name="twitter:description" content="题目描述： 你是一座大庄园的管家。庄园有很多房间，编号为 0、1、2、3，...。你的主人是一个心不在 焉的人，经常沿着走廊随意地把房间的门打开。多年来，你掌握了一个诀窍：沿着一个通道，穿 过这些大房间，并把房门关上。你的问题是能否找到一条路径经过所有开着门的房间，并使得： 1) 通过门后立即把门关上； 2) 关上了的门不再打开； 3) 后回到你自己的房间（房间 0），并且所有的门都已经关闭了。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/graph/POJ 1300 Door Man（欧拉通路）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>POJ 1300 Door Man（欧拉通路） | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/POJ 1300 Door Man（欧拉通路）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">POJ 1300 Door Man（欧拉通路）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-11-11 15:55:31" itemprop="dateCreated datePublished" datetime="2014-11-11T15:55:31+00:00">2014-11-11</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题目描述：</p>
+<p>你是一座大庄园的管家。庄园有很多房间，编号为 0、1、2、3，...。你的主人是一个心不在 焉的人，经常沿着走廊随意地把房间的门打开。多年来，你掌握了一个诀窍：沿着一个通道，穿 过这些大房间，并把房门关上。你的问题是能否找到一条路径经过所有开着门的房间，并使得： 1) 通过门后立即把门关上； 2) 关上了的门不再打开； 3) 后回到你自己的房间（房间 0），并且所有的门都已经关闭了。 在本题中，给定房间列表，及连通房间的、开着的门，并给定一个起始房间，判断是否存在 这样的一条路径。不需要输出这样的路径，只需判断是否存在。假定任意两个房间之间都是连通 的（可能需要经过其他房间）。</p>
+<p>输入描述：</p>
+<p>输入文件包含多个（多可达 100 个）测试数据，每个测试数据之间没有空行隔开。 每个测试数据包括 3部分： 起始行－格式为“START M N”，其中 M 为管理员起始所处的房间号，N 为房间的总数（1 ≤N≤20）； 房间列表－一共 N行，每行列出了一个房间通向其他房间的房间号（只需列出比它的号码大 的房间号，可能有多个，按升序排列），比如房间 3有门通向房间 1、5、7，则房间 3的信息行内 容为“5 7”，第一行代表房间 0，后一行代表行间 N-1。有可能有些行为空行，当然后一行肯 定是空行，因为 N-1 是大的房间号；两个房间之间可能有多扇门连通。 终止行－内容为"END"。 输入文件后一行是"ENDOFINPUT"，表示输入结束。</p>
+<p>输出描述：</p>
+<p>每个测试数据对应一行输出，如果能找到一条路关闭所有的门，并且回到房间 0，则输出"YES X"，X是他关闭的门的总数，否则输出"NO"。</p>
+<p>就是判断能否构成欧拉通路·咯</p>
+<p>无向图存在欧拉通路的充要条件：</p>
+<ol type="1">
+<li><p>是连通图</p></li>
+<li><p>奇度节点个数为0或2,其中为0时为欧拉回路,为2时是以这两个点节点为端点的欧拉通路 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cctype&gt;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">21</span>;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int door, cnt, m, n, deg[N];</span><br><span class="line">    char s[N], c;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%s"</span>, s), strcmp(s, <span class="string">"ENDOFINPUT"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        memset(deg, <span class="number">0</span>, sizeof(deg));</span><br><span class="line">        door = cnt = <span class="number">0</span>;</span><br><span class="line">        scanf(<span class="string">"%d %d\n"</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(scanf(<span class="string">"%c"</span>, &amp;c))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(isdigit(c)) ++door, ++deg[i], ++deg[c - <span class="string">'0'</span>];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">' '</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(deg[i] % <span class="number">2</span>) ++cnt;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanf(<span class="string">"%s"</span>, s);</span><br><span class="line">        bool ok = (cnt == <span class="number">0</span> &amp;&amp; m == <span class="number">0</span> ) || (m &amp;&amp; cnt == <span class="number">2</span> &amp;&amp; deg[m] % <span class="number">2</span> );</span><br><span class="line">        <span class="keyword">if</span>(ok) printf(<span class="string">"YES %d\n"</span>, door);</span><br><span class="line">        <span class="keyword">else</span> printf(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<p>Door Man</p>
+<p>Description You are a butler in a large mansion. This mansion has so many rooms that they are merely referred to by number (room 0, 1, 2, 3, etc...). Your master is a particularly absent-minded lout and continually leaves doors open throughout a particular floor of the house. Over the years, you have mastered the art of traveling in a single path through the sloppy rooms and closing the doors behind you. Your biggest problem is determining whether it is possible to find a path through the sloppy rooms where you: Always shut open doors behind you immediately after passing through Never open a closed door End up in your chambers (room 0) with all doors closed In this problem, you are given a list of rooms and open doors between them (along with a starting room). It is not needed to determine a route, only if one is possible.</p>
+<p>Input</p>
+<p>Input to this problem will consist of a (non-empty) series of up to 100 data sets. Each data set will be formatted according to the following description, and there will be no blank lines separating data sets. A single data set has 3 components: Start line - A single line, "START M N", where M indicates the butler's starting room, and N indicates the number of rooms in the house (1 &lt;= N &lt;= 20). Room list - A series of N lines. Each line lists, for a single room, every open door that leads to a room of higher number. For example, if room 3 had open doors to rooms 1, 5, and 7, the line for room 3 would read "5 7". The first line in the list represents room 0. The second line represents room 1, and so on until the last line, which represents room (N - 1). It is possible for lines to be empty (in particular, the last line will always be empty since it is the highest numbered room). On each line, the adjacent rooms are always listed in ascending order. It is possible for rooms to be connected by multiple doors! End line - A single line, "END" Following the final data set will be a single line, "ENDOFINPUT". Note that there will be no more than 100 doors in any single data set.</p>
+<p>Output</p>
+<p>For each data set, there will be exactly one line of output. If it is possible for the butler (by following the rules in the introduction) to walk into his chambers and close the final open door behind him, print a line "YES X", where X is the number of doors he closed. Otherwise, print "NO".</p>
+<p>Sample Input</p>
+<p>START 1 2 1 END START 0 5 1 2 2 3 3 4 4 END START 0 10 1 9 2 3 4 5 6 7 8 9 END ENDOFINPUT</p>
+<p>Sample Output</p>
+<p>YES 1 NO YES 10</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/math/HDU 1286 找新朋友(欧拉函数)/" rel="next" title="HDU 1286 找新朋友(欧拉函数)">
+                <i class="fa fa-chevron-left"></i> HDU 1286 找新朋友(欧拉函数)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/graph/POJ 1386 Play on Words（有向欧拉通路 连通图）/" rel="prev" title="POJ 1386 Play on Words（有向欧拉通路 连通图）">
+                POJ 1386 Play on Words（有向欧拉通路 连通图） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

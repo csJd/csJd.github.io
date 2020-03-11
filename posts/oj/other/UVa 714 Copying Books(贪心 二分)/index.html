@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 把m数分成k组 使每组数的和的最大值最小 如果有多种分法 靠前的组的和尽量小 关键是找出那个最小的最大值 可以通过二分来找出 开始左端点为m个数中最大的数 右端点为m个数的和 若中点能将m个数分为小于等于k组 比它大的肯定都是可以的 中点变为右端点 否则中点变成左端点 然后就可以贪心逆向模拟了 从后往前每组选择尽量多的数直到剩下的数等于组数 1234567891011121314151617">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 714 Copying Books(贪心 二分)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/other/UVa 714 Copying Books(贪心 二分)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 把m数分成k组 使每组数的和的最大值最小 如果有多种分法 靠前的组的和尽量小 关键是找出那个最小的最大值 可以通过二分来找出 开始左端点为m个数中最大的数 右端点为m个数的和 若中点能将m个数分为小于等于k组 比它大的肯定都是可以的 中点变为右端点 否则中点变成左端点 然后就可以贪心逆向模拟了 从后往前每组选择尽量多的数直到剩下的数等于组数 1234567891011121314151617">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img1.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img3.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img4.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img5.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img6.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img6.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img1.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img3.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img4.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img5.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img6.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img6.gif.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVa 714 Copying Books(贪心 二分)">
+<meta name="twitter:description" content="题意 把m数分成k组 使每组数的和的最大值最小 如果有多种分法 靠前的组的和尽量小 关键是找出那个最小的最大值 可以通过二分来找出 开始左端点为m个数中最大的数 右端点为m个数的和 若中点能将m个数分为小于等于k组 比它大的肯定都是可以的 中点变为右端点 否则中点变成左端点 然后就可以贪心逆向模拟了 从后往前每组选择尽量多的数直到剩下的数等于组数 1234567891011121314151617">
+<meta name="twitter:image" content="http://blog.deng.cf/posts/oj/other/images/dge.org-external-7-714img1.gif.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/other/UVa 714 Copying Books(贪心 二分)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UVa 714 Copying Books(贪心 二分) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/UVa 714 Copying Books(贪心 二分)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UVa 714 Copying Books(贪心 二分)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-02-03 19:10:03" itemprop="dateCreated datePublished" datetime="2015-02-03T19:10:03+00:00">2015-02-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 把m数分成k组 使每组数的和的最大值最小 如果有多种分法 靠前的组的和尽量小</p>
+<p>关键是找出那个最小的最大值 可以通过二分来找出 开始左端点为m个数中最大的数 右端点为m个数的和 若中点能将m个数分为小于等于k组 比它大的肯定都是可以的 中点变为右端点 否则中点变成左端点</p>
+<p>然后就可以贪心逆向模拟了 从后往前每组选择尽量多的数直到剩下的数等于组数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">505</span>;</span><br><span class="line">int a[N], d[N], m, k, maxi;</span><br><span class="line">ll s[N], le, ri, mid, mins, t;</span><br><span class="line"></span><br><span class="line">int divs()</span><br><span class="line">&#123;</span><br><span class="line">    int last = <span class="number">0</span>, cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] - s[last] &gt; mid)</span><br><span class="line">            last = i - <span class="number">1</span>, ++cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int cas;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%d %d"</span>, &amp;m, &amp;k);</span><br><span class="line">        <span class="keyword">for</span>(int i = maxi = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">            s[i] = s[i - <span class="number">1</span>] + a[i];</span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt; a[maxi]) maxi = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        le = a[maxi], ri = s[m];</span><br><span class="line">        <span class="keyword">while</span>(le &lt;= ri)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (le + ri) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(divs() &lt;= k) mins = mid, ri = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> le = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        t = <span class="number">0</span>;</span><br><span class="line">        memset(d, <span class="number">0</span>, sizeof(d));</span><br><span class="line">        <span class="keyword">for</span>(int i = m; i &gt; <span class="number">0</span>; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t + a[i] &gt; mins)</span><br><span class="line">                d[i] = k--, t = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(k &gt;= i) <span class="keyword">while</span>(i &gt; <span class="number">0</span>) d[--i] = <span class="number">1</span>;</span><br><span class="line">            t = t + a[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(<span class="string">"%d%c"</span>, a[i], i &lt; m ? <span class="string">' '</span> : <span class="string">'\n'</span>);</span><br><span class="line">            <span class="keyword">if</span>(d[i]) printf(<span class="string">"/ "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="section"></h1>
+<hr>
+<p>Before the invention of book-printing, it was very hard to make a copy of a book. All the contents had to be re-written by hand by so called <em>scribers</em>. The scriber had been given a book and after several months he finished its copy. One of the most famous scribers lived in the 15th century and his name was Xaverius Endricus Remius Ontius Xendrianus (<em>Xerox</em>). Anyway, the work was very annoying and boring. And the only way to speed it up was to hire more scribers.</p>
+<p>Once upon a time, there was a theater ensemble that wanted to play famous Antique Tragedies. The scripts of these plays were divided into many books and actors needed more copies of them, of course. So they hired many scribers to make copies of these books. Imagine you have <em>m</em> books (numbered <img src="../images/dge.org-external-7-714img1.gif.png" alt="1, 2, \dots, m">) that may have different number of pages ( <img src="../images/dge.org-external-7-714img2.gif.png" alt="p_1, p_2, \dots, p_m">) and you want to make one copy of each of them. Your task is to divide these books among <em>k</em> scribes, <img src="../images/dge.org-external-7-714img3.gif.png" alt="k \le m">. Each book can be assigned to a single scriber only, and every scriber must get a continuous sequence of books. That means, there exists an increasing succession of numbers <img src="../images/dge.org-external-7-714img4.gif.png" alt="0 = b_0 &lt;b_1 &lt; b_2, \dots &lt; b_{k-1} \le b_k = m">such that <em>i</em>-th scriber gets a sequence of books with numbers between <em>b<strong>i<em>-1+1 and </em>b</strong>i</em>. The time needed to make a copy of all the books is determined by the scriber who was assigned the most work. Therefore, our goal is to minimize the maximum number of pages assigned to a single scriber. Your task is to find the optimal assignment.</p>
+<h2 id="section-1"></h2>
+<p>The input consists of <em>N</em> cases. The first line of the input contains only positive integer <em>N</em>. Then follow the cases. Each case consists of exactly two lines. At the first line, there are two integers<em>m</em> and <em>k</em>, <img src="../images/dge.org-external-7-714img5.gif.png" alt="1 \le k \le m \le 500">. At the second line, there are integers <img src="../images/dge.org-external-7-714img6.gif.png" alt="p_1, p_2, \dots p_m"> separated by spaces. All these values are positive and less than 10000000.</p>
+<h2 id="section-2"></h2>
+<p>For each case, print exactly one line. The line must contain the input succession <img src="../images/dge.org-external-7-714img6.gif.png" alt="p_1, p_2, \dots p_m">divided into exactly <em>k</em> parts such that the maximum sum of a single part should be as small as possible. Use the slash character (`/') to separate the parts. There must be exactly one space character between any two successive numbers and between the number and the slash.</p>
+<p>If there is more than one solution, print the one that minimizes the work assigned to the first scriber, then to the second scriber etc. But each scriber must be assigned at least one book.</p>
+<h2 id="section-3"></h2>
+<p>2 9 3 100 200 300 400 500 600 700 800 900 5 4 100 100 100 100 100</p>
+<h2 id="section-4"></h2>
+<p>100 200 300 400 500 / 600 700 / 800 900 100 / 100 / 100 / 100 100</p>
+<h1 id="section-5"></h1>
+<hr>
+<p>Before the invention of book-printing, it was very hard to make a copy of a book. All the contents had to be re-written by hand by so called <em>scribers</em>. The scriber had been given a book and after several months he finished its copy. One of the most famous scribers lived in the 15th century and his name was Xaverius Endricus Remius Ontius Xendrianus (<em>Xerox</em>). Anyway, the work was very annoying and boring. And the only way to speed it up was to hire more scribers.</p>
+<p>Once upon a time, there was a theater ensemble that wanted to play famous Antique Tragedies. The scripts of these plays were divided into many books and actors needed more copies of them, of course. So they hired many scribers to make copies of these books. Imagine you have <em>m</em> books (numbered <img src="../images/dge.org-external-7-714img1.gif.png" alt="1, 2, \dots, m">) that may have different number of pages ( <img src="../images/dge.org-external-7-714img2.gif.png" alt="p_1, p_2, \dots, p_m">) and you want to make one copy of each of them. Your task is to divide these books among <em>k</em> scribes, <img src="../images/dge.org-external-7-714img3.gif.png" alt="k \le m">. Each book can be assigned to a single scriber only, and every scriber must get a continuous sequence of books. That means, there exists an increasing succession of numbers <img src="../images/dge.org-external-7-714img4.gif.png" alt="&#39;$0 = b_0 &lt;">such that <em>i</em>-th scriber gets a sequence of books with numbers between <em>b<strong>i<em>-1+1 and </em>b</strong>i</em>. The time needed to make a copy of all the books is determined by the scriber who was assigned the most work. Therefore, our goal is to minimize the maximum number of pages assigned to a single scriber. Your task is to find the optimal assignment.</p>
+<h2 id="section-6"></h2>
+<p>The input consists of <em>N</em> cases. The first line of the input contains only positive integer <em>N</em>. Then follow the cases. Each case consists of exactly two lines. At the first line, there are two integers<em>m</em> and <em>k</em>, <img src="../images/dge.org-external-7-714img5.gif.png" alt="1 \le k \le m \le 500">. At the second line, there are integers <img src="../images/dge.org-external-7-714img6.gif.png" alt="p_1, p_2, \dots p_m"> separated by spaces. All these values are positive and less than 10000000.</p>
+<h2 id="section-7"></h2>
+<p>For each case, print exactly one line. The line must contain the input succession <img src="../images/dge.org-external-7-714img6.gif.png" alt="p_1, p_2, \dots p_m">divided into exactly <em>k</em> parts such that the maximum sum of a single part should be as small as possible. Use the slash character (`/') to separate the parts. There must be exactly one space character between any two successive numbers and between the number and the slash.</p>
+<p>If there is more than one solution, print the one that minimizes the work assigned to the first scriber, then to the second scriber etc. But each scriber must be assigned at least one book.</p>
+<h2 id="section-8"></h2>
+<p>2 9 3 100 200 300 400 500 600 700 800 900 5 4 100 100 100 100 100</p>
+<h2 id="section-9"></h2>
+<p>100 200 300 400 500 / 600 700 / 800 900 100 / 100 / 100 / 100 100</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/other/UVa 11054 Wine trading in Gergovia（扫描）/" rel="next" title="UVa 11054 Wine trading in Gergovia（扫描）">
+                <i class="fa fa-chevron-left"></i> UVa 11054 Wine trading in Gergovia（扫描）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/dp/UVa 1025 A Spy in the Metro(DP)/" rel="prev" title="UVa 1025 A Spy in the Metro(DP)">
+                UVa 1025 A Spy in the Metro(DP) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#section-1"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-2"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-3"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-4"><span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-5"><span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#section-6"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-7"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-8"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-9"><span class="nav-text"></span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

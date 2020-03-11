@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 有一个Crane由n条线段连接组成 每个连接点处均可以任意旋转 给你n条线段的长度 然后又m次旋转操作 给你p和r 将第p和第p+1条线段之间的角度旋转为r 即第p条线段绕p的终点逆时针旋转r度后能够与第p+1条重合 问每次旋转后最后一条线段的终点坐标 可以发现 旋转第p+1条线段时 p+1后面的所有线段也一起旋转了 可以把Crane分解为n个向量 这些向量的和也就是Crane终点的坐标 用">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 2991 Crane（线段树·向量旋转）">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/ds/POJ 2991 Crane（线段树·向量旋转）/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 有一个Crane由n条线段连接组成 每个连接点处均可以任意旋转 给你n条线段的长度 然后又m次旋转操作 给你p和r 将第p和第p+1条线段之间的角度旋转为r 即第p条线段绕p的终点逆时针旋转r度后能够与第p+1条重合 问每次旋转后最后一条线段的终点坐标 可以发现 旋转第p+1条线段时 p+1后面的所有线段也一起旋转了 可以把Crane分解为n个向量 这些向量的和也就是Crane终点的坐标 用">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ 2991 Crane（线段树·向量旋转）">
+<meta name="twitter:description" content="题意 有一个Crane由n条线段连接组成 每个连接点处均可以任意旋转 给你n条线段的长度 然后又m次旋转操作 给你p和r 将第p和第p+1条线段之间的角度旋转为r 即第p条线段绕p的终点逆时针旋转r度后能够与第p+1条重合 问每次旋转后最后一条线段的终点坐标 可以发现 旋转第p+1条线段时 p+1后面的所有线段也一起旋转了 可以把Crane分解为n个向量 这些向量的和也就是Crane终点的坐标 用">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/ds/POJ 2991 Crane（线段树·向量旋转）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>POJ 2991 Crane（线段树·向量旋转） | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/POJ 2991 Crane（线段树·向量旋转）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">POJ 2991 Crane（线段树·向量旋转）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-08-16 15:16:48" itemprop="dateCreated datePublished" datetime="2015-08-16T15:16:48+00:00">2015-08-16</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 有一个Crane由n条线段连接组成 每个连接点处均可以任意旋转 给你n条线段的长度 然后又m次旋转操作 给你p和r 将第p和第p+1条线段之间的角度旋转为r 即第p条线段绕p的终点逆时针旋转r度后能够与第p+1条重合 问每次旋转后最后一条线段的终点坐标</p>
+<p>可以发现 旋转第p+1条线段时 p+1后面的所有线段也一起旋转了 可以把Crane分解为n个向量 这些向量的和也就是Crane终点的坐标 用rad[i]保存第i个向量与第i+1个向量之间的夹角 每次旋转操作时 我们要把rad[i]变为r 也就是要把第i+1和后面的所有向量逆时针旋转r - rad[i] 对于向量的旋转操作有</p>
+<p><strong>(x,y)</strong>逆时针旋转 r 弧度 --&gt;<strong>(x/<em>cos(r) - y/</em>sin(r), x/<em>sin(r) + y/</em>cos(r))</strong></p>
+<p><strong>(x,y)</strong>顺时针旋转 r 弧度 --&gt;<strong>(-x/<em>cos(r) + y/</em>sin(r), x/<em>sin(r) + y/</em>cos(r))</strong></p>
+<p>那么我们可以用线段树来维护对应区间的向量的和 根节点对应的x, y也就是答案了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#define lc p&lt;&lt;1, s, mid</span><br><span class="line">#define rc p&lt;&lt;1|1, mid+1, e</span><br><span class="line">#define mid ((s+e)&gt;&gt;1)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">const</span> double pi = acos(<span class="number">-1.0</span>);</span><br><span class="line"><span class="keyword">const</span> double eps = <span class="number">1e-8</span>;</span><br><span class="line">double x[N &lt;&lt; <span class="number">2</span>], y[N &lt;&lt; <span class="number">2</span>], rot[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"><span class="comment">//x 对应区间所有向量的和的横坐标</span></span><br><span class="line"><span class="comment">//y 对应区间所有向量的和的纵坐标</span></span><br><span class="line"><span class="comment">//rot 子节点对应区间所有向量需要逆时针旋转的弧度</span></span><br><span class="line">double rad[N]; <span class="comment">//rad[i] 保存第i个向量和第i+1个向量间的弧度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> rotate(double &amp;x, double &amp;y, double r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//将向量(x, y)逆时针旋转r弧度</span></span><br><span class="line">    double xx = x;</span><br><span class="line">    x = xx * cos(r) - y * sin(r);</span><br><span class="line">    y = xx * sin(r) + y * cos(r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> pushup(int p)</span><br><span class="line">&#123;</span><br><span class="line">    x[p] = x[p &lt;&lt; <span class="number">1</span>] + x[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">    y[p] = y[p &lt;&lt; <span class="number">1</span>] + y[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> pushdown(int p, int s, int e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(fabs(rot[p]) &lt; eps) <span class="keyword">return</span>;</span><br><span class="line">    int lp = p &lt;&lt; <span class="number">1</span>, rp = p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;</span><br><span class="line">    rot[lp] += rot[p];</span><br><span class="line">    rot[rp] += rot[p];</span><br><span class="line">    rotate(x[lp], y[lp], rot[p]);</span><br><span class="line">    rotate(x[rp], y[rp], rot[p]);</span><br><span class="line">    rot[p] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> build(int p, int s, int e)</span><br><span class="line">&#123;</span><br><span class="line">    rot[p] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(s == e)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%lf"</span>, &amp;y[p]);</span><br><span class="line">        x[p] = <span class="number">0</span>;</span><br><span class="line">        rad[s] = pi;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    build(lc);</span><br><span class="line">    build(rc);</span><br><span class="line">    pushup(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> update(int p, int s, int e, int l, int r, double v)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        rot[p] += v;</span><br><span class="line">        rotate(x[p], y[p], v);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(p, s, e);</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) update(lc, l, r, v);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) update(rc, l, r, v);</span><br><span class="line">    pushup(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, p, first = <span class="number">1</span>;</span><br><span class="line">    double r;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!first) puts(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">else</span> first = <span class="number">0</span>;</span><br><span class="line">        build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d%lf"</span>, &amp;p, &amp;r);</span><br><span class="line">            r = r / <span class="number">180</span> * pi;</span><br><span class="line">            <span class="comment">//p与p+1之间的弧度为rad[p] 要达到r p+1还需要逆时针旋转r - rad[p]弧度</span></span><br><span class="line">            update(<span class="number">1</span>, <span class="number">1</span>, n, p + <span class="number">1</span>, n, r - rad[p]);</span><br><span class="line">            rad[p] = r;  <span class="comment">//旋转后p与p+1之间的弧度变为r</span></span><br><span class="line">            printf(<span class="string">"%f %f\n"</span>, x[<span class="number">1</span>], y[<span class="number">1</span>]); <span class="comment">//x[1], y[1]为所有向量和的坐标</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Crane</p>
+<p>Description ACM has bought a new crane (crane -- jeřáb) . The crane consists of n segments of various lengths, connected by flexible joints. The end of the i-th segment is joined to the beginning of the i + 1-th one, for 1 ≤ i &lt; n. The beginning of the first segment is fixed at point with coordinates (0, 0) and its end at point with coordinates (0, w), where w is the length of the first segment. All of the segments lie always in one plane, and the joints allow arbitrary rotation in that plane. After series of unpleasant accidents, it was decided that software that controls the crane must contain a piece of code that constantly checks the position of the end of crane, and stops the crane if a collision should happen. Your task is to write a part of this software that determines the position of the end of the n-th segment after each command. The state of the crane is determined by the angles between consecutive segments. Initially, all of the angles are straight, i.e., 180 o. The operator issues commands that change the angle in exactly one joint.</p>
+<p>Input</p>
+<p>The input consists of several instances, separated by single empty lines. The first line of each instance consists of two integers 1 ≤ n ≤10 000 and c 0 separated by a single space -- the number of segments of the crane and the number of commands. The second line consists of n integers l1,..., ln (1 li 100) separated by single spaces. The length of the i-th segment of the crane is li. The following c lines specify the commands of the operator. Each line describing the command consists of two integers s and a (1 ≤ s &lt; n, 0 ≤ a ≤ 359) separated by a single space -- the order to change the angle between the s-th and the s + 1-th segment to a degrees (the angle is measured counterclockwise from the s-th to the s + 1-th segment).</p>
+<p>Output</p>
+<p>The output for each instance consists of c lines. The i-th of the lines consists of two rational numbers x and y separated by a single space -- the coordinates of the end of the n-th segment after the i-th command, rounded to two digits after the decimal point. The outputs for each two consecutive instances must be separated by a single empty line.</p>
+<p>Sample Input</p>
+<p>2 1 10 5 1 90 3 2 5 5 5 1 270 2 90</p>
+<p>Sample Output</p>
+<p>5.00 10.00 -10.00 5.00 -5.00 10.00</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/ds/HDU 3265 Posters（线段树扫描线·矩形框面积并）/" rel="next" title="HDU 3265 Posters（线段树扫描线·矩形框面积并）">
+                <i class="fa fa-chevron-left"></i> HDU 3265 Posters（线段树扫描线·矩形框面积并）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/ds/HDU 2871 Memory Control（线段树·区间合并·Vector）/" rel="prev" title="HDU 2871 Memory Control（线段树·区间合并·Vector）">
+                HDU 2871 Memory Control（线段树·区间合并·Vector） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

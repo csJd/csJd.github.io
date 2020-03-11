@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 从n个数的数组中选出不相交的m段 求被选数的和的最大值 Max Sum 的升级版 不只是要选一段连续的了 而是选m段 思想还是类似 依旧dp 状态和状态转移方程不是很难想 在 Max Sum 这个问题中 dp[i] 表示的是以第i个数结尾的一段的 Max Sum 由于这里还有一个多少段的状态 于是这里令 dp[i][j] 表示在前 i 个数中选取 j 组 且第 i 个数在最后一组中的 Max">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU 1024 Max Sum Plus Plus (DP·滚动数组)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/HDU 1024 Max Sum Plus Plus (DP·滚动数组)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 从n个数的数组中选出不相交的m段 求被选数的和的最大值 Max Sum 的升级版 不只是要选一段连续的了 而是选m段 思想还是类似 依旧dp 状态和状态转移方程不是很难想 在 Max Sum 这个问题中 dp[i] 表示的是以第i个数结尾的一段的 Max Sum 由于这里还有一个多少段的状态 于是这里令 dp[i][j] 表示在前 i 个数中选取 j 组 且第 i 个数在最后一组中的 Max">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDU 1024 Max Sum Plus Plus (DP·滚动数组)">
+<meta name="twitter:description" content="题意 从n个数的数组中选出不相交的m段 求被选数的和的最大值 Max Sum 的升级版 不只是要选一段连续的了 而是选m段 思想还是类似 依旧dp 状态和状态转移方程不是很难想 在 Max Sum 这个问题中 dp[i] 表示的是以第i个数结尾的一段的 Max Sum 由于这里还有一个多少段的状态 于是这里令 dp[i][j] 表示在前 i 个数中选取 j 组 且第 i 个数在最后一组中的 Max">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/HDU 1024 Max Sum Plus Plus (DP·滚动数组)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HDU 1024 Max Sum Plus Plus (DP·滚动数组) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU 1024 Max Sum Plus Plus (DP·滚动数组)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HDU 1024 Max Sum Plus Plus (DP·滚动数组)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-08-27 10:02:55" itemprop="dateCreated datePublished" datetime="2015-08-27T10:02:55+00:00">2015-08-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 从n个数的数组中选出不相交的m段 求被选数的和的最大值</p>
+<p>Max Sum 的升级版 不只是要选一段连续的了 而是选m段 思想还是类似 依旧dp</p>
+<p>状态和状态转移方程不是很难想 在 Max Sum 这个问题中 dp[i] 表示的是以第i个数结尾的一段的 Max Sum 由于这里还有一个多少段的状态 于是这里令 dp[i][j] 表示在前 i 个数中选取 j 组 且第 i 个数在最后一组中的 Max Sum Plus Plus</p>
+<p>那么现在对于第i个数有两种决策</p>
+<p>1, 第 i 个数和第 i-1 个数连接成一段<strong>dp[i][j] = dp[i-1][j] + a[i]</strong></p>
+<p>2, 第 i 个数自己单独做一段 那么前面就需要有 j-1 段<strong>dp[i][j] = max{dp[k][j-1] | j - 1&lt;= k &lt; i} + a[i]</strong></p>
+<p>那么也就有了状态转移方程<strong>dp[i][j] = max(dp[i-1][j], max{dp[k][j-1] | j - 1&lt;= k &lt; i}) + a[i];</strong></p>
+<p>有了方程就可以写了呀 我们先不考虑复杂度问题 假设时间空间都是无限的 恩 无限的</p>
+<p>那么很容易有下面的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>, INF = <span class="number">1e9</span>;</span><br><span class="line">int a[N], dp[N][N];</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%d%d"</span>, &amp;m, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        memset(dp, <span class="number">0</span>, sizeof dp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dp[i][j] 表示前i个数第i个数被选 选j组的Max Sum Plus Plus</span></span><br><span class="line">        <span class="comment">//dp[i][j] = max(dp[i-1][j], max&#123;dp[k][j-1], j - 1 &lt;= k &lt; i&#125;) + a[i]</span></span><br><span class="line">        int ans = -INF;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int i = j; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j] = i - <span class="number">1</span> &lt; j ? -INF : dp[i - <span class="number">1</span>][j]; <span class="comment">//i-1 &lt; j时dp[i - 1][j]是没意义的</span></span><br><span class="line">                <span class="keyword">for</span>(int k = j - <span class="number">1</span>; k &lt; i; ++k)</span><br><span class="line">                    dp[i][j] = max(dp[i][j], dp[k][j - <span class="number">1</span>]);</span><br><span class="line">                dp[i][j] += a[i];</span><br><span class="line">                <span class="keyword">if</span>(j == m) ans = max(ans, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可是并不是无限的呀 上面这个时间复杂度0(n/<em>n/</em>m) 空间复杂度O(n/*n) n高达1000000 简直可怕</p>
+<p>再来看看转移方程<strong>dp[i][j] = max(dp[i-1][j],max{dp[k][j-1] | j - 1&lt;= k &lt; i}) + a[i];</strong></p>
+<p>发现更新 dp[i][j] 的时候只用到了 dp[.][j] 和 dp[.][j-1] 里面的值 也就是 dp[.][0~j-2] 都已经没用了 那也就不用存这些没用的了 也就是j只用开两维就够了 也就是所谓的滚动数组了 用 dp[.][1] 和 dp[.][0] 来轮换表示 dp[.][j] 和 dp[.][j-1] 这样空间复杂度就降到了O(n) 这是可以接受的 那么有空间优化后的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000005</span>, INF = <span class="number">1e9</span>;</span><br><span class="line">int a[N], dp[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%d%d"</span>, &amp;m, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        memset(dp, <span class="number">0</span>, sizeof dp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dp[i][j] 表示前i个数第i个数被选 选j组的Max Sum Plus Plus</span></span><br><span class="line">        <span class="comment">//dp[i][j] = max(dp[i-1][j], max&#123;dp[k][j-1], j - 1 &lt;= k &lt; i&#125;) + a[i]</span></span><br><span class="line">        int ans = -INF, j0 = <span class="number">0</span>, j1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int i = j; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//dp[i][j0]存的是dp[i][j-1]的值 dp[i][j1] 存的是dp[i][j]的值</span></span><br><span class="line">                dp[i][j1] = i - <span class="number">1</span> &lt; j ? -INF : dp[i - <span class="number">1</span>][j1]; <span class="comment">//i-1 &lt; j时dp[i - 1][j]是没意义的</span></span><br><span class="line">                <span class="keyword">for</span>(int k = j - <span class="number">1</span>; k &lt; i; ++k)</span><br><span class="line">                    dp[i][j1] = max(dp[i][j1], dp[k][j0]);</span><br><span class="line">                dp[i][j1] += a[i];</span><br><span class="line">                <span class="keyword">if</span>(j == m) ans = max(ans, dp[i][j1]);</span><br><span class="line">            &#125;</span><br><span class="line">            swap(j0, j1); <span class="comment">//滚动数组交换0, 1  因为这轮的j在下轮就变成j - 1了</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在空间问题解决了 那么时间问题呢 来看这段代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=<span class="string">"white-space:pre"</span>&gt;	&lt;/span&gt;<span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">      &lt;span style=<span class="string">"white-space:pre"</span>&gt;	&lt;/span&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span>(int i = j; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//</span></span><br><span class="line">                dp[i][j1] = i - <span class="number">1</span> &lt; j ? -INF : dp[i - <span class="number">1</span>][j1]; <span class="comment">//</span></span><br><span class="line">                <span class="keyword">for</span>(int k = j - <span class="number">1</span>; k &lt; i; ++k)</span><br><span class="line">                    dp[i][j1] = max(dp[i][j1], dp[k][j0]); <span class="comment">//这轮循环只比上轮多了个dp[i-1][j0]！！！</span></span><br><span class="line">                dp[i][j1] += a[i];</span><br><span class="line">                <span class="keyword">if</span>(j == m) ans = max(ans, dp[i][j1]);</span><br><span class="line">            &#125;</span><br><span class="line">            swap(j0, j1); <span class="comment">//</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>看注释部分！！！ 这轮只比上轮多了一个数 我还循环那么多是什么鬼 把上轮的值 ma 记录下来 这轮只用和 dp[i-1][j0] 比较一下就行了 那么就有了可以ac的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000005</span>, INF = <span class="number">1e9</span>;</span><br><span class="line">int a[N], dp[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%d%d"</span>, &amp;m, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        memset(dp, <span class="number">0</span>, sizeof dp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dp[i][j] 表示前i个数第i个数被选 选j组的Max Sum Plus Plus</span></span><br><span class="line">        <span class="comment">//dp[i][j] = max(dp[i-1][j], max&#123;dp[k][j-1], j - 1 &lt;= k &lt; i&#125;) + a[i]</span></span><br><span class="line">        int ans = -INF, j0 = <span class="number">0</span>, j1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            int ma = dp[j - <span class="number">1</span>][j1] = -INF; <span class="comment">//dp[j - 1][j]是没意义的</span></span><br><span class="line">            <span class="keyword">for</span>(int i = j; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//dp[i][j0]存的是dp[i][j-1]的值 dp[i][j1]存的是dp[i][j]的值</span></span><br><span class="line">                ma = max(ma, dp[i - <span class="number">1</span>][j0]); <span class="comment">//ma维护max&#123;dp[k][j-1], j - 1 &lt;= k &lt; i&#125;</span></span><br><span class="line">                dp[i][j1] = max(dp[i - <span class="number">1</span>][j1], ma) + a[i];</span><br><span class="line">                <span class="keyword">if</span>(j == m) ans = max(ans, dp[i][j1]);</span><br><span class="line">            &#125;</span><br><span class="line">            swap(j0, j1); <span class="comment">//滚动数组交换0, 1  因为这轮的j在下轮就变成j - 1了</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="max-sum-plus-plus">Max Sum Plus Plus</h1>
+<p>Problem Description</p>
+<p>Now I think you have got an AC in Ignatius.L's "Max Sum" problem. To be a brave ACMer, we always challenge ourselves to more difficult problems. Now you are faced with a more difficult problem. Given a consecutive number sequence S <em>1</em>, S <em>2</em>, S <em>3</em>, S <em>4</em> ... S <em>x</em>, ... S <em>n</em> (1 ≤ x ≤ n ≤ 1,000,000, -32768 ≤ S <em>x</em> ≤ 32767). We define a function sum(i, j) = S <em>i</em> + ... + S <em>j</em> (1 ≤ i ≤ j ≤ n). Now given an integer m (m &gt; 0), your task is to find m pairs of i and j which make sum(i <em>1</em>, j <em>1</em>) + sum(i <em>2</em>, j <em>2</em>) + sum(i <em>3</em>, j <em>3</em>) + ... + sum(i <em>m</em>, j <em>m</em>) maximal (i <em>x</em> ≤ i <em>y</em> ≤ j <em>x</em> or i <em>x</em> ≤ j <em>y</em> ≤ j <em>x</em> is not allowed). But I`m lazy, I don't want to write a special-judge module, so you don't have to output m pairs of i and j, just output the maximal summation of sum(i <em>x</em>, j <em>x</em>)(1 ≤ x ≤ m) instead. ^_^ Input</p>
+<p>Each test case will begin with two integers m and n, followed by n integers S <em>1</em>, S <em>2</em>, S <em>3</em> ... S <em>n</em>. Process to the end of file. Output</p>
+<p>Output the maximal summation described above in one line. Sample Input</p>
+<p>1 3 1 2 3 2 6 -1 4 -2 3 -2 3 Sample Output</p>
+<p>6 8</p>
+<p><em>Hint</em> Huge input, scanf and dynamic programming is recommended. Author</p>
+<p>JGShining（极光炫影）</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/graph/POJ 1128 Frame Stacking（拓扑排序·打印字典序）/" rel="next" title="POJ 1128 Frame Stacking（拓扑排序·打印字典序）">
+                <i class="fa fa-chevron-left"></i> POJ 1128 Frame Stacking（拓扑排序·打印字典序）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/dp/HDU 1074 Doing Homework（DP·状态压缩）/" rel="prev" title="HDU 1074 Doing Homework（DP·状态压缩）">
+                HDU 1074 Doing Homework（DP·状态压缩） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#max-sum-plus-plus"><span class="nav-text">Max Sum Plus Plus</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

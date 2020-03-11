@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 建设一条河岸的污水处理系统 河岸有n个城市 每个城市都可以自己处理污水 V 也可以把污水传到相邻的城市处理 &amp;gt;或&amp;lt; 除了你传给我我也传给你这种情况 其它都是合法的 两端的城市不能传到不存在的城市 令d[i]表示有i个城市时的处理方法数 最后一个城市的处理方法有 1.V 自己处理自己的 与前i-1个城市的处理方法无关 有d[i-1]种方法 2.&amp;lt; 给左边的城市去处理 也与前i">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 1205 Water Treatment Plants(递推)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/POJ 1205 Water Treatment Plants(递推)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 建设一条河岸的污水处理系统 河岸有n个城市 每个城市都可以自己处理污水 V 也可以把污水传到相邻的城市处理 &amp;gt;或&amp;lt; 除了你传给我我也传给你这种情况 其它都是合法的 两端的城市不能传到不存在的城市 令d[i]表示有i个城市时的处理方法数 最后一个城市的处理方法有 1.V 自己处理自己的 与前i-1个城市的处理方法无关 有d[i-1]种方法 2.&amp;lt; 给左边的城市去处理 也与前i">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/es-1205_1.jpg.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ 1205 Water Treatment Plants(递推)">
+<meta name="twitter:description" content="题意 建设一条河岸的污水处理系统 河岸有n个城市 每个城市都可以自己处理污水 V 也可以把污水传到相邻的城市处理 &amp;gt;或&amp;lt; 除了你传给我我也传给你这种情况 其它都是合法的 两端的城市不能传到不存在的城市 令d[i]表示有i个城市时的处理方法数 最后一个城市的处理方法有 1.V 自己处理自己的 与前i-1个城市的处理方法无关 有d[i-1]种方法 2.&amp;lt; 给左边的城市去处理 也与前i">
+<meta name="twitter:image" content="http://blog.deng.cf/posts/oj/dp/images/es-1205_1.jpg.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/POJ 1205 Water Treatment Plants(递推)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>POJ 1205 Water Treatment Plants(递推) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/POJ 1205 Water Treatment Plants(递推)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">POJ 1205 Water Treatment Plants(递推)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-09-02 09:51:36" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:36+00:00">2014-09-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 建设一条河岸的污水处理系统 河岸有n个城市 每个城市都可以自己处理污水 V 也可以把污水传到相邻的城市处理 &gt;或&lt; 除了你传给我我也传给你这种情况 其它都是合法的 两端的城市不能传到不存在的城市</p>
+<p>令d[i]表示有i个城市时的处理方法数 最后一个城市的处理方法有</p>
+<p>1.V 自己处理自己的 与前i-1个城市的处理方法无关 有d[i-1]种方法</p>
+<p>2.&lt; 给左边的城市去处理 也与前i-1个城市的处理方法无关 把自己的污水给第i-1个城市就行了 有d[i-1]种方法</p>
+<p>3.&gt;V 左边有污水传过来 和自己的一起处理 这时第i-1个城市可以向右传了 如果这种情况发生的话 那么第i-1个城市肯定不可能是向左传的 但前i-2个城市的处理方法没有影响 所以第i-1个城市向左传的方法有d[i-2]种 然后第i-1个城市不向左传就有d[i-1]-d[i-2]种方法了</p>
+<p>所以有递推公式d[i]=3/*d[i-1]-d[i-2];</p>
+<p>增长速度很快要用大数处理 大数就用java了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.math.*;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span> args[]) &#123;</span><br><span class="line">		Scanner <span class="keyword">in</span> = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		BigInteger d[] = <span class="keyword">new</span> BigInteger[<span class="number">105</span>];</span><br><span class="line">		d[<span class="number">1</span>] = BigInteger.ONE;</span><br><span class="line">		d[<span class="number">2</span>] = BigInteger.valueOf(<span class="number">3</span>);</span><br><span class="line">		<span class="keyword">for</span> (int i = <span class="number">3</span>; i &lt;= <span class="number">100</span>; ++i)</span><br><span class="line">			d[i] = d[i - <span class="number">1</span>].multiply(d[<span class="number">2</span>]).subtract(d[i - <span class="number">2</span>]);</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">in</span>.hasNext())</span><br><span class="line">			System.out.println(d[<span class="keyword">in</span>.nextInt()]);</span><br><span class="line">		<span class="keyword">in</span>.close();</span><br><span class="line">	&#125;</span><br><span class="line">&lt;span style=<span class="string">"font-family:Microsoft YaHei;"</span>&gt;&#125;&lt;<span class="regexp">/span&gt;</span></span><br></pre></td></tr></table></figure>
+<p>还有没加大数模版的c++代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int d[N] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>&#125;, n;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">3</span>; i &lt;= <span class="number">100</span>; ++i)</span><br><span class="line">        d[i] = <span class="number">3</span> * d[i - <span class="number">1</span>] - d[i - <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">        printf (<span class="string">"%d\n"</span>, d[n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Water Treatment Plants</p>
+<p>Description</p>
+<p>River polution control is a major challenge that authorities face in order to ensure future clean water supply. Sewage treatment plants are used to clean-up the dirty water comming from cities before being discharged into the river. As part of a coordinated plan, a pipeline is setup in order to connect cities to the sewage treatment plants distributed along the river. It is more efficient to have treatment plants running at maximum capacity and less-used ones switched off for a period. So, each city has its own treatment plant by the river and also a pipe to its neighbouring city upstream and a pipe to the next city downstream along the riverside. At each city's treatment plant there are three choices:</p>
+<p><img src="../images/es-1205_1.jpg.png"> The choices above ensure that: every city must have its water treated somewhere and at least one city must discharge the cleaned water into the river. Let's represent a city discharging water into the river as "V" (a downwards flow), passing water onto its neighbours as "&gt;" (to the next city on its right) or else "&lt;" (to the left). When we have several cities along the river bank, we assign a symbol to each (V, &lt; or &gt;) and list the cities symbols in order. For example, two cities, A and B, can each treat their own sewage and each discharges clean water into the river. So A's action is denoted V as is B's and we write "VV" ; or else city A can send its sewage along the pipe (to the right) to B for treatment and discharge, denoted "&gt;V"; or else city B can send its sewage to (the left to) A, which treats it with its own dirty water and discharges (V) the cleaned water into the river. So A discharges (V) and B passes water to the left (&lt;), and we denote this situation as "V&lt;". We could not have "&gt;&lt;" since this means A sends its water to B and B sends its own to A, so both are using the same pipe and this is not allowed. Similarly "&lt;&lt;" is not possible since A's "&lt;" means it sends its water to a non-existent city on its left. So we have just 3 possible set-ups that fit the conditions: A B A &gt; B A &lt; B V V V V RIVER~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~RIVER "VV" "&gt;V" "V&lt;" If we now consider three cities, we can determine 8 possible set-ups. Your task is to produce a program that given the number of cities NC (or treatment plants) in the river bank, determines the number of possible set-ups, NS, that can be made according to the rules define above. You need to be careful with your design as the number of cities can be as large as 100.</p>
+<p>Input</p>
+<p>The input consists of a sequence of values, one per line, where each value represents the number of cities.</p>
+<p>Output</p>
+<p>Your output should be a sequence of values, one per line, where each value represents the number of possible set-ups for the corresponding number of cities read in the same input line.</p>
+<p>Sample Input</p>
+<p>2 3 20</p>
+<p>Sample Output</p>
+<p>3 8 102334155</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/dp/HDU 1978 How many ways(DP)/" rel="next" title="HDU 1978 How many ways(DP)">
+                <i class="fa fa-chevron-left"></i> HDU 1978 How many ways(DP)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/search/POJ 1856 Sea Battle(DFS)/" rel="prev" title="POJ 1856 Sea Battle(DFS)">
+                POJ 1856 Sea Battle(DFS) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

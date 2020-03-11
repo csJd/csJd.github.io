@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="A Typical Homework(a.k.a Shi Xiong Bang Bang Mang) Hi, I am an undergraduate student in institute of foreign languages. As you know, C programming is a required course in our university, even if his/h">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 12412 A Typical Homework(学生信息管理系统)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/other/UVa 12412 A Typical Homework(学生信息管理系统)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="A Typical Homework(a.k.a Shi Xiong Bang Bang Mang) Hi, I am an undergraduate student in institute of foreign languages. As you know, C programming is a required course in our university, even if his/h">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVa 12412 A Typical Homework(学生信息管理系统)">
+<meta name="twitter:description" content="A Typical Homework(a.k.a Shi Xiong Bang Bang Mang) Hi, I am an undergraduate student in institute of foreign languages. As you know, C programming is a required course in our university, even if his/h">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/other/UVa 12412 A Typical Homework(学生信息管理系统)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UVa 12412 A Typical Homework(学生信息管理系统) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/UVa 12412 A Typical Homework(学生信息管理系统)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UVa 12412 A Typical Homework(学生信息管理系统)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-09-02 09:50:36" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:36+00:00">2014-09-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="a-typical-homeworka.k.a-shi-xiong-bang-bang-mang">A Typical Homework(a.k.a Shi Xiong Bang Bang Mang)</h2>
+<p>Hi, I am an undergraduate student in institute of foreign languages. As you know, C programming is a required course in our university, even if his/her major is far from computer science. I don't like this course at all, as I am not good at computer and I don't wanna even have a try of any programming!! But I have to do the homework in order to pass :( Sh... Could you help me with it? Please keep secret!! I know that you won't say NO to a poor little girl, boy. :)</p>
+<h2 id="task">Task</h2>
+<p>Write a Student Performance Management System (SPMS).</p>
+<h2 id="concepts">Concepts</h2>
+<p>In the SPMS, there will be at most 100 students, each has an SID, a CID, a name and four scores (Chinese, Mathematics, English and Programming).</p>
+<h2 id="main-menu">Main Menu</h2>
+<p>When you enter the SPMS, the main menu should be shown like this: Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit</p>
+<h2 id="adding-a-student">Adding a Student</h2>
+<p>If you choose 1 from the main menu, the following message should be printed on the screen: Please enter the SID, CID, name and four scores. Enter 0 to finish. Then your program should wait for user input. The input lines are always valid (no invalid SID, CID, or name, exactly four scores etc), but the SID may already exist. In that case, simply ignore this line and print the following: Duplicated SID. On the other hand, multiple students can have the same name. You should keep printing the message above until the user inputs a single zero. After that the main menu is printed again.</p>
+<h2 id="removing-a-student">Removing a Student</h2>
+<p>If you choose 2 from the main menu, the following message should be printed on the screen: Please enter SID or name. Enter 0 to finish. Then your program should wait for user input, and remove all the students matching the SID or name in the database, and print the following message (it's possible xx=0): xx student(s) removed. You should keep printing the message above until the user inputs a single zero. After that the main menu is printed again.</p>
+<h2 id="querying-students">Querying Students</h2>
+<p>If you choose 3 from the main menu, the following message should be printed on the screen: Please enter SID or name. Enter 0 to finish. Then your program should wait for user input. If no student matches the SID or name, simply do nothing, otherwise print out all the matching students, in the same order they're added to the database. The format is similar to the input format for "adding a student", but 3 more columns are added: rank (1st column), total score and average score (last two columns). The student with highest total score (considering all classes) received rank-1, and if there are two rank-2 students, the next one would be rank-4. You should keep printing the message above until the user inputs a single zero. After that the main menu is printed again.</p>
+<h2 id="showing-the-ranklist">Showing the Ranklist</h2>
+<p>If you choose 4 from the main menu, the following message should be printed on the screen: Showing the ranklist hurts students' self-esteem. Don't do that. Then the main menu is printed again.</p>
+<h2 id="showing-statistics">Showing Statistics</h2>
+<p>If you choose 5 from the main menu, show the statistics, in the following format: Please enter class ID, 0 for the whole statistics. When a class ID is entered, print the following statistics. Note that "passed" means to have a score of at least 60. Chinese Average Score: xx.xx Number of passed students: xx Number of failed students: xx Mathematics Average Score: xx.xx Number of passed students: xx Number of failed students: xx English Average Score: xx.xx Number of passed students: xx Number of failed students: xx Programming Average Score: xx.xx Number of passed students: xx Number of failed students: xx Overall: Number of students who passed all subjects: xx Number of students who passed 3 or more subjects: xx Number of students who passed 2 or more subjects: xx Number of students who passed 1 or more subjects: xx Number of students who failed all subjects: xx Then, the main menu is printed again.</p>
+<h2 id="exiting-spms">Exiting SPMS</h2>
+<p>If you choose 0 from the main menu, the program should terminate. Note that course scores and total score should be formatted as integers, but average scores should be formatted as a real number with exactly two digits after the decimal point.</p>
+<h2 id="input">Input</h2>
+<p>There will be a single test case, ending with a zero entered in the main menu screen. The entire input will be valid. The size of input does not exceed 10KB.</p>
+<h2 id="output">Output</h2>
+<p>Print out everything as stated in the problem description. You should be able to play around this little program in your machine, with a keyboard and a screen. However, both the input and output may look silly when they're not mixed, as in the keyboard-screen case.</p>
+<h2 id="sample-input">Sample Input</h2>
+<p>1 0011223344 1 John 79 98 91 100 0022334455 1 Tom 59 72 60 81 0011223344 2 Alice 100 100 100 100 2423475629 2 John 60 80 30 99 0 3 0022334455 John 0 5 1 2 0011223344 0 5 0 4 0</p>
+<h2 id="output-for-the-sample-input">Output for the Sample Input</h2>
+<p>Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Please enter the SID, CID, name and four scores. Enter 0 to finish. Please enter the SID, CID, name and four scores. Enter 0 to finish. Please enter the SID, CID, name and four scores. Enter 0 to finish. Duplicated SID. Please enter the SID, CID, name and four scores. Enter 0 to finish. Please enter the SID, CID, name and four scores. Enter 0 to finish. Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Please enter SID or name. Enter 0 to finish. 2 0022334455 1 Tom 59 72 60 81 272 68.00 Please enter SID or name. Enter 0 to finish. 1 0011223344 1 John 79 98 91 100 368 92.00 3 2423475629 2 John 60 80 30 99 269 67.25 Please enter SID or name. Enter 0 to finish. Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Please enter class ID, 0 for the whole statistics. Chinese Average Score: 69.00 Number of passed students: 1 Number of failed students: 1 Mathematics Average Score: 85.00 Number of passed students: 2 Number of failed students: 0 English Average Score: 75.50 Number of passed students: 2 Number of failed students: 0 Programming Average Score: 90.50 Number of passed students: 2 Number of failed students: 0 Overall: Number of students who passed all subjects: 1 Number of students who passed 3 or more subjects: 2 Number of students who passed 2 or more subjects: 2 Number of students who passed 1 or more subjects: 2 Number of students who failed all subjects: 0 Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Please enter SID or name. Enter 0 to finish. 1 student(s) removed. Please enter SID or name. Enter 0 to finish. Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Please enter class ID, 0 for the whole statistics. Chinese Average Score: 59.50 Number of passed students: 1 Number of failed students: 1 Mathematics Average Score: 76.00 Number of passed students: 2 Number of failed students: 0 English Average Score: 45.00 Number of passed students: 1 Number of failed students: 1 Programming Average Score: 90.00 Number of passed students: 2 Number of failed students: 0 Overall: Number of students who passed all subjects: 0 Number of students who passed 3 or more subjects: 2 Number of students who passed 2 or more subjects: 2 Number of students who passed 1 or more subjects: 2 Number of students who failed all subjects: 0 Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Showing the ranklist hurts students' self-esteem. Don't do that. Welcome to Student Performance Management System (SPMS). 1 - Add 2 - Remove 3 - Query 4 - Show ranking 5 - Show Statistics 0 - Exit Rujia Liu's Present 5: Developing Simplified Softwares Special Thanks: Youzhi Bao, Zhuohua Chen</p>
+<p>这种题目出现在oj上感觉挺奇怪的 这不是当年C语言期末考试的题目吗 实在不知道我的代码哪里有问题 样例是一摸一样的</p>
+<p>可能哪里格式错了吧 既然是个系统就不在乎那些了TT</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define eps 1e-5</span><br><span class="line">map&lt;string, int&gt; si;</span><br><span class="line">int n;</span><br><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">    string sid, name;</span><br><span class="line">    int cid, chi, mat, eng, pro, sco;</span><br><span class="line">    Student () &#123;&#125;</span><br><span class="line">    Student (string s, int c, string na, int s1, int s2, int s3, int s4)</span><br><span class="line">        : sid (s), cid (c), name (na), chi (s1), mat (s2), eng (s3), pro (s4)</span><br><span class="line">    &#123;</span><br><span class="line">        sco = chi + mat + eng + pro;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> print()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; sid &lt;&lt; <span class="string">" "</span> &lt;&lt; cid &lt;&lt; <span class="string">" "</span> &lt;&lt; name;</span><br><span class="line">        printf (<span class="string">" %d %d %d %d %d %.2lf\n"</span>, chi, mat, eng, pro, sco, sco / <span class="number">4.0</span> + eps);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; stu[<span class="number">100000</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Add()</span><br><span class="line">&#123;</span><br><span class="line">    string s, na;</span><br><span class="line">    int c, s1, s2, s3, s4;</span><br><span class="line">    printf (<span class="string">"Please enter the SID, CID, name and four scores. Enter 0 to finish.\n"</span>);</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; s, s != <span class="string">"0"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cin &gt;&gt; c &gt;&gt; na &gt;&gt; s1 &gt;&gt; s2 &gt;&gt; s3 &gt;&gt; s4;</span><br><span class="line">        <span class="keyword">if</span> (si[s]) printf (<span class="string">"Duplicated SID.\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            si[s] = (++n);</span><br><span class="line">            stu[n] = Student (s, c, na, s1, s2, s3, s4);</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">"Please enter the SID, CID, name and four scores. Enter 0 to finish.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Remove()</span><br><span class="line">&#123;</span><br><span class="line">    string s;</span><br><span class="line">    int t;</span><br><span class="line">    printf (<span class="string">"Please enter SID or name. Enter 0 to finish.\n"</span>);</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; s, s != <span class="string">"0"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (si[stu[i].sid])</span><br><span class="line">                <span class="keyword">if</span> (stu[i].name == s || stu[i].sid == s)</span><br><span class="line">                &#123;</span><br><span class="line">                    si[stu[i].sid] = <span class="number">0</span>;</span><br><span class="line">                    ++t;</span><br><span class="line">                &#125;</span><br><span class="line">        printf (<span class="string">"%d student(s) removed.\n"</span>, t);</span><br><span class="line">        printf (<span class="string">"Please enter SID or name. Enter 0 to finish.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Query()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    string s;</span><br><span class="line">    printf (<span class="string">"Please enter SID or name. Enter 0 to finish.\n"</span>);</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; s, s != <span class="string">"0"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = t = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (si[stu[i].sid])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (stu[i].sid == s || stu[i].name == s)</span><br><span class="line">                &#123;</span><br><span class="line">                    printf (<span class="string">"%d "</span>, t++);</span><br><span class="line">                    stu[i].print();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>  ++t;</span><br><span class="line">            &#125;</span><br><span class="line">        printf (<span class="string">"Please enter SID or name. Enter 0 to finish.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Show_ranking()</span><br><span class="line">&#123;</span><br><span class="line">    printf (<span class="string">"Showing the ranklist hurts students' self-esteem. Don't do that.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Show_Statistics()</span><br><span class="line">&#123;</span><br><span class="line">    printf (<span class="string">"Please enter class ID, 0 for the whole statistics.\n"</span>);</span><br><span class="line">    int schi = <span class="number">0</span>, seng = <span class="number">0</span>, smat = <span class="number">0</span>, spro = <span class="number">0</span>, pmat = <span class="number">0</span>, cla,</span><br><span class="line">        pchi = <span class="number">0</span>, peng = <span class="number">0</span>, ppro = <span class="number">0</span>, npa = <span class="number">0</span>, np1 = <span class="number">0</span>, np2 = <span class="number">0</span>, np3 = <span class="number">0</span>, nfa = <span class="number">0</span>, numb;</span><br><span class="line">    scanf (<span class="string">"%d"</span>, &amp;cla);</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> ( (stu[i].cid == cla || cla == <span class="number">0</span>) &amp;&amp; si[stu[i].sid])</span><br><span class="line">        &#123;</span><br><span class="line">            int t = <span class="number">0</span>;</span><br><span class="line">            schi += stu[i].chi;</span><br><span class="line">            <span class="keyword">if</span> (stu[i].chi &gt;= <span class="number">60</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++pchi;</span><br><span class="line">                ++t;</span><br><span class="line">            &#125;</span><br><span class="line">            seng += stu[i].eng;</span><br><span class="line">            <span class="keyword">if</span> (stu[i].eng &gt;= <span class="number">60</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++peng;</span><br><span class="line">                ++t;</span><br><span class="line">            &#125;</span><br><span class="line">            spro += stu[i].pro;</span><br><span class="line">            <span class="keyword">if</span> (stu[i].pro &gt;= <span class="number">60</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++ppro;</span><br><span class="line">                ++t;</span><br><span class="line">            &#125;</span><br><span class="line">            smat += stu[i].mat;</span><br><span class="line">            <span class="keyword">if</span> (stu[i].mat &gt;= <span class="number">60</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++pmat;</span><br><span class="line">                ++t;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">0</span>) ++nfa;</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">1</span>) ++np1;</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">2</span>) ++np2;</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">3</span>) ++np3;</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">4</span>) ++npa;</span><br><span class="line">        &#125;</span><br><span class="line">    numb = nfa + np1 + np2 + np3 + npa;</span><br><span class="line">    printf (<span class="string">"Chinese\n"</span>);</span><br><span class="line">    printf (<span class="string">"Average Score: %.2lf\n"</span>, schi / (numb * <span class="number">1.0</span>) + eps);</span><br><span class="line">    printf (<span class="string">"Number of passed students: %d\n"</span>, pchi);</span><br><span class="line">    printf (<span class="string">"Number of failed students: %d\n\n"</span>, numb - pchi);</span><br><span class="line">    </span><br><span class="line">    printf (<span class="string">"Mathematics\n"</span>);</span><br><span class="line">    printf (<span class="string">"Average Score: %.2lf\n"</span>, smat / (numb * <span class="number">1.0</span>) + eps);</span><br><span class="line">    printf (<span class="string">"Number of passed students: %d\n"</span>, pmat);</span><br><span class="line">    printf (<span class="string">"Number of failed students: %d\n\n"</span>, numb - pmat);</span><br><span class="line">    </span><br><span class="line">    printf (<span class="string">"English\n"</span>);</span><br><span class="line">    printf (<span class="string">"Average Score: %.2lf\n"</span>, seng / (numb * <span class="number">1.0</span>) + eps);</span><br><span class="line">    printf (<span class="string">"Number of passed students: %d\n"</span>, peng);</span><br><span class="line">    printf (<span class="string">"Number of failed students: %d\n\n"</span>, numb - peng);</span><br><span class="line">    </span><br><span class="line">    printf (<span class="string">"Programming\n"</span>);</span><br><span class="line">    printf (<span class="string">"Average Score: %.2lf\n"</span>, spro / (numb * <span class="number">1.0</span>) + eps);</span><br><span class="line">    printf (<span class="string">"Number of passed students: %d\n"</span>, ppro);</span><br><span class="line">    printf (<span class="string">"Number of failed students: %d\n\n"</span>, numb - ppro);</span><br><span class="line">    </span><br><span class="line">    printf (<span class="string">"Overall:\n"</span>);</span><br><span class="line">    printf (<span class="string">"Number of students who passed all subjects: %d\n"</span>, npa);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 3 or more subjects: %d\n"</span>, npa + np3);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 2 or more subjects: %d\n"</span>, npa + np3 + np2);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 1 or more subjects: %d\n"</span>, npa + np3 + np2 + np1);</span><br><span class="line">    printf (<span class="string">"Number of students who failed all subjects: %d\n\n"</span>, nfa);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int cho;</span><br><span class="line">    n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        printf (<span class="string">"Welcome to Student Performance Management System (SPMS).\n\n"</span>);</span><br><span class="line">        printf (<span class="string">"1 - Add\n"</span>);</span><br><span class="line">        printf (<span class="string">"2 - Remove\n"</span>);</span><br><span class="line">        printf (<span class="string">"3 - Query\n"</span>);</span><br><span class="line">        printf (<span class="string">"4 - Show ranking\n"</span>);</span><br><span class="line">        printf (<span class="string">"5 - Show Statistics\n"</span>);</span><br><span class="line">        printf (<span class="string">"0 - Exit\n\n"</span>);</span><br><span class="line">        scanf (<span class="string">"%d"</span>, &amp;cho);</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">1</span>) Add();</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">2</span>) Remove();</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">3</span>) Query();</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">4</span>) Show_ranking();</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">5</span>) Show_Statistics();</span><br><span class="line">        <span class="keyword">if</span> (cho == <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>刘汝佳的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UVa12412 A Typical Homework (a.k.a Shi Xiong Bang Bang Mang)</span></span><br><span class="line"><span class="comment">// Rujia Liu</span></span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#define maxn 1000</span><br><span class="line">#define maxl 100</span><br><span class="line">#define EPS 1e-5</span><br><span class="line"></span><br><span class="line">int n = <span class="number">0</span>;</span><br><span class="line">char sid[maxn][maxl];</span><br><span class="line">int cid[maxn];</span><br><span class="line">char name[maxn][maxl];</span><br><span class="line">int score[maxn][<span class="number">5</span>];</span><br><span class="line">int removed[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> char* course_name[] = &#123;<span class="string">"Chinese"</span>, <span class="string">"Mathematics"</span>, <span class="string">"English"</span>, <span class="string">"Programming"</span>&#125;;</span><br><span class="line"></span><br><span class="line">int valid (int k)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; k; i++) <span class="keyword">if</span> (!removed[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (strcmp (sid[i], sid[k]) == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> add()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        printf (<span class="string">"Please enter the SID, CID, name and four scores. Enter 0 to finish.\n"</span>);</span><br><span class="line">        scanf (<span class="string">"%s"</span>, sid[n]);</span><br><span class="line">        <span class="keyword">if</span> (strcmp (sid[n], <span class="string">"0"</span>) == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        scanf (<span class="string">"%d%s%d%d%d%d"</span>, &amp;cid[n], name[n], &amp;score[n][<span class="number">0</span>], &amp;score[n][<span class="number">1</span>], &amp;score[n][<span class="number">2</span>], &amp;score[n][<span class="number">3</span>]);</span><br><span class="line">        <span class="keyword">if</span> (valid (n))</span><br><span class="line">        &#123;</span><br><span class="line">            score[n][<span class="number">4</span>] = score[n][<span class="number">0</span>] + score[n][<span class="number">1</span>] + score[n][<span class="number">2</span>] + score[n][<span class="number">3</span>];</span><br><span class="line">            n++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> printf (<span class="string">"Duplicated SID.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int rank (int k)</span><br><span class="line">&#123;</span><br><span class="line">    int r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span> (!removed[i] &amp;&amp; score[i][<span class="number">4</span>] &gt; score[k][<span class="number">4</span>]) r++;</span><br><span class="line">    <span class="keyword">return</span> r + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DQ (int isq)</span><br><span class="line">&#123;</span><br><span class="line">    char s[maxl];</span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        printf (<span class="string">"Please enter SID or name. Enter 0 to finish.\n"</span>);</span><br><span class="line">        scanf (<span class="string">"%s"</span>, s);</span><br><span class="line">        <span class="keyword">if</span> (strcmp (s, <span class="string">"0"</span>) == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        int r = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">if</span> (!removed[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (strcmp (sid[i], s) == <span class="number">0</span> || strcmp (name[i], s) == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (isq) printf (<span class="string">"%d %s %d %s %d %d %d %d %d %.2f\n"</span>, rank (i), sid[i], cid[i], name[i], score[i][<span class="number">0</span>], score[i][<span class="number">1</span>], score[i][<span class="number">2</span>], score[i][<span class="number">3</span>], score[i][<span class="number">4</span>], score[i][<span class="number">4</span>] / <span class="number">4.0</span> + EPS);</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        removed[i] = <span class="number">1</span>;</span><br><span class="line">                        r++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span> (!isq) printf (<span class="string">"%d student(s) removed.\n"</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double get_course_stat (int c, int s, int* passed, int* failed)</span><br><span class="line">&#123;</span><br><span class="line">    int tot = <span class="number">0</span>;</span><br><span class="line">    *passed = *failed = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span> (!removed[i] &amp;&amp; (c == <span class="number">0</span> || cid[i] == c))</span><br><span class="line">        &#123;</span><br><span class="line">            tot += score[i][s];</span><br><span class="line">            <span class="keyword">if</span> (score[i][s] &gt;= <span class="number">60</span>) (*passed)++;</span><br><span class="line">            <span class="keyword">else</span> (*failed)++;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> (double) tot / (double) (*passed + *failed);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> get_overall_stat (int c, int* cnt)</span><br><span class="line">&#123;</span><br><span class="line">    cnt[<span class="number">0</span>] = cnt[<span class="number">1</span>] = cnt[<span class="number">2</span>] = cnt[<span class="number">3</span>] = cnt[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span> (!removed[i] &amp;&amp; (c == <span class="number">0</span> || cid[i] == c))</span><br><span class="line">        &#123;</span><br><span class="line">            int k = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) <span class="keyword">if</span> (score[i][j] &gt;= <span class="number">60</span>) k++;</span><br><span class="line">            cnt[k]++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> stat()</span><br><span class="line">&#123;</span><br><span class="line">    int c;</span><br><span class="line">    printf (<span class="string">"Please enter class ID, 0 for the whole statistics.\n"</span>);</span><br><span class="line">    scanf (<span class="string">"%d"</span>, &amp;c);</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int passed, failed;</span><br><span class="line">        double avg = get_course_stat (c, i, &amp;passed, &amp;failed);</span><br><span class="line">        printf (<span class="string">"%s\n"</span>, course_name[i]);</span><br><span class="line">        printf (<span class="string">"Average Score: %.2f\n"</span>, avg + EPS);</span><br><span class="line">        printf (<span class="string">"Number of passed students: %d\n"</span>, passed);</span><br><span class="line">        printf (<span class="string">"Number of failed students: %d\n"</span>, failed);</span><br><span class="line">        printf (<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    int cnt[<span class="number">5</span>];</span><br><span class="line">    get_overall_stat (c, cnt);</span><br><span class="line">    printf (<span class="string">"Overall:\n"</span>);</span><br><span class="line">    printf (<span class="string">"Number of students who passed all subjects: %d\n"</span>, cnt[<span class="number">4</span>]);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 3 or more subjects: %d\n"</span>, cnt[<span class="number">4</span>] + cnt[<span class="number">3</span>]);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 2 or more subjects: %d\n"</span>, cnt[<span class="number">4</span>] + cnt[<span class="number">3</span>] + cnt[<span class="number">2</span>]);</span><br><span class="line">    printf (<span class="string">"Number of students who passed 1 or more subjects: %d\n"</span>, cnt[<span class="number">4</span>] + cnt[<span class="number">3</span>] + cnt[<span class="number">2</span>] + cnt[<span class="number">1</span>]);</span><br><span class="line">    printf (<span class="string">"Number of students who failed all subjects: %d\n"</span>, cnt[<span class="number">0</span>]);</span><br><span class="line">    printf (<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        int choice;</span><br><span class="line">        printf (<span class="string">"Welcome to Student Performance Management System (SPMS).\n"</span>);</span><br><span class="line">        printf (<span class="string">"\n"</span>);</span><br><span class="line">        printf (<span class="string">"1 - Add\n"</span>);</span><br><span class="line">        printf (<span class="string">"2 - Remove\n"</span>);</span><br><span class="line">        printf (<span class="string">"3 - Query\n"</span>);</span><br><span class="line">        printf (<span class="string">"4 - Show ranking\n"</span>);</span><br><span class="line">        printf (<span class="string">"5 - Show Statistics\n"</span>);</span><br><span class="line">        printf (<span class="string">"0 - Exit\n"</span>);</span><br><span class="line">        printf (<span class="string">"\n"</span>);</span><br><span class="line">        scanf (<span class="string">"%d"</span>, &amp;choice);</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">1</span>) add();</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">2</span>) DQ (<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">3</span>) DQ (<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">4</span>) printf (<span class="string">"Showing the ranklist hurts students' self-esteem. Don't do that.\n"</span>);</span><br><span class="line">        <span class="keyword">if</span> (choice == <span class="number">5</span>) stat();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/other/HDU 4907 BestCoder3_1 Task schedule/" rel="next" title="HDU 4907 BestCoder3_1 Task schedule">
+                <i class="fa fa-chevron-left"></i> HDU 4907 BestCoder3_1 Task schedule
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/string/POJ 2250 Compromise (DP,最长公共子序列)/" rel="prev" title="POJ 2250 Compromise (DP,最长公共子序列)">
+                POJ 2250 Compromise (DP,最长公共子序列) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#a-typical-homeworka.k.a-shi-xiong-bang-bang-mang"><span class="nav-text">A Typical Homework(a.k.a Shi Xiong Bang Bang Mang)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task"><span class="nav-text">Task</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#concepts"><span class="nav-text">Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-menu"><span class="nav-text">Main Menu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adding-a-student"><span class="nav-text">Adding a Student</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#removing-a-student"><span class="nav-text">Removing a Student</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#querying-students"><span class="nav-text">Querying Students</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#showing-the-ranklist"><span class="nav-text">Showing the Ranklist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#showing-statistics"><span class="nav-text">Showing Statistics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exiting-spms"><span class="nav-text">Exiting SPMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sample-input"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output-for-the-sample-input"><span class="nav-text">Output for the Sample Input</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

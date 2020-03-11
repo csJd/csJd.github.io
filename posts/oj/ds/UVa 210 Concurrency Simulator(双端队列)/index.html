@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 模拟程序并行运行 STL队列 双端队列 的应用 用双端队列维护即将执行的程序 再用个队列维护等待变量释放的程序 用lock表示变量锁定状态 先将所有程序依次放到执行队列中 每次取出队首程序运行不超过lim时间 未运行完又放到执行队列队尾 遇到lock时 若当前锁定状态为false就将锁定状态变为true 否则将当前程序放到等待队列队尾并结束运行 遇到unlock时 若等待队列有程序 就将等待">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 210 Concurrency Simulator(双端队列)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/ds/UVa 210 Concurrency Simulator(双端队列)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 模拟程序并行运行 STL队列 双端队列 的应用 用双端队列维护即将执行的程序 再用个队列维护等待变量释放的程序 用lock表示变量锁定状态 先将所有程序依次放到执行队列中 每次取出队首程序运行不超过lim时间 未运行完又放到执行队列队尾 遇到lock时 若当前锁定状态为false就将锁定状态变为true 否则将当前程序放到等待队列队尾并结束运行 遇到unlock时 若等待队列有程序 就将等待">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/ds/images/dge.org-external-2-210img1.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/ds/images/dge.org-external-2-210img2.gif.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVa 210 Concurrency Simulator(双端队列)">
+<meta name="twitter:description" content="题意 模拟程序并行运行 STL队列 双端队列 的应用 用双端队列维护即将执行的程序 再用个队列维护等待变量释放的程序 用lock表示变量锁定状态 先将所有程序依次放到执行队列中 每次取出队首程序运行不超过lim时间 未运行完又放到执行队列队尾 遇到lock时 若当前锁定状态为false就将锁定状态变为true 否则将当前程序放到等待队列队尾并结束运行 遇到unlock时 若等待队列有程序 就将等待">
+<meta name="twitter:image" content="http://blog.deng.cf/posts/oj/ds/images/dge.org-external-2-210img1.gif.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/ds/UVa 210 Concurrency Simulator(双端队列)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UVa 210 Concurrency Simulator(双端队列) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa 210 Concurrency Simulator(双端队列)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UVa 210 Concurrency Simulator(双端队列)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-01-23 13:16:07" itemprop="dateCreated datePublished" datetime="2015-01-23T13:16:07+00:00">2015-01-23</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 模拟程序并行运行</p>
+<p>STL队列 双端队列 的应用 用双端队列维护即将执行的程序 再用个队列维护等待变量释放的程序 用lock表示变量锁定状态 先将所有程序依次放到执行队列中 每次取出队首程序运行不超过lim时间 未运行完又放到执行队列队尾 遇到lock时 若当前锁定状态为false就将锁定状态变为true 否则将当前程序放到等待队列队尾并结束运行 遇到unlock时 若等待队列有程序 就将等待队列队首程序放到执行队列队首</p>
+<p>遇到end时 退出当前执行(不再进队尾)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">bool lock;</span><br><span class="line">deque&lt;int&gt; qr;<span class="comment">//执行队列</span></span><br><span class="line">queue&lt;int&gt; qb;<span class="comment">//等待队列</span></span><br><span class="line">vector&lt;string&gt; prg[N];</span><br><span class="line">string s;</span><br><span class="line">int t[N], p[N], <span class="keyword">var</span>[<span class="number">26</span>], lim;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> run(int i)</span><br><span class="line">&#123;</span><br><span class="line">    int rt = lim, v;</span><br><span class="line">    string cur;</span><br><span class="line">    <span class="keyword">while</span>(rt &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cur = prg[i][p[i]];</span><br><span class="line">        <span class="keyword">if</span>(cur[<span class="number">2</span>] == <span class="string">'='</span>)  <span class="comment">// 赋值</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt -= t[<span class="number">0</span>];</span><br><span class="line">            v = cur[<span class="number">4</span>] - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">if</span>(cur.size() == <span class="number">6</span>) v = v * <span class="number">10</span> + cur[<span class="number">5</span>] - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">var</span>[cur[<span class="number">0</span>] - <span class="string">'a'</span>] = v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(cur[<span class="number">2</span>] == <span class="string">'i'</span>)   <span class="comment">//print</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt -= t[<span class="number">1</span>];</span><br><span class="line">            printf(<span class="string">"%d: %d\n"</span>, i, <span class="keyword">var</span>[cur[<span class="number">6</span>] - <span class="string">'a'</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(cur[<span class="number">2</span>] == <span class="string">'c'</span>)   <span class="comment">//lock</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt -= t[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span>(lock)</span><br><span class="line">            &#123;</span><br><span class="line">                qb.push(i);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> lock = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(cur[<span class="number">2</span>] == <span class="string">'l'</span>)  <span class="comment">//unlock</span></span><br><span class="line">        &#123;</span><br><span class="line">            lock = <span class="literal">false</span>;</span><br><span class="line">            rt -= t[<span class="number">3</span>];</span><br><span class="line">            <span class="keyword">if</span>(!qb.empty())</span><br><span class="line">            &#123;</span><br><span class="line">                v = qb.front();</span><br><span class="line">                qb.pop();</span><br><span class="line">                qr.push_front(v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span>;  <span class="comment">//end</span></span><br><span class="line">        ++p[i];</span><br><span class="line">    &#125;</span><br><span class="line">    qr.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int cas, n;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;t[i]);</span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;lim);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            prg[i].clear();</span><br><span class="line">            <span class="keyword">while</span>(getline(cin, s))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s == <span class="string">""</span>) <span class="keyword">continue</span>;</span><br><span class="line">                prg[i].push_back(s);</span><br><span class="line">                <span class="keyword">if</span>(prg[i].back() == <span class="string">"end"</span>) <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            qr.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        memset(p, <span class="number">0</span>, sizeof(p));</span><br><span class="line">        memset(<span class="keyword">var</span>, <span class="number">0</span>, sizeof(<span class="keyword">var</span>));</span><br><span class="line">        <span class="keyword">while</span>(!qr.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            int cur = qr.front();</span><br><span class="line">            qr.pop_front();</span><br><span class="line">            run(cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cas) puts(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="section"></h1>
+<hr>
+<p>Programs executed concurrently on a uniprocessor system appear to be executed at the same time, but in reality the single CPU alternates between the programs, executing some number of instructions from each program before switching to the next. You are to simulate the concurrent execution of up to ten programs on such a system and determine the output that they will produce.</p>
+<p>The program that is currently being executed is said to be running, while all programs awaiting execution are said to be ready. A program consists of a sequence of no more than 25 statements, one per line, followed by an end statement. The statements available are listed below.</p>
+<p><img src="../images/dge.org-external-2-210img1.gif.png" alt="tex2html_wrap66"> <img src="../images/dge.org-external-2-210img2.gif.png" alt="tex2html_wrap68"></p>
+<p>Each statement requires an integral number of time units to execute. The running program is permitted to continue executing instructions for a period of time called its quantum. When a program�s time <em>quantum</em> expires, another ready program will be selected to run. Any instruction currently being executed when the time quantum expires will be allowed to complete.</p>
+<p>Programs are queued first-in-first-out for execution in a <em>ready queue</em>. The initial order of the ready queue corresponds to the original order of the programs in the input file. This order can change, however, as a result of the execution of <strong>lock</strong> and <strong>unlock</strong> statements.</p>
+<p>The <strong>lock</strong> and <strong>unlock</strong> statements are used whenever a program wishes to claim mutually exclusive access to the variables it is manipulating. These statements always occur in pairs, bracketing one or more other statements. A <strong>lock</strong> will always precede an <strong>unlock</strong>, and these statements will never be nested. Once a program successfully executes a <strong>lock</strong> statement, no other program may successfully execute a <strong>lock</strong> statement until the locking program runs and executes the corresponding <strong>unlock</strong>statement. Should a running program attempt to execute a <strong>lock</strong> while one is already in effect, this program will be placed at the end of the <em>blocked queue</em>. Programs blocked in this fashion lose any of their current time quantum remaining. When an <strong>unlock</strong> is executed, any program at the head of the blocked queue is moved to the head of the ready queue. The first statement this program will execute when it runs will be the <strong>lock</strong> statement that previously failed. Note that it is up to the programs involved to enforce the mutual exclusion protocol through correct usage of <strong>lock</strong> and<strong>unlock</strong> statements. (A renegade program with no <strong>lock</strong>/<strong>unlock</strong> pair could alter any variables it wished, despite the proper use of <strong>lock</strong>/<strong>unlock</strong> by the other programs.)</p>
+<h2 id="input">Input</h2>
+<p><strong>The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs.</strong></p>
+<p>The first line of the input file consists of seven integers separated by spaces. These integers specify (in order): the number of programs which follow, the unit execution times for each of the five statements (in the order given above), and the number of time units comprising the time quantum. The remainder of the input consists of the programs, which are correctly formed from statements according to the rules described above.</p>
+<p>All program statements begin in the first column of a line. Blanks appearing in a statement should be ignored. Associated with each program is an identification number based upon its location in the input data (the first program has ID = 1, the second has ID = 2, etc.).</p>
+<h2 id="output">Output</h2>
+<p><strong>For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line.</strong></p>
+<p>Your output will contain of the output generated by the print statements as they occur during the simulation. When a print statement is executed, your program should display the program ID, a colon, a space, and the value of the selected variable. Output from separate print statements should appear on separate lines.</p>
+<p>A sample input and correct output are shown below.</p>
+<h2 id="sample-input">Sample Input</h2>
+<p>1 3 1 1 1 1 1 1 a = 4 print a lock b = 9 print b unlock print b end a = 3 print a lock b = 8 print b unlock print b end b = 5 a = 17 print a print b lock b = 21 print b unlock print b end</p>
+<h2 id="sample-output">Sample Output</h2>
+<p>1: 3 2: 3 3: 17 3: 9 1: 9 1: 9 2: 8 2: 8 3: 21 3: 21</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/string/UVa 12504 Updating a Dictionary(更新字典)/" rel="next" title="UVa 12504 Updating a Dictionary(更新字典)">
+                <i class="fa fa-chevron-left"></i> UVa 12504 Updating a Dictionary(更新字典)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/graph/UVa 10305 Ordering Tasks(拓扑排序)/" rel="prev" title="UVa 10305 Ordering Tasks(拓扑排序)">
+                UVa 10305 Ordering Tasks(拓扑排序) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sample-input"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sample-output"><span class="nav-text">Sample Output</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="笔试题中遇到了 朴素贝叶斯算法 的实现，这里对朴素贝叶斯算法做个简单回顾。">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Naive Bayes Review">
+<meta property="og:url" content="http://blog.deng.cf/posts/naive-bayes/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="笔试题中遇到了 朴素贝叶斯算法 的实现，这里对朴素贝叶斯算法做个简单回顾。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Naive Bayes Review">
+<meta name="twitter:description" content="笔试题中遇到了 朴素贝叶斯算法 的实现，这里对朴素贝叶斯算法做个简单回顾。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/naive-bayes/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Naive Bayes Review | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/naive-bayes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Naive Bayes Review
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-16 08:32:01" itemprop="dateCreated datePublished" datetime="2019-09-16T08:32:01+00:00">2019-09-16</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Review/" itemprop="url" rel="index"><span itemprop="name">Review</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>笔试题中遇到了 <a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier" target="_blank" rel="noopener">朴素贝叶斯算法</a> 的实现，这里对朴素贝叶斯算法做个简单回顾。</p>
+<a id="more"></a>
+<h2 id="朴素贝叶斯算法">朴素贝叶斯算法</h2>
+<p>朴素贝叶斯算法是一个相对比较简单的机器学习算法，是基于贝叶斯定理和特征独立假设的分类方法。</p>
+<p>对于给定的训练集（设共 <span class="math inline">\(m\)</span> 条训练数据，<span class="math inline">\(n\)</span> 种特征，<span class="math inline">\(t\)</span> 种类别 <span class="math inline">\(0, 1, ..., t-1\)</span>)</p>
+<p>可以先得到各个类别的先验概率分布：</p>
+<p><span class="math display">\[
+P(Y=k)= |\{y_i = k \}|/m, \quad i=0, 1, ..., m-1 \tag{0}
+\]</span></p>
+<p>在特征条件独立性假设下， 有条件概率分布：</p>
+<p><span class="math display">\[
+P(X=x|Y=k)=\prod_{j=0}^{n-1}P(X^j=x^j|Y=k) \tag{1}
+\]</span></p>
+<p>根据贝叶斯定理可以得到后验概率分布： <span class="math display">\[
+P(Y=k|X=x)=\frac{P(Y=k)\prod_jP(X^j=x^j|Y=k)}{\sum_kP(Y=k)\prod_jP(X^j=x^j|Y=k)}
+\tag{2}
+\]</span> 使得后验概率最大的类别即分类器需要输出的类别，对于输入 <span class="math inline">\(x\)</span>，式 <span class="math inline">\((2)\)</span> 的分母对于所有类别都是相同的，所以朴素贝叶斯分类器可表示为： <span class="math display">\[
+y=f(x) =\underset{k}{argmax}P(Y=k)\prod_jP(X^j=x^j|Y=k)
+\tag{3}
+\]</span></p>
+<h2 id="笔试题">笔试题</h2>
+<blockquote>
+<p>朴素贝叶斯分类器假设在给定样本 label 的情况下，样本的不同特征之间相互独立。 现用朴素贝叶斯分类器进行垃圾邮件识别，数据包含 4 个特征。 现在将所有的特征进行转换后，得到下表(请在程序以硬编码方式读入); 转换规则如下: (注: [m,n]表示m,n之间的闭区间，[m,+]表示大于m的开区间)</p>
+<p>标题长度(feature1) : 1: [0,3], 2: [3,6]，3: [6,+] <br> 正文长度(feature2) : 1: [0,10], 2: [10,20], 3: [20,+] <br> 附件含有可执行程序(feature3) : 1:是，0:否 <br> 正文含特殊字符(feature4) : 1:是，0:否 <br></p>
+<p>请在程序中读入上述训练数据，实现朴素贝叶斯分类器，语言不限，但不能使用第三方库， 不需要考虑平滑方法，然后对给定的测试数据(特征已转换)进行预测，输出结果;</p>
+<p>输入描述： <br> 输入数据如下，第一行一个数字 M，表示共有 M 行训练数据， 第 2~M+1 行，每行 5 个数字，分别以空格隔开，前四个数字分别代表四个特征，第 5 个数字代表这一个样本 label 值。 第 M+2 行是一个数字 N，表示共有 N 行测试样本，随后的 N 行每行 4 个数字，分别代表四个特征的值。</p>
+<p>输出描述：<br> 使用贝叶斯模型对测试样本进行预测，所有结果按顺序输出到一行，以空格分隔;</p>
+</blockquote>
+<p>对应该笔试题的 Python 代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">输入示例：</span></span><br><span class="line"><span class="string">14</span></span><br><span class="line"><span class="string">1 1 1 0 1</span></span><br><span class="line"><span class="string">1 1 1 1 1</span></span><br><span class="line"><span class="string">2 1 1 0 0</span></span><br><span class="line"><span class="string">3 2 1 0 0</span></span><br><span class="line"><span class="string">3 3 0 0 0</span></span><br><span class="line"><span class="string">3 3 0 1 1</span></span><br><span class="line"><span class="string">2 3 0 1 0</span></span><br><span class="line"><span class="string">1 2 1 0 1</span></span><br><span class="line"><span class="string">1 3 0 0 0</span></span><br><span class="line"><span class="string">3 2 0 0 0</span></span><br><span class="line"><span class="string">1 2 0 0 0</span></span><br><span class="line"><span class="string">2 2 1 1 0</span></span><br><span class="line"><span class="string">2 1 0 0 0</span></span><br><span class="line"><span class="string">3 2 1 1 1</span></span><br><span class="line"><span class="string">5</span></span><br><span class="line"><span class="string">1 1 0 0</span></span><br><span class="line"><span class="string">1 1 1 0</span></span><br><span class="line"><span class="string">1 2 1 0</span></span><br><span class="line"><span class="string">2 1 0 1</span></span><br><span class="line"><span class="string">2 2 1 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输出示例：</span></span><br><span class="line"><span class="string">0 1 1 0 0</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    m = int(input())</span><br><span class="line"></span><br><span class="line">    n_values = [<span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">2</span>]</span><br><span class="line">    n_features = <span class="number">4</span></span><br><span class="line">    n_classes = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    X = list()</span><br><span class="line">    cnt = [<span class="number">0</span>] * n_classes</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">        X.append(list(map(int, input().split())))</span><br><span class="line">        X[<span class="number">-1</span>][<span class="number">0</span>] -= <span class="number">1</span>  <span class="comment"># x[0], x[1] are from 1 here</span></span><br><span class="line">        X[<span class="number">-1</span>][<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">        cnt[X[<span class="number">-1</span>][<span class="number">-1</span>]] += <span class="number">1</span>  <span class="comment"># X[-1][-1] is y</span></span><br><span class="line">    p_classes = [X / m <span class="keyword">for</span> X <span class="keyword">in</span> cnt]  <span class="comment"># P(y=class[i])</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># p_values[j][k][v] save the proba of P(Xj=v|y=k)</span></span><br><span class="line">    p_values = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n_features):</span><br><span class="line">        <span class="comment"># save value counts in each class of the j-th feature</span></span><br><span class="line">        value_counts = [[<span class="number">0</span>] * n_values[j] <span class="keyword">for</span> y <span class="keyword">in</span> range(n_classes)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            y = X[i][<span class="number">-1</span>]</span><br><span class="line">            value_counts[y][X[i][j]] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># p_values[j][k][v] save the proba of P(Xj=v|y=k)</span></span><br><span class="line">        p_values.append(</span><br><span class="line">            [[value_counts[k][v]/cnt[k] <span class="keyword">if</span> cnt[k] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">              <span class="keyword">for</span> v <span class="keyword">in</span> range(n_values[j])]</span><br><span class="line">             <span class="keyword">for</span> k <span class="keyword">in</span> range(n_classes)]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    ans = list()</span><br><span class="line">    n = int(input())</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> range(n):</span><br><span class="line">        xi = list(map(int, input().split()))</span><br><span class="line">        xi[<span class="number">0</span>] -= <span class="number">1</span></span><br><span class="line">        xi[<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">        y_pred, maxp = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(n_classes):</span><br><span class="line">            p = <span class="number">1</span></span><br><span class="line">            <span class="comment"># to calclate P(x=xi|y=k)</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n_features):</span><br><span class="line">                v = xi[j]</span><br><span class="line">                p *= p_values[j][k][v]</span><br><span class="line">            p *= p_classes[k]</span><br><span class="line">            <span class="keyword">if</span> p &gt; maxp:</span><br><span class="line">                y_pred, maxp = k, p</span><br><span class="line">        ans.append(y_pred)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">' '</span>.join(map(str, ans)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/attention/" rel="next" title="Something about Attention">
+                <i class="fa fa-chevron-left"></i> Something about Attention
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/flexget/" rel="prev" title="FlexGet 自动 PT 下载设置">
+                FlexGet 自动 PT 下载设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯算法"><span class="nav-text">朴素贝叶斯算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔试题"><span class="nav-text">笔试题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

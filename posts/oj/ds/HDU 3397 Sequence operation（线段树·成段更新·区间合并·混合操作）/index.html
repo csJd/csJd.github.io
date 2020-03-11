@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 给你一个只有0, 1的数组 有这些操作  将[a, b]区间的所有数都改为0 将[a, b]区间的所有数都改为1 将[a, b]区间的所有数都取反 即与1异或 输出区间[a, b]中1的个数 即所有数的和 输出区间[a, b]中最大连续1的长度  对于所有的3, 4操作输出对应的答案 单个的操作都很简单 但搞在一起就有点恶心了 还好数组里的数只有0和1 线段树维护9个值 对应区间0, 1的最">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/ds/HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 给你一个只有0, 1的数组 有这些操作  将[a, b]区间的所有数都改为0 将[a, b]区间的所有数都改为1 将[a, b]区间的所有数都取反 即与1异或 输出区间[a, b]中1的个数 即所有数的和 输出区间[a, b]中最大连续1的长度  对于所有的3, 4操作输出对应的答案 单个的操作都很简单 但搞在一起就有点恶心了 还好数组里的数只有0和1 线段树维护9个值 对应区间0, 1的最">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）">
+<meta name="twitter:description" content="题意 给你一个只有0, 1的数组 有这些操作  将[a, b]区间的所有数都改为0 将[a, b]区间的所有数都改为1 将[a, b]区间的所有数都取反 即与1异或 输出区间[a, b]中1的个数 即所有数的和 输出区间[a, b]中最大连续1的长度  对于所有的3, 4操作输出对应的答案 单个的操作都很简单 但搞在一起就有点恶心了 还好数组里的数只有0和1 线段树维护9个值 对应区间0, 1的最">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/ds/HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作） | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HDU 3397 Sequence operation（线段树·成段更新·区间合并·混合操作）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-08-12 10:12:46" itemprop="dateCreated datePublished" datetime="2015-08-12T10:12:46+00:00">2015-08-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 给你一个只有0, 1的数组 有这些操作</p>
+<ol start="0" type="1">
+<li><p>将[a, b]区间的所有数都改为0</p></li>
+<li><p>将[a, b]区间的所有数都改为1</p></li>
+<li><p>将[a, b]区间的所有数都取反 即与1异或</p></li>
+<li><p>输出区间[a, b]中1的个数 即所有数的和</p></li>
+<li><p>输出区间[a, b]中最大连续1的长度</p></li>
+</ol>
+<p>对于所有的3, 4操作输出对应的答案</p>
+<p>单个的操作都很简单 但搞在一起就有点恶心了 还好数组里的数只有0和1</p>
+<p>线段树维护9个值 对应区间0, 1的最大长度len[i] 对应区间左端点为起点的最大0, 1长度lle[i] 对应区间右端点为终点的最大0, 1长度 对应区间的1的个数sum 对应区间的置值标记setv 对应区间的取反标记opp</p>
+<p>成段更新时有两种操作 取反 (opp) 和置值 (setv) 取反操作时因为是0, 1互换 将维护的对应的信息也交换就行了 sum就变成长度减去sum了 置值操作比较简单 但是要注意置值操作前的所有取反操作都是没有意义的 所以置值的时候要将对应区间的取反标记去掉</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#define lc p&lt;&lt;1, s, mid</span><br><span class="line">#define rc p&lt;&lt;1|1, mid+1, e</span><br><span class="line">#define lp p&lt;&lt;1</span><br><span class="line">#define rp p&lt;&lt;1|1</span><br><span class="line">#define mid ((s+e)&gt;&gt;1)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>, M = N * <span class="number">4</span>;</span><br><span class="line"><span class="comment">//最大连续i的长度 左端连续长度 右端连续长度</span></span><br><span class="line">int len[<span class="number">2</span>][M], lle[<span class="number">2</span>][M], lri[<span class="number">2</span>][M];</span><br><span class="line">int opp[M], setv[M], sum[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> swap01(int p)  <span class="comment">//将p对应区间的01信息交换</span></span><br><span class="line">&#123;</span><br><span class="line">    swap(len[<span class="number">0</span>][p], len[<span class="number">1</span>][p]);</span><br><span class="line">    swap(lle[<span class="number">0</span>][p], lle[<span class="number">1</span>][p]);</span><br><span class="line">    swap(lri[<span class="number">0</span>][p], lri[<span class="number">1</span>][p]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> setAll(int p, int i, int v) <span class="comment">//将p对应的区间全部置为i</span></span><br><span class="line">&#123;</span><br><span class="line">    int j = <span class="number">1</span> - i;</span><br><span class="line">    len[i][p] = lle[i][p] = lri[i][p] = v;</span><br><span class="line">    len[j][p] = lle[j][p] = lri[j][p] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> pushup(int p, int s, int e)</span><br><span class="line">&#123;</span><br><span class="line">    sum[p] = sum[lp] + sum[rp];</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        len[i][p] = max(len[i][lp], len[i][rp]);</span><br><span class="line">        lle[i][p] = lle[i][lp], lri[i][p] = lri[i][rp];</span><br><span class="line">        <span class="keyword">if</span>(lri[i][lp] &amp;&amp; lle[i][rp]) <span class="comment">//左右孩子边界可连接</span></span><br><span class="line">        &#123;</span><br><span class="line">            len[i][p] = max(len[i][p], lri[i][lp] + lle[i][rp]);</span><br><span class="line">            <span class="keyword">if</span>(lle[i][lp] == mid + <span class="number">1</span> - s) lle[i][p] += lle[i][rp];</span><br><span class="line">            <span class="keyword">if</span>(lri[i][rp] == e - mid) lri[i][p] += lri[i][lp];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> build(int p, int s, int e)</span><br><span class="line">&#123;</span><br><span class="line">    opp[p] = <span class="number">0</span>;</span><br><span class="line">    setv[p] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(s == e)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;sum[p]);</span><br><span class="line">        int i = sum[p];</span><br><span class="line">        setAll(p, i, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    build(lc);</span><br><span class="line">    build(rc);</span><br><span class="line">    pushup(p, s, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> pushdown(int p, int s, int e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(setv[p] != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        int i = setv[lp] = setv[rp] = setv[p];</span><br><span class="line">        opp[lp] = opp[rp] = <span class="number">0</span>;</span><br><span class="line">        sum[lp] = i * (mid + <span class="number">1</span> - s);</span><br><span class="line">        sum[rp] = i * (e - mid);</span><br><span class="line"></span><br><span class="line">        setAll(lp, i, mid + <span class="number">1</span> - s);</span><br><span class="line">        setAll(rp, i, e-mid);</span><br><span class="line">        setv[p] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(opp[p])</span><br><span class="line">    &#123;</span><br><span class="line">        opp[lp] ^= <span class="number">1</span>;</span><br><span class="line">        opp[rp] ^= <span class="number">1</span>;</span><br><span class="line">        sum[lp] = mid + <span class="number">1</span> - s - sum[lp];</span><br><span class="line">        sum[rp] = e - mid - sum[rp];</span><br><span class="line"></span><br><span class="line">        swap01(lp);</span><br><span class="line">        swap01(rp);</span><br><span class="line">        opp[p] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> update(int p, int s, int e, int l, int r, int v)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            opp[p] ^= <span class="number">1</span>;</span><br><span class="line">            sum[p] = e - s + <span class="number">1</span> - sum[p];</span><br><span class="line">            swap01(p);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            int i = setv[p] = v;</span><br><span class="line">            opp[p] = <span class="number">0</span>;</span><br><span class="line">            sum[p] = v * (e - s + <span class="number">1</span>);</span><br><span class="line">            setAll(p, i, e - s + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(p, s, e);</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) update(lc, l, r, v);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) update(rc, l, r, v);</span><br><span class="line">    pushup(p, s, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int query(int p, int s, int e, int l, int r, int op)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r) <span class="keyword">return</span> op == <span class="number">3</span> ? sum[p] : len[<span class="number">1</span>][p];</span><br><span class="line">    pushdown(p, s, e);</span><br><span class="line">    int ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(op == <span class="number">3</span>)  <span class="comment">//the number of '1's</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= mid) ret += query(lc, l, r, op);</span><br><span class="line">        <span class="keyword">if</span>(r &gt; mid) ret += query(rc, l, r, op);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>  <span class="comment">// the length of '1's</span></span><br><span class="line">    &#123;</span><br><span class="line">        ret = max(ret, min(r, mid + lle[<span class="number">1</span>][rp]) - max(l, mid + <span class="number">1</span> - lri[<span class="number">1</span>][lp]) + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= mid) ret = max(ret, query(lc, l, r, op));</span><br><span class="line">        <span class="keyword">if</span>(r &gt; mid) ret = max(ret, query(rc, l, r, op));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int T, n, m, a, b, op;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">        build(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d%d%d"</span>, &amp;op, &amp;a, &amp;b);</span><br><span class="line">            <span class="keyword">if</span>(op &lt; <span class="number">3</span>) update(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a, b, op);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                printf(<span class="string">"%d\n"</span>, query(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a, b, op));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :  2015-08-12 09:10 CST</span></span><br></pre></td></tr></table></figure>
+<h1 id="sequence-operation">Sequence operation</h1>
+<p>Problem Description</p>
+<p>lxhgww got a sequence contains n characters which are all '0's or '1's. We have five operations here: Change operations: 0 a b change all characters into '0's in [a , b] 1 a b change all characters into '1's in [a , b] 2 a b change all '0's into '1's and change all '1's into '0's in [a, b] Output operations: 3 a b output the number of '1's in [a, b] 4 a b output the length of the longest continuous '1' string in [a , b] Input</p>
+<p>T(T&lt;=10) in the first line is the case number. Each case has two integers in the first line: n and m (1 &lt;= n , m &lt;= 100000). The next line contains n characters, '0' or '1' separated by spaces. Then m lines are the operations: op a b: 0 &lt;= op &lt;= 4 , 0 &lt;= a &lt;= b &lt; n. Output</p>
+<p>For each output operation , output the result. Sample Input</p>
+<p>1 10 10 0 0 0 1 1 0 1 0 1 1 1 0 2 3 0 5 2 2 2 4 0 4 0 3 6 2 3 7 4 2 8 1 0 5 0 5 6 3 3 9 Sample Output</p>
+<p>5 2 6 5</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/ds/HDU 3308 LCIS (线段树·单点更新·区间合并)/" rel="next" title="HDU 3308 LCIS (线段树·单点更新·区间合并)">
+                <i class="fa fa-chevron-left"></i> HDU 3308 LCIS (线段树·单点更新·区间合并)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/ds/HDU 1542 Atlantis（线段树扫描线·面积并）/" rel="prev" title="HDU 1542 Atlantis（线段树扫描线·面积并）">
+                HDU 1542 Atlantis（线段树扫描线·面积并） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sequence-operation"><span class="nav-text">Sequence operation</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

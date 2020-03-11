@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 你有f束花和v个花瓶 每束花放在不同的花瓶中都会有不同的价值 并且花的相对顺序不能改变 也就是说第i束花放在第j个花瓶中 那么第i+1朵花要放在j以后的花瓶中 令d[i][j]表示第i朵花放在第[j]个瓶子中前i朵花的最大价值 有状态转移方程 d[i][j]=max{d[i-1][1~j-1]}+val[i][j]; 题目有几个坑点 可能所有价值都为负数 必须所有花都放完 1234567">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 1157 Little shop of flowers(DP,最优搭配)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/POJ 1157 Little shop of flowers(DP,最优搭配)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 你有f束花和v个花瓶 每束花放在不同的花瓶中都会有不同的价值 并且花的相对顺序不能改变 也就是说第i束花放在第j个花瓶中 那么第i+1朵花要放在j以后的花瓶中 令d[i][j]表示第i朵花放在第[j]个瓶子中前i朵花的最大价值 有状态转移方程 d[i][j]=max{d[i-1][1~j-1]}+val[i][j]; 题目有几个坑点 可能所有价值都为负数 必须所有花都放完 1234567">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ 1157 Little shop of flowers(DP,最优搭配)">
+<meta name="twitter:description" content="题意 你有f束花和v个花瓶 每束花放在不同的花瓶中都会有不同的价值 并且花的相对顺序不能改变 也就是说第i束花放在第j个花瓶中 那么第i+1朵花要放在j以后的花瓶中 令d[i][j]表示第i朵花放在第[j]个瓶子中前i朵花的最大价值 有状态转移方程 d[i][j]=max{d[i-1][1~j-1]}+val[i][j]; 题目有几个坑点 可能所有价值都为负数 必须所有花都放完 1234567">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/POJ 1157 Little shop of flowers(DP,最优搭配)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>POJ 1157 Little shop of flowers(DP,最优搭配) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/POJ 1157 Little shop of flowers(DP,最优搭配)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">POJ 1157 Little shop of flowers(DP,最优搭配)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-08-22 10:41:05" itemprop="dateCreated datePublished" datetime="2014-08-22T10:41:05+00:00">2014-08-22</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>﻿ 题意 你有f束花和v个花瓶 每束花放在不同的花瓶中都会有不同的价值 并且花的相对顺序不能改变 也就是说第i束花放在第j个花瓶中 那么第i+1朵花要放在j以后的花瓶中 令d[i][j]表示第i朵花放在第[j]个瓶子中前i朵花的最大价值 有状态转移方程 d[i][j]=max{d[i-1][1~j-1]}+val[i][j]; 题目有几个坑点 可能所有价值都为负数 必须所有花都放完<br>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line">#define M 205  </span><br><span class="line">int val[M][M],d[M][M],pre[M][M],f,v,key;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">void</span> print(int i,int j)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">if</span>(pre[i][j])  </span><br><span class="line">    &#123;  </span><br><span class="line">        print(i<span class="number">-1</span>,pre[i][j]);  </span><br><span class="line">        printf(<span class="string">" %d"</span>,j);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        printf(<span class="string">"%d"</span>,j);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">int main()  </span><br><span class="line">&#123;  </span><br><span class="line">    scanf(<span class="string">"%d%d"</span>,&amp;f,&amp;v);  </span><br><span class="line">    memset(d,<span class="number">0x8f</span>,sizeof(d));  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=f; ++i)  </span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">            scanf(<span class="string">"%d"</span>,&amp;val[i][j]);  </span><br><span class="line">  </span><br><span class="line">    int ans=d[<span class="number">0</span>][<span class="number">0</span>];  </span><br><span class="line">    <span class="comment">//注意要把ans初始化为负无穷 可能所有的val都为负；这里wa了好久；  </span></span><br><span class="line">    d[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;  </span><br><span class="line">    <span class="comment">//0朵花价值当然为0了；  </span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=f; ++i)  </span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="keyword">for</span>(int k=<span class="number">0</span>; k&lt;j; ++k)  </span><br><span class="line">                <span class="keyword">if</span>(d[i<span class="number">-1</span>][k]+val[i][j]&gt;d[i][j])  </span><br><span class="line">                &#123;  </span><br><span class="line">                    d[i][j]=d[i<span class="number">-1</span>][k]+val[i][j];  </span><br><span class="line">                    pre[i][j]=k;  </span><br><span class="line">                &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">        <span class="keyword">if</span>(d[f][j]&gt;ans)  </span><br><span class="line">        &#123;  </span><br><span class="line">            ans=d[f][j];  </span><br><span class="line">            key=j;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="comment">//这里要在最后一层更新ans 因为要保证所有花都放进去；  </span></span><br><span class="line">  </span><br><span class="line">    printf(<span class="string">"%d\n"</span>,ans);  </span><br><span class="line">    print(f,key);  </span><br><span class="line">    printf(<span class="string">"\n"</span>);  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Little shop of flowers</strong></p>
+<hr>
+<p><strong>PROBLEM</strong> ****</p>
+<p>You want to arrange the window of your flower shop in a most pleasant way. You have<em>F</em>bunches of flowers, each being of a different kind, and at least as many vases ordered in a row. The vases are glued onto the shelf and are numbered consecutively 1 through<em>V</em>, where<em>V</em>is the number of vases, from left to right so that the vase 1 is the leftmost, and the vase<em>V</em>is the rightmost vase. The bunches are moveable and are uniquely identified by integers between 1 and<em>F</em>. These id-numbers have a significance: They determine the required order of appearance of the flower bunches in the row of vases so that the bunch<em>i</em>must be in a vase to the left of the vase containing bunch<em>j</em>whenever<em>i</em>&lt;<em>j</em>. Suppose, for example, you have bunch of azaleas (id-number=1), a bunch of begonias (id-number=2) and a bunch of carnations (id-number=3). Now, all the bunches must be put into the vases keeping their id-numbers in order. The bunch of azaleas must be in a vase to the left of begonias, and the bunch of begonias must be in a vase to the left of carnations. If there are more vases than bunches of flowers then the excess will be left empty. A vase can hold only one bunch of flowers.</p>
+<p>Each vase has a distinct characteristic (just like flowers do). Hence, putting a bunch of flowers in a vase results in a certain aesthetic value, expressed by an integer. The aesthetic values are presented in a table as shown below. Leaving a vase empty has an aesthetic value of 0.</p>
+<hr>
+<p><strong>V A S E S</strong> ****</p>
+<p><strong>1</strong></p>
+<hr>
+<p><strong>2</strong></p>
+<hr>
+<p><strong>3</strong></p>
+<hr>
+<p><strong>4</strong></p>
+<hr>
+<p><strong>5</strong> ****</p>
+<p><strong>Bunches</strong></p>
+<hr>
+<p><strong>1 (azaleas)</strong></p>
+<p>7</p>
+<p>23</p>
+<p>-5</p>
+<p>-24</p>
+<p>16 ****</p>
+<p><strong>2 (begonias)</strong></p>
+<p>5</p>
+<p>21</p>
+<p>-4</p>
+<p>10</p>
+<p>23 ****</p>
+<p><strong>3 (carnations)</strong></p>
+<p>-21</p>
+<p>5</p>
+<p>-4</p>
+<p>-20</p>
+<p>20</p>
+<p>According to the table, azaleas, for example, would look great in vase 2, but they would look awful in vase 4.</p>
+<p>To achieve the most pleasant effect you have to maximize the sum of aesthetic values for the arrangement while keeping the required ordering of the flowers. If more than one arrangement has the maximal sum value, any one of them will be acceptable. You have to produce exactly one arrangement.</p>
+<hr>
+<p>ASSUMPTIONS</p>
+<p>1 ≤<em>F</em>≤ 100 where<em>F</em>is the number of the bunches of flowers. The bunches are numbered 1 through<em>F</em>.</p>
+<p>**</p>
+<p><em>F</em>≤<em>V</em>≤ 100 where<em>V</em>is the number of vases.</p>
+<p>-50£<em>Aij</em>£50 where<em>Aij</em>is the aesthetic value obtained by putting the flower bunch<em>i</em>into the vase<em>j</em>.</p>
+<hr>
+<p>Input</p>
+<p>The first line contains two numbers:<em>F</em>,<em>V</em>.</p>
+<p>The following<em>F</em>lines: Each of these lines contains<em>V</em>integers, so that<em>Aij</em>is given as the<em>j</em>’th number on the (<em>i</em>+1)’st line of the input file.</p>
+<hr>
+<p>Output</p>
+<p>The first line will contain the sum of aesthetic values for your arrangement.</p>
+<p>The second line must present the arrangement as a list of<em>F</em>numbers, so that the<em>k</em>’th number on this line identifies the vase in which the bunch<em>k</em>is put.</p>
+<p>Sample Input 3 5 7 23 -5 -24 16 5 21 -4 10 23 -21 5 -4 -20 20</p>
+<p>Sample Output 53 2 4 5</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/dp/UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)/" rel="next" title="UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)">
+                <i class="fa fa-chevron-left"></i> UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/ds/POJ 2182 Lost Cows （树状数组,递推）/" rel="prev" title="POJ 2182 Lost Cows （树状数组,递推）">
+                POJ 2182 Lost Cows （树状数组,递推） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

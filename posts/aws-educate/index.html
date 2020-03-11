@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 AWS Educate 的 会员院校列表 里了，注册 AWS Educate 后可以得到 $100/年 的服务抵扣金额（Credits），配合 AWS 的 Amazon Lightsail 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。">
+<meta name="keywords" content="Practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS Educate &amp; Amazon Lightsail">
+<meta property="og:url" content="http://blog.deng.cf/posts/aws-educate/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 AWS Educate 的 会员院校列表 里了，注册 AWS Educate 后可以得到 $100/年 的服务抵扣金额（Credits），配合 AWS 的 Amazon Lightsail 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.se1sl2h6eqp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.ajgxeezmehm.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.w5465qhk2r.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AWS Educate &amp; Amazon Lightsail">
+<meta name="twitter:description" content="之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 AWS Educate 的 会员院校列表 里了，注册 AWS Educate 后可以得到 $100/年 的服务抵扣金额（Credits），配合 AWS 的 Amazon Lightsail 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/aws-educate/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>AWS Educate & Amazon Lightsail | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/aws-educate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AWS Educate & Amazon Lightsail
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-20 22:19:31" itemprop="dateCreated datePublished" datetime="2019-07-20T22:19:31+00:00">2019-07-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Practice/" itemprop="url" rel="index"><span itemprop="name">Practice</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 <a href="https://aws.amazon.com/cn/education/awseducate/" target="_blank" rel="noopener">AWS Educate</a> 的 <a href="https://s3.amazonaws.com/awseducate-list/AWS_Educate_Institutions.pdf" target="_blank" rel="noopener">会员院校列表</a> 里了，注册 AWS Educate 后可以得到 $100/年 的服务抵扣金额（Credits），配合 AWS 的 <a href="https://lightsail.aws.amazon.com/ls/webapp/home/instances" target="_blank" rel="noopener">Amazon Lightsail</a> 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。</p>
+<a id="more"></a>
+<h1 id="注册-aws-educate">注册 AWS Educate</h1>
+<p>在 <a href="https://aws.amazon.com/cn/education/awseducate" target="_blank" rel="noopener">AWS Educate 主页</a> 点击 「加入 AWS Educate」 ，身份选择 「Student」，下一步，电子邮件需要填学校的邮箱，收到邮件点击链接就可以完成注册。有信用卡（别人的没用过的也行）的话就继续注册 AWS 账户，没有就直接使用 AWS Educate Starter 账户，但是会有 <a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/educate-starter-account/" target="_blank" rel="noopener">一些限制</a>，送的抵扣金额也少一些。我注册的是 AWS 账户，以下步骤也是针对 AWS 账户，AWS Educate Starter 账户可能会有所不同。</p>
+<h1 id="注册-aws-账户需信用卡">注册 AWS 账户（需信用卡）</h1>
+<p>注册 AWS 账户需要信用卡，银联的信用卡也是可以的。在 AWS <a href="https://portal.aws.amazon.com/billing/signup#/start" target="_blank" rel="noopener">账户注册站点</a> 按步骤即可完成注册。注册完成后再 “我的账户” 可以看到账户 ID（12 位数字），复制账户 ID，再登录 <a href="https://www.awseducate.com/signin/SiteLogin" target="_blank" rel="noopener">AWS Educate</a> 输入 AWS 账户 ID 就可以得到 $100 的服务抵扣金额的优惠代码，可在 <a href="https://www.awseducate.com/student/s/awssite" target="_blank" rel="noopener">此处</a> 查看。 复制该优惠代码，在 <a href="https://console.aws.amazon.com/billing/home#/credits" target="_blank" rel="noopener">AWS 账单 | 服务抵扣金额</a> 处粘贴即可绑定该 $100 到 AWS 账户。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.png" alt><figcaption>image</figcaption>
+</figure>
+<h1 id="使用-amazon-lightsail">使用 Amazon Lightsail</h1>
+<p><a href="https://lightsail.aws.amazon.com/ls/webapp/home/instances" target="_blank" rel="noopener">Amazon Lightsail</a> 类似于 DigitalOcean 之类的 VPS 服务商家，比起之前用过的 EC2 实例要实惠多了，而且可以使用 AWS Credits，每月有 1T 的流量，最低配置只需要 $3.5/月，用户体验极棒。</p>
+<h2 id="新建实例">新建实例</h2>
+<p>在 <a href="https://lightsail.aws.amazon.com/ls/webapp/home/instances" target="_blank" rel="noopener">新建实例</a> 的地方点击 「Create Instance」 按步骤即可完成实例的新建，记得区域一定选东京（Tokyo），系统选 Ubuntu 18.04，具体如下图：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.se1sl2h6eqp.png" alt><figcaption>image</figcaption>
+</figure>
+<p>Plan 选择最低的 $3.5/月 就够用了，点击最下方 「Create instalce」 就可以完成实例的创建，然后就拥有一个在 Tokyo 的云主机啦。</p>
+<h2 id="绑定静态-ip">绑定静态 IP</h2>
+<p>Amazon Lightsail 默认是动态 IP，可以手动绑定静态 IP，在 <a href="https://lightsail.aws.amazon.com/ls/webapp/create/static-ip?region=ap-northeast-1" target="_blank" rel="noopener">创建静态 IP</a> 的页面即可绑定，绑定之后的静态 IP 是免费的，如下图：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.ajgxeezmehm.png" alt><figcaption>image</figcaption>
+</figure>
+<p>点击最下方的 「Create」 即可完成静态 IP 的创建和绑定，就可以使用 SSH 通过该静态 IP 来访问刚新建的 LightSail 实例了。</p>
+<h2 id="ssh-连接">SSH 连接</h2>
+<p>Lightsail 默认只能使用 SSH key 来连接，可以在 <a href="https://lightsail.aws.amazon.com/ls/webapp/account/keys" target="_blank" rel="noopener">这里下载</a> 用于连接的 SSH key，进入刚创建的 Lightsail 实例的 <a href="https://lightsail.aws.amazon.com/ls/webapp/ap-northeast-1/instances/Ubuntu-1/connect" target="_blank" rel="noopener">详情界面</a>，复制实例的 IP，通过该 IP 和刚下载的 SSH key，就可以连接该实例了. <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要修改 SSH key 的权限为 400，仅第一次需要修改</span></span><br><span class="line">chmod 400 LightsailDefaultKey-ap-northeast-1.pem</span><br><span class="line"><span class="comment"># ssh 连接</span></span><br><span class="line">ssh -i LightsailDefaultKey-ap-northeast-1.pem ubuntu@[your_ip_address]</span><br></pre></td></tr></table></figure></p>
+<p>成功连接：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.w5465qhk2r.png" alt><figcaption>image</figcaption>
+</figure>
+<h2 id="端口开放">端口开放</h2>
+<p>新建的 Lightsail 实例默认只开启了用于 SSH 连接的 22 端口，如需使用其他端口可在实例详情界面的 「Networking」 的 「Firewall」 手动开启相关端口，不清楚具体开启什么端口可以在 「Application」处选择「All TCP + UDP」开启所有端口。</p>
+<hr>
+<p>然后就可以使用啦~</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Practice/" rel="tag"># Practice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/two-pointers/" rel="next" title="双指针技巧的应用">
+                <i class="fa fa-chevron-left"></i> 双指针技巧的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/svm-review/" rel="prev" title="SVM Review">
+                SVM Review <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册-aws-educate"><span class="nav-text">注册 AWS Educate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册-aws-账户需信用卡"><span class="nav-text">注册 AWS 账户（需信用卡）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-amazon-lightsail"><span class="nav-text">使用 Amazon Lightsail</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建实例"><span class="nav-text">新建实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定静态-ip"><span class="nav-text">绑定静态 IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh-连接"><span class="nav-text">SSH 连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口开放"><span class="nav-text">端口开放</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

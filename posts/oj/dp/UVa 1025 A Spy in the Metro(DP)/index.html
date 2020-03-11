@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 某城市的地铁有n个车站 编号1到n 有m1辆车向右开 给出m1个从车站1出发的时间 m2辆车向左开 给出m2个从车站n出发的时间 t[i]为火车从第i个车站开到第i+1（或相反）个车站需要的时间 Maria在车站1 她需要恰在时刻T到达第n个车站 求她的最小总车站等待时间 基础的多阶段决策DP 令d[i][j]表示时刻j在i号车站剩下的最小总等待时间 每种状态有3种选择  等一个单位时间d[">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 1025 A Spy in the Metro(DP)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/UVa 1025 A Spy in the Metro(DP)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 某城市的地铁有n个车站 编号1到n 有m1辆车向右开 给出m1个从车站1出发的时间 m2辆车向左开 给出m2个从车站n出发的时间 t[i]为火车从第i个车站开到第i+1（或相反）个车站需要的时间 Maria在车站1 她需要恰在时刻T到达第n个车站 求她的最小总车站等待时间 基础的多阶段决策DP 令d[i][j]表示时刻j在i号车站剩下的最小总等待时间 每种状态有3种选择  等一个单位时间d[">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-p2728.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-2728img2.gif.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVa 1025 A Spy in the Metro(DP)">
+<meta name="twitter:description" content="题意 某城市的地铁有n个车站 编号1到n 有m1辆车向右开 给出m1个从车站1出发的时间 m2辆车向左开 给出m2个从车站n出发的时间 t[i]为火车从第i个车站开到第i+1（或相反）个车站需要的时间 Maria在车站1 她需要恰在时刻T到达第n个车站 求她的最小总车站等待时间 基础的多阶段决策DP 令d[i][j]表示时刻j在i号车站剩下的最小总等待时间 每种状态有3种选择  等一个单位时间d[">
+<meta name="twitter:image" content="http://blog.deng.cf/posts/oj/dp/images/dge.org-external-10-p2728.gif.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/UVa 1025 A Spy in the Metro(DP)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UVa 1025 A Spy in the Metro(DP) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa 1025 A Spy in the Metro(DP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UVa 1025 A Spy in the Metro(DP)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-02-06 16:08:26" itemprop="dateCreated datePublished" datetime="2015-02-06T16:08:26+00:00">2015-02-06</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 某城市的地铁有n个车站 编号1到n 有m1辆车向右开 给出m1个从车站1出发的时间 m2辆车向左开 给出m2个从车站n出发的时间 t[i]为火车从第i个车站开到第i+1（或相反）个车站需要的时间 Maria在车站1 她需要恰在时刻T到达第n个车站 求她的最小总车站等待时间</p>
+<p>基础的多阶段决策DP 令d[i][j]表示时刻j在i号车站剩下的最小总等待时间 每种状态有3种选择</p>
+<ol type="1">
+<li><p>等一个单位时间<strong>d[i][j+1]+1;</strong></p></li>
+<li><p>当前站此时有往左的车并搭乘<strong>d[i-1][j+t[i-1]];</strong></p></li>
+</ol>
+<p>3.当前站此时有往右的车并搭乘<strong>d[i+1][j+t[i]].</strong></p>
+<p>每个点三种选择选最优的就行了 边界条件为<strong>d[n][T]=0</strong> 其它状态均初始化为INF</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">55</span>, M = <span class="number">205</span>;</span><br><span class="line">int t[N], d[N][M];  <span class="comment">//j时刻在i号车站剩下的最小总等待时间</span></span><br><span class="line">bool l[N][M], r[N][M];  <span class="comment">//j时刻在i号车站是否有往左(右)的车</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, ti, cur, cas = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">"%d"</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;ti);</span><br><span class="line">        memset(l, <span class="number">0</span>, sizeof(l)), memset(r, <span class="number">0</span>, sizeof(r));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i) scanf(<span class="string">"%d"</span>, &amp;t[i]);</span><br><span class="line"></span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;m);  <span class="comment">//cur时刻车站j是否有往右的车</span></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;cur);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">                r[j][cur] = <span class="number">1</span>, cur += t[j];</span><br><span class="line">        &#125;</span><br><span class="line">        scanf(<span class="string">"%d"</span>, &amp;m);  <span class="comment">//cur时刻车站j是否有往左的车</span></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;cur);</span><br><span class="line">            <span class="keyword">for</span>(int j = n; j &gt;= <span class="number">1</span>; --j)</span><br><span class="line">                l[j][cur] = <span class="number">1</span>, cur += t[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        memset(d, <span class="number">0x3f</span>, sizeof(d));</span><br><span class="line">        d[n][ti] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j = ti - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                d[i][j] = d[i][j + <span class="number">1</span>] + <span class="number">1</span>;   <span class="comment">//在i车站等1单位时间</span></span><br><span class="line">                <span class="keyword">if</span>(l[i][j]) d[i][j] = min(d[i][j], d[i - <span class="number">1</span>][j + t[i - <span class="number">1</span>]]);  <span class="comment">//往左</span></span><br><span class="line">                <span class="keyword">if</span>(r[i][j]) d[i][j] = min(d[i][j], d[i + <span class="number">1</span>][j + t[i]]);  <span class="comment">//往右</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"Case Number %d: "</span>, ++cas);</span><br><span class="line">        <span class="keyword">if</span>(d[<span class="number">1</span>][<span class="number">0</span>] &gt; ti) puts(<span class="string">"impossible"</span>);</span><br><span class="line">        <span class="keyword">else</span> printf(<span class="string">"%d\n"</span>, d[<span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Secret agent Maria was sent to Algorithms City to carry out an especially dangerous mission. After several thrilling events we find her in the first station of Algorithms City Metro, examining the time table. The Algorithms City Metro consists of a single line with trains running both ways, so its time table is not complicated.</p>
+<p>Maria has an appointment with a local spy at the last station of Algorithms City Metro. Maria knows that a powerful organization is after her. She also knows that while waiting at a station, she is at great risk of being caught. To hide in a running train is much safer, so she decides to stay in running trains as much as possible, even if this means traveling backward and forward. Maria needs to know a schedule with minimal waiting time at the stations that gets her to the last station in time for her appointment. You must write a program that finds the total waiting time in a best schedule for Maria.</p>
+<p>The Algorithms City Metro system has <em>N</em> stations, consecutively numbered from 1 to <em>N</em>. Trains move in both directions: from the first station to the last station and from the last station back to the first station. The time required for a train to travel between two consecutive stations is fixed since all trains move at the same speed. Trains make a very short stop at each station, which you can ignore for simplicity. Since she is a very fast agent, Maria can always change trains at a station even if the trains involved stop in that station at the same time.</p>
+<figure>
+<img src="../images/dge.org-external-10-p2728.gif.png" alt><figcaption></figcaption>
+</figure>
+<h2 id="section"></h2>
+<p>The input file contains several test cases. Each test case consists of seven lines with information as follows. <strong>Line 1.</strong> The integer <em>N</em> ( 2<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>N</em><img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">50), which is the number of stations. <strong>Line 2.</strong> The integer <em>T</em> ( 0<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>T</em><img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">200), which is the time of the appointment. <strong>Line 3.</strong> <em>N</em> - 1 integers: <em>t</em>1, <em>t</em>2,..., <em>t</em>N - 1 ( 1<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>t</em>i<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">70), representing the travel times for the trains between two consecutive stations: <em>t</em>1 represents the travel time between the first two stations, <em>t</em>2 the time between the second and the third station, and so on. <strong>Line 4.</strong> The integer <em>M</em>1 ( 1<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>M</em>1<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">50), representing the number of trains departing from the first station. <strong>Line 5.</strong> <em>M</em>1 integers: <em>d</em>1, <em>d</em>2,..., <em>d</em>M1 ( 0<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>d</em>i<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">250 and <em>d</em>i &lt; <em>d</em>i + 1), representing the times at which trains depart from the first station. <strong>Line 6.</strong> The integer <em>M</em>2 ( 1<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>M</em>2<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">50), representing the number of trains departing from the <em>N</em>-th station. <strong>Line 7.</strong> <em>M</em>2 integers: <em>e</em>1, <em>e</em>2,..., <em>e</em>M2 ( 0<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $"><em>e</em>i<img src="../images/dge.org-external-10-2728img2.gif.png" alt="$ $">250 and <em>e</em>i &lt; <em>e</em>i + 1) representing the times at which trains depart from the <em>N</em>-th station.</p>
+<p>The last case is followed by a line containing a single zero.</p>
+<h2 id="section-1"></h2>
+<p>For each test case, print a line containing the case number (starting with 1) and an integer representing the total waiting time in the stations for a best schedule, or the word ` impossible ' in case Maria is unable to make the appointment. Use the format of the sample output.</p>
+<h2 id="section-2"></h2>
+<p>4 55 5 10 15 4 0 5 10 20 4 0 5 10 15 4 18 1 2 3 5 0 3 6 10 12 6 0 3 5 7 12 15 2 30 20 1 20 7 1 3 5 7 11 13 17 0</p>
+<h2 id="section-3"></h2>
+<p>Case Number 1: 5 Case Number 2: 0 Case Number 3: impossible</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/other/UVa 714 Copying Books(贪心 二分)/" rel="next" title="UVa 714 Copying Books(贪心 二分)">
+                <i class="fa fa-chevron-left"></i> UVa 714 Copying Books(贪心 二分)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/dp/UVa 1347 Tour(DP)/" rel="prev" title="UVa 1347 Tour(DP)">
+                UVa 1347 Tour(DP) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-1"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-2"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section-3"><span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

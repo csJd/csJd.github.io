@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 Watashi发明了一种蛋疼(eggache) 语言 你要为这个语言实现一个 array slicing 函数 这个函数的功能是 有一个数组初始为空 每次给你一个区间[ l, r) 和一些数 你要输出数组中下标在[l, r) 之间的数 然后删除这些数 然后把给你的那些数插入到数组的下标为 l 的位置 签到模拟题 一直没看懂题意 看了Watashi的scanf高端用法 弱到连scanf都不会用">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZOJ 3427 Array Slicing （scanf使用）">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/other/ZOJ 3427 Array Slicing （scanf使用）/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 Watashi发明了一种蛋疼(eggache) 语言 你要为这个语言实现一个 array slicing 函数 这个函数的功能是 有一个数组初始为空 每次给你一个区间[ l, r) 和一些数 你要输出数组中下标在[l, r) 之间的数 然后删除这些数 然后把给你的那些数插入到数组的下标为 l 的位置 签到模拟题 一直没看懂题意 看了Watashi的scanf高端用法 弱到连scanf都不会用">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZOJ 3427 Array Slicing （scanf使用）">
+<meta name="twitter:description" content="题意 Watashi发明了一种蛋疼(eggache) 语言 你要为这个语言实现一个 array slicing 函数 这个函数的功能是 有一个数组初始为空 每次给你一个区间[ l, r) 和一些数 你要输出数组中下标在[l, r) 之间的数 然后删除这些数 然后把给你的那些数插入到数组的下标为 l 的位置 签到模拟题 一直没看懂题意 看了Watashi的scanf高端用法 弱到连scanf都不会用">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/other/ZOJ 3427 Array Slicing （scanf使用）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ZOJ 3427 Array Slicing （scanf使用） | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/ZOJ 3427 Array Slicing （scanf使用）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ZOJ 3427 Array Slicing （scanf使用）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-07-24 16:00:46" itemprop="dateCreated datePublished" datetime="2015-07-24T16:00:46+00:00">2015-07-24</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 Watashi发明了一种蛋疼(eggache) 语言 你要为这个语言实现一个 array slicing 函数 这个函数的功能是 有一个数组初始为空 每次给你一个区间[ l, r) 和一些数 你要输出数组中下标在[l, r) 之间的数 然后删除这些数 然后把给你的那些数插入到数组的下标为 l 的位置</p>
+<p>签到模拟题 一直没看懂题意 看了Watashi的scanf高端用法 弱到连scanf都不会用了 强行到<a href="http://www.cplusplus.com/reference/cstdio/scanf/?kw=scanf" target="_blank" rel="noopener">cpp</a>预习了一下 先记录一下那些并不了解的scanf用法吧</p>
+<p>int scanf ( const char /* format, ... );</p>
+<p>format 由这些内容组成</p>
+<ul>
+<li><strong>空白字符:</strong> scanf在读入时会忽略下一个非空白字符之前的所有空白字符 <a href="http://www.cplusplus.com/reference/cctype/isspace/" target="_blank" rel="noopener">空白字符</a>包含 ' '', '', ', ', '* 表示这个格式说明符所对应的内容读而不存 也不用为其指定参数 (注意区别 printf /* 需要一个整型参数 表示至少输出多少位 不足用空格代替)</li>
+</ul>
+<p>width 表示最多读取多少位字符 length 有的话一定是这几个之一 hh , h , l , ll , j , z , t , L 对应同种数据的不同位数类型如 int(d) 和 long long(lld) 重点是 specifier <em>specifier</em> 描述 Characters extracted i Integer Any number of digits, optionally preceded by a sign (+ or -). <a href="http://www.cplusplus.com/isdigit" target="_blank" rel="noopener">Decimal digits</a> assumed by default (0-9), but a 0 prefix introduces octal digits (0-7), and 0x <a href="http://www.cplusplus.com/isxdigit" target="_blank" rel="noopener">hexadecimal digits</a> (0-f). <em>Signed</em> argument. d <em>or</em> u Decimal integer Any number of <a href="http://www.cplusplus.com/isdigit" target="_blank" rel="noopener">decimal digits</a> (0-9), optionally preceded by a sign (+ or -). d is for a <em>signed</em> argument, and u for an <em>unsigned</em>. o Octal integer Any number of octal digits (0-7), optionally preceded by a sign (+ or -). <em>Unsigned</em> argument. x Hexadecimal integer Any number of <a href="http://www.cplusplus.com/isxdigit" target="_blank" rel="noopener">hexadecimal digits</a> (0-9, a-f, A-F), optionally preceded by 0x or 0X, and all optionally preceded by a sign (+ or -). <em>Unsigned</em> argument. f, e, g Floating point number A series of <a href="http://www.cplusplus.com/isdigit" target="_blank" rel="noopener">decimal</a> digits, optionally containing a decimal point, optionally preceeded by a sign (+ or -) and optionally followed by the e or E character and a decimal integer (or some of the other sequences supported by <a href="http://www.cplusplus.com/strtod" target="_blank" rel="noopener">strtod</a>). Implementations complying with C99 also support hexadecimal floating-point format when preceded by</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>x</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>X</span><br></pre></td></tr></table></figure>
+<p>. a c Character The next character. If a <em>width</em> other than 1 is specified, the function reads exactly <em>width</em>characters and stores them in the successive locations of the array passed as argument. No null character is appended at the end. s String of characters Any number of non-whitespace characters, stopping at the first <a href="http://www.cplusplus.com/isspace" target="_blank" rel="noopener">whitespace</a> character found. A terminating null character is automatically added at the end of the stored sequence. p Pointer address A sequence of characters representing a pointer. The particular format used depends on the system and library implementation, but it is the same as the one used to format %p in <a href="http://www.cplusplus.com/fprintf" target="_blank" rel="noopener">fprintf</a>. [<em>characters</em>] Scanset Any number of the characters specified between the brackets. A dash (-) that is not the first character may produce non-portable behavior in some library implementations. [^*characters*] Negated scanset Any number of characters none of them specified as <em>characters</em> between the brackets. n Count No input is consumed. The number of characters read so far from <a href="http://www.cplusplus.com/stdin" target="_blank" rel="noopener">stdin</a> is stored in the pointed location. % % A % followed by another % matches a single %. 除了 n 之外 specifier至少匹配一个输入的字符 否则读入会在当前字符终止 n需要一个指向int的参数 保存在这之前读取了多少位字符<br>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">500</span>];</span><br><span class="line">    int n;</span><br><span class="line">    scanf(<span class="string">"%s%n"</span>, s, &amp;n);</span><br><span class="line">    printf(<span class="string">"%s  %d\n"</span>, s, n);</span><br><span class="line">    <span class="comment">//输入hello</span></span><br><span class="line">    <span class="comment">//输出hello 5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>printf中也可以使用%n表示这条语句这之前输出了多少位字符<br>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    printf(<span class="string">"hello%n"</span>, &amp;n);</span><br><span class="line">    printf(<span class="string">" %d\n"</span>, n);</span><br><span class="line">    <span class="comment">//输出hello 5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>specifier可以是[...]、[^...]这两种<a href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正则表达式</a></p>
+<p>[...]表示读取括号中包含的字符 遇到其他字符就结束这个specifier <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">500</span>];</span><br><span class="line">    int n;</span><br><span class="line">    scanf(<span class="string">" %[0-9]%n"</span>, s, &amp;n);<span class="comment">//%[0-9]只读取数字  遇到非数字结束</span></span><br><span class="line">    printf(<span class="string">"%s %d\n"</span>, s, n);</span><br><span class="line">    scanf(<span class="string">" %[ab]%n"</span>, s, &amp;n);</span><br><span class="line">    printf(<span class="string">"%s %d\n"</span>, s, n);</span><br><span class="line">    <span class="comment">//输入"   12345abc"  前面有三个空格</span></span><br><span class="line">    <span class="comment">//输出12345 8  ab 2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>[^...]表示读取除括号中字符之外的所有字符 遇到括号中的字符就结束这个specifier</p>
+<p>当然这些东西sscanf也适用</p>
+<p>感觉预习了scanf之后这个题的输入就很好处理了 直接用list的<a href="http://www.cplusplus.com/reference/list/list/splice/" target="_blank" rel="noopener">splice</a>函数就行了 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char s[<span class="number">5000</span>], *ps;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    list&lt;int&gt; a, b;</span><br><span class="line">    int l, r, n, v;</span><br><span class="line">    list&lt;int&gt;::iterator it;</span><br><span class="line">    <span class="keyword">while</span>(~scanf(<span class="string">" [ %d : %d ]%[^\n]"</span>, &amp;l, &amp;r, s))</span><br><span class="line">    &#123;</span><br><span class="line">        b.clear();</span><br><span class="line">        ps = s;</span><br><span class="line">        <span class="keyword">while</span>(sscanf(ps, <span class="string">"%*[^-0-9]%d%n"</span>, &amp;v, &amp;n) &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//过滤掉非'-'和数字再读入一个数</span></span><br><span class="line">            <span class="comment">//n记录scanf读了多少个字符</span></span><br><span class="line">            ps = ps + n;  <span class="comment">//读了n个字符所以要前进n位</span></span><br><span class="line">            b.push_back(v);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        advance(it = a.begin(), l);</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(<span class="string">"%d%s"</span>, *it, l &lt; r - <span class="number">1</span> ? <span class="string">", "</span> : <span class="string">""</span>);</span><br><span class="line">            it = a.erase(it);</span><br><span class="line">            l++;</span><br><span class="line">        &#125;</span><br><span class="line">        puts(<span class="string">""</span>);</span><br><span class="line">        a.splice(it, b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Array Slicing Time Limit:2 Seconds Memory Limit:65536 KB</p>
+<p>Array slicing is an operation that extracts certain elements from an array and packages them as another array. Now you're asked to implements the array slicing operations for a new programming language -- *eggache/** (pronounced "eggache star"). The grammar of array slicing in *eggache/** is: [ <em>begin</em> : <em>end</em> ] = <em>x1</em>, <em>x2</em>, ..., <em>xk</em>, ... where begin ≤ end are indices indicating the range of slice. Redundant whitespaces should be ignored. For each operation, the original slice should be printed first, then these elements will be replaced with the new elements provided. See sample for more details.</p>
+<h4 id="input">Input</h4>
+<p>There is only one case for this problem, which contains about 50 lines of array slicing operations. It's guaranteed that all operations are valid and the absolute values of all integers never exceed 100. <strong>The array is empty ([]) before the first operation.</strong></p>
+<h4 id="output">Output</h4>
+<p>The output produced by array slicing operations in the *eggache/** programming language.</p>
+<h4 id="sample-input">Sample Input</h4>
+<p>[ 0 : 0] = 1 2 3 4 5 6 7 8 9 [ 1 : 1] = -1 [ 1 : 1] = [ 0 : 8] = 9 8 7 6 5 4 3 2 1 [ 2 : 8] = -2, -3, -5, -7 [ 0 : 9] = 000 [ 0 : 1] = 1, 2, 8 [ 2 : 2] = 4 [ 0 : 4] =</p>
+<h4 id="sample-output">Sample Output</h4>
+<p>1, -1, 2, 3, 4, 5, 6, 7 7, 6, 5, 4, 3, 2 9, 8, -2, -3, -5, -7, 1, 8, 9 0 1, 2, 4, 8</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/dp/HDU 2089 不要62(数位DP·记忆化搜索)/" rel="next" title="HDU 2089 不要62(数位DP·记忆化搜索)">
+                <i class="fa fa-chevron-left"></i> HDU 2089 不要62(数位DP·记忆化搜索)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/search/ZOJ 3436 July Number(DFS)/" rel="prev" title="ZOJ 3436 July Number(DFS)">
+                ZOJ 3436 July Number(DFS) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#output"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sample-input"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sample-output"><span class="nav-text">Sample Output</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心 最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯 12345678910111213141516171819202122232425262728293031323334353637383">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/graph/ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心 最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯 12345678910111213141516171819202122232425262728293031323334353637383">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.deng.cf/posts/oj/graph/images/cn-onlinejudge-showImage.do-name=0000%2F2913%2FBus_Pass_1.jpg.png">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)">
+<meta name="twitter:description" content="题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心 最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯 12345678910111213141516171819202122232425262728293031323334353637383">
+<meta name="twitter:image" content="http://blog.deng.cf/posts/oj/graph/images/cn-onlinejudge-showImage.do-name=0000%2F2913%2FBus_Pass_1.jpg.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/oj/graph/ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ZOJ 2913 Bus Pass (最近的最远BFS HDU2377) | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-10-18 22:12:05" itemprop="dateCreated datePublished" datetime="2014-10-18T22:12:05+00:00">2014-10-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心</p>
+<p>最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef <span class="keyword">set</span>&lt;int&gt;::iterator it;</span><br><span class="line">const int N = 10000;</span><br><span class="line">int dis[N], tdis[N], link[N][12];</span><br><span class="line">queue&lt;int&gt; q;</span><br><span class="line"><span class="keyword">set</span>&lt;int&gt; zone;</span><br><span class="line"></span><br><span class="line">void bfs(int o)</span><br><span class="line">&#123;</span><br><span class="line">    memset(tdis, <span class="number">0</span>, sizeof(tdis));</span><br><span class="line">    tdis[o] = <span class="number">1</span>;</span><br><span class="line">    q.push(o);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int cur = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(tdis[cur] &gt; dis[cur]) dis[cur] = tdis[cur];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= link[cur][<span class="number">0</span>]; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            int j = link[cur][i];</span><br><span class="line">            <span class="keyword">if</span>(tdis[j] == <span class="number">0</span>)  q.push(j), tdis[j] = tdis[cur] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int cas, nz, nr, id, mz, mr, ans, t;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        zone.clear();</span><br><span class="line">        memset(dis, <span class="number">0</span>, sizeof(dis));</span><br><span class="line">        scanf(<span class="string">"%d%d"</span>, &amp;nz, &amp;nr);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nz; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d %d"</span>, &amp;id, &amp;mz);</span><br><span class="line">            link[id][<span class="number">0</span>] = mz;</span><br><span class="line">            zone.insert(id);</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= mz; ++i)</span><br><span class="line">                scanf(<span class="string">"%d"</span>, &amp;link[id][i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nr; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(<span class="string">"%d"</span>, &amp;mr);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= mr; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                scanf(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">                bfs(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        it i = zone.begin();</span><br><span class="line">        ans = *i;</span><br><span class="line">        <span class="keyword">for</span>(++i; i != zone.end(); ++i)</span><br><span class="line">            <span class="keyword">if</span>(dis[*i] &lt; dis[ans]) ans = *i;</span><br><span class="line">        printf(<span class="string">"%d %d\n"</span>, dis[ans], ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Bus Pass Time Limit:5 Seconds Memory Limit:32768 KB</p>
+<p>You travel a lot by bus and the costs of all the seperate tickets are starting to add up.</p>
+<p>Therefore you want to see if it might be advantageous for you to buy a bus pass.</p>
+<p>The way the bus system works in your country (and also in the Netherlands) is as follows:</p>
+<p>when you buy a bus pass, you have to indicate a center zone and a star value. You are allowed to travel freely in any zone which has a distance to your center zone which is less than your star value. For example, if you have a star value of one, you can only travel in your center zone. If you have a star value of two, you can also travel in all adjacent zones, et cetera.</p>
+<p>You have a list of all bus trips you frequently make, and would like to determine the minimum star value you need to make all these trips using your buss pass. But this is not always an easy task. For example look at the following figure:</p>
+<p><img src="../images/cn-onlinejudge-showImage.do-name=0000%2F2913%2FBus_Pass_1.jpg.png"> Here you want to be able to travel from A to B and from B to D. The best center zone is 7400, for which you only need a star value of 4. Note that you do not even visit this zone on your trips!</p>
+<p><strong>Input</strong></p>
+<p>On the first line an integer<em>t</em>(1 &lt;=<em>t</em>&lt;= 100): the number of test cases. Then for each test case:</p>
+<p>One line with two integers<em>nz</em>(2 &lt;=<em>nz</em>&lt;= 9 999) and<em>nr</em>(1 &lt;=<em>nr</em>&lt;= 10): the number of zones and the number of bus trips, respectively.</p>
+<p><em>nz</em> lines starting with two integers <em>idi</em> (1 &lt;= idi &lt;= 9 999) and <em>mzi</em> (1 &lt;= <em>mzi</em> &lt;= 10), a number identifying the i-th zone and the number of zones adjacent to it, followed by mzi integers: the numbers of the adjacent zones.</p>
+<p><em>nr</em> lines starting with one integer <em>mri</em> (1 &lt;= <em>mri</em> &lt;= 20), indicating the number of zones the ith bus trip visits, followed by <em>mri</em> integers: the numbers of the zones through which the bus passes in the order in which they are visited.</p>
+<p>All zones are connected, either directly or via other zones.</p>
+<p><strong>Output</strong></p>
+<p>For each test case:</p>
+<p>One line with two integers, the minimum star value and the id of a center zone which achieves this minimum star value. If there are multiple possibilities, choose the zone with the lowest number.</p>
+<p><strong>Sample Input</strong></p>
+<p>1 17 2 7400 6 7401 7402 7403 7404 7405 7406 7401 6 7412 7402 7400 7406 7410 7411 7402 5 7412 7403 7400 7401 7411 7403 6 7413 7414 7404 7400 7402 7412 7404 5 7403 7414 7415 7405 7400 7405 6 7404 7415 7407 7408 7406 7400 7406 7 7400 7405 7407 7408 7409 7410 7401 7407 4 7408 7406 7405 7415 7408 4 7409 7406 7405 7407 7409 3 7410 7406 7408 7410 4 7411 7401 7406 7409 7411 5 7416 7412 7402 7401 7410 7412 6 7416 7411 7401 7402 7403 7413 7413 3 7412 7403 7414 7414 3 7413 7403 7404 7415 3 7404 7405 7407 7416 2 7411 7412 5 7409 7408 7407 7405 7415 6 7415 7404 7414 7413 7412 7416</p>
+<p><strong>Sample Output</strong></p>
+<p>4 7400</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/oj/graph/ZOJ 1649 Rescue(有敌人迷宫BFS)/" rel="next" title="ZOJ 1649 Rescue(有敌人迷宫BFS)">
+                <i class="fa fa-chevron-left"></i> ZOJ 1649 Rescue(有敌人迷宫BFS)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/oj/graph/ZOJ 1203 Swordfish(最小生成树 kruskal)/" rel="prev" title="ZOJ 1203 Swordfish(最小生成树 kruskal)">
+                ZOJ 1203 Swordfish(最小生成树 kruskal) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

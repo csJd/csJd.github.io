@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="家里网络可连接性较差，挂的 PT 一直没有上传，就尝试在 VPS 上配置远程 PT 下载，这里记录下在 Ubuntu 18.04 VPS 上使用 FlexGet 自动下载 PT 站资源的设置。">
+<meta name="keywords" content="Practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FlexGet 自动 PT 下载设置">
+<meta property="og:url" content="http://blog.deng.cf/posts/flexget/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="家里网络可连接性较差，挂的 PT 一直没有上传，就尝试在 VPS 上配置远程 PT 下载，这里记录下在 Ubuntu 18.04 VPS 上使用 FlexGet 自动下载 PT 站资源的设置。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-11T10:17:50.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FlexGet 自动 PT 下载设置">
+<meta name="twitter:description" content="家里网络可连接性较差，挂的 PT 一直没有上传，就尝试在 VPS 上配置远程 PT 下载，这里记录下在 Ubuntu 18.04 VPS 上使用 FlexGet 自动下载 PT 站资源的设置。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.deng.cf/posts/flexget/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>FlexGet 自动 PT 下载设置 | dd's site \#</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dd's site \#</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/flexget/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng">
+      <meta itemprop="description" content="Don't be evil.">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">FlexGet 自动 PT 下载设置
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-17 12:19:07" itemprop="dateCreated datePublished" datetime="2020-02-17T12:19:07+00:00">2020-02-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>家里网络可连接性较差，挂的 PT 一直没有上传，就尝试在 VPS 上配置远程 PT 下载，这里记录下在 Ubuntu 18.04 VPS 上使用 FlexGet 自动下载 PT 站资源的设置。</p>
+<a id="more"></a>
+<h2 id="前置软件包安装">前置软件包安装</h2>
+<h3 id="安装-pt-下载客户端">安装 PT 下载客户端</h3>
+<p>PT 下载客户端推荐使用 <a href="https://transmissionbt.com" target="_blank" rel="noopener">Transmission</a> 或 <a href="https://www.qbittorrent.org/download.php" target="_blank" rel="noopener">qBittorrent</a>，据说 Transmission 更适合保种，qBittorrent 适合下载新/热种赚上传。</p>
+<h4 id="transmisson">Transmisson</h4>
+<p>Transmisson 使用以下命令安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install transmission-daemon</span><br></pre></td></tr></table></figure>
+<p>安装后配置文件位于：<code>/etc/transmission-daemon/settings.json</code>，其详细配置信息可见 <a href="https://github.com/transmission/transmission/wiki/Editing-Configuration-Files" target="_blank" rel="noopener">官方 Wiki</a>，编辑该配置文件，主要需要修改的项目如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"rpc-authentication-required"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"rpc-password"</span>: <span class="string">"transmission"</span>,</span><br><span class="line">    <span class="attr">"rpc-username"</span>: <span class="string">"transmission"</span>,</span><br><span class="line">    <span class="attr">"rpc-whitelist-enabled"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后执行 <code>service transmission-daemon start</code> 就可以开启 Transmission 后台服务，其 Web 管理服务的默认端口为 <code>9091</code>，浏览器输入 <code>http://&lt;yourVpsIP&gt;:9091</code> 就可以通过 Web 管理界面远程控制 VPS 上的 Transmission，默认提供的 Transmission RPC 界面较简陋，可以额外安装第三方开源的 <a href="https://github.com/ronggang/transmission-web-control" target="_blank" rel="noopener">Transmission Web Control (TWC)</a> 作为替换。进入 Web 管理界面后可自行修改其他设置选项。</p>
+<h4 id="qbittorrent">qBittorrent</h4>
+<p>Ubuntu 官方源提供的 qBittorent 版本较旧，部分 PT 站点不支持使用旧版本，可以使用 qBittorrent 官方 PPA 安装最新的稳定版本:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install qbittorrent-nox</span><br></pre></td></tr></table></figure>
+<p>运行 <code>qbittorrent-nox -d</code> 即在后台运行 qBittorrent，其 Web 管理服务默认端口为 <code>8080</code>，默认用户名为 <code>admin</code>，默认密码为 <code>adminadmin</code>，浏览器输入 <code>http://&lt;yourVpsIP&gt;:8080</code> 进入 Web 管理界面后可以修改这些内容及其他设置。</p>
+<h2 id="flexget-设置">FlexGet 设置</h2>
+<p>下载 PT 站点较新的内容可以较快获得上传量，但每次都手动添加也较麻烦，使用 <a href="https://flexget.com/InstallWizard/Linux" target="_blank" rel="noopener">FlexGet</a> 可以利用 PT 站点提供的 RSS 订阅实现自动下载最新的资源以及删除旧的内容。</p>
+<h3 id="flexget-安装">FlexGet 安装</h3>
+<p>FlexGet 基于 Python 实现，执行以下命令安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3 python3-pip</span><br><span class="line">pip3 install flexget</span><br></pre></td></tr></table></figure>
+<p>使用 Transmission 还需要安装 <code>transmission-rpc</code> 用于 FlexGet 和 Transmission 的交互：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install transmission-rpc</span><br></pre></td></tr></table></figure>
+<h3 id="flexget-配置">FlexGet 配置</h3>
+<p>FelxGet 的配置文件位于 <code>~/.config/flexget/config.yml</code>。先看官方的 <a href="https://flexget.com/Configuration" target="_blank" rel="noopener">配置指南</a>，我的配置文件如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里关闭 schedules 功能，后续使用 crontab 来实现定时执行</span></span><br><span class="line"><span class="attr">schedules:</span> <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="attr">templates:</span></span><br><span class="line"><span class="attr">  disklimit:</span></span><br><span class="line">    <span class="comment"># 使用 free_space 插件，指定位置空余空间大于 space (单位为 MB) 时才执行任务</span></span><br><span class="line">    <span class="comment"># https://flexget.com/Plugins/free_space</span></span><br><span class="line"><span class="attr">    free_space:</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/home/ubuntu/rss/</span></span><br><span class="line"><span class="attr">      space:</span> <span class="number">10240</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用 content_size 插件，只接受内容大小在 min 到 max (单位为 MB) 之间的 torrent</span></span><br><span class="line">    <span class="comment"># https://flexget.com/Plugins/content_size</span></span><br><span class="line"><span class="attr">    content_size:</span></span><br><span class="line"><span class="attr">      min:</span> <span class="number">1024</span></span><br><span class="line"><span class="attr">      max:</span> <span class="number">30720</span></span><br><span class="line"><span class="attr">      strict:</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  qb:</span></span><br><span class="line">    <span class="comment"># qBittorent 插件配置模板</span></span><br><span class="line">    <span class="comment"># https://flexget.com/Plugins/qbittorrent</span></span><br><span class="line"><span class="attr">    qbittorrent:</span></span><br><span class="line">      <span class="comment"># 下载保存路径</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/home/ubuntu/rss/</span></span><br><span class="line">      <span class="comment"># 设置下载分类</span></span><br><span class="line"><span class="attr">      label:</span> <span class="string">rss</span></span><br><span class="line"><span class="attr">      host:</span> <span class="string">localhost</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">8080</span></span><br><span class="line">      <span class="comment"># 设置单种最大下载/上传速度</span></span><br><span class="line"><span class="attr">      maxdownspeed:</span> <span class="number">30000</span></span><br><span class="line"><span class="attr">      maxupspeed:</span> <span class="number">10000</span></span><br><span class="line">      <span class="comment"># 若在 WebUI 的设置界面勾选了「对本地主机上的客户端跳过身份验证」，可省略用户名和密码</span></span><br><span class="line"><span class="attr">      username:</span> <span class="string">admin</span></span><br><span class="line"><span class="attr">      password:</span> <span class="string">adminadmin</span></span><br><span class="line"><span class="attr">  tr:</span></span><br><span class="line">    <span class="comment"># Transmission 插件配置模板</span></span><br><span class="line">    <span class="comment"># https://flexget.com/Plugins/transmission</span></span><br><span class="line"><span class="attr">    transmission:</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/home/ubuntu/rss/</span></span><br><span class="line"><span class="attr">      host:</span> <span class="string">localhost</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">9091</span></span><br><span class="line"><span class="attr">      max_up_speed:</span> <span class="number">10000</span></span><br><span class="line"><span class="attr">      max_down_speed:</span> <span class="number">30000</span></span><br><span class="line"><span class="attr">      username:</span> <span class="string">transmission</span></span><br><span class="line"><span class="attr">      password:</span> <span class="string">transmission</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果想只下载优惠内容可安装 nexusphp 插件</span></span><br><span class="line"><span class="comment"># https://github.com/Juszoe/flexget-nexusphp#site</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务设置</span></span><br><span class="line"><span class="attr">tasks:</span></span><br><span class="line">  <span class="comment"># 任务名称</span></span><br><span class="line"><span class="attr">  frds:</span></span><br><span class="line">    <span class="comment"># - - - - - - - - - input - - - - - - - - - - - - -</span></span><br><span class="line">    <span class="comment"># PT 站 RSS 地址，需要包含自己的 passkey</span></span><br><span class="line"><span class="attr">    rss:</span> <span class="attr">https://pt.keepfrds.com/torrentrss.php?rows=20&amp;passkey=jxxx</span></span><br><span class="line">    <span class="comment"># url 作为标记访问过的条件</span></span><br><span class="line"><span class="attr">    seen:</span></span><br><span class="line"><span class="attr">      fields:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">url</span></span><br><span class="line">    <span class="comment"># - - - - - - - - - filter - - - - - - - - - - - - -</span></span><br><span class="line">    <span class="comment"># 正则表达式过滤规则</span></span><br><span class="line"><span class="attr">    regexp:</span></span><br><span class="line"><span class="attr">      accept:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">""</span></span><br><span class="line">    <span class="comment"># - - - - - - - - - output - - - - - - - - - - - - -</span></span><br><span class="line"><span class="attr">    template:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">disklimit</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">tr</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  tju:</span></span><br><span class="line"><span class="attr">    rss:</span> <span class="attr">https://www.tjupt.org/torrentrss.php?rows=10&amp;passkey=xxx</span></span><br><span class="line"><span class="attr">    seen:</span></span><br><span class="line"><span class="attr">      fields:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">url</span></span><br><span class="line">    <span class="comment"># 接受全部输入</span></span><br><span class="line">    <span class="comment"># https://flexget.com/Plugins/accept_all</span></span><br><span class="line"><span class="attr">    accept_all:</span> <span class="literal">yes</span></span><br><span class="line"><span class="attr">    template:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">disklimit</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">qb</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 自动清理 Transmission 旧种子和数据</span></span><br><span class="line">  <span class="comment"># https://flexget.com/Cookbook/TorrentCleanup</span></span><br><span class="line"><span class="attr">  clean:</span></span><br><span class="line"><span class="attr">    from_transmission:</span></span><br><span class="line"><span class="attr">      host:</span> <span class="string">localhost</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">9091</span></span><br><span class="line"><span class="attr">      username:</span> <span class="string">transmission</span></span><br><span class="line"><span class="attr">      password:</span> <span class="string">transmission</span></span><br><span class="line"><span class="attr">    disable:</span> <span class="string">[seen,</span> <span class="string">seen_info_hash]</span></span><br><span class="line"><span class="attr">    if:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">transmission_progress</span> <span class="string">==</span> <span class="number">100</span><span class="string">:</span> <span class="string">accept</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">transmission_secondsSeeding</span> <span class="string">&lt;</span> <span class="number">86400</span><span class="string">:</span> <span class="string">reject</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">transmission_ratio</span> <span class="string">&lt;</span> <span class="number">0.5</span><span class="string">:</span> <span class="string">reject</span></span><br><span class="line"><span class="attr">    transmission:</span></span><br><span class="line"><span class="attr">      host:</span> <span class="string">localhost</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">9091</span></span><br><span class="line"><span class="attr">      username:</span> <span class="string">transmission</span></span><br><span class="line"><span class="attr">      password:</span> <span class="string">transmission</span></span><br><span class="line"><span class="attr">      action:</span> <span class="string">purge</span></span><br></pre></td></tr></table></figure>
+<h3 id="flexget-测试执行">FlexGet 测试执行</h3>
+<p>防止配置文件错误导致的错误执行，可以使用 <code>--test</code> <a href="https://flexget.com/CLI" target="_blank" rel="noopener">选项参数</a>来测试执行，通过其输出可以判断是不是想要执行的。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flexget --<span class="built_in">test</span> execute --tasks frds</span><br></pre></td></tr></table></figure>
+<p>防止 FlexGet 第一次下载时下载 rss 列表中的全部种子，对 <code>execute</code> 命令使用 <code>--learn</code> <a href="https://flexget.com/CLI/execute" target="_blank" rel="noopener">命令选项参数</a> 将当前 rss 列表的种子标记为 <code>seen</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flexget execute --learn --tasks frds</span><br></pre></td></tr></table></figure>
+<h2 id="自动清理-qbittorrent-的种子和数据">自动清理 qBittorrent 的种子和数据</h2>
+<p>FlexGet 目前还没有读取 qBittorrent 种子列表的插件，所以无法直接清理种子和下载的文件，若有此需要，可以使用 <a href="https://github.com/jerrymakesjelly/autoremove-torrents.git" target="_blank" rel="noopener"><code>autoremove-torrents</code></a> 工具来实现，具体详见其 <a href="https://autoremove-torrents.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="noopener">官方文档</a>。我使用 qBittorrent 时配置的 config 如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.config/autoremove-torrents/config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务名称</span></span><br><span class="line"><span class="attr">qbtask:</span></span><br><span class="line"><span class="attr">  client:</span> <span class="string">qbittorrent</span></span><br><span class="line"><span class="attr">  host:</span> <span class="attr">http://127.0.0.1:8080</span></span><br><span class="line">  <span class="comment"># 若在 WebUI 的设置界面勾选了「对本地主机上的客户端跳过身份验证」，可省略用户名和密码</span></span><br><span class="line"><span class="attr">  username:</span> <span class="string">admin</span></span><br><span class="line"><span class="attr">  password:</span> <span class="string">adminadmin</span></span><br><span class="line"><span class="attr">  strategies:</span></span><br><span class="line">    <span class="comment"># 删除策略名称</span></span><br><span class="line"><span class="attr">    rm_old:</span></span><br><span class="line"><span class="attr">      categories:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">rss</span></span><br><span class="line"><span class="attr">      remove:</span> <span class="string">create_time</span> <span class="string">&gt; 86400 or (seeding_time &gt; 28800 and connected_leecher &lt; 5)</span></span><br><span class="line"><span class="string"></span><span class="attr">    rm_dead:</span></span><br><span class="line"><span class="attr">      categories:</span> <span class="string">rss</span></span><br><span class="line"><span class="attr">      remove:</span> <span class="string">create_time</span> <span class="string">&gt; 1000 and average_downloadspeed &lt; 5</span></span><br><span class="line"><span class="string"></span><span class="attr">    rm_stalled:</span></span><br><span class="line"><span class="attr">      categories:</span> <span class="string">rss</span></span><br><span class="line"><span class="attr">      status:</span> <span class="string">StalledDownload</span></span><br><span class="line"><span class="attr">      remove:</span> <span class="string">progress</span> <span class="string">&lt;</span> <span class="number">3</span></span><br><span class="line"><span class="attr">  delete_data:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>在该配置文件所在目录执行 <code>autoremove-torrents --view</code> 可以测试执行而不真正删除种子及数据。</p>
+<h2 id="定时执行任务">定时执行任务</h2>
+<p>运行 <code>flexget execute --task frds</code> 即立刻执行一次 <code>frds</code> 任务，要实现定时自动执行相关任务，可使用 <code>cron</code> 来实现。</p>
+<p>运行 <code>crontab -e</code> 来编辑 crontab 实现 <a href="https://flexget.com/InstallWizard/Partial/Crontab" target="_blank" rel="noopener">定时执行任务</a>，我编辑的内容如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开机自启 qBittorrent</span></span><br><span class="line">@reboot /usr/bin/qbittorrent-nox -d</span><br><span class="line"><span class="comment"># 每半小时执行一次 autoremove-torrents 工具，--conf 指定文件 --log 指定保存 log 文件夹</span></span><br><span class="line">*/30  *  *  *  *  /home/ubuntu/.<span class="built_in">local</span>/bin/autoremove-torrents --conf=/home/ubuntu/.config/autoremove-torrents/config.yml --<span class="built_in">log</span>=/home/ubuntu/.config/autoremove-torrents</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每十分钟执行一次 clean 和 frds 任务</span></span><br><span class="line">*/10  *  *  *  *  /home/ubuntu/.<span class="built_in">local</span>/bin/flexget --cron execute --tasks clean frds</span><br></pre></td></tr></table></figure>
+<hr>
+<p>关于 FlexGet 更多详细用法可见 <a href="https://flexget.com/Cookbook" target="_blank" rel="noopener">官方 Cookbook</a>。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Practice/" rel="tag"># Practice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/naive-bayes/" rel="next" title="Naive Bayes Review">
+                <i class="fa fa-chevron-left"></i> Naive Bayes Review
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/iptables/" rel="prev" title="使用 iptables 设置防火墙">
+                使用 iptables 设置防火墙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Deng">
+            
+              <p class="site-author-name" itemprop="name">Deng</p>
+              <div class="site-description motion-element" itemprop="description">Don't be evil.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">261</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/csJd" title="GitHub &rarr; https://github.com/csJd" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:scutjd@gmail.com" title="E-Mail &rarr; mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前置软件包安装"><span class="nav-text">前置软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-pt-下载客户端"><span class="nav-text">安装 PT 下载客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#transmisson"><span class="nav-text">Transmisson</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qbittorrent"><span class="nav-text">qBittorrent</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flexget-设置"><span class="nav-text">FlexGet 设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flexget-安装"><span class="nav-text">FlexGet 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flexget-配置"><span class="nav-text">FlexGet 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flexget-测试执行"><span class="nav-text">FlexGet 测试执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动清理-qbittorrent-的种子和数据"><span class="nav-text">自动清理 qBittorrent 的种子和数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时执行任务"><span class="nav-text">定时执行任务</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
