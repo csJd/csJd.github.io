@@ -1,23 +1,337 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 在坐标系中有n条平行于y轴的线段 当一条线段与另一条线段之间可以连一条平行与x轴的线不与其它线段相交 就视为它们是可见的 问有多少组三条线段两两相互可见 先把所有线段存下来 并按x坐标排序 线段树记录对应区间从右往左当前可见的线段编号(1…n) 超过一条就为0 然后从左往右对每条线段 先查询左边哪些线段和它是可见的 把可见关系存到数组中 然后把这条线段对应区间的最右端可见编号更新为这条线段的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 1436 Horizontally Visible Segments (线段树·区间染色)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/ds/POJ%201436%20Horizontally%20Visible%20Segments%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9F%93%E8%89%B2)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 在坐标系中有n条平行于y轴的线段 当一条线段与另一条线段之间可以连一条平行与x轴的线不与其它线段相交 就视为它们是可见的 问有多少组三条线段两两相互可见 先把所有线段存下来 并按x坐标排序 线段树记录对应区间从右往左当前可见的线段编号(1…n) 超过一条就为0 然后从左往右对每条线段 先查询左边哪些线段和它是可见的 把可见关系存到数组中 然后把这条线段对应区间的最右端可见编号更新为这条线段的">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-07-15T15:58:17.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.297Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/ds/POJ%201436%20Horizontally%20Visible%20Segments%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9F%93%E8%89%B2)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/ds/POJ%201436%20Horizontally%20Visible%20Segments%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9F%93%E8%89%B2)/","path":"posts/oj/ds/POJ 1436 Horizontally Visible Segments (线段树·区间染色)/","title":"POJ 1436 Horizontally Visible Segments (线段树·区间染色)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>POJ 1436 Horizontally Visible Segments (线段树·区间染色) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/POJ%201436%20Horizontally%20Visible%20Segments%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9F%93%E8%89%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="POJ 1436 Horizontally Visible Segments (线段树·区间染色) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          POJ 1436 Horizontally Visible Segments (线段树·区间染色)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-15 15:58:17" itemprop="dateCreated datePublished" datetime="2015-07-15T15:58:17+00:00">2015-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 在坐标系中有n条平行于y轴的线段 当一条线段与另一条线段之间可以连一条平行与x轴的线不与其它线段相交 就视为它们是可见的 问有多少组三条线段两两相互可见</p>
+<p>先把所有线段存下来 并按x坐标排序 线段树记录对应区间从右往左当前可见的线段编号(1…n) 超过一条就为0 然后从左往右对每条线段 先查询左边哪些线段和它是可见的 把可见关系存到数组中 然后把这条线段对应区间的最右端可见编号更新为这条线段的编号 最后暴力统计有多少组就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#define lc p&lt;&lt;<span class="number">1</span>, s, mid</span><br><span class="line">#define rc p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, e</span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">8005</span>;</span><br><span class="line">int top[N * <span class="number">8</span>];</span><br><span class="line">bool g[N][N];</span><br><span class="line"></span><br><span class="line">struct seg</span><br><span class="line">&#123;</span><br><span class="line">    int y1, y2, x;</span><br><span class="line">&#125; line[N];</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">cmp</span>(<span class="params">seg a, seg b</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a.<span class="property">x</span> &lt; b.<span class="property">x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(g, <span class="number">0</span>, <span class="title function_">sizeof</span>(g));</span><br><span class="line">    <span class="title function_">memset</span>(top, <span class="number">0</span>, <span class="title function_">sizeof</span>(top));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    top[p] = (top[p &lt;&lt; <span class="number">1</span>] == top[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]) ? top[p &lt;&lt; <span class="number">1</span>] : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushdown</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top[p])</span><br><span class="line">    &#123;</span><br><span class="line">        top[p &lt;&lt; <span class="number">1</span>] = top[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] = top[p];</span><br><span class="line">        top[p] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int l, int r, int v</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        top[p] = v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pushdown</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) <span class="title function_">update</span>(lc, l, r, v);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) <span class="title function_">update</span>(rc, l, r, v);</span><br><span class="line">    <span class="title function_">pushup</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">query</span>(<span class="params">int p, int s, int e, int l, int r, int x</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top[p]) <span class="comment">//p对应的区间已经只可见一条线段</span></span><br><span class="line">    &#123;</span><br><span class="line">        g[top[p]][x] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(s == e) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) <span class="title function_">query</span>(lc, l, r, x);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) <span class="title function_">query</span>(rc, l, r, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n, l, r;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;line[i].<span class="property">y1</span>, &amp;line[i].<span class="property">y2</span>, &amp;line[i].<span class="property">x</span>);</span><br><span class="line">        <span class="title function_">sort</span>(line + <span class="number">1</span>, line + n + <span class="number">1</span>, cmp);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">build</span>();</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//点化为区间会丢失间隔为1的区间  所以要乘以2</span></span><br><span class="line">            l = (line[i].<span class="property">y1</span>) * <span class="number">2</span>;</span><br><span class="line">            r = (line[i].<span class="property">y2</span>) * <span class="number">2</span>;</span><br><span class="line">            <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">0</span>, N * <span class="number">2</span>, l, r, i);</span><br><span class="line">            <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">0</span>, N * <span class="number">2</span>, l, r, i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int j = i + <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(g[i][j])</span><br><span class="line">                    <span class="keyword">for</span>(int k = j + <span class="number">1</span>; k &lt;= n; ++k)</span><br><span class="line">                        <span class="keyword">if</span>(g[j][k] &amp;&amp; g[i][k]) ++ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-07-15 15:33</span></span><br></pre></td></tr></table></figure>
+
+<p>Horizontally Visible Segments</p>
+<p>Description<br>There is a number of disjoint vertical line segments in the plane. We say that two segments are horizontally visible if they can be connected by a horizontal line segment that does not have any common points with other vertical segments. Three different vertical segments are said to form a triangle of segments if each two of them are horizontally visible. How many triangles can be found in a given set of vertical segments?<br>Task<br>Write a program which for each data set:<br>reads the description of a set of vertical segments,<br>computes the number of triangles in this set,<br>writes the result.</p>
+<p>Input</p>
+<p>The first line of the input contains exactly one positive integer d equal to the number of data sets, 1 &lt;&#x3D; d &lt;&#x3D; 20. The data sets follow.<br>The first line of each data set contains exactly one integer n, 1 &lt;&#x3D; n &lt;&#x3D; 8 000, equal to the number of vertical line segments.<br>Each of the following n lines consists of exactly 3 nonnegative integers separated by single spaces:<br>yi’, yi’’, xi - y-coordinate of the beginning of a segment, y-coordinate of its end and its x-coordinate, respectively. The coordinates satisfy 0 &lt;&#x3D; yi’ &lt; yi’’ &lt;&#x3D; 8 000, 0 &lt;&#x3D; xi &lt;&#x3D; 8 000. The segments are disjoint.</p>
+<p>Output</p>
+<p>The output should consist of exactly d lines, one line for each data set. Line i should contain exactly one integer equal to the number of triangles in the i-th data set.</p>
+<p>Sample Input</p>
+<p>1 5 0 4 4 0 3 1 3 4 2 0 2 2 0 2 3</p>
+<p>Sample Output</p>
+<p>1</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=Central+Europe+2001">Central Europe 2001</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/POJ%202886%20Who%20Gets%20the%20Most%20Candies?(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF)/" rel="prev" title="POJ 2886 Who Gets the Most Candies?(线段树·约瑟夫环)">
+                  <i class="fa fa-chevron-left"></i> POJ 2886 Who Gets the Most Candies?(线段树·约瑟夫环)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/dp/HDU%202089%20%E4%B8%8D%E8%A6%8162(%E6%95%B0%E4%BD%8DDP%C2%B7%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2)/" rel="next" title="HDU 2089 不要62(数位DP·记忆化搜索)">
+                  HDU 2089 不要62(数位DP·记忆化搜索) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

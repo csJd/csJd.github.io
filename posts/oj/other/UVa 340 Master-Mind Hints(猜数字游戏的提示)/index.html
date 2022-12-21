@@ -1,23 +1,343 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 猜数字游戏 统计猜的数字有多少个数字位置正确 有多少个数字在答案中出现但是位置不正确 每个字符只能匹配一次 直接匹配每位数 1234567891011121314151617181920212223242526272829303132333435#include&lt;cstdio&gt;  #include&lt;algorithm&gt;  #include&lt;map&gt;  us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 340 Master-Mind Hints(猜数字游戏的提示)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/other/UVa%20340%20Master-Mind%20Hints(%E7%8C%9C%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F%E7%9A%84%E6%8F%90%E7%A4%BA)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 猜数字游戏 统计猜的数字有多少个数字位置正确 有多少个数字在答案中出现但是位置不正确 每个字符只能匹配一次 直接匹配每位数 1234567891011121314151617181920212223242526272829303132333435#include&lt;cstdio&gt;  #include&lt;algorithm&gt;  #include&lt;map&gt;  us">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-3-340img1.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-3-340img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-3-340img3.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-3-340img4.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-3-340img5.gif.png">
+<meta property="article:published_time" content="2014-08-31T09:20:01.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.305Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.deng.cf/images/dge.org-external-3-340img1.gif.png">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/other/UVa%20340%20Master-Mind%20Hints(%E7%8C%9C%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F%E7%9A%84%E6%8F%90%E7%A4%BA)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/other/UVa%20340%20Master-Mind%20Hints(%E7%8C%9C%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F%E7%9A%84%E6%8F%90%E7%A4%BA)/","path":"posts/oj/other/UVa 340 Master-Mind Hints(猜数字游戏的提示)/","title":"UVa 340 Master-Mind Hints(猜数字游戏的提示)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVa 340 Master-Mind Hints(猜数字游戏的提示) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-text">Sample Output</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/UVa%20340%20Master-Mind%20Hints(%E7%8C%9C%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F%E7%9A%84%E6%8F%90%E7%A4%BA)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVa 340 Master-Mind Hints(猜数字游戏的提示) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVa 340 Master-Mind Hints(猜数字游戏的提示)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-31 09:20:01" itemprop="dateCreated datePublished" datetime="2014-08-31T09:20:01+00:00">2014-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 猜数字游戏 统计猜的数字有多少个数字位置正确 有多少个数字在答案中出现但是位置不正确 每个字符只能匹配一次</p>
+<p>直接匹配每位数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;algorithm&gt;  </span><br><span class="line">#include&lt;map&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;  </span><br><span class="line">int  a[N], b[N], c, d;  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    int n, cas = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;n), n)  </span><br><span class="line">    &#123;  </span><br><span class="line">        map&lt;int, int&gt; aa;  </span><br><span class="line">        printf (<span class="string">&quot;Game %d:\n&quot;</span>, ++cas);  </span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; ++i)  </span><br><span class="line">        &#123;  </span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;a[i]);  </span><br><span class="line">            ++aa[a[i]];  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>)  </span><br><span class="line">        &#123;  </span><br><span class="line">            map&lt;int, int&gt; bb;  </span><br><span class="line">            <span class="keyword">for</span> (int i = c = d = <span class="number">0</span>; i &lt; n; ++i)  </span><br><span class="line">            &#123;  </span><br><span class="line">                scanf (<span class="string">&quot;%d&quot;</span>, &amp;b[i]);  </span><br><span class="line">                ++bb[b[i]];  </span><br><span class="line">                <span class="keyword">if</span> (a[i] == b[i]) c++;  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (!b[<span class="number">0</span>]) <span class="keyword">break</span>;  </span><br><span class="line">            <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i)  </span><br><span class="line">                d += min (aa[i], bb[i]);  </span><br><span class="line">            printf (<span class="string">&quot;    (%d,%d)\n&quot;</span>, c, d - c);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p>MasterMind is a game for two players. One of them, <em>Designer</em>, selects a secret code. The other,<em>Breaker</em>, tries to break it. A code is no more than a row of colored dots. At the beginning of a game, the players agree upon the length <em>N</em> that a code must have and upon the colors that may occur in a code.</p>
+<p>In order to break the code, Breaker makes a number of guesses, each guess itself being a code. After each guess Designer gives a hint, stating to what extent the guess matches his secret code.</p>
+<p>In this problem you will be given a secret code <img src="/../images/dge.org-external-3-340img1.gif.png" alt="tex2html_wrap_inline35"> and a guess <img src="/../images/dge.org-external-3-340img2.gif.png" alt="tex2html_wrap_inline37"> , and are to determine the hint. A hint consists of a pair of numbers determined as follows.</p>
+<p>A <em>match</em> is a pair (<em>i</em>,<em>j</em>), <img src="/../images/dge.org-external-3-340img3.gif.png" alt="tex2html_wrap_inline41"> and <img src="/../images/dge.org-external-3-340img4.gif.png" alt="tex2html_wrap_inline43"> , such that <img src="/../images/dge.org-external-3-340img5.gif.png" alt="tex2html_wrap_inline45"> . Match (<em>i</em>,<em>j</em>) is called <em>strong</em>when <em>i</em> &#x3D; <em>j</em>, and is called <em>weak</em> otherwise. Two matches (<em>i</em>,<em>j</em>) and (<em>p</em>,<em>q</em>) are called <em>independent</em> when<em>i</em> &#x3D; <em>p</em> if and only if <em>j</em> &#x3D; <em>q</em>. A set of matches is called <em>independent</em> when all of its members are pairwise independent.</p>
+<p>Designer chooses an independent set <em>M</em> of matches for which the total number of matches and the number of strong matches are both maximal. The hint then consists of the number of strong followed by the number of weak matches in <em>M</em>. Note that these numbers are uniquely determined by the secret code and the guess. If the hint turns out to be (<em>n</em>,0), then the guess is identical to the secret code.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The input will consist of data for a number of games. The input for each game begins with an integer specifying <em>N</em> (the length of the code). Following these will be the secret code, represented as <em>N</em> integers, which we will limit to the range 1 to 9. There will then follow an arbitrary number of guesses, each also represented as <em>N</em> integers, each in the range 1 to 9. Following the last guess in each game will be <em>N</em> zeroes; these zeroes are not to be considered as a guess.</p>
+<p>Following the data for the first game will appear data for the second game (if any) beginning with a new value for <em>N</em>. The last game in the input will be followed by a single zero (when a value for<em>N</em> would normally be specified). The maximum value for <em>N</em> will be 1000.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>The output for each game should list the hints that would be generated for each guess, in order, one hint per line. Each hint should be represented as a pair of integers enclosed in parentheses and separated by a comma. The entire list of hints for each game should be prefixed by a heading indicating the game number; games are numbered sequentially starting with 1. Look at the samples below for the <em>exact</em> format.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>4 1 3 5 5 1 1 2 3 4 3 3 5 6 5 5 1 6 1 3 5 1 3 5 5 0 0 0 0 10 1 2 2 2 4 5 6 6 6 9 1 2 3 4 5 6 7 8 9 1 1 1 2 2 3 3 4 4 5 5 1 2 1 3 1 5 1 6 1 9 1 2 2 5 5 5 6 6 6 7 0 0 0 0 0 0 0 0 0 0 0</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>Game 1: (1,1) (2,0) (1,2) (1,2) (4,0) Game 2: (2,4) (3,2) (5,0) (7,0)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/string/UVa%201584%20Circular%20Sequence(%E7%8E%AF%E5%BD%A2%E4%B8%B2%E6%9C%80%E5%B0%8F%E5%AD%97%E5%85%B8%E5%BA%8F)/" rel="prev" title="UVa 1584 Circular Sequence(环形串最小字典序)">
+                  <i class="fa fa-chevron-left"></i> UVa 1584 Circular Sequence(环形串最小字典序)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/other/ZOJ%203804%20YY's%20Minions(%E6%A8%A1%E6%8B%9F)/" rel="next" title="ZOJ 3804 YY's Minions(模拟)">
+                  ZOJ 3804 YY's Minions(模拟) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

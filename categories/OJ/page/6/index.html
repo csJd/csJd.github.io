@@ -1,38 +1,845 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post-collapse.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ __('title.category') }}: {{ page.category }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block content %}
+<link rel="stylesheet" href="/css/main.css">
 
-  {######################}
-  {### CATEGORY BLOCK ###}
-  {######################}
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <{% if theme.seo %}h2{% else %}h1{% endif %}>{#
-        #}{{ page.category }}{#
-        #}<small>{{ __('title.category') }}</small>
-        </{% if theme.seo %}h2{% else %}h1{% endif %}>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Don&#39;t be evil.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="dd&#39;s site \#">
+<meta property="og:url" content="http://blog.deng.cf/categories/OJ/page/6/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="Don&#39;t be evil.">
+<meta property="og:locale">
+<meta property="article:author" content="Deng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/categories/OJ/page/6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"default","comments":"","permalink":"","path":"categories/OJ/page/6/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Category: OJ | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
       </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
-      {% for post in page.posts %}
-        {{ post_template.render(post) }}
-      {% endfor %}
+        </div>
+      </div>
     </div>
 
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner category posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h1 class="collection-header">OJ
+          <small>Category</small>
+        </h1>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2014</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:57+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/HDU%201081%20To%20The%20Max(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1081 To The Max(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:55+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201078%20FatMouse%20and%20Cheese(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1078 FatMouse and Cheese(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:53+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201160%20FatMouse's%20Speed(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1160 FatMouse's Speed(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:51+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201114%20Piggy-Bank(%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%20DP)/" itemprop="url">
+            <span itemprop="name">HDU 1114 Piggy-Bank(完全背包 DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:49+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ%201692%20Crossed%20Matchings(DP)/" itemprop="url">
+            <span itemprop="name">POJ 1692 Crossed Matchings(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:47+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201789%20Doing%20Homework%20again%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 1789 Doing Homework again（贪心）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:45+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/POJ%203282%20Ferry%20Loading%20IV(%E6%A8%A1%E6%8B%9F,%E9%98%9F%E5%88%97)/" itemprop="url">
+            <span itemprop="name">POJ 3282 Ferry Loading IV(模拟,队列)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:43+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/POJ%203087%20Shuffle'm%20Up%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/" itemprop="url">
+            <span itemprop="name">POJ 3087 Shuffle'm Up（模拟）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:41+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/POJ%203481%20Double%20Queue(STL)/" itemprop="url">
+            <span itemprop="name">POJ 3481 Double Queue(STL)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:39+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/search/POJ%201856%20Sea%20Battle(DFS)/" itemprop="url">
+            <span itemprop="name">POJ 1856 Sea Battle(DFS)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:36+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ%201205%20Water%20Treatment%20Plants(%E9%80%92%E6%8E%A8)/" itemprop="url">
+            <span itemprop="name">POJ 1205 Water Treatment Plants(递推)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:34+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201978%20How%20many%20ways(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1978 How many ways(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:32+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/POJ%203461%20Oulipo%20(KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%C2%B7%E7%BB%9F%E8%AE%A1p%E5%9C%A8s%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0)/" itemprop="url">
+            <span itemprop="name">POJ 3461 Oulipo (KMP字符串匹配·统计p在s中出现次数)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:30+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201058%20Humble%20Numbers%EF%BC%88DP,%E6%95%B0%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 1058 Humble Numbers（DP,数）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:28+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202845%20Beans(DP,%E6%9C%80%E5%A4%A7%E4%B8%8D%E8%BF%9E%E7%BB%AD%E5%92%8C)/" itemprop="url">
+            <span itemprop="name">HDU 2845 Beans(DP,最大不连续和)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:26+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202844%20Coins%20(%E7%BB%84%E5%90%88%E8%83%8C%E5%8C%85)/" itemprop="url">
+            <span itemprop="name">HDU 2844 Coins (组合背包)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:24+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201421%20%E6%90%AC%E5%AF%9D%E5%AE%A4(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1421 搬寝室(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:22+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202870%20Largest%20Submatrix(DP)/" itemprop="url">
+            <span itemprop="name">HDU 2870 Largest Submatrix(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:20+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202830%20Matrix%20Swapping%20II%20%EF%BC%88DP,%E6%9C%80%E5%A4%A7%E5%85%A81%E7%9F%A9%E9%98%B5%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 2830 Matrix Swapping II （DP,最大全1矩阵）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:18+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201069%20Monkey%20and%20Banana(DP%20%E9%95%BF%E6%96%B9%E4%BD%93%E5%A0%86%E6%94%BE%E9%97%AE%E9%A2%98)/" itemprop="url">
+            <span itemprop="name">HDU 1069 Monkey and Banana(DP 长方体堆放问题)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:16+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201171%20Big%20Event%20in%20HDU%EF%BC%88%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 1171 Big Event in HDU（多重背包）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:13+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202159%20FATE%EF%BC%88%E4%BA%8C%E7%BB%B4%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 2159 FATE（二维完全背包）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:11+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/HDU%202577%20How%20to%20Type(%E6%A8%A1%E6%8B%9F)/" itemprop="url">
+            <span itemprop="name">HDU 2577 How to Type(模拟)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:09+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%201087%20Super%20Jumping!%20Jumping!%20Jumping!(DP)/" itemprop="url">
+            <span itemprop="name">HDU 1087 Super Jumping! Jumping! Jumping!(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:07+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%202602%20Bone%20Collector%EF%BC%8801%E8%83%8C%E5%8C%85%EF%BC%89/" itemprop="url">
+            <span itemprop="name">HDU 2602 Bone Collector（01背包）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:05+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ%203356%20AGTC%EF%BC%88%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/" itemprop="url">
+            <span itemprop="name">POJ 3356 AGTC（最长公共子序列）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:03+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ%203934%20Queue(DP)/" itemprop="url">
+            <span itemprop="name">POJ 3934 Queue(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:51:01+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/math/POJ%203993%20Not%20So%20Flat%20After%20All(%E8%B4%A8%E5%9B%A0%E6%95%B0)/" itemprop="url">
+            <span itemprop="name">POJ 3993 Not So Flat After All(质因数)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:59+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/POJ%203080%20Blue%20Jeans(KMP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2)/" itemprop="url">
+            <span itemprop="name">POJ 3080 Blue Jeans(KMP 最长公共子串)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:57+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/UVa%20679%20Dropping%20Balls/" itemprop="url">
+            <span itemprop="name">UVa 679 Dropping Balls</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+    </div>
   </div>
-  {##########################}
-  {### END CATEGORY BLOCK ###}
-  {##########################}
+  
+  
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/categories/OJ/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/OJ/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/OJ/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/categories/OJ/page/7/">7</a><a class="page-number" href="/categories/OJ/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/categories/OJ/page/7/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
-  {% include '_partials/pagination.swig' %}
+</div>
+  </main>
 
-{% endblock %}
+  <footer class="footer">
+    <div class="footer-inner">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

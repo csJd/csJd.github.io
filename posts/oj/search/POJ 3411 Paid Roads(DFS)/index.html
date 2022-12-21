@@ -1,23 +1,339 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 你要从第1个城市到第N个城市去 有m条路 每条路用a, b, c, p, r 表示 你从第a个城市到第b个城市时 若之前经过或现在位于第c个城市 过路费就是p元 否则就是r元 求你到达第N个城市最少用多少过路费 由于最多只有10个城市 10条路 这个题就变得很简单了 直接暴力dfs就行 可以用状态压缩来存储已经走过了哪些城市 由于最多只有10条路 从某个城市出发要一条 回这个城市也要一条 所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ 3411 Paid Roads(DFS)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/search/POJ%203411%20Paid%20Roads(DFS)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 你要从第1个城市到第N个城市去 有m条路 每条路用a, b, c, p, r 表示 你从第a个城市到第b个城市时 若之前经过或现在位于第c个城市 过路费就是p元 否则就是r元 求你到达第N个城市最少用多少过路费 由于最多只有10个城市 10条路 这个题就变得很简单了 直接暴力dfs就行 可以用状态压缩来存储已经走过了哪些城市 由于最多只有10条路 从某个城市出发要一条 回这个城市也要一条 所">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-08-03T16:04:47.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.305Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/search/POJ%203411%20Paid%20Roads(DFS)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/search/POJ%203411%20Paid%20Roads(DFS)/","path":"posts/oj/search/POJ 3411 Paid Roads(DFS)/","title":"POJ 3411 Paid Roads(DFS)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>POJ 3411 Paid Roads(DFS) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/POJ%203411%20Paid%20Roads(DFS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="POJ 3411 Paid Roads(DFS) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          POJ 3411 Paid Roads(DFS)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-08-03 16:04:47" itemprop="dateCreated datePublished" datetime="2015-08-03T16:04:47+00:00">2015-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 你要从第1个城市到第N个城市去 有m条路 每条路用a, b, c, p, r 表示 你从第a个城市到第b个城市时 若之前经过或现在位于第c个城市 过路费就是p元 否则就是r元 求你到达第N个城市最少用多少过路费</p>
+<p>由于最多只有10个城市 10条路 这个题就变得很简单了 直接暴力dfs就行 可以用状态压缩来存储已经走过了哪些城市 由于最多只有10条路 从某个城市出发要一条 回这个城市也要一条 所以一个城市最多经过5次 这个可以作为dfs的结束条件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">11</span>, <span class="variable constant_">INF</span> = <span class="number">2333333</span>;</span><br><span class="line">int n, m, ans, vis[N];</span><br><span class="line">struct road&#123;</span><br><span class="line">    int a, b, c, p, r;</span><br><span class="line">&#125; rd[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">//当前所在城市, 到过哪些城市, 当前已经用了多少过路费</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dfs</span>(<span class="params">int p, int s, int v</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(vis[p] &gt; <span class="number">5</span>) <span class="keyword">return</span>;</span><br><span class="line">    s = s | <span class="number">1</span> &lt;&lt; (p - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(p == n)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = <span class="title function_">min</span>(ans, v);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(rd[i].<span class="property">a</span> != p) <span class="keyword">continue</span>;</span><br><span class="line">        ++vis[rd[i].<span class="property">b</span>];</span><br><span class="line">        <span class="keyword">if</span>(s &amp; <span class="number">1</span> &lt;&lt; (rd[i].<span class="property">c</span> - <span class="number">1</span>)) <span class="comment">//到过城市c</span></span><br><span class="line">            <span class="title function_">dfs</span>(rd[i].<span class="property">b</span>, s, v + rd[i].<span class="property">p</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">dfs</span>(rd[i].<span class="property">b</span>, s, v + rd[i].<span class="property">r</span>);</span><br><span class="line">        --vis[rd[i].<span class="property">b</span>]; <span class="comment">//回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d%d%d&quot;</span>, &amp;rd[i].<span class="property">a</span>, &amp;rd[i].<span class="property">b</span>, &amp;rd[i].<span class="property">c</span>, &amp;rd[i].<span class="property">p</span>, &amp;rd[i].<span class="property">r</span>);</span><br><span class="line"></span><br><span class="line">        ans = <span class="variable constant_">INF</span>;</span><br><span class="line">        <span class="title function_">memset</span>(vis, <span class="number">0</span>, <span class="title function_">sizeof</span>(vis));</span><br><span class="line">        <span class="title function_">dfs</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(ans == <span class="variable constant_">INF</span>) <span class="title function_">puts</span>(<span class="string">&quot;impossible&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> Paid Roads</p>
+<p>Description</p>
+<p>A network of <strong>m</strong> roads connects <strong>N</strong> cities (numbered from 1 to <strong>N</strong>). There may be more than one road connecting one city with another. Some of the roads are paid. There are two ways to pay for travel on a paid road <strong>i</strong> from city <strong>ai</strong> to city <strong>bi</strong>:</p>
+<p>The payment is <strong>Pi</strong> in the first case and <strong>Ri</strong> in the second case.</p>
+<p>Write a program to find a minimal-cost route from the city 1 to the city <strong>N</strong>.</p>
+<p>Input</p>
+<p>The first line of the input contains the values of <strong>N</strong> and <strong>m</strong>. Each of the following <strong>m</strong> lines describes one road by specifying the values of <strong>ai</strong>, <strong>bi</strong>, <strong>ci</strong>, <strong>Pi</strong>, <strong>Ri</strong> (1 ≤ <strong>i</strong>≤ <strong>m</strong>). Adjacent values on the same line are separated by one or more spaces. All values are integers, 1 ≤ <strong>m, N</strong> ≤ 10, 0 ≤ <strong>Pi</strong> , <strong>Ri</strong> ≤ 100, <strong>P</strong>i ≤ <strong>Ri</strong> (1 ≤ <strong>i</strong>≤ <strong>m</strong>).</p>
+<p>Output</p>
+<p>The first and only line of the file must contain the minimal possible cost of a trip from the city 1 to the city <strong>N</strong>. If the trip is not possible for any reason, the line must contain the word ‘<strong>impossible</strong>’.</p>
+<p>Sample Input</p>
+<p>4 5 1 2 1 10 10 2 3 1 30 50 3 4 3 80 80 2 1 2 10 10 1 3 2 10 50</p>
+<p>Sample Output</p>
+<p>110</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=Northeastern+Europe+2002">Northeastern Europe 2002</a>, Western Subregion</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/ZOJ%203447%20Doraemon's%20Number%20Game(Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%C2%B7BigInteger)/" rel="prev" title="ZOJ 3447 Doraemon's Number Game(Java优先队列·BigInteger)">
+                  <i class="fa fa-chevron-left"></i> ZOJ 3447 Doraemon's Number Game(Java优先队列·BigInteger)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/search/POJ%201167%20(DFS%C2%B7%E5%89%AA%E6%9E%9D%C2%B7%E5%85%AC%E4%BA%A4%E6%97%B6%E5%88%BB%E8%A1%A8)/" rel="next" title="POJ 1167 (DFS·剪枝·公交时刻表)">
+                  POJ 1167 (DFS·剪枝·公交时刻表) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

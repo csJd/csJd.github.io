@@ -1,23 +1,335 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="将 Blog 成功搭到 Github 后就要考虑一些配置问题了，需要更加美观的主题，换了电脑或者重装系统后还需要快速的从以前的配置恢复，下面就解决这些问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的 Hexo 使用实践（二）">
+<meta property="og:url" content="http://blog.deng.cf/posts/my-practice-with-hexo-2/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="将 Blog 成功搭到 Github 后就要考虑一些配置问题了，需要更加美观的主题，换了电脑或者重装系统后还需要快速的从以前的配置恢复，下面就解决这些问题。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-02-26T13:36:10.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.293Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Practice">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/my-practice-with-hexo-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/my-practice-with-hexo-2/","path":"posts/my-practice-with-hexo-2/","title":"我的 Hexo 使用实践（二）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>我的 Hexo 使用实践（二） | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-text">一. 设置主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD-NexT"><span class="nav-text">1. 下载 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-NexT"><span class="nav-text">2. 使用 NexT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E5%90%8C%E6%AD%A5"><span class="nav-text">二. 配置信息同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BB%BA%E7%AB%8B-hexo-%E5%88%86%E6%94%AF"><span class="nav-text">1. 建立 hexo 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%81%A2%E5%A4%8D%E9%85%8D%E7%BD%AE"><span class="nav-text">2. 恢复配置</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/my-practice-with-hexo-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="我的 Hexo 使用实践（二） | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我的 Hexo 使用实践（二）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-26 13:36:10" itemprop="dateCreated datePublished" datetime="2017-02-26T13:36:10+00:00">2017-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>将 Blog 成功搭到 Github 后就要考虑一些配置问题了，需要更加美观的主题，换了电脑或者重装系统后还需要快速的从以前的配置恢复，下面就解决这些问题。</p>
+<span id="more"></span>
+
+<h2 id="一-设置主题"><a href="#一-设置主题" class="headerlink" title="一. 设置主题"></a>一. 设置<a target="_blank" rel="noopener" href="https://hexo.io/themes/">主题</a></h2><p>Hexo 官网就提供了很多<a target="_blank" rel="noopener" href="https://hexo.io/themes/">主题</a>，我是用的是<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/">NexT 主题</a>，简单大方且不失美观，以下以 NexT 主题为例，其余主题也类似。</p>
+<h3 id="1-下载-NexT"><a href="#1-下载-NexT" class="headerlink" title="1. 下载 NexT"></a>1. 下载 NexT</h3><p>推荐使用<a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/releases">最新稳定版本</a>,下载后解压到你的站点目录下的 <code>themes</code> 目录下，并将 解压后的文件夹名称（hexo-theme-next-5.0.1）更改为  next。</p>
+<h3 id="2-使用-NexT"><a href="#2-使用-NexT" class="headerlink" title="2. 使用 NexT"></a>2. 使用 NexT</h3><p>下载并重命名后将站点配置文件（站点目录下的 <strong>_config.yml</strong> 文件）中的 theme 属性修改为 next，再次执行 <code>hexo g -d</code>，Blog 就应用新主题了。<br>在站点目录下的 <code>themes\next</code> 目录下也有 <strong>_config.yml</strong> 文件，是 NexT 主题的主题配置文件，关于其详细配置和问题可参考<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html#theme-settings">官方文档</a>和官方 <a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2">Github Wiki</a>。</p>
+<h2 id="二-配置信息同步"><a href="#二-配置信息同步" class="headerlink" title="二. 配置信息同步"></a>二. 配置信息同步</h2><p>可以发现，<code>hexo d</code> 只将站点显示所需文件 push 到了 github master 分支，markdown 源文件以及 hexo 配置文件等都只在本地，我们在系统重装或者换电脑后再次搭建就失去了原来的配置以及源文件。要想多端同步和重装后快速恢复，比较好的解决方法就是将这些源文件和配置文件也上传到 Github Repo，刚好 <code>hexo g</code> 已经提供了 <strong>.gitignore</strong> 文件，就是用于我们把整个站点 push 到 GitHub 上去的。</p>
+<h3 id="1-建立-hexo-分支"><a href="#1-建立-hexo-分支" class="headerlink" title="1. 建立 hexo 分支"></a>1. 建立 hexo 分支</h3><p>由于 GitHub 上 master 分支管理的是站点显示文件，这是由 <code>hexo d</code> 命令来部署的，我们需要再建一个 hexo 分支来管理 Hexo 的配置文件和站点源文件，我们手动管理这个分支。<br>执行以下命令就完成了新分支的创建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git branch hexo     <span class="comment">#本地新建hexo分支</span></span><br><span class="line">git checkout hexo   <span class="comment">#切换到hexo</span></span><br><span class="line">git add .           <span class="comment">#添加站点文件到git</span></span><br><span class="line">git commit -m <span class="string">&quot;add hexo branch&quot;</span>     <span class="comment">#提交修改</span></span><br><span class="line">git push origin hexo    <span class="comment">#push本地更改到GitHub Repo</span></span><br></pre></td></tr></table></figure>
+<p>此时在 Github 上就看到了新的分支 hexo，在 Github 上修改 Default branch 为 hexo 分支，这样我们以后的手动 push 默认就是 hexo 分支了，正是我们所想要的。<br>类似的，还可以建立 res 分支存放图片等资源文件，这样就不用把这些文件放 <code>source</code> 文件夹中了，clone 的内容也更少了。像上篇文章的图片地址为 <a target="_blank" rel="noopener" href="https://github.com/csJd/csJd.github.io/raw/res/My-Practice-with-Hexo.png">https://github.com/csJd/csJd.github.io/raw/res/My-Practice-with-Hexo.png</a>，此图片就放在 res 分支下。</p>
+<h3 id="2-恢复配置"><a href="#2-恢复配置" class="headerlink" title="2. 恢复配置"></a>2. 恢复配置</h3><p>以后在新的 PC 获重装系统后要编辑博客时只用安装 git 和 node.js，然后 clone 你的 Github Repo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:csJd/csJd.github.io.git</span><br></pre></td></tr></table></figure>
+<p>进入站点文件夹（<em>yourGithubUserName.github.io</em>文件夹），输入以下命令就恢复以前的环境了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g               <span class="comment">#安装hexo</span></span><br><span class="line">npm install                           <span class="comment">#安装模块到node_modules</span></span><br></pre></td></tr></table></figure>
+<p>然后就可以像以前一样在 <code>source/_posts</code> 文件夹编写博客，使用 <code>hexo g -d</code> 即可发布到 GitHub Pages。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Practice/" rel="tag"># Practice</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/my-practice-with-hexo/" rel="prev" title="我的 Hexo 使用实践（一）">
+                  <i class="fa fa-chevron-left"></i> 我的 Hexo 使用实践（一）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/not-found/" rel="next" title="在 VPS 上搭建 NOT FOUND Server">
+                  在 VPS 上搭建 NOT FOUND Server <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

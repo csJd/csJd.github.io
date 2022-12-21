@@ -1,23 +1,339 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 给你一个黑方被将军的象棋残局 判断红方是否已经把黑方将死 模拟题 注意细节就行了 看黑方的将是否四个方向都不能走 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 1589 Xiangqi(模拟 HDU4121)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/other/UVa%201589%20Xiangqi(%E6%A8%A1%E6%8B%9F%20HDU4121)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 给你一个黑方被将军的象棋残局 判断红方是否已经把黑方将死 模拟题 注意细节就行了 看黑方的将是否四个方向都不能走 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-5.jpg.png">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-1.jpg.png">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-2.jpg.png">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-3.jpg.png">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-4.jpg.png">
+<meta property="og:image" content="http://blog.deng.cf/images/cn-data-images-4121-6.jpg.png">
+<meta property="article:published_time" content="2015-01-20T14:07:37.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.305Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.deng.cf/images/cn-data-images-4121-5.jpg.png">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/other/UVa%201589%20Xiangqi(%E6%A8%A1%E6%8B%9F%20HDU4121)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/other/UVa%201589%20Xiangqi(%E6%A8%A1%E6%8B%9F%20HDU4121)/","path":"posts/oj/other/UVa 1589 Xiangqi(模拟 HDU4121)/","title":"UVa 1589 Xiangqi(模拟 HDU4121)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVa 1589 Xiangqi(模拟 HDU4121) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xiangqi"><span class="nav-text">Xiangqi</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/UVa%201589%20Xiangqi(%E6%A8%A1%E6%8B%9F%20HDU4121)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVa 1589 Xiangqi(模拟 HDU4121) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVa 1589 Xiangqi(模拟 HDU4121)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-01-20 14:07:37" itemprop="dateCreated datePublished" datetime="2015-01-20T14:07:37+00:00">2015-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 给你一个黑方被将军的象棋残局 判断红方是否已经把黑方将死</p>
+<p>模拟题 注意细节就行了 看黑方的将是否四个方向都不能走</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line">char brd[N][N];</span><br><span class="line">int dx[] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;, dy[] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int hx[] = &#123; -<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>&#125;;  <span class="comment">//马将军</span></span><br><span class="line">int hy[] = &#123; -<span class="number">1</span>, -<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, -<span class="number">2</span>, -<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int tx[] = &#123; -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;  <span class="comment">//马蹩脚</span></span><br><span class="line">int ty[] = &#123; -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int cr[<span class="number">2</span>], cc[<span class="number">2</span>];  <span class="comment">//记录炮的坐标</span></span><br><span class="line"></span><br><span class="line">int <span class="title function_">check</span>(<span class="params">int r, int c</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j, k, tr, tc, cnt;</span><br><span class="line">    <span class="keyword">if</span>(r &lt; <span class="number">1</span> || r &gt; <span class="number">3</span> || c &lt; <span class="number">4</span> || c &gt; <span class="number">6</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (j = c - <span class="number">1</span>; j &gt; <span class="number">0</span>; --j)   <span class="comment">//行被车</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(brd[r][j])</span><br><span class="line">            <span class="keyword">if</span>(brd[r][j] == <span class="string">&#x27;R&#x27;</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j = c + <span class="number">1</span>; j &lt;= <span class="number">9</span>; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(brd[r][j])</span><br><span class="line">            <span class="keyword">if</span>(brd[r][j] == <span class="string">&#x27;R&#x27;</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = r - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i)  <span class="comment">//列被车</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(brd[i][c])</span><br><span class="line">            <span class="keyword">if</span>(brd[i][c] == <span class="string">&#x27;R&#x27;</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = r + <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) <span class="comment">//列被车或将</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(brd[i][c])</span><br><span class="line">            <span class="keyword">if</span>(brd[i][c] == <span class="string">&#x27;R&#x27;</span> || brd[i][c] == <span class="string">&#x27;G&#x27;</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">2</span>; ++k)    <span class="comment">//被炮将军</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cr[k] == r)   <span class="comment">//行有炮</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j = c - <span class="number">1</span>, cnt = <span class="number">0</span>; j &gt; cc[k]; --j) <span class="keyword">if</span>(brd[r][j]) ++cnt;</span><br><span class="line">            <span class="keyword">if</span>(cnt == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(j = c + <span class="number">1</span>, cnt = <span class="number">0</span>; j &lt; cc[k]; ++j) <span class="keyword">if</span>(brd[r][j]) ++cnt;</span><br><span class="line">            <span class="keyword">if</span>(cnt == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cc[k] == c)   <span class="comment">//列有炮</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = r - <span class="number">1</span>, cnt = <span class="number">0</span>; i &gt; cr[k]; --i) <span class="keyword">if</span>(brd[i][c]) ++cnt;</span><br><span class="line">            <span class="keyword">if</span>(cnt == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(i = r + <span class="number">1</span>, cnt = <span class="number">0</span>; i &lt; cr[k]; ++i) <span class="keyword">if</span>(brd[i][c]) ++cnt;</span><br><span class="line">            <span class="keyword">if</span>(cnt == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">8</span>; ++k)   <span class="comment">//被马将军</span></span><br><span class="line">    &#123;</span><br><span class="line">        tr = r + hx[k], tc = c + hy[k];</span><br><span class="line">        <span class="keyword">if</span>(tr &lt; <span class="number">1</span> || tr &gt; <span class="number">10</span> || tc &lt; <span class="number">1</span> || tc &gt; <span class="number">9</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(brd[tr][tc] == <span class="string">&#x27;H&#x27;</span> &amp;&amp; (!brd[r + tx[k]][c + ty[k]]))</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">5</span>];</span><br><span class="line">    int n, r, c, x, y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;r, &amp;c), n || r || c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(brd, <span class="number">0</span>, <span class="title function_">sizeof</span>(brd));</span><br><span class="line">        cr[<span class="number">0</span>] = cc[<span class="number">0</span>] = cr[<span class="number">1</span>] = cc[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, s, &amp;x, &amp;y);</span><br><span class="line">            <span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(cr[<span class="number">0</span>]) cr[<span class="number">1</span>] = x, cc[<span class="number">1</span>] = y;</span><br><span class="line">                <span class="keyword">else</span> cr[<span class="number">0</span>] = x, cc[<span class="number">0</span>] = y;</span><br><span class="line">            &#125;</span><br><span class="line">            brd[x][y] = s[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">            cnt += <span class="title function_">check</span>(r + dx[i], c + dy[i]);</span><br><span class="line">        <span class="keyword">if</span>(cnt &lt; <span class="number">4</span>) <span class="title function_">puts</span>(<span class="string">&quot;NO&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">puts</span>(<span class="string">&quot;YES&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Xiangqi"><a href="#Xiangqi" class="headerlink" title="Xiangqi"></a>Xiangqi</h1><p>Problem Description</p>
+<p>Xiangqi is one of the most popular two-player board games in China. The game represents a battle between two armies with the goal of capturing the enemy’s “general” piece. In this problem, you are given a situation of later stage in the game. Besides, the red side has already “delivered a check”. <strong>Your work is to check whether the situation is “checkmate”.</strong><br>Now we introduce some basic rules of Xiangqi. Xiangqi is played on a 10×9 board and the pieces are placed on the intersections (points). The top left point is (1,1) and the bottom right point is (10,9). There are two groups of pieces marked by black or red Chinese characters, belonging to the two players separately. During the game, each player in turn moves one piece from the point it occupies to another point. No two pieces can occupy the same point at the same time. A piece can be moved onto a point occupied by an enemy piece, in which case the enemy piece is “captured” and removed from the board. When the general is in danger of being captured by the enemy player on the enemy player’s next move, the enemy player is said to have <strong>“delivered a check”</strong>. If the general’s player can make no move to prevent the general’s capture by next enemy move, the situation is called <strong>“checkmate”</strong>.<br>  <img src="/../images/cn-data-images-4121-5.jpg.png">  We only use 4 kinds of pieces introducing as follows:<br><img src="/../images/cn-data-images-4121-1.jpg.png">General: the generals can move and capture <strong>one point</strong> either vertically or horizontally and cannot leave the “<strong>palace</strong>” unless the situation called “<strong>flying general</strong>” (see the figure above). “Flying general” means that one general can “fly” across the board to capture the enemy general if they stand on the same line without intervening pieces.<br><img src="/../images/cn-data-images-4121-2.jpg.png">Chariot: the chariots can move and capture vertically and horizontally by any distance, but may not jump over intervening pieces<br><img src="/../images/cn-data-images-4121-3.jpg.png">Cannon: the cannons move like the chariots, horizontally and vertically, but capture by jumping <strong>exactly one piece</strong> (whether it is friendly or enemy) over to its target.<br><img src="/../images/cn-data-images-4121-4.jpg.png">Horse: the horses have 8 kinds of jumps to move and capture shown in the left figure. However, if there is any pieces lying on a point away from the horse horizontally or vertically it cannot move or capture in that direction (see the figure below), which is called “<strong>hobbling the horse’s leg</strong>”.<br>  <img src="/../images/cn-data-images-4121-6.jpg.png">  Now you are given a situation only containing a black general, a red general and several red chariots, cannons and horses, and the red side has delivered a check. Now it turns to black side’s move. Your job is to determine that whether this situation is “checkmate”.<br>Input</p>
+<p>The input contains no more than 40 test cases. For each test case, the first line contains three integers representing the number of red pieces N (2&lt;&#x3D;N&lt;&#x3D;7) and the position of the black general. The following n lines contain details of N red pieces. For each line, there are a char and two integers representing the type and position of the piece (type char ‘G’ for general, ‘R’ for chariot, ‘H’ for horse and ‘C’ for cannon). We guarantee that the situation is legal and the red side has delivered the check.<br>There is a blank line between two test cases. The input ends by 0 0 0.<br>Output</p>
+<p>For each test case, if the situation is checkmate, output a single word ‘YES’, otherwise output the word ‘NO’.<br>Sample Input</p>
+<p>2 1 4 G 10 5 R 6 4 3 1 5 H 4 5 G 10 5 C 7 5 0 0 0<br>Sample Output</p>
+<p>YES NO</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/graph/CF%20505B%20Mr.%20Kitayuta's%20Colorful%20Graph(%E6%9C%80%E7%9F%AD%E8%B7%AF)/" rel="prev" title="CF 505B Mr. Kitayuta's Colorful Graph(最短路)">
+                  <i class="fa fa-chevron-left"></i> CF 505B Mr. Kitayuta's Colorful Graph(最短路)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/UVa%20540%20Team%20Queue%EF%BC%88%E5%9B%A2%E9%98%9F%E9%98%9F%E5%88%97%EF%BC%89/" rel="next" title="UVa 540 Team Queue（团队队列）">
+                  UVa 540 Team Queue（团队队列） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

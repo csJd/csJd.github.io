@@ -1,23 +1,1277 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Don&#39;t be evil.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="dd&#39;s site \#">
+<meta property="og:url" content="http://blog.deng.cf/page/2/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="Don&#39;t be evil.">
+<meta property="og:locale">
+<meta property="article:author" content="Deng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/page/2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"default","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">dd's site \#</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/leetcode-115-distinct-subsequences/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/leetcode-115-distinct-subsequences/" class="post-title-link" itemprop="url">LeetCode 115 Distinct Subsequences (DP)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-06-03 09:13:33" itemprop="dateCreated datePublished" datetime="2019-06-03T09:13:33+00:00">2019-06-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这里通过 LeetCode 中的一道动态规划题目（<a target="_blank" rel="noopener" href="https://leetcode.com/problems/distinct-subsequences">115. Distinct Subsequences</a>）来复习一下动态规划中的正反向递推和滚动数组的使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/oj/dp/leetcode-115-distinct-subsequences/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/python-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/python-tutorial/" class="post-title-link" itemprop="url">Python Basic Tutorial</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-26 09:22:16" itemprop="dateCreated datePublished" datetime="2019-01-26T09:22:16+00:00">2019-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Python-Basic-Tutorial（2019-01-26-SCUT）"><a href="#Python-Basic-Tutorial（2019-01-26-SCUT）" class="headerlink" title="Python Basic Tutorial（2019.01.26 @ SCUT）"></a>Python Basic Tutorial（2019.01.26 @ SCUT）</h1><ul>
+<li><a href="#python-basic-tutorial20190126--scut">Python Basic Tutorial（2019.01.26 @ SCUT）</a><ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#python-tutorial--forked-from-cs231">Python tutorial ( Forked from CS231)</a><ul>
+<li><a href="#standard-input--output">Standard Input &amp; Output</a></li>
+<li><a href="#basic-data-types">Basic data types</a><ul>
+<li><a href="#numbers">Numbers</a></li>
+<li><a href="#booleans">Booleans</a></li>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#none">None</a></li>
+<li><a href="#type-casting">Type casting</a></li>
+<li><a href="#quiz-1-calclating-a--b--c">Quiz #1: Calclating A + B + C</a></li>
+</ul>
+</li>
+<li><a href="#containers">Containers</a><ul>
+<li><a href="#lists--value">Lists | [value, ]</a></li>
+<li><a href="#quiz-2-fibonacci-numbers">Quiz #2: Fibonacci numbers</a></li>
+<li><a href="#dictionaries--key-value">Dictionaries | {key: value, }</a></li>
+<li><a href="#sets--element">Sets | {element, }</a></li>
+<li><a href="#quiz-3-remove-repeated-values">Quiz #3: Remove repeated values</a></li>
+<li><a href="#tuples--value">Tuples | (value, )</a></li>
+</ul>
+</li>
+<li><a href="#control-flow">Control flow</a><ul>
+<li><a href="#condition">Condition</a></li>
+<li><a href="#loops">Loops</a></li>
+</ul>
+</li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#quiz-4--implement-sqrt-function">Quiz #4 : Implement <code>sqrt()</code> function</a></li>
+</ul>
+</li>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#file-input--output">File Input &amp; Output</a><ul>
+<li><a href="#quiz-5-char-count">Quiz #5: Char count</a></li>
+</ul>
+</li>
+<li><a href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li><a href="#end">END</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VS Code</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/">Python 3  (conda version)</a></p>
+<ul>
+<li><p>Use tuna mirrors (<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">conda</a> , <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">pypi</a> )</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ipython.org/">IPython</a>, <code>pip(conda) install ipython</code></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.numpy.org/">NumPy</a> , <code>pip(conda) install numpy</code></p>
+</li>
+<li><p>Create a Python 3.6 environment and activate it</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name py36 python=3.6</span><br><span class="line">activate py36</span><br><span class="line"><span class="comment"># activate base</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download">PyCharm (Community Version)</a></p>
+</li>
+</ul>
+<p>You can know more about conda package manager <a target="_blank" rel="noopener" href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html">in the documentation</a>.</p>
+<h2 id="Python-tutorial-Forked-from-CS231"><a href="#Python-tutorial-Forked-from-CS231" class="headerlink" title="Python tutorial ( Forked from CS231)"></a>Python tutorial ( Forked from <a target="_blank" rel="noopener" href="http://cs231n.github.io/python-numpy-tutorial/">CS231</a>)</h2><h3 id="Standard-Input-amp-Output"><a href="#Standard-Input-amp-Output" class="headerlink" title="Standard Input &amp; Output"></a>Standard Input &amp; Output</h3><p>The <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#input"><code>input()</code></a> built-in function read a line from standard input with trailing newline stripped.</p>
+<p>The <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print"><code>print()</code></a> built-in function usually used to print something to standard output with adding a trailing newline.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">something = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(something)</span><br><span class="line"></span><br><span class="line">name = <span class="built_in">input</span>(<span class="string">&quot;Input your name: &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>, name)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Basic-data-types"><a href="#Basic-data-types" class="headerlink" title="Basic data types"></a>Basic data types</h3><p>Like most languages, Python has a number of basic types including integers, floats, booleans, and strings. These data types behave in ways that are familiar from other programming languages.</p>
+<h4 id="Numbers"><a href="#Numbers" class="headerlink" title="Numbers"></a>Numbers</h4><p>Integers and floats work as you would expect from other languages:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">3</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(x)) <span class="comment"># Prints &quot;&lt;class &#x27;int&#x27;&gt;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x)       <span class="comment"># Prints &quot;3&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x + <span class="number">1</span>)   <span class="comment"># Addition; prints &quot;4&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x - <span class="number">1</span>)   <span class="comment"># Subtraction; prints &quot;2&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x * <span class="number">2</span>)   <span class="comment"># Multiplication; prints &quot;6&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x ** <span class="number">3</span>)  <span class="comment"># Exponentiation; prints &quot;27&quot;</span></span><br><span class="line"><span class="built_in">print</span>(x / <span class="number">2</span>)   <span class="comment"># Division</span></span><br><span class="line"><span class="built_in">print</span>(x // <span class="number">2</span>)  <span class="comment"># Integer division</span></span><br><span class="line"><span class="built_in">print</span>(x % <span class="number">2</span>)   <span class="comment"># Remainder of the division</span></span><br><span class="line">x += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># Prints &quot;4&quot;</span></span><br><span class="line">x *= <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># Prints &quot;8&quot;</span></span><br><span class="line">y = <span class="number">2.5</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(y)) <span class="comment"># Prints &quot;&lt;class &#x27;float&#x27;&gt;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(y, y + <span class="number">1</span>, y * <span class="number">2</span>, y ** <span class="number">2</span>) <span class="comment"># Prints &quot;2.5 3.5 5.0 6.25&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Note that unlike many languages, Python does not have unary increment (<code>x++</code>) or decrement (<code>x--</code>) operators.</p>
+<p>Python also has built-in types for complex numbers; you can find all of the details <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex">in the documentation</a>.</p>
+<h4 id="Booleans"><a href="#Booleans" class="headerlink" title="Booleans"></a>Booleans</h4><p>Python implements all of the usual operators for Boolean logic, but uses English words rather than symbols (<code>&amp;&amp;</code>, <code>||</code>, etc.):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="literal">True</span></span><br><span class="line">f = <span class="literal">False</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(t)) <span class="comment"># Prints &quot;&lt;class &#x27;bool&#x27;&gt;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t <span class="keyword">and</span> f) <span class="comment"># Logical AND; prints &quot;False&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t <span class="keyword">or</span> f)  <span class="comment"># Logical OR; prints &quot;True&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">not</span> t)   <span class="comment"># Logical NOT; prints &quot;False&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t != f)  <span class="comment"># Logical XOR; prints &quot;True&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t == t)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h4><p>Python has great support for strings:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hello = <span class="string">&#x27;hello&#x27;</span>    <span class="comment"># String literals can use single quotes</span></span><br><span class="line">world = <span class="string">&quot;world&quot;</span>    <span class="comment"># or double quotes; it does not matter.</span></span><br><span class="line"><span class="built_in">print</span>(hello)       <span class="comment"># Prints &quot;hello&quot;</span></span><br><span class="line"><span class="built_in">print</span>(hello[<span class="number">0</span>])    <span class="comment"># Prints &#x27;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(hello))  <span class="comment"># String length; prints &quot;5&quot;</span></span><br><span class="line">hw = hello + <span class="string">&#x27; &#x27;</span> + world  <span class="comment"># String concatenation</span></span><br><span class="line"><span class="built_in">print</span>(hw)  <span class="comment"># prints &quot;hello world&quot;</span></span><br><span class="line">hw12 = <span class="string">&#x27;%s %s %d&#x27;</span> % (hello, world, <span class="number">12</span>)  <span class="comment"># sprintf style string formatting</span></span><br><span class="line"><span class="built_in">print</span>(hw12)  <span class="comment"># prints &quot;hello world 12&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>String objects have a bunch of useful methods; for example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;hello&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.capitalize())  <span class="comment"># Capitalize a string; prints &quot;Hello&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.upper())       <span class="comment"># Convert a string to uppercase; prints &quot;HELLO&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.rjust(<span class="number">7</span>))      <span class="comment"># Right-justify a string, padding with spaces; prints &quot;  hello&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.center(<span class="number">7</span>))     <span class="comment"># Center a string, padding with spaces; prints &quot; hello &quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.replace(<span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;(ell)&#x27;</span>))  <span class="comment"># Replace all instances of one substring with another;</span></span><br><span class="line">                                <span class="comment"># prints &quot;he(ell)(ell)o&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;  world &#x27;</span>.strip())  <span class="comment"># Strip leading and trailing whitespace; prints &quot;world&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello world&#x27;</span>.split())</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong>: strings in python are readonly objects</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">hello[<span class="number">0</span>] = <span class="string">&#x27;i&#x27;</span>  <span class="comment"># Invalid statement</span></span><br></pre></td></tr></table></figure>
+
+<p>You can find a list of all string methods <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#string-methods">in the documentation</a>.</p>
+<h4 id="None"><a href="#None" class="headerlink" title="None"></a>None</h4><p>The sole value of the type <code>NoneType</code>. <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/constants.html#None"><code>None</code></a> is frequently used to represent the absence of a value.</p>
+<h4 id="Type-casting"><a href="#Type-casting" class="headerlink" title="Type casting"></a>Type casting</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(<span class="number">1.5</span>))     <span class="comment"># Convert floating point into integer truncates towards zero</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(<span class="string">&#x27;-233&#x27;</span>))  <span class="comment"># A string must be a valid integer string to be converted into integer</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">float</span>(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bool</span>(<span class="number">1</span>), <span class="built_in">bool</span>(<span class="number">0</span>), <span class="built_in">bool</span>(<span class="number">1.1</span>), <span class="built_in">bool</span>(<span class="number">0.0</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bool</span>(<span class="string">&quot;&quot;</span>), <span class="built_in">bool</span>(<span class="string">&quot;hello&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>You can konw more about Python built-in types <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html">in the documentation</a>.</p>
+<h4 id="Quiz-1-Calclating-A-B-C"><a href="#Quiz-1-Calclating-A-B-C" class="headerlink" title="Quiz #1: Calclating A + B + C"></a>Quiz #1: <a target="_blank" rel="noopener" href="https://nanti.jisuanke.com/t/1">Calclating A + B + C</a></h4><h3 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a>Containers</h3><p>Python includes several built-in container types: lists, dictionaries, sets, and tuples.</p>
+<h4 id="Lists-value"><a href="#Lists-value" class="headerlink" title="Lists | [value, ]"></a>Lists | [value, ]</h4><p>A list is the Python equivalent of an array, but is resizeable and can contain elements of different types:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">list</span>()</span><br><span class="line">b = []</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a), <span class="built_in">type</span>(b))</span><br><span class="line"></span><br><span class="line">xs = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]    <span class="comment"># Create a list</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span> <span class="keyword">in</span> xs)    <span class="comment"># Check whether an element is in a list</span></span><br><span class="line"><span class="built_in">print</span>(xs, xs[<span class="number">2</span>])  <span class="comment"># Prints &quot;[3, 1, 2] 2&quot;</span></span><br><span class="line"><span class="built_in">print</span>(xs[-<span class="number">1</span>])     <span class="comment"># Negative indices count from the end of the list; prints &quot;2&quot;</span></span><br><span class="line">xs[<span class="number">2</span>] = <span class="string">&#x27;foo&#x27;</span>     <span class="comment"># Lists can contain elements of different types</span></span><br><span class="line"><span class="built_in">print</span>(xs)         <span class="comment"># Prints &quot;[3, 1, &#x27;foo&#x27;]&quot;</span></span><br><span class="line">xs.append(<span class="string">&#x27;bar&#x27;</span>)  <span class="comment"># Add a new element to the end of the list</span></span><br><span class="line"><span class="built_in">print</span>(xs)         <span class="comment"># Prints &quot;[3, 1, &#x27;foo&#x27;, &#x27;bar&#x27;]&quot;</span></span><br><span class="line">x = xs.pop()      <span class="comment"># Remove and return the last element of the list</span></span><br><span class="line"><span class="built_in">print</span>(x, xs)      <span class="comment"># Prints &quot;bar [3, 1, &#x27;foo&#x27;]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>As usual, you can find all the gory details about lists <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">in the documentation</a>.</p>
+<p><strong>Slicing:</strong> In addition to accessing list elements one at a time, Python provides concise syntax to access sublists; this is known as <em>slicing</em>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nums = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">5</span>))     <span class="comment"># range is a built-in function that creates a list of integers</span></span><br><span class="line"><span class="built_in">print</span>(nums)               <span class="comment"># Prints &quot;[0, 1, 2, 3, 4]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[<span class="number">2</span>:<span class="number">4</span>])          <span class="comment"># Get a slice from index 2 to 4 (exclusive); prints &quot;[2, 3]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[<span class="number">2</span>:])           <span class="comment"># Get a slice from index 2 to the end; prints &quot;[2, 3, 4]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[:<span class="number">2</span>])           <span class="comment"># Get a slice from the start to index 2 (exclusive); prints &quot;[0, 1]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[:])            <span class="comment"># Get a slice of the whole list; prints &quot;[0, 1, 2, 3, 4]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[:-<span class="number">1</span>])          <span class="comment"># Slice indices can be negative; prints &quot;[0, 1, 2, 3]&quot;</span></span><br><span class="line"><span class="built_in">print</span>(nums[<span class="number">0</span>:<span class="number">4</span>:<span class="number">2</span>])        <span class="comment"># Get a slice from index 0 to 4 (exclusive) with step 2</span></span><br><span class="line">nums[<span class="number">2</span>:<span class="number">4</span>] = [<span class="number">8</span>, <span class="number">9</span>]        <span class="comment"># Assign a new sublist to a slice</span></span><br><span class="line"><span class="built_in">print</span>(nums)               <span class="comment"># Prints &quot;[0, 1, 8, 9, 4]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>We will see slicing again in the context of numpy arrays.</p>
+<p><strong>Loops:</strong> You can loop over the elements of a list like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">animals = [<span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;monkey&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> animal <span class="keyword">in</span> animals:</span><br><span class="line">    <span class="built_in">print</span>(animal)</span><br><span class="line"><span class="comment"># Prints &quot;cat&quot;, &quot;dog&quot;, &quot;monkey&quot;, each on its own line.</span></span><br></pre></td></tr></table></figure>
+
+<p>If you want access to the index of each element within the body of a loop, use the built-in <code>enumerate</code> function:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">animals = [<span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;monkey&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> idx, animal <span class="keyword">in</span> <span class="built_in">enumerate</span>(animals):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;#%d: %s&#x27;</span> % (idx + <span class="number">1</span>, animal))</span><br><span class="line"><span class="comment"># Prints &quot;#1: cat&quot;, &quot;#2: dog&quot;, &quot;#3: monkey&quot;, each on its own line</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>List comprehensions:</strong> When programming, frequently we want to transform one type of data into another. As a simple example, consider the following code that computes square numbers:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">squares = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">    squares.append(x ** <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(squares)   <span class="comment"># Prints [0, 1, 4, 9, 16]</span></span><br></pre></td></tr></table></figure>
+
+<p>You can make this code simpler using a <strong>list comprehension</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> nums]</span><br><span class="line"><span class="built_in">print</span>(squares)   <span class="comment"># Prints [0, 1, 4, 9, 16]</span></span><br></pre></td></tr></table></figure>
+
+<p>List comprehensions can also contain conditions:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">even_squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> nums <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(even_squares)  <span class="comment"># Prints &quot;[0, 4, 16]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Quiz-2-Fibonacci-numbers"><a href="#Quiz-2-Fibonacci-numbers" class="headerlink" title="Quiz #2: Fibonacci numbers"></a>Quiz #2: <a target="_blank" rel="noopener" href="https://nanti.jisuanke.com/t/4">Fibonacci numbers</a></h4><h4 id="Dictionaries-key-value"><a href="#Dictionaries-key-value" class="headerlink" title="Dictionaries | {key: value, }"></a>Dictionaries | {key: value, }</h4><p>A dictionary stores (key, value) pairs, similar to a <code>Map</code> in Java or an object in Javascript. You can use it like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">dict</span>()</span><br><span class="line">b = &#123;&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a), <span class="built_in">type</span>(b))</span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">&#x27;cat&#x27;</span>: <span class="string">&#x27;cute&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>: <span class="string">&#x27;furry&#x27;</span>&#125;  <span class="comment"># Create a new dictionary with some data</span></span><br><span class="line"><span class="built_in">print</span>(d[<span class="string">&#x27;cat&#x27;</span>])       <span class="comment"># Get an entry from a dictionary; prints &quot;cute&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;cat&#x27;</span> <span class="keyword">in</span> d)     <span class="comment"># Check if a dictionary has a given key; prints &quot;True&quot;</span></span><br><span class="line">d[<span class="string">&#x27;fish&#x27;</span>] = <span class="string">&#x27;wet&#x27;</span>     <span class="comment"># Set an entry in a dictionary</span></span><br><span class="line"><span class="built_in">print</span>(d[<span class="string">&#x27;fish&#x27;</span>])      <span class="comment"># Prints &quot;wet&quot;</span></span><br><span class="line"><span class="comment"># print(d[&#x27;monkey&#x27;])  # KeyError: &#x27;monkey&#x27; not a key of d</span></span><br><span class="line"><span class="built_in">print</span>(d.get(<span class="string">&#x27;monkey&#x27;</span>, <span class="string">&#x27;N/A&#x27;</span>))  <span class="comment"># Get an element with a default; prints &quot;N/A&quot;</span></span><br><span class="line"><span class="built_in">print</span>(d.get(<span class="string">&#x27;fish&#x27;</span>, <span class="string">&#x27;N/A&#x27;</span>))    <span class="comment"># Get an element with a default; prints &quot;wet&quot;</span></span><br><span class="line"><span class="keyword">del</span> d[<span class="string">&#x27;fish&#x27;</span>]         <span class="comment"># Remove an element from a dictionary</span></span><br><span class="line"><span class="built_in">print</span>(d.get(<span class="string">&#x27;fish&#x27;</span>, <span class="string">&#x27;N/A&#x27;</span>)) <span class="comment"># &quot;fish&quot; is no longer a key; prints &quot;N/A&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>You can find all you need to know about dictionaries <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#dict">in the documentation</a>.</p>
+<p><strong>Loops:</strong> It is easy to iterate over the keys in a dictionary:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;person&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;cat&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;spider&#x27;</span>: <span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">for</span> animal <span class="keyword">in</span> d:</span><br><span class="line">    legs = d[animal]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;A %s has %d legs&#x27;</span> % (animal, legs))</span><br><span class="line"><span class="comment"># Prints &quot;A person has 2 legs&quot;, &quot;A cat has 4 legs&quot;, &quot;A spider has 8 legs&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>If you want access to keys and their corresponding values, use the <code>items</code> method:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;person&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;cat&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;spider&#x27;</span>: <span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">for</span> animal, legs <span class="keyword">in</span> d.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;A %s has %d legs&#x27;</span> % (animal, legs))</span><br><span class="line"><span class="comment"># Prints &quot;A person has 2 legs&quot;, &quot;A cat has 4 legs&quot;, &quot;A spider has 8 legs&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Dictionary comprehensions:</strong> These are similar to list comprehensions, but allow you to easily construct dictionaries. For example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">even_num_to_square = &#123;x: x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> nums <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(even_num_to_square)  <span class="comment"># Prints &quot;&#123;0: 0, 2: 4, 4: 16&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Sets-element"><a href="#Sets-element" class="headerlink" title="Sets | {element, }"></a>Sets | {element, }</h4><p>A set is an unordered collection of distinct elements. As a simple example, consider the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">set</span>()</span><br><span class="line">b = &#123;&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a), <span class="built_in">type</span>(b))</span><br><span class="line"></span><br><span class="line">animals = &#123;<span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;cat&#x27;</span> <span class="keyword">in</span> animals)   <span class="comment"># Check if an element is in a set; prints &quot;True&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;fish&#x27;</span> <span class="keyword">in</span> animals)  <span class="comment"># prints &quot;False&quot;</span></span><br><span class="line">animals.add(<span class="string">&#x27;fish&#x27;</span>)       <span class="comment"># Add an element to a set</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;fish&#x27;</span> <span class="keyword">in</span> animals)  <span class="comment"># Prints &quot;True&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(animals))       <span class="comment"># Number of elements in a set; prints &quot;3&quot;</span></span><br><span class="line">animals.add(<span class="string">&#x27;cat&#x27;</span>)        <span class="comment"># Adding an element that is already in the set does nothing</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(animals))       <span class="comment"># Prints &quot;3&quot;</span></span><br><span class="line">animals.remove(<span class="string">&#x27;cat&#x27;</span>)     <span class="comment"># Remove an element from a set</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(animals))       <span class="comment"># Prints &quot;2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>As usual, everything you want to know about sets can be found <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#set">in the documentation</a>.</p>
+<p><strong>Loops:</strong> Iterating over a set has the same syntax as iterating over a list; however since sets are unordered, you cannot make assumptions about the order in which you visit the elements of the set:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">animals = &#123;<span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;fish&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> idx, animal <span class="keyword">in</span> <span class="built_in">enumerate</span>(animals):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;#%d: %s&#x27;</span> % (idx + <span class="number">1</span>, animal))</span><br><span class="line"><span class="comment"># Prints &quot;#1: fish&quot;, &quot;#2: dog&quot;, &quot;#3: cat&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Set comprehensions:</strong> Like lists and dictionaries, we can easily construct sets using set comprehensions:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line">nums = &#123;<span class="built_in">int</span>(sqrt(x)) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>)&#125;</span><br><span class="line"><span class="built_in">print</span>(nums)  <span class="comment"># Prints &quot;&#123;0, 1, 2, 3, 4, 5&#125;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Quiz-3-Remove-repeated-values"><a href="#Quiz-3-Remove-repeated-values" class="headerlink" title="Quiz #3: Remove repeated values"></a>Quiz #3: <a target="_blank" rel="noopener" href="https://nanti.jisuanke.com/t/11">Remove repeated values</a></h4><h4 id="Tuples-value"><a href="#Tuples-value" class="headerlink" title="Tuples | (value, )"></a>Tuples | (value, )</h4><p>A tuple is an (immutable) ordered list of values. A tuple is in many ways similar to a list; one of the most important differences is that tuples can be used as keys in dictionaries and as elements of sets, while lists cannot. Here is a trivial example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;(x, x + <span class="number">1</span>): x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)&#125;  <span class="comment"># Create a dictionary with tuple keys</span></span><br><span class="line">t = (<span class="number">5</span>, <span class="number">6</span>)        <span class="comment"># Create a tuple</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(t))    <span class="comment"># Prints &quot;&lt;class &#x27;tuple&#x27;&gt;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(d[t])       <span class="comment"># Prints &quot;5&quot;</span></span><br><span class="line"><span class="built_in">print</span>(d[(<span class="number">1</span>, <span class="number">2</span>)])  <span class="comment"># Prints &quot;1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">The documentation</a> has more information about tuples.</p>
+<h3 id="Control-flow"><a href="#Control-flow" class="headerlink" title="Control flow"></a>Control flow</h3><h4 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h4><p>Python use <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#if"><code>if</code></a> statement to perform condition control flow.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;Please enter an integer: &quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x &lt; <span class="number">0</span>:</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Negative changed to zero&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> x == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Zero&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> x == <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Single&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;More&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>There can be zero or more <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#elif"><code>elif</code></a> parts, and the <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#else"><code>else</code></a> part is optional. The keyword ‘<code>elif</code>’ is short for ‘else if’, and is useful to avoid excessive indentation. An <code>if … elif … elif …</code> sequence is a substitute for the <code>switch</code> or <code>case</code> statements found in other languages.</p>
+<p><strong>Truth value testing</strong> : Any object can be tested for truth value, for use in an <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#if"><code>if</code></a> or <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#while"><code>while</code></a> condition or as operand of the Boolean operations below. The following values are considered false:</p>
+<ul>
+<li><code>None</code></li>
+<li><code>False</code></li>
+<li>zero of any numeric type, for example, <code>0</code>, <code>0L</code>, <code>0.0</code>, <code>0j</code>.</li>
+<li>any empty sequence, for example, <code>&#39;&#39;</code>, <code>()</code>, <code>[]</code>.</li>
+<li>any empty mapping, for example, <code>&#123;&#125;</code>.</li>
+<li>most of others are true.</li>
+</ul>
+<h4 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h4><p>The <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#for"><code>for</code></a> statement in Python differs a bit from other programming languages, Python’s <code>for</code> statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Loop over list:</span></span><br><span class="line">words = [<span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;window&#x27;</span>, <span class="string">&#x27;defenestrate&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> words:</span><br><span class="line">    <span class="built_in">print</span>(w, <span class="built_in">len</span>(w))</span><br><span class="line">word = words[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop over string</span></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">    <span class="built_in">print</span>(char)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop over range</span></span><br><span class="line">rng = <span class="built_in">range</span>(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(rng)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<p>The <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/compound_stmts.html#while"><code>while</code></a> statement is used for repeated execution as long as an expression is true.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    i += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>A <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/simple_stmts.html#break"><code>break</code></a> statement will terminate the loop.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># judge whether a number is a prime number</span></span><br><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">flag = <span class="literal">True</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, x):</span><br><span class="line">    <span class="keyword">if</span> x % i == <span class="number">0</span>:</span><br><span class="line">        flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> flag:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;YES&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;NO&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>A <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/simple_stmts.html#continue"><code>continue</code></a> statement executed in the first suite skips the rest of the suite and continues with the next item.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Found an even number&quot;</span>, num)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Found a number&quot;</span>, num)</span><br></pre></td></tr></table></figure>
+
+<p>The <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>You can know more about loops from <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/datastructures.html#tut-loopidioms">offical documents</a> , and more about Python’s simple statements in <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/simple_stmts.html">documents</a> too</p>
+<h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><p>Python functions are defined using the <code>def</code> keyword. For example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;positive&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> x &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;negative&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;zero&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]:</span><br><span class="line">    <span class="built_in">print</span>(sign(x))</span><br><span class="line"><span class="comment"># Prints &quot;negative&quot;, &quot;zero&quot;, &quot;positive&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>We will often define functions to take optional keyword arguments, like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hello</span>(<span class="params">name, loud=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="keyword">if</span> loud:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;HELLO, %s!&#x27;</span> % name.upper())</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s&#x27;</span> % name)</span><br><span class="line"></span><br><span class="line">hello(<span class="string">&#x27;Bob&#x27;</span>) <span class="comment"># Prints &quot;Hello, Bob&quot;</span></span><br><span class="line">hello(<span class="string">&#x27;Fred&#x27;</span>, loud=<span class="literal">True</span>)  <span class="comment"># Prints &quot;HELLO, FRED!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>There are a number of built-in functions (like <code>len()</code>) in Python, you can konw more about them <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html">in the documentation</a>.</p>
+<p>There is a lot more information about Python functions <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">in the documentation</a>.</p>
+<h4 id="Quiz-4-Implement-sqrt-function"><a href="#Quiz-4-Implement-sqrt-function" class="headerlink" title="Quiz #4 : Implement sqrt() function"></a>Quiz #4 : <a target="_blank" rel="noopener" href="https://nanti.jisuanke.com/t/17">Implement <code>sqrt()</code> function</a></h4><h3 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h3><p>The syntax for defining classes in Python is straightforward:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Greeter</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Constructor</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name = name  <span class="comment"># Create an instance variable</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Instance method</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">self, loud=<span class="literal">False</span></span>):</span><br><span class="line">        <span class="keyword">if</span> loud:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;HELLO, %s!&#x27;</span> % self.name.upper())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s&#x27;</span> % self.name)</span><br><span class="line"></span><br><span class="line">g = Greeter(<span class="string">&#x27;Fred&#x27;</span>)  <span class="comment"># Construct an instance of the Greeter class</span></span><br><span class="line">g.greet()            <span class="comment"># Call an instance method; prints &quot;Hello, Fred&quot;</span></span><br><span class="line">g.greet(loud=<span class="literal">True</span>)   <span class="comment"># Call an instance method; prints &quot;HELLO, FRED!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>You can read a lot more about Python classes <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/classes.html">in the documentation</a>.</p>
+<h3 id="File-Input-amp-Output"><a href="#File-Input-amp-Output" class="headerlink" title="File Input &amp; Output"></a>File Input &amp; Output</h3><p>Interact with files in Python is much easier than other languages , you can simply use <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#open"><code>open()</code></a> built-in function.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># wirte content into a file</span></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">file.write(<span class="string">&#x27;hello\n&#x27;</span>)</span><br><span class="line">file.write(<span class="string">&#x27;\n1\n2\n3\n&#x27;</span>)</span><br><span class="line">file.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># read from a file</span></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>)  <span class="comment"># the default mode is &#x27;r&#x27;</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">    <span class="built_in">print</span>(line)</span><br><span class="line">file.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># use &#x27;with&#x27; statement (PEP343)</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="built_in">print</span>(file.readlines())</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Quiz-5-Char-count"><a href="#Quiz-5-Char-count" class="headerlink" title="Quiz #5: Char count"></a>Quiz #5: Char count</h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/csJd/md-notes/master/review/python_tutorial.md">Download data file here</a>. Calclate all characters’ frequencies and save them into <code>charcount.txt</code> file like following.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">char counts</span><br><span class="line">-----------</span><br><span class="line">.    233</span><br><span class="line">a    2333</span><br><span class="line">A    23333</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Exceptions"><a href="#Exceptions" class="headerlink" title="Exceptions"></a>Exceptions</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">zero_division_fails</span>():</span><br><span class="line">    x = <span class="number">1</span>/<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">type_error_fails</span>():</span><br><span class="line">    x = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    x[<span class="number">0</span>] = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">no_error</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I&#x27;m fine&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">test_func</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        test_func()</span><br><span class="line">    <span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> err:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Handling run-time error:&quot;</span>, err)</span><br><span class="line">    <span class="keyword">except</span> TypeError <span class="keyword">as</span> err:</span><br><span class="line">        <span class="keyword">raise</span> err</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;In finally&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test zero division case&quot;</span>)</span><br><span class="line">test(zero_division_fails)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\ntest type error case&quot;</span>)</span><br><span class="line">test(type_error_fails)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nno error case&quot;</span>)</span><br><span class="line">test(no_error)</span><br></pre></td></tr></table></figure>
+
+<p>You can know more about errors and exceptions in Python <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/errors.html">in the documentation</a>.</p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>You can read a lot more about Python in official <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/index.html">Python Tutorial</a>.</p>
+<p>Thank You.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/dual-boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/dual-boot/" class="post-title-link" itemprop="url">双系统安装指北</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-21 20:08:07" itemprop="dateCreated datePublished" datetime="2018-11-21T20:08:07+00:00">2018-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="双系统（Windows-Ubuntu）安装指北"><a href="#双系统（Windows-Ubuntu）安装指北" class="headerlink" title="双系统（Windows + Ubuntu）安装指北"></a>双系统（Windows + Ubuntu）安装指北</h1><blockquote>
+<p>以下操作会清空所有磁盘的所有数据，请提前备份需要的数据。<strong>所有未提及到的选项请都保持默认选项</strong></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/dual-boot/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/hexo-with-travis-ci/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/hexo-with-travis-ci/" class="post-title-link" itemprop="url">使用 Travis CI 自动构建 Hexo 博客</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-16 13:36:10" itemprop="dateCreated datePublished" datetime="2018-02-16T13:36:10+00:00">2018-02-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://travis-ci.com/">Travis CI</a> 提供的持续集成服务可以在我们将 Commit push 到 Github 后自动执行用户定义的一系列任务。这里记录一下使用 Travis CI 对 Hexo 静态博客自动部署到 Github Pages 的过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/hexo-with-travis-ci/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/my-gradle-practice-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/my-gradle-practice-1/" class="post-title-link" itemprop="url">我的 Gradle 使用实践（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-12 12:19:50" itemprop="dateCreated datePublished" datetime="2017-03-12T12:19:50+00:00">2017-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Practice/" itemprop="url" rel="index"><span itemprop="name">Practice</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上面已经成功执行了一个使用 Gradle 的 Java 项目，下面大概介绍一下原理，官方也给出了详细的 <a target="_blank" rel="noopener" href="https://guides.gradle.org/creating-java-applications/">Getting Started</a>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/my-gradle-practice-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/my-gradle-practice-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/my-gradle-practice-0/" class="post-title-link" itemprop="url">我的 Gradle 使用实践（零）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-11 23:14:38" itemprop="dateCreated datePublished" datetime="2017-03-11T23:14:38+00:00">2017-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Practice/" itemprop="url" rel="index"><span itemprop="name">Practice</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Gradle 是一款非常强大的构建工具，最近学习了下 Gradle 的基础使用，这里记录下我的使用实践。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/my-gradle-practice-0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/mysql-zip-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/mysql-zip-install/" class="post-title-link" itemprop="url">Windows 上使用 zip 包安装 MySQL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-07 22:14:30" itemprop="dateCreated datePublished" datetime="2017-03-07T22:14:30+00:00">2017-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于重装系统比较频繁，每次都使用安装包安装 MySQL 的话比较麻烦，看到 <a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">MySQL 官网</a>提供了 MySQL 的 ZIP Archive，查了下<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">官方文档</a>，这里记录一下使用 ZIP 包安装 MySQL 的方法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/mysql-zip-install/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/add-to-github-repo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/add-to-github-repo/" class="post-title-link" itemprop="url">给本地项目添加 Github Repo</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-05 19:17:56" itemprop="dateCreated datePublished" datetime="2017-03-05T19:17:56+00:00">2017-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将本地项目添加 Github repo 后可以方便的在其它设备继续进行项目的开发，也可以方便的与其他人分享自己的项目，我这里记录一下给本地项目添加 Github repo 的方法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/add-to-github-repo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/not-found/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/not-found/" class="post-title-link" itemprop="url">在 VPS 上搭建 NOT FOUND Server</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-27 13:10:10" itemprop="dateCreated datePublished" datetime="2017-02-27T13:10:10+00:00">2017-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>分享在 Ubuntu 18.04 VPS 上搭建 Shadowsocks Server 的方法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/not-found/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/my-practice-with-hexo-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/my-practice-with-hexo-2/" class="post-title-link" itemprop="url">我的 Hexo 使用实践（二）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-26 13:36:10" itemprop="dateCreated datePublished" datetime="2017-02-26T13:36:10+00:00">2017-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将 Blog 成功搭到 Github 后就要考虑一些配置问题了，需要更加美观的主题，换了电脑或者重装系统后还需要快速的从以前的配置恢复，下面就解决这些问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/my-practice-with-hexo-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

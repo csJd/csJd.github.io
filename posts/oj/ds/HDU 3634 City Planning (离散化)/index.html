@@ -1,23 +1,334 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 给你n个矩形 每个矩形都有自己的value 你可以任意改变矩形的表里关系 被覆盖的地方的value取最表层的 求总value的最大值 刚看了扫描线 感觉这个可以用扫描线做就直接写了 其实直接离散化就行了 因为最多也就20个矩形 那坐标最多也就40个 那我们对坐标进行离散化 然后将矩形按value从小到大一个个的放 暴力更新覆盖格子的value 最后直接将2n &#x2F;* 2n个小格子的v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU 3634 City Planning (离散化)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/ds/HDU%203634%20City%20Planning%20(%E7%A6%BB%E6%95%A3%E5%8C%96)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 给你n个矩形 每个矩形都有自己的value 你可以任意改变矩形的表里关系 被覆盖的地方的value取最表层的 求总value的最大值 刚看了扫描线 感觉这个可以用扫描线做就直接写了 其实直接离散化就行了 因为最多也就20个矩形 那坐标最多也就40个 那我们对坐标进行离散化 然后将矩形按value从小到大一个个的放 暴力更新覆盖格子的value 最后直接将2n &#x2F;* 2n个小格子的v">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-08-14T09:32:37.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.297Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/ds/HDU%203634%20City%20Planning%20(%E7%A6%BB%E6%95%A3%E5%8C%96)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/ds/HDU%203634%20City%20Planning%20(%E7%A6%BB%E6%95%A3%E5%8C%96)/","path":"posts/oj/ds/HDU 3634 City Planning (离散化)/","title":"HDU 3634 City Planning (离散化)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HDU 3634 City Planning (离散化) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#City-Planning"><span class="nav-text">City Planning</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/HDU%203634%20City%20Planning%20(%E7%A6%BB%E6%95%A3%E5%8C%96)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HDU 3634 City Planning (离散化) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HDU 3634 City Planning (离散化)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-08-14 09:32:37" itemprop="dateCreated datePublished" datetime="2015-08-14T09:32:37+00:00">2015-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 给你n个矩形 每个矩形都有自己的value 你可以任意改变矩形的表里关系 被覆盖的地方的value取最表层的 求总value的最大值</p>
+<p>刚看了扫描线 感觉这个可以用扫描线做就直接写了 其实直接离散化就行了 因为最多也就20个矩形 那坐标最多也就40个 那我们对坐标进行离散化 然后将矩形按value从小到大一个个的放 暴力更新覆盖格子的value 最后直接将2n &#x2F;* 2n个小格子的value加起来就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">50</span>;</span><br><span class="line">int y[N], x[N], n, m;</span><br><span class="line">ll val[N][N];</span><br><span class="line"></span><br><span class="line">struct <span class="title class_">Rect</span></span><br><span class="line">&#123;</span><br><span class="line">    int x1, y1, x2, y2, v;</span><br><span class="line">    bool operator&lt; (<span class="keyword">const</span> <span class="title class_">Rect</span> &amp;r) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v &lt; r.<span class="property">v</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; r[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">fid</span>(<span class="params">int a[], int k</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">lower_bound</span>(a, a + m, k) - a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, x1, y1, x2, y2, cas = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = m = <span class="number">0</span>; i &lt; n; ++i, m += <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d%d%d&quot;</span>, &amp;r[i].<span class="property">x1</span>, &amp;r[i].<span class="property">y1</span>, &amp;r[i].<span class="property">x2</span>, &amp;r[i].<span class="property">y2</span>, &amp;r[i].<span class="property">v</span>);</span><br><span class="line">            x[m] = r[i].<span class="property">x1</span>, x[m + <span class="number">1</span>] = r[i].<span class="property">x2</span>;</span><br><span class="line">            y[m] = r[i].<span class="property">y1</span>, y[m + <span class="number">1</span>] = r[i].<span class="property">y2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">sort</span>(r, r + n); <span class="comment">//将value小的大楼放前面</span></span><br><span class="line">        <span class="title function_">sort</span>(x, x + m); <span class="comment">//离散化x</span></span><br><span class="line">        <span class="title function_">sort</span>(y, y + m); <span class="comment">//离散化y</span></span><br><span class="line"></span><br><span class="line">        <span class="title function_">memset</span>(val, <span class="number">0</span>, <span class="title function_">sizeof</span>(val));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            x1 = <span class="title function_">fid</span>(x, r[i].<span class="property">x1</span>), x2 = <span class="title function_">fid</span>(x, r[i].<span class="property">x2</span>);  <span class="comment">//获得x离散化后的坐标</span></span><br><span class="line">            y1 = <span class="title function_">fid</span>(y, r[i].<span class="property">y1</span>), y2 = <span class="title function_">fid</span>(y, r[i].<span class="property">y2</span>);  <span class="comment">//获得y离散化后的坐标</span></span><br><span class="line">            <span class="keyword">for</span>(int j = x1; j &lt; x2; ++j)</span><br><span class="line">                <span class="keyword">for</span>(int k = y1; k &lt; y2; ++k)  val[j][k] = r[i].<span class="property">v</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m - <span class="number">1</span>; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m - <span class="number">1</span>; ++j)</span><br><span class="line">                ans += val[i][j] * (x[i + <span class="number">1</span>] - x[i]) * (y[j + <span class="number">1</span>] - y[j]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case %d: %I64d\n&quot;</span>, ++cas, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有扫描线a的代码 用扫描线的时候是将矩形value从大到小排序 每放置一个矩形 看面积改变了多少 然后就用value乘以这个改变的面积</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#define lc p&lt;&lt;<span class="number">1</span>, s, mid</span><br><span class="line">#define rc p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, e</span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">50</span>;</span><br><span class="line">int y[N], flag[N * <span class="number">2</span>], len[N * <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">struct <span class="title class_">Rect</span></span><br><span class="line">&#123;</span><br><span class="line">    int x1, y1, x2, y2, v;</span><br><span class="line">    bool operator&lt; (<span class="keyword">const</span> <span class="title class_">Rect</span> &amp;r) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> v &gt; r.<span class="property">v</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; r[N];</span><br><span class="line"></span><br><span class="line">struct <span class="title class_">SLine</span></span><br><span class="line">&#123;</span><br><span class="line">    int x, y1, y2, flag;</span><br><span class="line">    <span class="title class_">SLine</span>() &#123;&#125;</span><br><span class="line">    <span class="title class_">SLine</span>(int xx, int a, int b, int f):</span><br><span class="line">        <span class="title function_">x</span>(xx), <span class="title function_">y1</span>(a), <span class="title function_">y2</span>(b), <span class="title function_">flag</span>(<span class="params">f</span>) &#123;&#125;</span><br><span class="line">    bool operator&lt; (<span class="keyword">const</span> <span class="title class_">SLine</span> &amp;s) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; s.<span class="property">x</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; line[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(flag, <span class="number">0</span>, <span class="title function_">sizeof</span>(flag));</span><br><span class="line">    <span class="title function_">memset</span>(len, <span class="number">0</span>, <span class="title function_">sizeof</span>(len));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(flag[p]) len[p] = y[e] - y[s - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(s == e) len[p] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> len[p] = len[p &lt;&lt; <span class="number">1</span>] + len[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int l, int r, int v</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        flag[p] += v;</span><br><span class="line">        <span class="title function_">pushup</span>(p, s, e);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) <span class="title function_">update</span>(lc, l, r, v);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) <span class="title function_">update</span>(rc, l, r, v);</span><br><span class="line">    <span class="title function_">pushup</span>(p, s, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n, m, cas = <span class="number">0</span>;</span><br><span class="line">    int x1, y1, x2, y2, v;</span><br><span class="line">    ll ans;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d%d%d&quot;</span>, &amp;r[i].<span class="property">x1</span>, &amp;r[i].<span class="property">y1</span>, &amp;r[i].<span class="property">x2</span>, &amp;r[i].<span class="property">y2</span>, &amp;r[i].<span class="property">v</span>);</span><br><span class="line">        <span class="title function_">sort</span>(r, r + n);</span><br><span class="line">        ll ans = <span class="number">0</span>, last = <span class="number">0</span>, area;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = m = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">build</span>();</span><br><span class="line">            area = <span class="number">0</span>;</span><br><span class="line">            y[m] = r[i].<span class="property">y1</span>, y[m + <span class="number">1</span>] = r[i].<span class="property">y2</span>;</span><br><span class="line">            line[m++] = <span class="title class_">SLine</span>(r[i].<span class="property">x1</span>, r[i].<span class="property">y1</span>, r[i].<span class="property">y2</span>, <span class="number">1</span>);</span><br><span class="line">            line[m++] = <span class="title class_">SLine</span>(r[i].<span class="property">x2</span>, r[i].<span class="property">y1</span>, r[i].<span class="property">y2</span>, -<span class="number">1</span>);</span><br><span class="line">            <span class="title function_">sort</span>(y, y + m);</span><br><span class="line">            <span class="title function_">sort</span>(line, line + m);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m - <span class="number">1</span>; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                int l = <span class="title function_">lower_bound</span>(y, y + m, line[j].<span class="property">y1</span>) - y;</span><br><span class="line">                int r = <span class="title function_">lower_bound</span>(y, y + m, line[j].<span class="property">y2</span>) - y;</span><br><span class="line">                <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">1</span>, m, l + <span class="number">1</span>, r, line[j].<span class="property">flag</span>);</span><br><span class="line">                area += len[<span class="number">1</span>] * (line[j + <span class="number">1</span>].<span class="property">x</span> - line[j].<span class="property">x</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ans += (area - last) * r[i].<span class="property">v</span>;</span><br><span class="line">            last = area;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case %d: %I64d\n&quot;</span>, ++cas, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="City-Planning"><a href="#City-Planning" class="headerlink" title="City Planning"></a>City Planning</h1><p>Problem Description</p>
+<p>After many years, the buildings in HDU has become very old. It need to rebuild the buildings now. So Mr dragon (the president of HDU’s logistics department ) ask Mr Wan (a very famous engineer) for help.<br>Mr Wan only draw one building on a construction design drawings(all the buildings are rectangle and each edge of buildings’ is paraller or perpendicular to others buildings’ edge ). And total draw n drawings (all the drawings have same width and length . And bottomleft point is (0, 0)). Due to possible overlap of conditions, so when they build a new building, they should to remove all the overlapping part of it. And for each building, HDU have a jury evaluate the value per unit area. Now Mr dragon want to know how to arrange the order of build these buildings can make the highest value.<br>Input</p>
+<p>The first line of input is a number T which indicate the number of cases . (1 &lt; T &lt; 3000);<br>Each test case will begin with a single line containing a single integer n (where 1 &lt;&#x3D; n &lt;&#x3D; 20).<br>Next n line will contain five integers x1, y1, x2, y2 ,value . x1,y1 is bottomleft point and x2,y2 is topright point , value is the value of the buildings’ unit area.((0 &lt;&#x3D; x1, y1, x2, y2 &lt;&#x3D; 10000) (x1 &lt; x2, &amp;&amp; y1 &lt; y2) (1 &lt;&#x3D; value &lt;&#x3D; 22)<br>Output</p>
+<p>For each case. You just ouput the highest value in one line.<br>Sample Input</p>
+<p>1 3 1 1 10 10 4 4 4 15 5 5 7 8 20 30 6<br>Sample Output</p>
+<p>Case 1: 2047</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/HDU%201542%20Atlantis%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%89%AB%E6%8F%8F%E7%BA%BF%C2%B7%E9%9D%A2%E7%A7%AF%E5%B9%B6%EF%BC%89/" rel="prev" title="HDU 1542 Atlantis（线段树扫描线·面积并）">
+                  <i class="fa fa-chevron-left"></i> HDU 1542 Atlantis（线段树扫描线·面积并）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/HDU%201828%20Picture%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%89%AB%E6%8F%8F%E7%BA%BF%C2%B7%E5%91%A8%E9%95%BF%E5%B9%B6%EF%BC%89/" rel="next" title="HDU 1828 Picture（线段树扫描线·周长并）">
+                  HDU 1828 Picture（线段树扫描线·周长并） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

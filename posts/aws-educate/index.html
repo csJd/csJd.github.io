@@ -1,23 +1,343 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 AWS Educate 的 会员院校列表 里了，注册 AWS Educate 后可以得到 $100&#x2F;年 的服务抵扣金额（Credits），配合 AWS 的 Amazon Lightsail 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS Educate &amp; Amazon Lightsail">
+<meta property="og:url" content="http://blog.deng.cf/posts/aws-educate/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 AWS Educate 的 会员院校列表 里了，注册 AWS Educate 后可以得到 $100&#x2F;年 的服务抵扣金额（Credits），配合 AWS 的 Amazon Lightsail 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.se1sl2h6eqp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.ajgxeezmehm.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.w5465qhk2r.png">
+<meta property="article:published_time" content="2019-07-20T22:19:31.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.293Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Practice">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/csJd/res/master/pic/image.png">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/aws-educate/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/aws-educate/","path":"posts/aws-educate/","title":"AWS Educate & Amazon Lightsail"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AWS Educate & Amazon Lightsail | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C-AWS-Educate"><span class="nav-text">注册 AWS Educate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C-AWS-%E8%B4%A6%E6%88%B7%EF%BC%88%E9%9C%80%E4%BF%A1%E7%94%A8%E5%8D%A1%EF%BC%89"><span class="nav-text">注册 AWS 账户（需信用卡）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Amazon-Lightsail"><span class="nav-text">使用 Amazon Lightsail</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="nav-text">新建实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E9%9D%99%E6%80%81-IP"><span class="nav-text">绑定静态 IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-%E8%BF%9E%E6%8E%A5"><span class="nav-text">SSH 连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE"><span class="nav-text">端口开放</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/aws-educate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AWS Educate & Amazon Lightsail | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AWS Educate & Amazon Lightsail
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-20 22:19:31" itemprop="dateCreated datePublished" datetime="2019-07-20T22:19:31+00:00">2019-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Practice/" itemprop="url" rel="index"><span itemprop="name">Practice</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>之前申请的 DigitalOcean 的云主机最近到期了，偶然看到学校已经在 <a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/education/awseducate/">AWS Educate</a> 的 <a target="_blank" rel="noopener" href="https://s3.amazonaws.com/awseducate-list/AWS_Educate_Institutions.pdf">会员院校列表</a> 里了，注册 AWS Educate 后可以得到 $100&#x2F;年 的服务抵扣金额（Credits），配合 AWS 的 <a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/home/instances">Amazon Lightsail</a> 实例可以使用一年多，趁着还是学生，决定折腾一个，这里记录一下过程。</p>
+<span id="more"></span>
+
+<h1 id="注册-AWS-Educate"><a href="#注册-AWS-Educate" class="headerlink" title="注册 AWS Educate"></a>注册 AWS Educate</h1><p>在 <a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/education/awseducate">AWS Educate 主页</a> 点击 「加入 AWS Educate」 ，身份选择 「Student」，下一步，电子邮件需要填学校的邮箱，收到邮件点击链接就可以完成注册。有信用卡（别人的没用过的也行）的话就继续注册 AWS 账户，没有就直接使用 AWS Educate Starter 账户，但是会有 <a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/educate-starter-account/">一些限制</a>，送的抵扣金额也少一些。我注册的是 AWS 账户，以下步骤也是针对 AWS 账户，AWS Educate Starter 账户可能会有所不同。</p>
+<h1 id="注册-AWS-账户（需信用卡）"><a href="#注册-AWS-账户（需信用卡）" class="headerlink" title="注册 AWS 账户（需信用卡）"></a>注册 AWS 账户（需信用卡）</h1><p>注册 AWS 账户需要信用卡，银联的信用卡也是可以的。在 AWS <a target="_blank" rel="noopener" href="https://portal.aws.amazon.com/billing/signup#/start">账户注册站点</a> 按步骤即可完成注册。注册完成后再 “我的账户” 可以看到账户 ID（12 位数字），复制账户 ID，再登录 <a target="_blank" rel="noopener" href="https://www.awseducate.com/signin/SiteLogin">AWS Educate</a> 输入 AWS 账户 ID 就可以得到 $100 的服务抵扣金额的优惠代码，可在 <a target="_blank" rel="noopener" href="https://www.awseducate.com/student/s/awssite">此处</a> 查看。<br>复制该优惠代码，在 <a target="_blank" rel="noopener" href="https://console.aws.amazon.com/billing/home#/credits">AWS 账单 | 服务抵扣金额</a> 处粘贴即可绑定该 $100 到 AWS 账户。</p>
+<p><img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.png" alt="image"></p>
+<h1 id="使用-Amazon-Lightsail"><a href="#使用-Amazon-Lightsail" class="headerlink" title="使用 Amazon Lightsail"></a>使用 Amazon Lightsail</h1><p><a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/home/instances">Amazon Lightsail</a> 类似于 DigitalOcean 之类的 VPS 服务商家，比起之前用过的 EC2 实例要实惠多了，而且可以使用 AWS Credits，每月有 1T 的流量，最低配置只需要 $3.5&#x2F;月，用户体验极棒。</p>
+<h2 id="新建实例"><a href="#新建实例" class="headerlink" title="新建实例"></a>新建实例</h2><p>在 <a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/home/instances">新建实例</a> 的地方点击 「Create Instance」 按步骤即可完成实例的新建，记得区域一定选东京（Tokyo），系统选 Ubuntu 18.04，具体如下图：</p>
+<p><img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.se1sl2h6eqp.png" alt="image"></p>
+<p>Plan 选择最低的 $3.5&#x2F;月 就够用了，点击最下方 「Create instalce」 就可以完成实例的创建，然后就拥有一个在 Tokyo 的云主机啦。</p>
+<h2 id="绑定静态-IP"><a href="#绑定静态-IP" class="headerlink" title="绑定静态 IP"></a>绑定静态 IP</h2><p>Amazon Lightsail 默认是动态 IP，可以手动绑定静态 IP，在 <a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/create/static-ip?region=ap-northeast-1">创建静态 IP</a>  的页面即可绑定，绑定之后的静态 IP 是免费的，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.ajgxeezmehm.png" alt="image"></p>
+<p>点击最下方的 「Create」 即可完成静态 IP 的创建和绑定，就可以使用 SSH 通过该静态 IP 来访问刚新建的 LightSail 实例了。</p>
+<h2 id="SSH-连接"><a href="#SSH-连接" class="headerlink" title="SSH 连接"></a>SSH 连接</h2><p>Lightsail 默认只能使用 SSH key 来连接，可以在 <a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/account/keys">这里下载</a> 用于连接的 SSH key，进入刚创建的 Lightsail 实例的 <a target="_blank" rel="noopener" href="https://lightsail.aws.amazon.com/ls/webapp/ap-northeast-1/instances/Ubuntu-1/connect">详情界面</a>，复制实例的 IP，通过该 IP 和刚下载的 SSH key，就可以连接该实例了.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要修改 SSH key 的权限为 400，仅第一次需要修改</span></span><br><span class="line"><span class="built_in">chmod</span> 400 LightsailDefaultKey-ap-northeast-1.pem</span><br><span class="line"><span class="comment"># ssh 连接</span></span><br><span class="line">ssh -i LightsailDefaultKey-ap-northeast-1.pem ubuntu@[your_ip_address]</span><br></pre></td></tr></table></figure>
+<p>成功连接：</p>
+<p><img src="https://raw.githubusercontent.com/csJd/res/master/pic/image.w5465qhk2r.png" alt="image"></p>
+<h2 id="端口开放"><a href="#端口开放" class="headerlink" title="端口开放"></a>端口开放</h2><p>新建的 Lightsail 实例默认只开启了用于 SSH 连接的 22 端口，如需使用其他端口可在实例详情界面的 「Networking」 的 「Firewall」 手动开启相关端口，不清楚具体开启什么端口可以在 「Application」处选择「All TCP + UDP」开启所有端口。</p>
+<hr>
+<p>然后就可以使用啦~</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Practice/" rel="tag"># Practice</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/two-pointers/" rel="prev" title="双指针技巧的应用">
+                  <i class="fa fa-chevron-left"></i> 双指针技巧的应用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/svm-review/" rel="next" title="SVM Review">
+                  SVM Review <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

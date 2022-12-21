@@ -1,64 +1,845 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post-collapse.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ __('title.archive') }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-archive{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  {#####################}
-  {### ARCHIVE BLOCK ###}
-  {#####################}
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      {% if theme.cheers %}
-      <span class="archive-page-counter">
-        {% set cheers %}
-        {% set posts_length = site.posts.length %}
-        {% if posts_length > 210 %} {% set cheers = 'excellent' %}
-          {% elif posts_length > 130 %} {% set cheers = 'great' %}
-          {% elif posts_length > 80 %} {% set cheers = 'good' %}
-          {% elif posts_length > 50 %} {% set cheers = 'nice' %}
-          {% elif posts_length > 30 %} {% set cheers = 'ok' %}
-        {% else %}
-          {% set cheers = 'um' %}
-        {% endif %}
-        {{ __('cheers.' + cheers) }}! {{ _p("counter.archive_posts", site.posts.length) }} {{ __('keep_on') }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Don&#39;t be evil.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="dd&#39;s site \#">
+<meta property="og:url" content="http://blog.deng.cf/archives/page/8/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="Don&#39;t be evil.">
+<meta property="og:locale">
+<meta property="article:author" content="Deng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/archives/page/8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"default","comments":"","permalink":"","path":"archives/page/8/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Archive | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">dd's site \#</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
       </span>
-      {% endif %}
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
-      {% for post in page.posts %}
+        </div>
+      </div>
+    </div>
 
-        {# Show year #}
-        {% set year %}
-        {% set post.year = date(post.date, 'YYYY') %}
+    
+  </aside>
 
-        {% if post.year !== year %}
-          {% set year = post.year %}
-          <div class="collection-title">
-            <{% if theme.seo %}h2{% else %}h1{% endif %} class="archive-year" id="archive-year-{{ year }}">{{ year }}</{% if theme.seo %}h2{% else %}h1{% endif %}>
-          </div>
-        {% endif %}
-        {# endshow #}
 
-        {{ post_template.render(post) }}
+    </div>
 
-      {% endfor %}
+    <div class="main-inner archive posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        
+        <span class="collection-header">Excellent! 262 posts in total. Keep on posting.</span>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2014</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:36+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/UVa%2012412%20A%20Typical%20Homework(%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F)/" itemprop="url">
+            <span itemprop="name">UVa 12412 A Typical Homework(学生信息管理系统)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:34+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/HDU%204907%20BestCoder3_1%20Task%20schedule/" itemprop="url">
+            <span itemprop="name">HDU 4907 BestCoder3_1 Task schedule</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:32+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/UVa%20156%20Ananagrams(STL,map)/" itemprop="url">
+            <span itemprop="name">UVa 156 Ananagrams(STL,map)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:30+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/UVa%20514%20Rails(%E6%A0%88)/" itemprop="url">
+            <span itemprop="name">UVa 514 Rails(栈)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:27+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/math/POJ%201365%20Prime%20Land/" itemprop="url">
+            <span itemprop="name">POJ 1365 Prime Land</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:23+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ1505&&UVa714%20Copying%20Books(DP)/" itemprop="url">
+            <span itemprop="name">POJ1505&&UVa714 Copying Books(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:21+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/search/POJ%203895%20Cycles%20of%20Lanes(DFS)/" itemprop="url">
+            <span itemprop="name">POJ 3895 Cycles of Lanes(DFS)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:19+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/POJ%203390%20Print%20Words%20in%20Lines(DP)/" itemprop="url">
+            <span itemprop="name">POJ 3390 Print Words in Lines(DP)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:17+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%20213%20Message%20Decoding(World%20Finals1991%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2)/" itemprop="url">
+            <span itemprop="name">UVa 213 Message Decoding(World Finals1991，字符串)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:15+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%20340%20Master-Mind%20Hints/" itemprop="url">
+            <span itemprop="name">UVa 340 Master-Mind Hints</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:13+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%201339%20Ancient%20Cipher/" itemprop="url">
+            <span itemprop="name">UVa 1339 Ancient Cipher</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:11+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%20489%20Hangman%20Judge(%E5%AD%97%E7%AC%A6%E4%B8%B2)/" itemprop="url">
+            <span itemprop="name">UVa 489 Hangman Judge(字符串)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-02T09:50:08+00:00"
+              content="2014-09-02">
+          09-02
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/ds/UVa%20133%20The%20Dole%20Queue/" itemprop="url">
+            <span itemprop="name">UVa 133 The Dole Queue</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-09-01T22:23:18+00:00"
+              content="2014-09-01">
+          09-01
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/ZOJ%203804%20YY's%20Minions(%E6%A8%A1%E6%8B%9F)/" itemprop="url">
+            <span itemprop="name">ZOJ 3804 YY's Minions(模拟)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-31T09:20:01+00:00"
+              content="2014-08-31">
+          08-31
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/UVa%20340%20Master-Mind%20Hints(%E7%8C%9C%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F%E7%9A%84%E6%8F%90%E7%A4%BA)/" itemprop="url">
+            <span itemprop="name">UVa 340 Master-Mind Hints(猜数字游戏的提示)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-31T09:09:36+00:00"
+              content="2014-08-31">
+          08-31
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%201584%20Circular%20Sequence(%E7%8E%AF%E5%BD%A2%E4%B8%B2%E6%9C%80%E5%B0%8F%E5%AD%97%E5%85%B8%E5%BA%8F)/" itemprop="url">
+            <span itemprop="name">UVa 1584 Circular Sequence(环形串最小字典序)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-30T18:36:26+00:00"
+              content="2014-08-30">
+          08-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/Codeforce%20264%20B%20Caisa%20and%20Pylons(%E6%A8%A1%E6%8B%9F)/" itemprop="url">
+            <span itemprop="name">Codeforce 264 B Caisa and Pylons(模拟)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-30T18:29:17+00:00"
+              content="2014-08-30">
+          08-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/Codeforce%20264%20A%20Caisa%20and%20Sugar(%E7%AE%80%E5%8D%95)/" itemprop="url">
+            <span itemprop="name">Codeforce 264 A Caisa and Sugar(简单)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-30T09:36:03+00:00"
+              content="2014-08-30">
+          08-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/math/UVa%201583%20Digit%20Generator(%E6%95%B0%E5%AD%A6)/" itemprop="url">
+            <span itemprop="name">UVa 1583 Digit Generator(数学)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-30T09:28:54+00:00"
+              content="2014-08-30">
+          08-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/string/UVa%20401%20Palindromes(%E9%95%9C%E5%83%8F%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2)/" itemprop="url">
+            <span itemprop="name">UVa 401 Palindromes(镜像回文字符串)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-30T00:10:53+00:00"
+              content="2014-08-30">
+          08-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/math/Codeforces%2017A%20Noldbach%20problem(%E6%95%B0%E5%AD%A6)/" itemprop="url">
+            <span itemprop="name">Codeforces 17A Noldbach problem(数学)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-28T20:56:41+00:00"
+              content="2014-08-28">
+          08-28
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/CodeForces%2016B%20Burglar%20and%20Matches%20(%E8%B4%AA%E5%BF%83)/" itemprop="url">
+            <span itemprop="name">CodeForces 16B Burglar and Matches (贪心)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-28T10:43:05+00:00"
+              content="2014-08-28">
+          08-28
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UESTC%20890%20Card%20Trick(DP%20%E7%BA%B8%E7%89%8C%E9%AD%94%E6%9C%AF)/" itemprop="url">
+            <span itemprop="name">UESTC 890 Card Trick(DP 纸牌魔术)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-27T10:37:07+00:00"
+              content="2014-08-27">
+          08-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/other/HDU%204883%20TIANKENG%E2%80%99s%20restaurant(%E6%A8%A1%E6%8B%9F)/" itemprop="url">
+            <span itemprop="name">HDU 4883 TIANKENG’s restaurant(模拟)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-27T10:27:40+00:00"
+              content="2014-08-27">
+          08-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/HDU%204882%20ZCC%20Loves%20Codefires(%E8%B4%AA%E5%BF%83)/" itemprop="url">
+            <span itemprop="name">HDU 4882 ZCC Loves Codefires(贪心)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-26T09:43:30+00:00"
+              content="2014-08-26">
+          08-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UVa%2010651%20Pebble%20Solitaire%20(DP%20%E5%8D%B5%E7%9F%B3%E6%B8%B8%E6%88%8F%20%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2)/" itemprop="url">
+            <span itemprop="name">UVa 10651 Pebble Solitaire (DP 卵石游戏 记忆化搜索)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-26T08:39:25+00:00"
+              content="2014-08-26">
+          08-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UVa%2010051%20Tower%20of%20Cubes(DP%20%E6%9C%80%E9%95%BF%E7%AB%8B%E4%BD%93%E5%A0%86%E5%8F%A0)/" itemprop="url">
+            <span itemprop="name">UVa 10051 Tower of Cubes(DP 最长立体堆叠)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-25T21:29:38+00:00"
+              content="2014-08-25">
+          08-25
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UVa%2010003%20Cutting%20Sticks(DP%20%E6%9C%80%E4%BC%98%E6%9C%A8%E6%A3%8D%E5%88%87%E5%89%B2)/" itemprop="url">
+            <span itemprop="name">UVa 10003 Cutting Sticks(DP 最优木棍切割)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-25T21:24:16+00:00"
+              content="2014-08-25">
+          08-25
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UVa%20348%20Optimal%20Array%20Multiplication%20Sequence%20(DP%20%E6%9C%80%E4%BC%98%E7%9F%A9%E9%98%B5%E9%93%BE%E4%B9%98)/" itemprop="url">
+            <span itemprop="name">UVa 348 Optimal Array Multiplication Sequence (DP 最优矩阵链乘)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2014-08-25T15:18:17+00:00"
+              content="2014-08-25">
+          08-25
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/oj/dp/UVa%2010534%20Wavio%20Sequence%20(%20DP%20%E4%BA%8C%E5%88%86%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%20)/" itemprop="url">
+            <span itemprop="name">UVa 10534 Wavio Sequence ( DP 二分 最长递增子序列 )</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
 
     </div>
   </div>
-  {#########################}
-  {### END ARCHIVE BLOCK ###}
-  {#########################}
+  
+  
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/archives/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/archives/page/9/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
-  {% include '_partials/pagination.swig' %}
+</div>
+  </main>
 
-{% endblock %}
+  <footer class="footer">
+    <div class="footer-inner">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

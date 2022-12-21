@@ -1,23 +1,1183 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Don&#39;t be evil.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="dd&#39;s site \#">
+<meta property="og:url" content="http://blog.deng.cf/page/9/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="Don&#39;t be evil.">
+<meta property="og:locale">
+<meta property="article:author" content="Deng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/page/9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"default","comments":"","permalink":"","path":"page/9/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">dd's site \#</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/HDU%202612%20Find%20a%20way(%E5%8F%8CBFS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/HDU%202612%20Find%20a%20way(%E5%8F%8CBFS)/" class="post-title-link" itemprop="url">HDU 2612 Find a way(双BFS)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-31 23:16:45" itemprop="dateCreated datePublished" datetime="2015-03-31T23:16:45+00:00">2015-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 在n&#x2F;*m的地图中 ‘Y’和’M’两个人到某一家KFC(在地图上用”@’表示) 所需的最小时间和是多少 他们每走一步都要11分钟</p>
+<p>可以分别以y和m为起点进行一遍bfs 把到每个KFC的时间都存起来 最后看哪家KFC的时间和最小就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>;</span><br><span class="line">int x[] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int y[] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">pair&lt;int, int&gt; q[N * N];</span><br><span class="line">int dy[N][N], dm[N][N], ans, n, m;</span><br><span class="line">char g[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params">int r, int c, char k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int (&amp;d)[N][N] = (k == <span class="string">&#x27;Y&#x27;</span> ? dy : dm); <span class="comment">//d为指向dy或dm的引用</span></span><br><span class="line">    int v[N][N] = &#123;<span class="number">0</span>&#125;, le = <span class="number">0</span>, ri = <span class="number">0</span>, cr, cc;</span><br><span class="line">    q[ri++] = <span class="title function_">make_pair</span>(r, c), v[r][c] = <span class="number">1</span>, d[r][c] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">    &#123;</span><br><span class="line">        r = q[le].<span class="property">first</span>, c = q[le++].<span class="property">second</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            cr = r + x[i], cc = c + y[i];</span><br><span class="line">            <span class="keyword">if</span>(cr &gt;= <span class="number">0</span> &amp;&amp; cr &lt; n &amp;&amp; cc &gt;= <span class="number">0</span> &amp;&amp; cc &lt; m</span><br><span class="line">                    &amp;&amp; v[cr][cc] == <span class="number">0</span> &amp;&amp; g[cr][cc] != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">                q[ri++] = <span class="title function_">make_pair</span>(cr, cc), d[cr][cc] = d[r][c] + <span class="number">1</span>, v[cr][cc] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n , &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        ans = N * N;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, g[i]);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="string">&#x27;Y&#x27;</span> || g[i][j] == <span class="string">&#x27;M&#x27;</span>)  <span class="title function_">bfs</span>(i, j, g[i][j]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="string">&#x27;@&#x27;</span>) ans = <span class="title function_">min</span>(ans, dy[i][j] + dm[i][j]);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans * <span class="number">11</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Find-a-way"><a href="#Find-a-way" class="headerlink" title="Find a way"></a>Find a way</h1><p>Problem Description</p>
+<p>Pass a year learning in Hangzhou, yifenfei arrival hometown Ningbo at finally. Leave Ningbo one year, yifenfei have many people to meet. Especially a good friend Merceki.<br>Yifenfei’s home is at the countryside, but Merceki’s home is in the center of city. So yifenfei made arrangements with Merceki to meet at a KFC. There are many KFC in Ningbo, they want to choose one that let the total time to it be most smallest.<br>Now give you a Ningbo map, Both yifenfei and Merceki can move up, down ,left, right to the adjacent road by cost 11 minutes.<br>Input</p>
+<p>The input contains multiple test cases.<br>Each test case include, first two integers n, m. (2&lt;&#x3D;n,m&lt;&#x3D;200).<br>Next n lines, each line included m character.<br>‘Y’ express yifenfei initial position.<br>‘M’ express Merceki initial position.<br>‘&#x2F;#’ forbid road;<br>‘.’ Road.<br>‘@’ KCF<br>Output</p>
+<p>For each test case output the minimum total time that both yifenfei and Merceki to arrival one of KFC.You may sure there is always have a KFC that can let them meet.<br>Sample Input</p>
+<p>4 4 Y.&#x2F;#@ …. .&#x2F;#.. @..M 4 4 Y.&#x2F;#@ …. .&#x2F;#.. @&#x2F;#.M 5 5 Y..@. .&#x2F;#… .&#x2F;#… @..M. &#x2F;#…&#x2F;#<br>Sample Output</p>
+<p>66 88 66</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/POJ%203279%20Fliptile(%E7%8A%B6%E5%8E%8B%E6%90%9C%E7%B4%A2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/POJ%203279%20Fliptile(%E7%8A%B6%E5%8E%8B%E6%90%9C%E7%B4%A2)/" class="post-title-link" itemprop="url">POJ 3279 Fliptile(状压搜索)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-27 11:21:29" itemprop="dateCreated datePublished" datetime="2015-03-27T11:21:29+00:00">2015-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 把一个n&#x2F;*m矩阵中的1全部变成0所需的最少步数 改变某个格子时其相邻的4个格子也一起改变</p>
+<p>只要知道第一行改变了哪些后面的就都确定了 因为上一行对应位置是1的位置必须改变 上一行是0的一定不能改变</p>
+<p>所以可以根据第一行的状态推出后面所有行的状态 直到最后一行结束 如果最后一行不是全0的话 这种状态就是不可行的</p>
+<p>那么我们只用枚举第一行的所有状态就够了 m&lt;&#x3D;16 用二进制可以比较方便的枚举 对应位是1就表示改变状态 0就不改变 最后打印改变状态次数最少的可行结果就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">16</span>;</span><br><span class="line">int g[N][N], t[N][N], f[N][N];</span><br><span class="line">int cnt, n, m;</span><br><span class="line">int x[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int y[<span class="number">4</span>] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">flip</span>(<span class="params">int i, int j</span>)</span><br><span class="line">&#123;</span><br><span class="line">    ++cnt, f[i][j] = <span class="number">1</span>;</span><br><span class="line">    t[i][j] = !t[i][j];</span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">4</span>; ++k)</span><br><span class="line">        <span class="keyword">if</span>(i + x[k] &gt; -<span class="number">1</span> &amp;&amp; j + y[k] &gt; -<span class="number">1</span>)</span><br><span class="line">            t[i + x[k]][j + y[k]] ^= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">ok</span>(<span class="params">int k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">memcpy</span>(t, g, <span class="title function_">sizeof</span>(t));</span><br><span class="line">    <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">        <span class="keyword">if</span>(k &amp; (<span class="number">1</span> &lt;&lt; (m - <span class="number">1</span> - j))) <span class="title function_">flip</span>(<span class="number">0</span>, j);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">            <span class="keyword">if</span>(t[i - <span class="number">1</span>][j]) <span class="title function_">flip</span>(i, j);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">        <span class="keyword">if</span>(t[n - <span class="number">1</span>][j]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int ans, p;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;g[i][j]);</span><br><span class="line">        ans = n * m + <span class="number">1</span>, p = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; m); ++i)</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">ok</span>(i) &amp;&amp; cnt &lt; ans) ans = cnt, p = i;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">memset</span>(f, <span class="number">0</span>, <span class="title function_">sizeof</span>(f));</span><br><span class="line">        <span class="keyword">if</span>(p &gt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">ok</span>(p);</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">                <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">                    <span class="title function_">printf</span>(<span class="string">&quot;%d%c&quot;</span>, f[i][j], j &lt; m - <span class="number">1</span> ? <span class="string">&#x27; &#x27;</span> : <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">puts</span>(<span class="string">&quot;IMPOSSIBLE&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Fliptile</p>
+<p>Description<br>Farmer John knows that an intellectually satisfied cow is a happy cow who will give more milk. He has arranged a brainy activity for cows in which they manipulate an <em>M</em> × <em>N</em> grid (1 ≤ <em>M</em> ≤ 15; 1 ≤ <em>N</em> ≤ 15) of square tiles, each of which is colored black on one side and white on the other side.</p>
+<p>As one would guess, when a single white tile is flipped, it changes to black; when a single black tile is flipped, it changes to white. The cows are rewarded when they flip the tiles so that each tile has the white side face up. However, the cows have rather large hooves and when they try to flip a certain tile, they also flip all the adjacent tiles (tiles that share a full edge with the flipped tile). Since the flips are tiring, the cows want to minimize the number of flips they have to make.</p>
+<p>Help the cows determine the minimum number of flips required, and the locations to flip to achieve that minimum. If there are multiple ways to achieve the task with the minimum amount of flips, return the one with the least lexicographical ordering in the output when considered as a string. If the task is impossible, print one line with the word “IMPOSSIBLE”.</p>
+<p>Input</p>
+<p>Line 1: Two space-separated integers: <em>M</em> and <em>N</em><br>Lines 2..<em>M</em>+1: Line <em>i</em>+1 describes the colors (left to right) of row i of the grid with <em>N</em> space-separated integers which are 1 for black and 0 for white</p>
+<p>Output</p>
+<p>Lines 1..<em>M</em>: Each line contains <em>N</em> space-separated integers, each specifying how many times to flip that particular location.</p>
+<p>Sample Input</p>
+<p>4 4 1 0 0 1 0 1 1 0 0 1 1 0 1 0 0 1</p>
+<p>Sample Output</p>
+<p>0 0 0 0 1 0 0 1 1 0 0 1 0 0 0 0</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/POJ%201321%20%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98(DFS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/POJ%201321%20%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98(DFS)/" class="post-title-link" itemprop="url">POJ 1321 棋盘问题(DFS)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-25 20:03:41" itemprop="dateCreated datePublished" datetime="2015-03-25T20:03:41+00:00">2015-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 中文</p>
+<p>简单的搜索题 标记列是否已经有子进行深搜即可 k可能小于n 所以每行都有放子或不放子两种选择</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10</span>;</span><br><span class="line">int n, k, ans, v[N];</span><br><span class="line">char g[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dfs</span>(<span class="params">int r, int cnt</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(cnt &gt;= k) ++ans;</span><br><span class="line">    <span class="keyword">if</span>(r &gt;= n || cnt &gt;= k) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span>(int c = <span class="number">0</span>; c &lt; n; ++c)   <span class="comment">//第r行c列放一个子</span></span><br><span class="line">        <span class="keyword">if</span>((!v[c]) &amp;&amp; g[r][c] == <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">            v[c] = <span class="number">1</span>, <span class="title function_">dfs</span>(r + <span class="number">1</span>, cnt + <span class="number">1</span>), v[c] = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">dfs</span>(r + <span class="number">1</span>, cnt);   <span class="comment">//第r行不放子</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k), n + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, g[i]);</span><br><span class="line">        <span class="title function_">dfs</span>(ans = <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>棋盘问题</p>
+<p>Description<br>在一个给定形状的棋盘（形状可能是不规则的）上面摆放棋子，棋子没有区别。要求摆放时任意的两个棋子不能放在棋盘中的同一行或者同一列，请编程求解对于给定形状和大小的棋盘，摆放k个棋子的所有可行的摆放方案C。</p>
+<p>Input</p>
+<p>输入含有多组测试数据。<br>每组数据的第一行是两个正整数，n k，用一个空格隔开，表示了将在一个n&#x2F;*n的矩阵内描述棋盘，以及摆放棋子的数目。 n &lt;&#x3D; 8 , k &lt;&#x3D; n<br>当为-1 -1时表示输入结束。<br>随后的n行描述了棋盘的形状：每行有n个字符，其中 &#x2F;# 表示棋盘区域， . 表示空白区域（数据保证不出现多余的空白行或者空白列）。</p>
+<p>Output</p>
+<p>对于每一组数据，给出一行输出，输出摆放的方案数目C （数据保证C&lt;2^31）。</p>
+<p>Sample Input</p>
+<p>2 1 &#x2F;#. .&#x2F;# 4 4 …&#x2F;# ..&#x2F;#. .&#x2F;#.. &#x2F;#… -1 -1</p>
+<p>Sample Output</p>
+<p>2 1</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/POJ%201434%20Fill%20the%20Cisterns!%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/math/POJ%201434%20Fill%20the%20Cisterns!%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89/" class="post-title-link" itemprop="url">POJ 1434 Fill the Cisterns!（二分）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-23 22:36:47" itemprop="dateCreated datePublished" datetime="2015-03-23T22:36:47+00:00">2015-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 有n个互相连通的长方体水箱 给出每个水箱的位置和长宽高 判断放v体积的水时水面的高度 精确到两位小数</p>
+<p>可以把每个水箱的位置 底面积 和高存起来 然用体积v二分高度 就是要注意精度的处理 最好转换成整数运算</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.<span class="property">util</span>.*;</span><br><span class="line">public <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	<span class="keyword">static</span> int N = <span class="number">50005</span>;</span><br><span class="line">	<span class="keyword">static</span> long[] b = <span class="keyword">new</span> long[N];</span><br><span class="line">	<span class="keyword">static</span> long[] h = <span class="keyword">new</span> long[N];</span><br><span class="line">	<span class="keyword">static</span> long[] s = <span class="keyword">new</span> long[N];</span><br><span class="line">	<span class="keyword">static</span> int n;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> long <span class="title function_">getv</span>(<span class="params">long k</span>) &#123;</span><br><span class="line">		long v = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">			<span class="keyword">if</span> (b[i] + h[i] &lt;= k) v += s[i] * h[i];</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (b[i] &lt; k) v += (k - b[i]) * s[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> v;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span>(<span class="params"><span class="built_in">String</span> args[]</span>) &#123;</span><br><span class="line">		<span class="title class_">Scanner</span> <span class="keyword">in</span> = <span class="keyword">new</span> <span class="title class_">Scanner</span>(<span class="title class_">System</span>.<span class="property">in</span>);</span><br><span class="line">		int cas = <span class="keyword">in</span>.<span class="title function_">nextInt</span>();</span><br><span class="line">		<span class="keyword">while</span> (cas-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			n = <span class="keyword">in</span>.<span class="title function_">nextInt</span>();</span><br><span class="line">			long l = <span class="number">0</span>, r = <span class="number">0</span>, f = <span class="number">0</span>, mid = <span class="number">0</span>, v;</span><br><span class="line">			<span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">				b[i] = <span class="keyword">in</span>.<span class="title function_">nextLong</span>() * <span class="number">1000</span>;</span><br><span class="line">				h[i] = <span class="keyword">in</span>.<span class="title function_">nextLong</span>() * <span class="number">1000</span>;</span><br><span class="line">				s[i] = <span class="keyword">in</span>.<span class="title function_">nextLong</span>() * <span class="keyword">in</span>.<span class="title function_">nextLong</span>();</span><br><span class="line">				f += s[i] * h[i];</span><br><span class="line">				<span class="keyword">if</span> (b[i] + h[i] &gt; r)  r = b[i] + h[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> ((v = <span class="keyword">in</span>.<span class="title function_">nextLong</span>() * <span class="number">1000</span>) &gt; f)</span><br><span class="line">				<span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(<span class="string">&quot;OVERFLOW&quot;</span>);</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">while</span> (r &gt;= l) &#123;</span><br><span class="line">					mid = (r + l) / <span class="number">2</span>;</span><br><span class="line">					<span class="keyword">if</span> (<span class="title function_">getv</span>(mid) &lt; v) l = mid + <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">else</span> r = mid - <span class="number">1</span>;		</span><br><span class="line">				&#125;</span><br><span class="line">				double ans = l / <span class="number">1000.0</span>;</span><br><span class="line">				<span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(<span class="title class_">String</span>.<span class="title function_">format</span>(<span class="string">&quot;%.2f&quot;</span>, ans));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">in</span>.<span class="title function_">close</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Fill the Cisterns!</p>
+<p>Description<br>During the next century certain regions on earth will experience severe water shortages. The old town of Uqbar has already started to prepare itself for the worst. Recently they created a network of pipes connecting the cisterns that distribute water in each neighbourhood, making it easier to fill them at once from a single source of water. But in case of water shortage the cisterns above a certain level will be empty since the water will to the cisterns below.<br>  <img src="/../images/es-1434_1.jpg.png">  You have been asked to write a program to compute the level to which cisterns will be lled with a certain volume of water, given the dimensions and position of each cistern. To simplify we will neglect the volume of water in the pipes.<br>Task<br>Write a program which for each data set:<br>reads the description of cisterns and the volume of water,<br>computes the level to which the cisterns will be filled with the given amount of water,<br>writes the result.</p>
+<p>Input</p>
+<p>The first line of the input contains the number of data sets k, 1 &lt;&#x3D; k &lt;&#x3D; 30. The data sets follow.<br>The first line of each data set contains one integer n, the number of cisterns, 1 &lt;&#x3D; n &lt;&#x3D; 50 000. Each of the following n lines consists of 4 nonnegative integers, separated by single spaces: b, h, w, d - the base level of the cistern, its height, width and depth in meters, respectively. The integers satisfy 0 &lt;&#x3D; b &lt;&#x3D; 10^6 and 1 &lt;&#x3D; h &#x2F;* w &#x2F;* d &lt;&#x3D; 40 000. The last line of the data set contains an integer V - the volume of water in cubic meters to be injected into the network. Integer V satisfies 1 &lt;&#x3D; V &lt;&#x3D; 2 &#x2F;* 10^9.</p>
+<p>Output</p>
+<p>The output should consist of exactly d lines, one line for each data set.<br>Line i, 1 &lt;&#x3D; i &lt;&#x3D; d, should contain the level that the water will reach, in meters, rounded up to two fractional digits, or the word ‘OVERFLOW’, if the volume of water exceeds the total capacity of the cisterns.</p>
+<p>Sample Input</p>
+<p>3 2 0 1 1 1 2 1 1 1 1 4 11 7 5 1 15 6 2 2 5 8 5 1 19 4 8 1 132 4 11 7 5 1 15 6 2 2 5 8 5 1 19 4 8 1 78</p>
+<p>Sample Output</p>
+<p>1.00 OVERFLOW 17.00</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/Codeforces%20527C%20Glass%20Carving(Set)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/Codeforces%20527C%20Glass%20Carving(Set)/" class="post-title-link" itemprop="url">Codeforces 527C Glass Carving(Set)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-18 23:26:44" itemprop="dateCreated datePublished" datetime="2015-03-18T23:26:44+00:00">2015-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 一块w&#x2F;*h的玻璃 对其进行n次切割 每次切割都是垂直或者水平的 输出每次切割后最大单块玻璃的面积</p>
+<p>用两个set存储每次切割的位置 就可以比较方便的把每次切割产生和消失的长宽存下来 每次切割后剩下的最大长宽的积就是答案了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">200005</span>;</span><br><span class="line">typedef long long <span class="variable constant_">LL</span>;</span><br><span class="line">set&lt;int&gt;::iterator i, j;</span><br><span class="line">set&lt;int&gt; ve, ho;  <span class="comment">//记录所有边的位置</span></span><br><span class="line">int wi[N], hi[N];  <span class="comment">//记录存在的边长值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">cut</span>(<span class="params">set&lt;int&gt; &amp;s, int *a, int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    s.<span class="title function_">insert</span>(p), i = j = s.<span class="title function_">find</span>(p);</span><br><span class="line">    --i, ++j, --a[*j - *i];  <span class="comment">//除掉被分开的长宽</span></span><br><span class="line">    ++a[p - *i], ++a[*j - p];  <span class="comment">//新产生了两个长宽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int w, n, h, p, mw, mh;</span><br><span class="line">    char s[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;w, &amp;h, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(wi, <span class="number">0</span>, <span class="title function_">sizeof</span>(wi)), <span class="title function_">memset</span>(hi, <span class="number">0</span>, <span class="title function_">sizeof</span>(hi));</span><br><span class="line">        ve.<span class="title function_">clear</span>(), ho.<span class="title function_">clear</span>();</span><br><span class="line">        ve.<span class="title function_">insert</span>(<span class="number">0</span>), ho.<span class="title function_">insert</span>(<span class="number">0</span>);</span><br><span class="line">        ve.<span class="title function_">insert</span>(w), ho.<span class="title function_">insert</span>(h);</span><br><span class="line">        wi[w] = hi[h] = <span class="number">1</span>;</span><br><span class="line">        mw = w , mh = h;</span><br><span class="line">        <span class="keyword">while</span>(n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s%d&quot;</span>, s, &amp;p);</span><br><span class="line">            <span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">&#x27;V&#x27;</span>) <span class="title function_">cut</span>(ve, wi, p);</span><br><span class="line">            <span class="keyword">else</span> <span class="title function_">cut</span>(ho, hi, p);</span><br><span class="line">            <span class="keyword">while</span>(!wi[mw]) --mw;</span><br><span class="line">            <span class="keyword">while</span>(!hi[mh]) --mh;</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="title function_">LL</span>(mw)*<span class="title function_">LL</span>(mh));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C. Glass Carving</p>
+<p>Leonid wants to become a glass carver (the person who creates beautiful artworks by cutting the glass). He already has a rectangular <em>w</em>mm ×  <em>h</em> mm sheet of glass, a diamond glass cutter and lots of enthusiasm. What he lacks is understanding of what to carve and how.</p>
+<p>In order not to waste time, he decided to practice the technique of carving. To do this, he makes vertical and horizontal cuts through the entire sheet. This process results in making smaller rectangular fragments of glass. Leonid does not move the newly made glass fragments. In particular, a cut divides each fragment of glass that it goes through into smaller fragments.</p>
+<p>After each cut Leonid tries to determine what area the largest of the currently available glass fragments has. Since there appear more and more fragments, this question takes him more and more time and distracts him from the fascinating process.</p>
+<p>Leonid offers to divide the labor — he will cut glass, and you will calculate the area of the maximum fragment after each cut. Do you agree?<br>Input</p>
+<p>The first line contains three integers <em>w</em>, <em>h</em>, <em>n</em> (2 ≤ <em>w</em>, <em>h</em> ≤ 200 000, 1 ≤ <em>n</em> ≤ 200 000).</p>
+<p>Next <em>n</em> lines contain the descriptions of the cuts. Each description has the form <em>H y</em> or <em>V x</em>. In the first case Leonid makes the horizontal cut at the distance <em>y</em> millimeters (1 ≤ <em>y</em> ≤ <em>h</em> - 1) from the lower edge of the original sheet of glass. In the second case Leonid makes a vertical cut at distance <em>x</em> (1 ≤ <em>x</em> ≤ <em>w</em> - 1) millimeters from the left edge of the original sheet of glass. It is guaranteed that Leonid won’t make two identical cuts.</p>
+<p>Output</p>
+<p>After each cut print on a single line the area of the maximum available glass fragment in mm2.<br>Sample test(s)</p>
+<p>input 4 3 4 H 2 V 2 V 3 V 1</p>
+<p>output 8 4 4 2<br>input 7 6 5 H 4 V 3 V 5 H 2 V 1</p>
+<p>output 28 16 12 6 4</p>
+<p>Note</p>
+<p>Picture for the first sample test:</p>
+<p><img src="/../images/eforces.com-76f76c4b91db5d63d733cd37c91bce09001259b7-.png">  Picture for the second sample test:  <img src="/../images/eforces.com-70c98df3646740cda1a5e6455b065203e1953191-.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/string/Codeforces%20527B%20Error%20Correct%20System(%E5%AD%97%E7%AC%A6%E4%B8%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/string/Codeforces%20527B%20Error%20Correct%20System(%E5%AD%97%E7%AC%A6%E4%B8%B2)/" class="post-title-link" itemprop="url">Codeforces 527B Error Correct System(字符串)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-18 19:49:15" itemprop="dateCreated datePublished" datetime="2015-03-18T19:49:15+00:00">2015-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 两个长度为n的只由小写字母组成的字符串a.b 问能否同时交换两个串两个对应位置的字符 使得两个串相同位置字符不相同的数目最小</p>
+<p>因为只能交换一次 所以只可能减少0,1或2个 用p[i][j]记录a串字符i对应位置b串字符为j的位置 不存在的为0 那么有</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">200005</span>, M = <span class="number">26</span>;</span><br><span class="line">char a[N], b[N];</span><br><span class="line">int p[M][M];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, d, u, v, flag;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(p, <span class="number">0</span>, <span class="title function_">sizeof</span>(p));</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%s%s&quot;</span>, a, b);</span><br><span class="line">        <span class="keyword">for</span>(int i = d = flag = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">if</span>(a[i] != b[i]) ++d, p[a[i] - <span class="string">&#x27;a&#x27;</span>][b[i] - <span class="string">&#x27;a&#x27;</span>] = i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; M; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; M; ++j)</span><br><span class="line">                <span class="keyword">if</span>((u = p[i][j]) &amp;&amp; (v = p[j][i])) flag = <span class="number">2</span>, i = j = M;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!flag) <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; M; ++i) <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; M; ++j) <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; M; ++k)</span><br><span class="line">                      <span class="keyword">if</span>((u = p[i][j]) &amp;&amp; (v = p[j][k])) flag = <span class="number">1</span>, i = j = k = M;</span><br><span class="line">        <span class="keyword">if</span>(!flag) u = v = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n%d %d\n&quot;</span>, d - flag, u, v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>B. Error Correct System</p>
+<p>Ford Prefect got a job as a web developer for a small company that makes towels. His current work task is to create a search engine for the website of the company. During the development process, he needs to write a subroutine for comparing strings <em>S</em> and <em>T</em> of equal length to be “similar”. After a brief search on the Internet, he learned about the Hamming distance between two strings <em>S</em> and <em>T</em> of the same length, which is defined as the number of positions in which <em>S</em> and <em>T</em> have different characters. For example, the Hamming distance between words “permanent” and “pergament” is two, as these words differ in the fourth and sixth letters.</p>
+<p>Moreover, as he was searching for information, he also noticed that modern search engines have powerful mechanisms to correct errors in the request to improve the quality of search. Ford doesn’t know much about human beings, so he assumed that the most common mistake in a request is swapping two arbitrary letters of the string (not necessarily adjacent). Now he wants to write a function that determines which two letters should be swapped in string <em>S</em>, so that the Hamming distance between a new string <em>S</em> and string <em>T</em> would be as small as possible, or otherwise, determine that such a replacement cannot reduce the distance between the strings.</p>
+<p>Help him do this!<br>Input</p>
+<p>The first line contains integer <em>n</em> (1 ≤ <em>n</em> ≤ 200 000) — the length of strings <em>S</em> and <em>T</em>.</p>
+<p>The second line contains string <em>S</em>.</p>
+<p>The third line contains string <em>T</em>.</p>
+<p>Each of the lines only contains lowercase Latin letters.</p>
+<p>Output</p>
+<p>In the first line, print number <em>x</em> — the minimum possible Hamming distance between strings <em>S</em> and <em>T</em> if you swap at most one pair of letters in <em>S</em>.</p>
+<p>In the second line, either print the indexes <em>i</em> and <em>j</em> (1 ≤ <em>i</em>, <em>j</em> ≤ <em>n</em>, <em>i</em> ≠ <em>j</em>), if reaching the minimum possible distance is possible by swapping letters on positions <em>i</em> and <em>j</em>, or print “-1 -1”, if it is not necessary to swap characters.</p>
+<p>If there are multiple possible answers, print any of them.<br>Sample test(s)</p>
+<p>input 9 pergament permanent</p>
+<p>output 1 4 6<br>input 6 wookie cookie</p>
+<p>output 1 -1 -1<br>input 4 petr egor</p>
+<p>output 2 1 2<br>input 6 double bundle</p>
+<p>output 2 4 1</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/hiho%E4%B8%80%E4%B8%8B%2037%20(%E6%97%A0%E5%BA%8F%E4%BA%8C%E5%88%86%C2%B7k%E5%B0%8F%E6%95%B0)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/hiho%E4%B8%80%E4%B8%8B%2037%20(%E6%97%A0%E5%BA%8F%E4%BA%8C%E5%88%86%C2%B7k%E5%B0%8F%E6%95%B0)/" class="post-title-link" itemprop="url">hiho一下 37 (无序二分·k小数)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-16 00:49:06" itemprop="dateCreated datePublished" datetime="2015-03-16T00:49:06+00:00">2015-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 中文</p>
+<p>可以先排序然后输出第k个 复杂度为O(N&#x2F;*logN) 但有更快的方法 其实二分时只要能保证mid左边的数都比mid小 mid右边的数都比mid大就能进行划分了 对于k不在的区间就不用管了于是可以用到快排的思想</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000005</span>;</span><br><span class="line">int a[N];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, k, l, r, le, ri, m;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i) <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span>(n &lt; k) &#123;<span class="title function_">puts</span>(<span class="string">&quot;-1&quot;</span>); <span class="keyword">continue</span>;&#125;</span><br><span class="line">        l = <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            m = a[le = l], ri = r;</span><br><span class="line">            <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span>(le &lt; ri &amp;&amp; a[ri] &gt; m) --ri;</span><br><span class="line">                a[le] = a[ri];</span><br><span class="line">                <span class="keyword">while</span>(le &lt; ri &amp;&amp; a[le] &lt; m) ++le;</span><br><span class="line">                a[ri] = a[le];</span><br><span class="line">            &#125;</span><br><span class="line">            a[le] = m;</span><br><span class="line">            <span class="keyword">if</span>(le &lt; k - <span class="number">1</span>) l = le + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = le - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a[r + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间限制: 10000ms</p>
+<p>单点时限: 1000ms<br>内存限制: 256MB</p>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选择一个k，然后拆掉稀有度第k小的船。 已知每一艘船都有自己的稀有度，Nettle现在把所有船的稀有度值告诉你，希望你能帮他找出目标船。</p>
+<p><a target="_blank" rel="noopener" href="http://hihocoder.com/contest/hiho37/problem/1#">提示：非有序数组的二分查找之二</a></p>
+<h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。</p>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br>样例输入 10 4 1732 4176 2602 6176 1303 6207 3125 1 1011 6600 样例输出 1732</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/URAL%201762%20Search%20for%20a%20Hiding-Place(%E6%95%B0%E5%AD%A6%C2%B7%E6%A8%A1%E6%8B%9F)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/math/URAL%201762%20Search%20for%20a%20Hiding-Place(%E6%95%B0%E5%AD%A6%C2%B7%E6%A8%A1%E6%8B%9F)/" class="post-title-link" itemprop="url">URAL 1762 Search for a Hiding-Place(数学·模拟)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-11 21:32:21" itemprop="dateCreated datePublished" datetime="2015-03-11T21:32:21+00:00">2015-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 你在一个n&#x2F;*m个白色正方形格子组成的矩形的某个顶点格子 你沿着45度角的方向走 到了边界就改变方向90度 每次经过一个格子都改变他原来的颜（白或灰） 求你走到另一个顶点格子时矩形中有多少格子是灰色的</p>
+<p>这题可以用公式也可以直接模拟 模拟就是一直向右移n-1位 每次超过边界就可以把边界向右移m-1位 用cnt记录超过边界的次数 那么每次都会经过cnt个已经走过的格子 (每个格子最多经过2次) 答案也就减去2&#x2F;*cnt 直到刚好到达边界</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    ll n, m, cur, cnt, ans, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; m) <span class="title function_">swap</span>(n, m);</span><br><span class="line">        cur = ans = <span class="number">1</span>, cnt = <span class="number">0</span>, k = m;</span><br><span class="line">        <span class="keyword">while</span>(cur != k)</span><br><span class="line">        &#123;</span><br><span class="line">            cur += n - <span class="number">1</span>, ans += n - <span class="number">1</span> - <span class="number">2</span> * cnt;</span><br><span class="line">            <span class="keyword">if</span>(cur &gt; k) k += m - <span class="number">1</span>, ++cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Search-for-a-Hiding-Place"><a href="#Search-for-a-Hiding-Place" class="headerlink" title="Search for a Hiding-Place"></a>Search for a Hiding-Place</h2><p><img src="/../images/-image-get.aspx-76e9e33b-e7d0-476b-b059-544383bb9e8d.png" alt="Problem illustration"></p>
+<p>Scooby-Doo is fond of adventures. This time he wanted to find a hiding-place in a vampire castle. After a long search, Scooby ended up in a huge rectangular hall with four entrances, one in each corner, through one of which he had entered. The floor was paved with white square tiles. Scooby thought that the hiding-place was under one of these tiles. He started searching for it by turning the tiles over, the grey side up. He began his search from a corner moving at an angle of 45° to the walls. Each time he came to a wall, he made a 90° turn. If he stepped on a grey tile, he turned it back the white side up. The search went on until Scooby reached an entrance at one of the corners. Then, not having found the hiding-place, the tired dog sighed and went out to have a snack.<br>Given the dimensions of the hall, calculate the total number of tiles that were turned the grey side up at the end of the search.</p>
+<p>The only input line contains integers <em>n</em> and <em>m</em> separated with a space. They are the length and width of the hall measured in tiles (2 ≤ <em>n</em>, <em>m</em> ≤ 1 000 000).</p>
+<p>In the only line output the number of grey tiles in the hall after Scooby-Doo’s search.</p>
+<p>input output 7 5 11 2 3 3</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/CodeForces%20327D%20Block%20Tower%EF%BC%88DFS%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/CodeForces%20327D%20Block%20Tower%EF%BC%88DFS%EF%BC%89/" class="post-title-link" itemprop="url">CodeForces 327D Block Tower（DFS）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-10 23:25:09" itemprop="dateCreated datePublished" datetime="2015-03-10T23:25:09+00:00">2015-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你一个城市的地图 你可以在地图上的 . 上建房子&#x2F;#上不能建房子 红房子可以装200个人 蓝房子可以装100个人 只有相邻位置有蓝房子时才能建红房子 你也可以拆掉已经建成的房子 拆掉后该点又变成 .</p>
+<p>这题想到了就很容易了 因为没有限制要步数最少 可以先把左右的地方都建成蓝房子 然后就变成求连通块的题了 每个蓝房子连通块内依次拆掉建红房子 最终就只剩下一个蓝房子了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">505</span>;</span><br><span class="line">char g[N][N];</span><br><span class="line">stack&lt;pair&lt;int, int&gt; &gt; s;</span><br><span class="line">int x[] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">int y[] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int n, m, a, b, cnt, is_first;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dfs</span>(<span class="params">int i, int j</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int r, c;</span><br><span class="line">    <span class="keyword">if</span>(is_first) is_first = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> s.<span class="title function_">push</span>(<span class="title function_">make_pair</span>(i, j));</span><br><span class="line">    g[i][j] = <span class="string">&#x27;R&#x27;</span>, cnt += <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">4</span>; ++k)</span><br><span class="line">    &#123;</span><br><span class="line">        r = i + x[k], c = j + y[k];</span><br><span class="line">        <span class="keyword">if</span>(g[r][c] == <span class="string">&#x27;.&#x27;</span>) <span class="title function_">dfs</span>(r, c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, g[i] + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="string">&#x27;.&#x27;</span>)  is_first = <span class="number">1</span>, cnt -= <span class="number">2</span>, <span class="title function_">dfs</span>(i, j);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cnt);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] != <span class="string">&#x27;#&#x27;</span>) <span class="title function_">printf</span>(<span class="string">&quot;B %d %d\n&quot;</span>, i, j);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!s.<span class="title function_">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            a = s.<span class="title function_">top</span>().<span class="property">first</span>, b = s.<span class="title function_">top</span>().<span class="property">second</span>;</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;D %d %d\nR %d %d\n&quot;</span>, a, b, a, b);</span><br><span class="line">            s.<span class="title function_">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Block Tower</p>
+<p>After too much playing on paper, Iahub has switched to computer games. The game he plays is called “Block Towers”. It is played in a rectangular grid with <em>n</em> rows and <em>m</em> columns (it contains <em>n</em> × <em>m</em> cells). The goal of the game is to build your own city. Some cells in the grid are big holes, where Iahub can’t build any building. The rest of cells are empty. In some empty cell Iahub can build exactly one tower of two following types:</p>
+<p>Iahub is also allowed to destroy a building from any cell. He can do this operation as much as he wants. After destroying a building, the other buildings are not influenced, and the destroyed cell becomes empty (so Iahub can build a tower in this cell if needed, see the second example for such a case).</p>
+<p>Iahub can convince as many population as he wants to come into his city. So he needs to configure his city to allow maximum population possible. Therefore he should find a sequence of operations that builds the city in an optimal way, so that total population limit is as large as possible.</p>
+<p>He says he’s the best at this game, but he doesn’t have the optimal solution. Write a program that calculates the optimal one, to show him that he’s not as good as he thinks.<br>Input</p>
+<p>The first line of the input contains two integers <em>n</em> and <em>m</em> (1 ≤ <em>n</em>, <em>m</em> ≤ 500). Each of the next <em>n</em> lines contains <em>m</em> characters, describing the grid. The <em>j</em>-th character in the <em>i</em>-th line is ‘.’ if you’re allowed to build at the cell with coordinates (<em>i</em>, <em>j</em>) a tower (empty cell) or ‘&#x2F;#’ if there is a big hole there.</p>
+<p>Output</p>
+<p>Print an integer <em>k</em> in the first line (0 ≤ <em>k</em> ≤ 106) — the number of operations Iahub should perform to obtain optimal result.</p>
+<p>Each of the following <em>k</em> lines must contain a single operation in the following format:</p>
+<p>If there are multiple solutions you can output any of them. Note, that you shouldn’t minimize the number of operations.<br>Sample test(s)</p>
+<p>input 2 3 ..&#x2F;# .&#x2F;#.</p>
+<p>output 4 B 1 1 R 1 2 R 2 1 B 2 3<br>input 1 3 …</p>
+<p>output 5 B 1 1 B 1 2 R 1 3 D 1 2 R 1 2</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/POJ%203258%20River%20Hopscotch%EF%BC%88%E4%BA%8C%E5%88%86%C2%B7%E6%9C%80%E5%B0%8F%E8%B7%9D%E7%A6%BB%E6%9C%80%E5%A4%A7)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/math/POJ%203258%20River%20Hopscotch%EF%BC%88%E4%BA%8C%E5%88%86%C2%B7%E6%9C%80%E5%B0%8F%E8%B7%9D%E7%A6%BB%E6%9C%80%E5%A4%A7)/" class="post-title-link" itemprop="url">POJ 3258 River Hopscotch（二分·最小距离最大)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-09 11:33:17" itemprop="dateCreated datePublished" datetime="2015-03-09T11:33:17+00:00">2015-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 一条河两岸之间有n个石头 求取走m个石头后 使得两个石头间距离的最小值最大</p>
+<p>感觉关键是理解题意 简单的二分 二分最小距离 看要取走多少个(cnt)石头 cnt&lt;&#x3D;m的话 说明最小距离还可以增大 这样就可以二分出答案了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">50005</span>;</span><br><span class="line">int p[N], l, n, m;</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">ok</span>(<span class="params">int k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int last = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i] - p[last] &lt; k) ++cnt;</span><br><span class="line">        <span class="keyword">else</span> last = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt &lt;= m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int le, ri, mid;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;l, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        p[++n] = l;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p[i]);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">sort</span>(p, p + n);</span><br><span class="line">        le = <span class="number">0</span>, ri = l;</span><br><span class="line">        <span class="keyword">while</span>(le &lt;= ri)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (le + ri) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">ok</span>(mid)) le = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> ri = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, le - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>River Hopscotch</p>
+<p>Description<br>Every year the cows hold an event featuring a peculiar version of hopscotch that involves carefully jumping from rock to rock in a river. The excitement takes place on a long, straight river with a rock at the start and another rock at the end, <em>L</em> units away from the start (1 ≤ <em>L</em> ≤ 1,000,000,000). Along the river between the starting and ending rocks, <em>N</em> (0 ≤<em>N</em> ≤ 50,000) more rocks appear, each at an integral distance <em>Di</em> from the start (0 &lt; <em>Di</em> &lt; <em>L</em>).</p>
+<p>To play the game, each cow in turn starts at the starting rock and tries to reach the finish at the ending rock, jumping only from rock to rock. Of course, less agile cows never make it to the final rock, ending up instead in the river.</p>
+<p>Farmer John is proud of his cows and watches this event each year. But as time goes by, he tires of watching the timid cows of the other farmers limp across the short distances between rocks placed too closely together. He plans to remove several rocks in order to increase the shortest distance a cow will have to jump to reach the end. He knows he cannot remove the starting and ending rocks, but he calculates that he has enough resources to remove up to <em>M</em>rocks (0 ≤ <em>M</em> ≤ <em>N</em>).</p>
+<p>FJ wants to know exactly how much he can increase the shortest distance <em>&#x2F;<em>before&#x2F;</em></em> he starts removing the rocks. Help Farmer John determine the greatest possible shortest distance a cow has to jump after removing the optimal set of <em>M</em> rocks.</p>
+<p>Input</p>
+<p>Line 1: Three space-separated integers: <em>L</em>, <em>N</em>, and <em>M</em><br>Lines 2.. <em>N</em>+1: Each line contains a single integer indicating how far some rock is away from the starting rock. No two rocks share the same position.</p>
+<p>Output</p>
+<p>Line 1: A single integer that is the maximum of the shortest distance a cow has to jump after removing <em>M</em> rocks</p>
+<p>Sample Input</p>
+<p>25 5 2 2 14 11 21 17</p>
+<p>Sample Output</p>
+<p>4</p>
+<p>Hint</p>
+<p>Before removing any rocks, the shortest jump was a jump of 2 from 0 (the start) to 2. After removing the rocks at 2 and 14, the shortest required jump is a jump of 4 (from 17 to 21 or from 21 to 25).</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=USACO+2006+December+Silver">USACO 2006 December Silver</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

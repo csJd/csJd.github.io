@@ -1,23 +1,1227 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Don&#39;t be evil.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="dd&#39;s site \#">
+<meta property="og:url" content="http://blog.deng.cf/page/26/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="Don&#39;t be evil.">
+<meta property="og:locale">
+<meta property="article:author" content="Deng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/page/26/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"default","comments":"","permalink":"","path":"page/26/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">dd's site \#</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/POJ%203036%20Honeycomb%20Walk(DP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/POJ%203036%20Honeycomb%20Walk(DP)/" class="post-title-link" itemprop="url">POJ 3036 Honeycomb Walk(DP)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 20:05:21" itemprop="dateCreated datePublished" datetime="2014-08-22T20:05:21+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求蜜蜂在蜂巢跑行n个格子回到原点的方法数</p>
+<p>把每个格子抽象成一个点 最多走14步 把初始位置O的坐标设为(15,15) 保围着O的6个点如下图所示 他们到O的距离都是1</p>
+<p><img src="/../images/null"></p>
+<p>每个点周围都有这样的6个点 代表相邻的格子 这6个点到中间点的距离为1 令d[k][i][j]表示 从O点走k步到达(i,j)点的方法总数 那么很容易有转移方程 d[k][i][j]&#x3D;d[k-1][i-1][j-1]+d[k-1][i][j-1]+d[k-1][i+1][j]+d[k-1][i+1][j+1]+d[k-1][i][j+1]+d[k-1][i-1][j] 边界条件为d[0][15][15]&#x3D;0</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int L = <span class="number">15</span>, X = <span class="number">30</span>, Y = <span class="number">30</span>;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int d[L][X][Y]=&#123;<span class="number">0</span>&#125;, n, t;</span><br><span class="line">    d[<span class="number">0</span>][<span class="number">15</span>][<span class="number">15</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (int k = <span class="number">1</span>; k &lt; L; ++k)</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; X; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt; Y; ++j)</span><br><span class="line">                d[k][i][j] = d[k - <span class="number">1</span>][i - <span class="number">1</span>][j - <span class="number">1</span>] + d[k - <span class="number">1</span>][i][j - <span class="number">1</span>] + d[k - <span class="number">1</span>][i + <span class="number">1</span>][j] +</span><br><span class="line">                             d[k - <span class="number">1</span>][i + <span class="number">1</span>][j + <span class="number">1</span>] + d[k - <span class="number">1</span>][i][j + <span class="number">1</span>] + d[k - <span class="number">1</span>][i - <span class="number">1</span>][j];</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n][<span class="number">15</span>][<span class="number">15</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Honeycomb Walk</p>
+<p>Description</p>
+<p><img src="/../images/es-3036_1.jpg.png"></p>
+<p>A bee larva living in a hexagonal cell of a large honeycomb decides to creep for a walk. In each “step” the larva may move into any of the six adjacent cells and after<em>n</em>steps, it is to end up in its original cell.</p>
+<p>Your program has to compute, for a given<em>n</em>, the number of different such larva walks.</p>
+<p>Input</p>
+<p>The first line contains an integer giving the number of test cases to follow. Each case consists of one line containing an integer<em>n</em>, where 1 ≤<em>n</em>≤ 14.</p>
+<p>Output</p>
+<p>For each test case, output one line containing the number of walks. Under the assumption 1 ≤<em>n</em>≤ 14, the answer will be less than 231.</p>
+<p>Sample Input</p>
+<p>2 2 4</p>
+<p>Sample Output</p>
+<p>6 90</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010066%20Twin%20Towers%20(DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%2010066%20Twin%20Towers%20(DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97)/" class="post-title-link" itemprop="url">UVa 10066 Twin Towers (DP 最长公共子序列)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 15:50:08" itemprop="dateCreated datePublished" datetime="2014-08-22T15:50:08+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求两串数字最长公共子序列的长度</p>
+<p>裸的lcs没啥说的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">#include&lt;algorithm&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line"><span class="keyword">const</span> int maxn=<span class="number">105</span>;  </span><br><span class="line">int a[maxn],b[maxn],d[maxn][maxn],na,nb;  </span><br><span class="line"><span class="keyword">void</span> <span class="title function_">lcs</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));  </span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=na; ++i)  </span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=nb; ++j)  </span><br><span class="line">            <span class="keyword">if</span>(a[i]==b[j]) d[i][j]=d[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>;  </span><br><span class="line">            <span class="keyword">else</span> d[i][j]=<span class="title function_">max</span>(d[i-<span class="number">1</span>][j],d[i][j-<span class="number">1</span>]);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    int k=<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;na,&amp;nb),na||nb)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=na; ++i)  </span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=nb; ++i)  </span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;b[i]);  </span><br><span class="line">        <span class="title function_">lcs</span>();  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Twin Towers #%d\nNumber of Tiles : %d\n\n&quot;</span>,k++,d[na][nb]);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>The Twin Towers</strong></p>
+<p><strong>Input:<strong>standard input</strong></strong></p>
+<p>**Output:**standard output</p>
+<p>Once upon a time, in an ancient Empire, there were two towers of dissimilar shapes in two different cities. The towers were built byputting circular tiles one upon another. Each of the tiles was of the same height and had integral radius. It is no wonder that though the two towers were of dissimilar shape, they had many tiles in common.</p>
+<p>However, more than thousand years after they were built, the Emperor ordered his architects to remove some of the tiles from the two towers so that they have exactly the same shape and size, and at the same time remain as high as possible. The order of the tiles in the new towers must remain the same as they were in the original towers. The Emperor thought that, in this way the two towers might be able to stand as the symbol of harmony and equality between the two cities. He decided to name them the<em>Twin Towers</em>.</p>
+<p>Now, about two thousand years later, you are challenged with an even simpler problem: given the descriptions of two dissimilar towers you are asked only to find out the number of tiles in the highest twin towers that can be built from them.</p>
+<p><strong>Input</strong></p>
+<p>The input file consists of several data blocks. Each data block describes a pair of towers.</p>
+<p>The first line of a data block contains two integers N1 and N2 (1 &lt;&#x3D; N1, N2 &lt;&#x3D; 100) indicating the number of tiles respectively in the two towers. The next line contains N1 positive integers giving the radii of the tiles (from top to bottom) in the first tower. Then follows another line containing N2 integers giving the radii of the tiles (from top to bottom) in the second tower.</p>
+<p>The input file terminates with two zeros for N1 and N2.</p>
+<p><strong>Output</strong></p>
+<p>For each pair of towers in the input first output the twin tower number followed by the number of tiles (in one tower) in the highest possible twin towers that can be built from them. Print a blank line after the output of each data set.****</p>
+<hr>
+<p><strong>Sample Input</strong></p>
+<p>7 6<br>20 15 10 15 25 20 15<br>15 25 10 20 15 20<br>8 9<br>10 20 20 10 20 10 20 10<br>20 10 20 10 10 20 10 10 20<br>0 0</p>
+<p><strong>Sample Output</strong></p>
+<p>Twin Towers &#x2F;#1<br>Number of Tiles : 4<br>Twin Towers &#x2F;#2<br>Number of Tiles : 6
+﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/POJ%202182%20Lost%20Cows%20%EF%BC%88%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84,%E9%80%92%E6%8E%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/POJ%202182%20Lost%20Cows%20%EF%BC%88%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84,%E9%80%92%E6%8E%A8%EF%BC%89/" class="post-title-link" itemprop="url">POJ 2182 Lost Cows （树状数组,递推）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:43:32" itemprop="dateCreated datePublished" datetime="2014-08-22T10:43:32+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>﻿﻿ <span style="font-family:Microsoft YaHei;font-size:14px;">题意 N头牛排成一列 但编号顺序是乱的 知道每头牛前面有多少头牛编号在其之前 要求输出此时队列中每头牛的编号</span></span> <span style="font-family:Microsoft YaHei;font-size:14px;">本题有两种做法 一是利用数据结构的树状数组 时间复杂度低但相对较复杂 也可以依次推出每头牛的编号 这里先介绍递推的 以后再介绍数据结构优化的</span></span> <span style="font-family:Microsoft YaHei;font-size:14px;">从后往前递推 知道第i头牛在前i头牛里面的编号 即a[i]+1 然后加上a[i]+1之前已经被确定的编号个数（也就是被i后面的牛所确定的编号） 就是第i头牛的实际编了每次算i的编号时 i+1的编号都是确定的</span> <pre class="cpp" name="code">/#include<cstdio> using namespace std; /#define M 8005 /#define t a[i]+1 //t开始为i在前i头牛中的编号，后逐步推为实际编号； int main() { int sure[M]= {0},a[M],n; scanf("%d",&n); a[1]=0; for(int i=2; i<=n; i++) scanf("%d",&a[i]); for(int i=n; i>0; i--) { for(int j=1; j<=t; j++) if(sure[j]) //编号j已经被确定; a[i]++; sure[t]=1; } for(int i=1; i<=n; i++) printf("%d\n",t); return 0; }</p>
+<p>Lost Cows</p>
+<p>N (2 <= N <= 8,000) cows have unique brands in the range 1..N. In a spectacular display of poor judgment, they visited the neighborhood 'watering hole' and drank a few too many beers before dinner. When it was time to line up for their evening meal, they did not line up in the required ascending numerical order of their brands.<br>Regrettably, FJ does not have a way to sort them. Furthermore, he's not very good at observing problems. Instead of writing down each cow's brand, he determined a rather silly statistic: For each cow in line, he knows the number of cows that precede that cow in line that do, in fact, have smaller brands than that cow.<br>Given this data, tell FJ the exact ordering of the cows.</p>
+<p>/* Line 1: A single integer, N<br>/* Lines 2..N: These N-1 lines describe the number of cows that precede a given cow in line and have brands smaller than that cow. Of course, no cows precede the first cow in line, so she is not listed. Line 2 of the input describes the number of preceding cows whose brands are smaller than the cow in slot /#2; line 3 describes the number of preceding cows whose brands are smaller than the cow in slot /#3; and so on.</p>
+<p>/* Lines 1..N: Each of the N lines of output tells the brand of a cow in line. Line /#1 of the output tells the brand of the first cow in line; line 2 tells the brand of the second cow; and so on.</p>
+<p>Sample Input<br><span style="font-family:Comic Sans MS;font-size:12px;">5 1 2 1 0 </span><br>Sample Output<br><span style="font-family:Comic Sans MS;font-size:12px;">2 4 5 3 1</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/POJ%201157%20Little%20shop%20of%20flowers(DP,%E6%9C%80%E4%BC%98%E6%90%AD%E9%85%8D)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/POJ%201157%20Little%20shop%20of%20flowers(DP,%E6%9C%80%E4%BC%98%E6%90%AD%E9%85%8D)/" class="post-title-link" itemprop="url">POJ 1157 Little shop of flowers(DP,最优搭配)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:41:05" itemprop="dateCreated datePublished" datetime="2014-08-22T10:41:05+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>﻿﻿ 题意 你有f束花和v个花瓶 每束花放在不同的花瓶中都会有不同的价值 并且花的相对顺序不能改变 也就是说第i束花放在第j个花瓶中 那么第i+1朵花要放在j以后的花瓶中 令d[i][j]表示第i朵花放在第[j]个瓶子中前i朵花的最大价值 有状态转移方程 d[i][j]&#x3D;max{d[i-1][1~j-1]}+val[i][j]; 题目有几个坑点 可能所有价值都为负数 必须所有花都放完  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line">#define M <span class="number">205</span>  </span><br><span class="line">int val[M][M],d[M][M],pre[M][M],f,v,key;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i,int j</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">if</span>(pre[i][j])  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">print</span>(i-<span class="number">1</span>,pre[i][j]);  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot; %d&quot;</span>,j);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d&quot;</span>,j);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;f,&amp;v);  </span><br><span class="line">    <span class="title function_">memset</span>(d,<span class="number">0x8f</span>,<span class="title function_">sizeof</span>(d));  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=f; ++i)  </span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;val[i][j]);  </span><br><span class="line">  </span><br><span class="line">    int ans=d[<span class="number">0</span>][<span class="number">0</span>];  </span><br><span class="line">    <span class="comment">//注意要把ans初始化为负无穷 可能所有的val都为负；这里wa了好久；  </span></span><br><span class="line">    d[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;  </span><br><span class="line">    <span class="comment">//0朵花价值当然为0了；  </span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=f; ++i)  </span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="keyword">for</span>(int k=<span class="number">0</span>; k&lt;j; ++k)  </span><br><span class="line">                <span class="keyword">if</span>(d[i-<span class="number">1</span>][k]+val[i][j]&gt;d[i][j])  </span><br><span class="line">                &#123;  </span><br><span class="line">                    d[i][j]=d[i-<span class="number">1</span>][k]+val[i][j];  </span><br><span class="line">                    pre[i][j]=k;  </span><br><span class="line">                &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=v; ++j)  </span><br><span class="line">        <span class="keyword">if</span>(d[f][j]&gt;ans)  </span><br><span class="line">        &#123;  </span><br><span class="line">            ans=d[f][j];  </span><br><span class="line">            key=j;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="comment">//这里要在最后一层更新ans 因为要保证所有花都放进去；  </span></span><br><span class="line">  </span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);  </span><br><span class="line">    <span class="title function_">print</span>(f,key);  </span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Little shop of flowers</strong></p>
+<hr>
+<p><strong>PROBLEM</strong></p>
+<hr>
+<p>You want to arrange the window of your flower shop in a most pleasant way. You have<em>F</em>bunches of flowers, each being of a different kind, and at least as many vases ordered in a row. The vases are glued onto the shelf and are numbered consecutively 1 through<em>V</em>, where<em>V</em>is the number of vases, from left to right so that the vase 1 is the leftmost, and the vase<em>V</em>is the rightmost vase. The bunches are moveable and are uniquely identified by integers between 1 and<em>F</em>. These id-numbers have a significance: They determine the required order of appearance of the flower bunches in the row of vases so that the bunch<em>i</em>must be in a vase to the left of the vase containing bunch<em>j</em>whenever<em>i</em>&lt;<em>j</em>. Suppose, for example, you have bunch of azaleas (id-number&#x3D;1), a bunch of begonias (id-number&#x3D;2) and a bunch of carnations (id-number&#x3D;3). Now, all the bunches must be put into the vases keeping their id-numbers in order. The bunch of azaleas must be in a vase to the left of begonias, and the bunch of begonias must be in a vase to the left of carnations. If there are more vases than bunches of flowers then the excess will be left empty. A vase can hold only one bunch of flowers.</p>
+<p>Each vase has a distinct characteristic (just like flowers do). Hence, putting a bunch of flowers in a vase results in a certain aesthetic value, expressed by an integer. The aesthetic values are presented in a table as shown below. Leaving a vase empty has an aesthetic value of 0.</p>
+<hr>
+<p><strong>V A S E S</strong> ****</p>
+<p><strong>1</strong></p>
+<hr>
+<p><strong>2</strong></p>
+<hr>
+<p><strong>3</strong></p>
+<hr>
+<p><strong>4</strong></p>
+<hr>
+<p><strong>5</strong> ****</p>
+<p><strong>Bunches</strong></p>
+<hr>
+<p><strong>1 (azaleas)</strong></p>
+<p>7</p>
+<p>23</p>
+<p>-5</p>
+<p>-24</p>
+<p>16 ****</p>
+<p><strong>2 (begonias)</strong></p>
+<p>5</p>
+<p>21</p>
+<p>-4</p>
+<p>10</p>
+<p>23 ****</p>
+<p><strong>3 (carnations)</strong></p>
+<p>-21</p>
+<p>5</p>
+<p>-4</p>
+<p>-20</p>
+<p>20</p>
+<p>According to the table, azaleas, for example, would look great in vase 2, but they would look awful in vase 4.</p>
+<p>To achieve the most pleasant effect you have to maximize the sum of aesthetic values for the arrangement while keeping the required ordering of the flowers. If more than one arrangement has the maximal sum value, any one of them will be acceptable. You have to produce exactly one arrangement.</p>
+<hr>
+<p>ASSUMPTIONS</p>
+<p>1 ≤<em>F</em>≤ 100 where<em>F</em>is the number of the bunches of flowers. The bunches are numbered 1 through<em>F</em>.</p>
+<p>**</p>
+<p><em>F</em>≤<em>V</em>≤ 100 where<em>V</em>is the number of vases.</p>
+<p>-50£<em>Aij</em>£50 where<em>Aij</em>is the aesthetic value obtained by putting the flower bunch<em>i</em>into the vase<em>j</em>.</p>
+<hr>
+<p>Input</p>
+<p>The first line contains two numbers:<em>F</em>,<em>V</em>.</p>
+<p>The following<em>F</em>lines: Each of these lines contains<em>V</em>integers, so that<em>Aij</em>is given as the<em>j</em>’th number on the (<em>i</em>+1)’st line of the input file.</p>
+<hr>
+<p>Output</p>
+<p>The first line will contain the sum of aesthetic values for your arrangement.</p>
+<p>The second line must present the arrangement as a list of<em>F</em>numbers, so that the<em>k</em>’th number on this line identifies the vase in which the bunch<em>k</em>is put.</p>
+<p>Sample Input<br>3 5 7 23 -5 -24 16 5 21 -4 10 23 -21 5 -4 -20 20</p>
+<p>Sample Output<br>53 2 4 5</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/" class="post-title-link" itemprop="url">UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:26:02" itemprop="dateCreated datePublished" datetime="2014-08-22T10:26:02+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 盒子a的n边都小于盒子b时 盒子a就可以放在盒子b上 求这样最多能堆多高</p>
+<p>DAG中不固定顶点的最长路径，小白P162有讲解，d(i)&#x3D;max{d(j)+1} j表示所有能装得下i的盒子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">35</span></span><br><span class="line">int a[M][M],d[M],pre[M],k,n,m;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">bool <span class="title class_">Isnest</span>(int i,int j)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">sort</span>(a[i]+<span class="number">1</span>,a[i]+<span class="number">1</span>+n);</span><br><span class="line">    <span class="title function_">sort</span>(a[j]+<span class="number">1</span>,a[j]+<span class="number">1</span>+n);</span><br><span class="line">    <span class="keyword">for</span>(int u=<span class="number">1</span>;u&lt;=n;++u)</span><br><span class="line">        <span class="keyword">if</span>(a[i][u]&lt;=a[j][u]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dp</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d[i]&gt;<span class="number">0</span>) <span class="keyword">return</span> d[i];</span><br><span class="line">    d[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=k;++j)</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Isnest</span>(i,j)&amp;&amp;<span class="title function_">dp</span>(j)+<span class="number">1</span>&gt;d[i])</span><br><span class="line">        &#123;</span><br><span class="line">            d[i]=d[j]+<span class="number">1</span>;</span><br><span class="line">            pre[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> d[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(pre[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot; %d&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;k,&amp;n)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=k;++i)</span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i][j]);</span><br><span class="line">        m=<span class="number">0</span>;</span><br><span class="line">        <span class="title function_">memset</span>(pre,<span class="number">0</span>,<span class="title function_">sizeof</span>(pre));</span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=k;++i)</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">dp</span>(i)&gt;<span class="title function_">dp</span>(m))</span><br><span class="line">                m=i;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,d[m]);</span><br><span class="line">        <span class="title function_">print</span>(m);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Some concepts in Mathematics and Computer Science are simple in one or two dimensions but become more complex when extended to arbitrary dimensions. Consider solving differential equations in several dimensions and analyzing the topology of an n-dimensional hypercube. The former is much more complicated than its one dimensional relative while the latter bears a remarkable resemblance to its &#96;&#96;lower-class’’ cousin.</p>
+<h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>Consider an n-dimensional &#96;&#96;box’’ given by its dimensions. In two dimensions the box (2,3) might represent a box with length 2 units and width 3 units. In three dimensions the box (4,8,9) can represent a box <img src="/../images/dge.org-external-1-103img1.gif.png" alt="tex2html_wrap_inline40"> (length, width, and height). In 6 dimensions it is, perhaps, unclear what the box (4,5,6,7,8,9) represents; but we can analyze properties of the box such as the sum of its dimensions.</p>
+<p>In this problem you will analyze a property of a group of n-dimensional boxes. You are to determine the longest nesting string of boxes, that is a sequence of boxes <img src="/../images/dge.org-external-1-103img2.gif.png" alt="tex2html_wrap_inline44"> such that each box <img src="/../images/dge.org-external-1-103img3.gif.png" alt="tex2html_wrap_inline46">nests in box <img src="/../images/dge.org-external-1-103img4.gif.png" alt="tex2html_wrap_inline48"> ( <img src="/../images/dge.org-external-1-103img5.gif.png" alt="tex2html_wrap_inline50"> .</p>
+<p>A box D &#x3D; ( <img src="/../images/dge.org-external-1-103img6.gif.png" alt="tex2html_wrap_inline52"> ) nests in a box E &#x3D; ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) if there is some rearrangement of the <img src="/../images/dge.org-external-1-103img8.gif.png" alt="tex2html_wrap_inline56">such that when rearranged each dimension is less than the corresponding dimension in box E. This loosely corresponds to turning box D to see if it will fit in box E. However, since any rearrangement suffices, box D can be contorted, not just turned (see examples below).</p>
+<p>For example, the box D &#x3D; (2,6) nests in the box E &#x3D; (7,3) since D can be rearranged as (6,2) so that each dimension is less than the corresponding dimension in E. The box D &#x3D; (9,5,7,3) does NOT nest in the box E &#x3D; (2,10,6,8) since no rearrangement of D results in a box that satisfies the nesting property, but F &#x3D; (9,5,7,1) does nest in box E since F can be rearranged as (1,9,5,7) which nests in E.</p>
+<p>Formally, we define nesting as follows: box D &#x3D; ( <img src="/../images/dge.org-external-1-103img6.gif.png" alt="tex2html_wrap_inline52"> ) nests in box E &#x3D; ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) if there is a permutation <img src="/../images/dge.org-external-1-103img9.gif.png" alt="tex2html_wrap_inline62"> of <img src="/../images/dge.org-external-1-103img10.gif.png" alt="tex2html_wrap_inline64"> such that ( <img src="/../images/dge.org-external-1-103img11.gif.png" alt="tex2html_wrap_inline66"> ) &#96;&#96;fits’’ in ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) i.e., if<img src="/../images/dge.org-external-1-103img12.gif.png" alt="tex2html_wrap_inline70"> for all <img src="/../images/dge.org-external-1-103img13.gif.png" alt="tex2html_wrap_inline72"> .</p>
+<h2 id="The-Input"><a href="#The-Input" class="headerlink" title="The Input"></a>The Input</h2><p>The input consists of a series of box sequences. Each box sequence begins with a line consisting of the the number of boxes k in the sequence followed by the dimensionality of the boxes, n (on the same line.)</p>
+<p>This line is followed by k lines, one line per box with the n measurements of each box on one line separated by one or more spaces. The <img src="/../images/dge.org-external-1-103img14.gif.png" alt="tex2html_wrap_inline82"> line in the sequence ( <img src="/../images/dge.org-external-1-103img15.gif.png" alt="tex2html_wrap_inline84"> ) gives the measurements for the <img src="/../images/dge.org-external-1-103img14.gif.png" alt="tex2html_wrap_inline82"> box.</p>
+<p>There may be several box sequences in the input file. Your program should process all of them and determine, for each sequence, which of the k boxes determine the longest nesting string and the length of that nesting string (the number of boxes in the string).</p>
+<p>In this problem the maximum dimensionality is 10 and the minimum dimensionality is 1. The maximum number of boxes in a sequence is 30.</p>
+<h2 id="The-Output"><a href="#The-Output" class="headerlink" title="The Output"></a>The Output</h2><p>For each box sequence in the input file, output the length of the longest nesting string on one line followed on the next line by a list of the boxes that comprise this string in order. The <code>smallest&#39;&#39; or </code>innermost’’ box of the nesting string should be listed first, the next box (if there is one) should be listed second, etc.</p>
+<p>The boxes should be numbered according to the order in which they appeared in the input file (first box is box 1, etc.).</p>
+<p>If there is more than one longest nesting string then any one of them can be output.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>5 2 3 7 8 10 5 2 9 11 21 18 8 6 5 2 20 1 30 10 23 15 7 9 11 3 40 50 34 24 14 4 9 10 11 12 13 14 31 4 18 8 27 17 44 32 13 19 41 19 1 2 3 4 5 6 80 37 47 18 21 9</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>5 3 1 2 4 5 4 7 2 5 6</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20531%20Compromise%20%EF%BC%88DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%20531%20Compromise%20%EF%BC%88DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/" class="post-title-link" itemprop="url">UVa 531 Compromise （DP 最长公共子序列）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:20:33" itemprop="dateCreated datePublished" datetime="2014-08-22T10:20:33+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求两段文本的最长公共子单词序列</p>
+<p>还是最长公共子序列 只是现在是单词不是一个字母了 用字符串数组保存 还是一样的处理 注意结果的打印和输入的处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">105</span></span><br><span class="line">using namespace std;</span><br><span class="line">char a[M][<span class="number">32</span>],b[M][<span class="number">32</span>];</span><br><span class="line">int d[M][M],flag[M][M],la,lb;</span><br><span class="line">bool <span class="title class_">Isfirst</span>;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">lcs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">    <span class="title function_">memset</span>(flag,<span class="number">0</span>,<span class="title function_">sizeof</span>(flag));</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=la; ++i)</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=lb; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="title function_">strcmp</span>(a[i],b[j]))</span><br><span class="line">            &#123;</span><br><span class="line">                d[i][j]=d[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">                flag[i][j]=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(d[i-<span class="number">1</span>][j]&gt;d[i][j-<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                d[i][j]=d[i-<span class="number">1</span>][j];</span><br><span class="line">                flag[i][j]=<span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                d[i][j]=d[i][j-<span class="number">1</span>];</span><br><span class="line">                flag[i][j]=<span class="number">3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i,int j</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||j&lt;<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title class_">Isfirst</span>=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag[i][j]==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(i-<span class="number">1</span>,j-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Isfirst</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%s&quot;</span>,a[i]);</span><br><span class="line">            <span class="title class_">Isfirst</span>=<span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot; %s&quot;</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(flag[i][j]==<span class="number">2</span>)</span><br><span class="line">        <span class="title function_">print</span>(i-<span class="number">1</span>,j);</span><br><span class="line">    <span class="keyword">else</span> <span class="title function_">print</span>(i,j-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char t[M];</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>,a[<span class="number">1</span>])!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        la=<span class="number">1</span>;</span><br><span class="line">        lb=<span class="number">0</span>;</span><br><span class="line">        bool <span class="title class_">Isfirst</span>=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>,t),t[<span class="number">0</span>]!=<span class="string">&#x27;#&#x27;</span>) <span class="title function_">strcpy</span>(a[++la],t);</span><br><span class="line">        <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>,t),t[<span class="number">0</span>]!=<span class="string">&#x27;#&#x27;</span>) <span class="title function_">strcpy</span>(b[++lb],t);</span><br><span class="line">        <span class="title function_">lcs</span>();</span><br><span class="line">        <span class="title function_">print</span>(la,lb);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>In a few months the European Currency Union will become a reality. However, to join the club, the Maastricht criteria must be fulfilled, and this is not a trivial task for the countries (maybe except for Luxembourg). To enforce that Germany will fulfill the criteria, our government has so many wonderful options (raise taxes, sell stocks, revalue the gold reserves,…) that it is really hard to choose what to do.</p>
+<p>Therefore the German government requires a program for the following task:</p>
+<p>Two politicians each enter their proposal of what to do. The computer then outputs the longest common subsequence of words that occurs in both proposals. As you can see, this is a totally fair compromise (after all, a common sequence of words is something what both people have in mind).</p>
+<p>Your country needs this program, so your job is to write it for us.</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input file will contain several test cases.</p>
+<p>Each test case consists of two texts. Each text is given as a sequence of lower-case words, separated by whitespace, but with no punctuation. Words will be less than 30 characters long. Both texts will contain less than 100 words and will be terminated by a line containing a single ‘&#x2F;#’.</p>
+<p>Input is terminated by end of file.</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each test case, print the longest common subsequence of words occuring in the two texts. If there is more than one such sequence, any one is acceptable. Separate the words by one blank. After the last word, output a newline character.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>die einkommen der landwirte sind fuer die abgeordneten ein buch mit sieben siegeln um dem abzuhelfen muessen dringend alle subventionsgesetze verbessert werden &#x2F;# die steuern auf vermoegen und einkommen sollten nach meinung der abgeordneten nachdruecklich erhoben werden dazu muessen die kontrollbefugnisse der finanzbehoerden dringend verbessert werden &#x2F;#</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>die einkommen der abgeordneten muessen dringend verbessert werden</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010192%20Vacation%20%EF%BC%88DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%2010192%20Vacation%20%EF%BC%88DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/" class="post-title-link" itemprop="url">UVa 10192 Vacation （DP 最长公共子序列）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:03:31" itemprop="dateCreated datePublished" datetime="2014-08-22T10:03:31+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>﻿﻿</p>
+<p>题意：假期你要出去旅游 你爸爸和你妈妈对你去的城市有不同的意见 为了不让他们中的任何一个不开心 你得选出同时符合两人的方案 也就是最长公共子序列 这个大白上有很详细的讲解 直接用增量法就些 注意输入数据有空格 不能用scanf读入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">110</span></span><br><span class="line">using namespace std;</span><br><span class="line">char a[M],b[M];</span><br><span class="line">int d[M][M],n,m;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">LCS</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">    n=<span class="title function_">strlen</span>(a+<span class="number">1</span>);</span><br><span class="line">    m=<span class="title function_">strlen</span>(b+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=m; ++j)</span><br><span class="line">            <span class="keyword">if</span>(a[i]==b[j]) d[i][j]=d[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> d[i][j]=<span class="title function_">max</span>(d[i-<span class="number">1</span>][j],d[i][j-<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">gets</span>(a+<span class="number">1</span>)!=<span class="variable constant_">NULL</span>,a[<span class="number">1</span>]!=<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++t;</span><br><span class="line">        <span class="title function_">gets</span>(b+<span class="number">1</span>);</span><br><span class="line">        <span class="title function_">LCS</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case #%d: you can visit at most %d cities.\n&quot;</span>,t,d[n][m]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于本题没要求打印方案 故还可用滚动数组以达到空间上的优化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">110</span></span><br><span class="line">using namespace std;</span><br><span class="line">char a[M],b[M];</span><br><span class="line">int d[M],n,m,r,temp;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">LCS</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">    n=<span class="title function_">strlen</span>(a+<span class="number">1</span>);</span><br><span class="line">    m=<span class="title function_">strlen</span>(b+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        r=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=m; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]==b[j]) temp=r+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> temp=<span class="title function_">max</span>(d[j],d[j-<span class="number">1</span>]);</span><br><span class="line">            r=d[j];</span><br><span class="line">            d[j]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">gets</span>(a+<span class="number">1</span>)!=<span class="variable constant_">NULL</span>,a[<span class="number">1</span>]!=<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++t;</span><br><span class="line">        <span class="title function_">gets</span>(b+<span class="number">1</span>);</span><br><span class="line">        <span class="title function_">LCS</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case #%d: you can visit at most %d cities.\n&quot;</span>,t,d[m]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p><a target="_blank" rel="noopener" href="http://vjudge.net/">Problem E: Vacation</a></p>
+<h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a><a target="_blank" rel="noopener" href="http://vjudge.net/">The Problem</a></h2><p>You are planning to take some rest and to go out on vacation, but you really don’t know which cities you should visit. So, you ask your parents for help. Your mother says “My son, you MUST visit Paris, Madrid, Lisboa and London. But it’s only fun in this order.” Then your father says: “Son, if you’re planning to travel, go first to Paris, then to Lisboa, then to London and then, at last, go to Madrid. I know what I’m talking about.”</p>
+<p>Now you’re a bit confused, as you didn’t expected this situation. You’re afraid that you’ll hurt your mother if you follow your father’s suggestion. But you’re also afraid to hurt your father if you follow you mother’s suggestion. But it can get worse, because you can hurt both of them if you simply ignore their suggestions!</p>
+<p>Thus, you decide that you’ll try to follow their suggestions in the better way that you can. So, you realize that the “Paris-Lisboa-London” order is the one which better satisfies both your mother and your father. Afterwards you can say that you could not visit Madrid, even though you would’ve liked it very much.</p>
+<p>If your father have suggested the “London-Paris-Lisboa-Madrid” order, then you would have two orders, “Paris-Lisboa” and “Paris-Madrid”, that would better satisfy both of your parent’s suggestions. In this case, you could only visit 2 cities.</p>
+<p>You want to avoid problems like this one in the future. And what if their travel suggestions were bigger? Probably you would not find the better way very easy. So, you decided to write a program to help you in this task. You’ll represent each city by one character, using uppercase letters, lowercase letters, digits and the space. Thus, you can have at most 63 different cities to visit. But it’s possible that you’ll visit some city more than once.</p>
+<p>If you represent Paris with “a”, Madrid with “b”, Lisboa with “c” and London with “d”, then your mother’s suggestion would be “abcd” and you father’s suggestion would be “acdb” (or “dacb”, in the second example).</p>
+<p>The program will read two travel sequences and it must answer how many cities you can travel to such that you’ll satisfy both of your parents and it’s maximum.</p>
+<h2 id="The-Input"><a href="#The-Input" class="headerlink" title="The Input"></a><a target="_blank" rel="noopener" href="http://vjudge.net/">The Input</a></h2><p>The input will consist on an arbitrary number of city sequence pairs. The end of input occurs when the first sequence starts with an “&#x2F;#”character (without the quotes). Your program should not process this case. Each travel sequence will be on a line alone and will be formed by legal characters (as defined above). All travel sequences will appear in a single line and will have at most 100 cities.</p>
+<h2 id="The-Output"><a href="#The-Output" class="headerlink" title="The Output"></a><a target="_blank" rel="noopener" href="http://vjudge.net/">The Output</a></h2><p>For each sequence pair, you must print the following message in a line alone:<br>Case &#x2F;#d: you can visit at most K cities. Where d stands for the test case number (starting from 1) and K is the maximum number of cities you can visit such that you’ll satisfy both you father’s suggestion and you mother’s suggestion.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a><a target="_blank" rel="noopener" href="http://vjudge.net/">Sample Input</a></h2><p>abcd acdb abcd dacb &#x2F;#</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a><a target="_blank" rel="noopener" href="http://vjudge.net/">Sample Output</a></h2><p>Case &#x2F;#1: you can visit at most 3 cities. Case &#x2F;#2: you can visit at most 2 cities.</p>
+<p>© 2001 Universidade do Brasil (UFRJ). Internal Contest Warmup 2001.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%202602%20Bone%20Collector%EF%BC%8801%E8%83%8C%E5%8C%85%E7%BB%8F%E5%85%B8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%202602%20Bone%20Collector%EF%BC%8801%E8%83%8C%E5%8C%85%E7%BB%8F%E5%85%B8%EF%BC%89/" class="post-title-link" itemprop="url">HDU 2602 Bone Collector（01背包经典）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 09:52:21" itemprop="dateCreated datePublished" datetime="2014-08-22T09:52:21+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>很裸的01背包 大家都懂得</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">int n, v, d[N], val[N], vol[N], cas;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        memset (d, <span class="number">0</span>, sizeof (d));</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;v);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;val[i]);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;vol[i]);</span><br><span class="line">            <span class="keyword">for</span> (int j = v; j &gt;= vol[i]; --j)</span><br><span class="line">                d[j] = max (d[j], d[j - vol[i]] + val[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Bone-Collector"><a href="#Bone-Collector" class="headerlink" title="Bone Collector"></a>Bone Collector</h1><p>Problem Description</p>
+<p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave … The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?  <img src="/../images/cn-data-images-C154-1003-1.jpg.png"><br>Input</p>
+<p>The first line contain a integer T , the number of cases. Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;&#x3D; 1000 , V &lt;&#x3D; 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.<br>Output</p>
+<p>One integer per line representing the maximum of the total value (this number will be less than 231).<br>Sample Input</p>
+<p>1 5 10 1 2 3 4 5 5 4 3 2 1<br>Sample Output</p>
+<p>14
+﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20624%20CD%20%EF%BC%88DP%2001%E8%83%8C%E5%8C%85%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%20624%20CD%20%EF%BC%88DP%2001%E8%83%8C%E5%8C%85%EF%BC%89/" class="post-title-link" itemprop="url">UVa 624 CD （DP 01背包）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 09:38:23" itemprop="dateCreated datePublished" datetime="2014-08-22T09:38:23+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 你要把CD上的歌录到tape上 使得剩余磁带空间最小 很容易看出是01背包问题 输出路径也很容易 直接递归</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int s,n,val[<span class="number">30</span>],d[<span class="number">1000005</span>],pre[<span class="number">1000005</span>];</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(pre[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>,i-pre[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>,i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;s,&amp;n)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">        <span class="title function_">memset</span>(pre,<span class="number">0</span>,<span class="title function_">sizeof</span>(pre));</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;val[i]);</span><br><span class="line">            <span class="keyword">for</span>(int j=s; j&gt;=val[i]; --j)</span><br><span class="line">                <span class="keyword">if</span>(d[j-val[i]]+val[i]&gt;d[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    d[j]=d[j-val[i]]+val[i];</span><br><span class="line">                    pre[j]=j-val[i];</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">print</span>(d[s]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;sum:%d\n&quot;</span>,d[s]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>You have a long drive by car ahead. You have a tape recorder, but unfortunately your best music is on CDs. You need to have it on tapes so the problem to solve is: you have a tapeNminutes long. How to choose tracks from CD to get most out of tape space and have as short unused space as possible.</p>
+<p>Assumptions:</p>
+<p>Program should find the set of tracks which fills the tape best and print it in the same sequence as the tracks are stored on the CD</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>Any number of lines. Each one contains valueN, (after space) number of tracks and durations of the tracks. For example from first line in sample data:N&#x3D;5, number of tracks&#x3D;3, first track lasts for 1 minute, second one 3 minutes, next one 4 minutes</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>Set of tracks (and durations) which are the correct solutions and string &#96;&#96;sum:” and sum of duration times.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>5 3 1 3 4 10 4 9 8 4 2 20 4 10 5 7 4 90 8 10 23 1 2 3 4 5 7 45 8 4 10 44 43 12 9 8 2</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>1 4 sum:5 8 2 sum:10 10 5 4 sum:19 10 23 1 2 3 4 5 7 sum:55 4 10 12 9 8 2 sum:45</p>
+<p>Miguel A. Revilla<br>2000-01-10</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVA%2010131%20Is%20Bigger%20Smarter?%20%EF%BC%88DP,%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVA%2010131%20Is%20Bigger%20Smarter?%20%EF%BC%88DP,%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/" class="post-title-link" itemprop="url">UVA 10131 Is Bigger Smarter? （DP,最长条件子序列）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 09:28:26" itemprop="dateCreated datePublished" datetime="2014-08-22T09:28:26+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 找出一个最长的序列，满足大象的体重增加时 智商是减小的<br>也是基础的DP d[i]表示以第i个大象为起点的最长序列 当满足(w[i]&gt;w[j])&amp;&amp;(s[i]&lt;s[j]时 d[i]&#x3D;max(d[i],dp(j)+1)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">1005</span></span><br><span class="line">using namespace std;</span><br><span class="line">int w[M],s[M],d[M],pre[M],n,l;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dp</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d[i]&gt;<span class="number">0</span>) <span class="keyword">return</span> d[i];</span><br><span class="line">    d[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">1</span>; j&lt;=n; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((w[i]&gt;w[j])&amp;&amp;(s[i]&lt;s[j]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(d[i]&lt;<span class="title function_">dp</span>(j)+<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                d[i]=d[j]+<span class="number">1</span>;</span><br><span class="line">                pre[i]=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(pre[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    n=<span class="number">0</span>;l=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;w[n],&amp;s[++n])!=<span class="variable constant_">EOF</span>);</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_">dp</span>(i)&gt;<span class="title function_">dp</span>(l)) l=i;</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,d[l]);</span><br><span class="line">    <span class="title function_">print</span>(l);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Is-Bigger-Smarter"><a href="#Is-Bigger-Smarter" class="headerlink" title="Is Bigger Smarter?"></a>Is Bigger Smarter?</h1><h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>Some people think that the bigger an elephant is, the smarter it is. To disprove this, you want to take the data on a collection of elephants and put as large a subset of this data as possible into a sequence so that the weights are increasing, but the IQ’s are decreasing.</p>
+<p>The input will consist of data for a bunch of elephants, one elephant per line, terminated by the end-of-file. The data for a particular elephant will consist of a pair of integers: the first representing its size in kilograms and the second representing its IQ in hundredths of IQ points. Both integers are between 1 and 10000. The data will contain information for at most 1000 elephants. Two elephants may have the same weight, the same IQ, or even the same weight and IQ.</p>
+<p>Say that the numbers on the i-th data line are W[i] and S[i]. Your program should output a sequence of lines of data; the first line should contain a number n; the remaining n lines should each contain a single positive integer (each one representing an elephant). If these nintegers are a[1], a[2],…, a[n] then it must be the case that<br>W[a[1]] &lt; W[a[2]] &lt; … &lt; W[a[n]]</p>
+<p>and</p>
+<p>S[a[1]] &gt; S[a[2]] &gt; … &gt; S[a[n]]</p>
+<p>In order for the answer to be correct,nshould be as large as possible. All inequalities are strict: weights must be strictly increasing, and IQs must be strictly decreasing. There may be many correct outputs for a given input, your program only needs to find one.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>6008 1300 6000 2100 500 2000 1000 4000 1100 3000 6000 2000 8000 1400 6000 1200 2000 1900</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4 4 5 9 7</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/27/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

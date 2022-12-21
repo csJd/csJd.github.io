@@ -1,23 +1,362 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 盒子a的n边都小于盒子b时 盒子a就可以放在盒子b上 求这样最多能堆多高 DAG中不固定顶点的最长路径，小白P162有讲解，d(i)&#x3D;max{d(j)+1} j表示所有能装得下i的盒子 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 盒子a的n边都小于盒子b时 盒子a就可以放在盒子b上 求这样最多能堆多高 DAG中不固定顶点的最长路径，小白P162有讲解，d(i)&#x3D;max{d(j)+1} j表示所有能装得下i的盒子 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img1.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img2.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img3.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img4.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img5.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img6.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img7.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img8.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img6.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img7.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img9.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img10.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img11.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img7.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img12.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img13.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img14.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img15.gif.png">
+<meta property="og:image" content="http://blog.deng.cf/images/dge.org-external-1-103img14.gif.png">
+<meta property="article:published_time" content="2014-08-22T10:26:02.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.297Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.deng.cf/images/dge.org-external-1-103img1.gif.png">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/","path":"posts/oj/dp/UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)/","title":"UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Problem"><span class="nav-text">The Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Input"><span class="nav-text">The Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Output"><span class="nav-text">The Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-text">Sample Output</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20103%20Stacking%20Boxes%20%E5%A0%86%E7%A0%8C%E7%9B%92%E5%AD%90(DP%20%E6%9C%80%E9%95%BF%E6%9D%A1%E4%BB%B6%E5%AD%90%E5%BA%8F%E5%88%97)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVa 103 Stacking Boxes 堆砌盒子(DP 最长条件子序列)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-22 10:26:02" itemprop="dateCreated datePublished" datetime="2014-08-22T10:26:02+00:00">2014-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 盒子a的n边都小于盒子b时 盒子a就可以放在盒子b上 求这样最多能堆多高</p>
+<p>DAG中不固定顶点的最长路径，小白P162有讲解，d(i)&#x3D;max{d(j)+1} j表示所有能装得下i的盒子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define M <span class="number">35</span></span><br><span class="line">int a[M][M],d[M],pre[M],k,n,m;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">bool <span class="title class_">Isnest</span>(int i,int j)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">sort</span>(a[i]+<span class="number">1</span>,a[i]+<span class="number">1</span>+n);</span><br><span class="line">    <span class="title function_">sort</span>(a[j]+<span class="number">1</span>,a[j]+<span class="number">1</span>+n);</span><br><span class="line">    <span class="keyword">for</span>(int u=<span class="number">1</span>;u&lt;=n;++u)</span><br><span class="line">        <span class="keyword">if</span>(a[i][u]&lt;=a[j][u]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dp</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d[i]&gt;<span class="number">0</span>) <span class="keyword">return</span> d[i];</span><br><span class="line">    d[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=k;++j)</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Isnest</span>(i,j)&amp;&amp;<span class="title function_">dp</span>(j)+<span class="number">1</span>&gt;d[i])</span><br><span class="line">        &#123;</span><br><span class="line">            d[i]=d[j]+<span class="number">1</span>;</span><br><span class="line">            pre[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> d[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(pre[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot; %d&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;k,&amp;n)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=k;++i)</span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i][j]);</span><br><span class="line">        m=<span class="number">0</span>;</span><br><span class="line">        <span class="title function_">memset</span>(pre,<span class="number">0</span>,<span class="title function_">sizeof</span>(pre));</span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=k;++i)</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">dp</span>(i)&gt;<span class="title function_">dp</span>(m))</span><br><span class="line">                m=i;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,d[m]);</span><br><span class="line">        <span class="title function_">print</span>(m);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Some concepts in Mathematics and Computer Science are simple in one or two dimensions but become more complex when extended to arbitrary dimensions. Consider solving differential equations in several dimensions and analyzing the topology of an n-dimensional hypercube. The former is much more complicated than its one dimensional relative while the latter bears a remarkable resemblance to its &#96;&#96;lower-class’’ cousin.</p>
+<h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>Consider an n-dimensional &#96;&#96;box’’ given by its dimensions. In two dimensions the box (2,3) might represent a box with length 2 units and width 3 units. In three dimensions the box (4,8,9) can represent a box <img src="/../images/dge.org-external-1-103img1.gif.png" alt="tex2html_wrap_inline40"> (length, width, and height). In 6 dimensions it is, perhaps, unclear what the box (4,5,6,7,8,9) represents; but we can analyze properties of the box such as the sum of its dimensions.</p>
+<p>In this problem you will analyze a property of a group of n-dimensional boxes. You are to determine the longest nesting string of boxes, that is a sequence of boxes <img src="/../images/dge.org-external-1-103img2.gif.png" alt="tex2html_wrap_inline44"> such that each box <img src="/../images/dge.org-external-1-103img3.gif.png" alt="tex2html_wrap_inline46">nests in box <img src="/../images/dge.org-external-1-103img4.gif.png" alt="tex2html_wrap_inline48"> ( <img src="/../images/dge.org-external-1-103img5.gif.png" alt="tex2html_wrap_inline50"> .</p>
+<p>A box D &#x3D; ( <img src="/../images/dge.org-external-1-103img6.gif.png" alt="tex2html_wrap_inline52"> ) nests in a box E &#x3D; ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) if there is some rearrangement of the <img src="/../images/dge.org-external-1-103img8.gif.png" alt="tex2html_wrap_inline56">such that when rearranged each dimension is less than the corresponding dimension in box E. This loosely corresponds to turning box D to see if it will fit in box E. However, since any rearrangement suffices, box D can be contorted, not just turned (see examples below).</p>
+<p>For example, the box D &#x3D; (2,6) nests in the box E &#x3D; (7,3) since D can be rearranged as (6,2) so that each dimension is less than the corresponding dimension in E. The box D &#x3D; (9,5,7,3) does NOT nest in the box E &#x3D; (2,10,6,8) since no rearrangement of D results in a box that satisfies the nesting property, but F &#x3D; (9,5,7,1) does nest in box E since F can be rearranged as (1,9,5,7) which nests in E.</p>
+<p>Formally, we define nesting as follows: box D &#x3D; ( <img src="/../images/dge.org-external-1-103img6.gif.png" alt="tex2html_wrap_inline52"> ) nests in box E &#x3D; ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) if there is a permutation <img src="/../images/dge.org-external-1-103img9.gif.png" alt="tex2html_wrap_inline62"> of <img src="/../images/dge.org-external-1-103img10.gif.png" alt="tex2html_wrap_inline64"> such that ( <img src="/../images/dge.org-external-1-103img11.gif.png" alt="tex2html_wrap_inline66"> ) &#96;&#96;fits’’ in ( <img src="/../images/dge.org-external-1-103img7.gif.png" alt="tex2html_wrap_inline54"> ) i.e., if<img src="/../images/dge.org-external-1-103img12.gif.png" alt="tex2html_wrap_inline70"> for all <img src="/../images/dge.org-external-1-103img13.gif.png" alt="tex2html_wrap_inline72"> .</p>
+<h2 id="The-Input"><a href="#The-Input" class="headerlink" title="The Input"></a>The Input</h2><p>The input consists of a series of box sequences. Each box sequence begins with a line consisting of the the number of boxes k in the sequence followed by the dimensionality of the boxes, n (on the same line.)</p>
+<p>This line is followed by k lines, one line per box with the n measurements of each box on one line separated by one or more spaces. The <img src="/../images/dge.org-external-1-103img14.gif.png" alt="tex2html_wrap_inline82"> line in the sequence ( <img src="/../images/dge.org-external-1-103img15.gif.png" alt="tex2html_wrap_inline84"> ) gives the measurements for the <img src="/../images/dge.org-external-1-103img14.gif.png" alt="tex2html_wrap_inline82"> box.</p>
+<p>There may be several box sequences in the input file. Your program should process all of them and determine, for each sequence, which of the k boxes determine the longest nesting string and the length of that nesting string (the number of boxes in the string).</p>
+<p>In this problem the maximum dimensionality is 10 and the minimum dimensionality is 1. The maximum number of boxes in a sequence is 30.</p>
+<h2 id="The-Output"><a href="#The-Output" class="headerlink" title="The Output"></a>The Output</h2><p>For each box sequence in the input file, output the length of the longest nesting string on one line followed on the next line by a list of the boxes that comprise this string in order. The <code>smallest&#39;&#39; or </code>innermost’’ box of the nesting string should be listed first, the next box (if there is one) should be listed second, etc.</p>
+<p>The boxes should be numbered according to the order in which they appeared in the input file (first box is box 1, etc.).</p>
+<p>If there is more than one longest nesting string then any one of them can be output.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>5 2 3 7 8 10 5 2 9 11 21 18 8 6 5 2 20 1 30 10 23 15 7 9 11 3 40 50 34 24 14 4 9 10 11 12 13 14 31 4 18 8 27 17 44 32 13 19 41 19 1 2 3 4 5 6 80 37 47 18 21 9</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>5 3 1 2 4 5 4 7 2 5 6</p>
+<p>﻿﻿</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/dp/UVa%20531%20Compromise%20%EF%BC%88DP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%89/" rel="prev" title="UVa 531 Compromise （DP 最长公共子序列）">
+                  <i class="fa fa-chevron-left"></i> UVa 531 Compromise （DP 最长公共子序列）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/dp/POJ%201157%20Little%20shop%20of%20flowers(DP,%E6%9C%80%E4%BC%98%E6%90%AD%E9%85%8D)/" rel="next" title="POJ 1157 Little shop of flowers(DP,最优搭配)">
+                  POJ 1157 Little shop of flowers(DP,最优搭配) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

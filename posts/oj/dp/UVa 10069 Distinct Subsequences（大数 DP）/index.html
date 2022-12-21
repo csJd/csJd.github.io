@@ -1,23 +1,344 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 求母串中子串出现的次数（长度不超过1后面100个0 显然要用大数了）令a为子串 b为母串 d[i][j]表示子串前i个字母在母串前j个字母中出现的次数当a[i]&#x3D;&#x3D;b[j]&amp;&amp;d[i-1][j-1]!&#x3D;0时 d[i][j]&#x3D;d[i-1][j-1]+d[i][j-1](a[i]&#x3D;&#x3D;b[j]时 子串前i个字母在母串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 10069 Distinct Subsequences（大数 DP）">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/dp/UVa%2010069%20Distinct%20Subsequences%EF%BC%88%E5%A4%A7%E6%95%B0%20DP%EF%BC%89/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 求母串中子串出现的次数（长度不超过1后面100个0 显然要用大数了）令a为子串 b为母串 d[i][j]表示子串前i个字母在母串前j个字母中出现的次数当a[i]&#x3D;&#x3D;b[j]&amp;&amp;d[i-1][j-1]!&#x3D;0时 d[i][j]&#x3D;d[i-1][j-1]+d[i][j-1](a[i]&#x3D;&#x3D;b[j]时 子串前i个字母在母串">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-08-25T09:48:31.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.297Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/dp/UVa%2010069%20Distinct%20Subsequences%EF%BC%88%E5%A4%A7%E6%95%B0%20DP%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/dp/UVa%2010069%20Distinct%20Subsequences%EF%BC%88%E5%A4%A7%E6%95%B0%20DP%EF%BC%89/","path":"posts/oj/dp/UVa 10069 Distinct Subsequences（大数 DP）/","title":"UVa 10069 Distinct Subsequences（大数 DP）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UVa 10069 Distinct Subsequences（大数 DP） | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Distinct-Subsequences"><span class="nav-text">Distinct Subsequences</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010069%20Distinct%20Subsequences%EF%BC%88%E5%A4%A7%E6%95%B0%20DP%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UVa 10069 Distinct Subsequences（大数 DP） | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UVa 10069 Distinct Subsequences（大数 DP）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-25 09:48:31" itemprop="dateCreated datePublished" datetime="2014-08-25T09:48:31+00:00">2014-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>﻿﻿</p>
+<p>题意 求母串中子串出现的次数（长度不超过1后面100个0 显然要用大数了）<br>令a为子串 b为母串 d[i][j]表示子串前i个字母在母串前j个字母中出现的次数当a[i]&#x3D;&#x3D;b[j]&amp;&amp;d[i-1][j-1]!&#x3D;0时 d[i][j]&#x3D;d[i-1][j-1]+d[i][j-1]<br>(a[i]&#x3D;&#x3D;b[j]时 子串前i个字母在母串前j个字母中出现的次数 等于 子串前i-1个字母在母串前j-1个字母中出现的次数 加上 子串前i个字母在母串前j-1个字母中出现的次数<br>a[i]!&#x3D;b[j]时 子串前i个字母在母串前j个字母中出现的次数 等于 子串前i个字母在母串前j-1个字母中出现的次数)<br>懒得写大数模版就用java交的 ;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.<span class="property">util</span>.*;</span><br><span class="line"><span class="keyword">import</span> java.<span class="property">math</span>.*;</span><br><span class="line"></span><br><span class="line">public <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span>(<span class="params"><span class="built_in">String</span> args[]</span>) &#123;</span><br><span class="line">		<span class="title class_">BigInteger</span> d[][] = <span class="keyword">new</span> <span class="title class_">BigInteger</span>[<span class="number">105</span>][<span class="number">10005</span>];</span><br><span class="line">		<span class="title class_">Scanner</span> <span class="keyword">in</span> = <span class="keyword">new</span> <span class="title class_">Scanner</span>(<span class="title class_">System</span>.<span class="property">in</span>);</span><br><span class="line">		int t = <span class="keyword">in</span>.<span class="title function_">nextInt</span>();</span><br><span class="line">		<span class="keyword">while</span> ((t--) != <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="title class_">String</span> b = <span class="keyword">in</span>.<span class="title function_">next</span>();</span><br><span class="line">			<span class="title class_">String</span> a = <span class="keyword">in</span>.<span class="title function_">next</span>();</span><br><span class="line">			int la = a.<span class="title function_">length</span>();</span><br><span class="line">			int lb = b.<span class="title function_">length</span>();</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; la; ++i)</span><br><span class="line">				<span class="keyword">for</span> (int j = <span class="number">0</span>; j &lt; lb; ++j)</span><br><span class="line">					d[i][j] = <span class="title class_">BigInteger</span>.<span class="property">ZERO</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (a.<span class="title function_">charAt</span>(<span class="number">0</span>) == b.<span class="title function_">charAt</span>(<span class="number">0</span>))</span><br><span class="line">				d[<span class="number">0</span>][<span class="number">0</span>] = <span class="title class_">BigInteger</span>.<span class="property">ONE</span>;</span><br><span class="line">			<span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt; lb; ++j) &#123;</span><br><span class="line">				<span class="keyword">if</span> (a.<span class="title function_">charAt</span>(<span class="number">0</span>) == b.<span class="title function_">charAt</span>(j))</span><br><span class="line">					d[<span class="number">0</span>][j] = d[<span class="number">0</span>][j - <span class="number">1</span>].<span class="title function_">add</span>(<span class="title class_">BigInteger</span>.<span class="property">ONE</span>);</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					d[<span class="number">0</span>][j] = d[<span class="number">0</span>][j - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; la; ++i)</span><br><span class="line">				<span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt; lb; ++j) &#123;</span><br><span class="line">					<span class="keyword">if</span> (a.<span class="title function_">charAt</span>(i) == b.<span class="title function_">charAt</span>(j)</span><br><span class="line">							&amp;&amp; d[i - <span class="number">1</span>][j - <span class="number">1</span>] != <span class="title class_">BigInteger</span>.<span class="property">ZERO</span>) &#123;</span><br><span class="line">						d[i][j] = d[i][j - <span class="number">1</span>].<span class="title function_">add</span>(d[i - <span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line">					&#125; <span class="keyword">else</span></span><br><span class="line">						d[i][j] = d[i][j - <span class="number">1</span>];</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			<span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(d[la - <span class="number">1</span>][lb - <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">in</span>.<span class="title function_">close</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有没加大数模版的C++代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char b[<span class="number">10005</span>], a[<span class="number">105</span>];</span><br><span class="line">int d[<span class="number">105</span>][<span class="number">10005</span>], la, lb, t;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dp</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d, <span class="number">0</span>, <span class="title function_">sizeof</span>(d));</span><br><span class="line">    <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= lb; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[<span class="number">1</span>] == b[j]) d[<span class="number">1</span>][j] = d[<span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> d[<span class="number">1</span>][j] = d[<span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i &lt;= la; ++i)</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= lb; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i] == b[j] &amp;&amp; d[i - <span class="number">1</span>][j - <span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                d[i][j] = d[i][j - <span class="number">1</span>] + d[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> d[i][j] = d[i][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%s%s&quot;</span>, b + <span class="number">1</span>, a + <span class="number">1</span>);</span><br><span class="line">        la = <span class="title function_">strlen</span>(a + <span class="number">1</span>);</span><br><span class="line">        lb = <span class="title function_">strlen</span>(b + <span class="number">1</span>);</span><br><span class="line">        <span class="title function_">dp</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, d[la][lb]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Distinct-Subsequences"><a href="#Distinct-Subsequences" class="headerlink" title="Distinct Subsequences"></a>Distinct Subsequences</h2><p>A subsequence of a given sequence is just the given sequence with some elements (possibly none) left out. Formally, given a sequence <em>*<em>X</em> &#x3D; <em>x</em>1*x</em>2…<em>xm</em>**, another sequence <em>*<em>Z</em> &#x3D; <em>z</em>1*z</em>2…<em>zk</em>** is a subsequence of <em><strong>X</strong></em> if there exists a strictly increasing sequence <strong>&lt;*i*1,*i*2, …, *ik*&gt;</strong> of indices of <em><strong>X</strong></em> such that for all <em>j</em> &#x3D; 1, 2, …, <em>k</em>, we have <em><strong>xij* &#x3D; *zj</strong></em>. For example, <em><strong>Z* &#x3D; *bcdb</strong></em> is a subsequence of <em><strong>X* &#x3D;*abcbdab</strong></em> with corresponding index sequence <strong>&lt; 2, 3, 5, 7 &gt;</strong>.</p>
+<p>In this problem your job is to write a program that counts the number of occurrences of <em><strong>Z</strong></em> in <em><strong>X</strong></em> as a subsequence such that each has a distinct index sequence.</p>
+<hr>
+<p><strong>Input</strong></p>
+<p>The first line of the input contains an integer <em><strong>N</strong></em> indicating the number of test cases to follow.</p>
+<p>The first line of each test case contains a string <em><strong>X</strong></em>, composed entirely of lowercase alphabetic characters and having length no greater than 10,000. The second line contains another string <em><strong>Z</strong></em> having length no greater than 100 and also composed of only lowercase alphabetic characters. Be assured that neither <em><strong>Z</strong></em> nor any prefix or suffix of <em><strong>Z</strong></em> will have more than 10100 distinct occurrences in <em><strong>X</strong></em> as a subsequence.</p>
+<hr>
+<p><strong>Output</strong></p>
+<p>For each test case in the input output the number of distinct occurrences of <em><strong>Z</strong></em> in <em><strong>X</strong></em> as a subsequence. Output for each input set must be on a separate line.****</p>
+<hr>
+<p><strong>Sample Input</strong></p>
+<p>2<br>babgbag<br>bag<br>rabbbit<br>rabbit</p>
+<hr>
+<p><strong>Sample Output</strong></p>
+<p>5<br>3</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/dp/HDU%201300%20Pearls(DP%20%E7%8F%A0%E5%AE%9D%E5%BA%97%E8%BF%9B%E8%B4%A7%E9%97%AE%E9%A2%98)/" rel="prev" title="HDU 1300 Pearls(DP 珠宝店进货问题)">
+                  <i class="fa fa-chevron-left"></i> HDU 1300 Pearls(DP 珠宝店进货问题)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/dp/UVa%2011584%20Partitioning%20by%20Palindromes(DP%20%E6%9C%80%E5%B0%91%E5%AF%B9%E7%A7%B0%E4%B8%B2)/" rel="next" title="UVa 11584 Partitioning by Palindromes(DP 最少对称串)">
+                  UVa 11584 Partitioning by Palindromes(DP 最少对称串) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

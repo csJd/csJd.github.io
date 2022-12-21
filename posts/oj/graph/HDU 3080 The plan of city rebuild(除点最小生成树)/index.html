@@ -1,23 +1,332 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.deng.cf","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"dimmer":false},"copycode":{"enable":false,"style":null,"show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意 一个城市原来有l个村庄 e1条道路 又增加了n个村庄 e2条道路 后来后销毁了m个村庄 与m相连的道路也销毁了 求使所有未销毁村庄相互连通最小花费 不能连通输出what a pity! 还是很裸的最小生成树 把销毁掉的标记下 然后prim咯 结果是无穷大就是不能连通的 12345678910111213141516171819202122232425262728293031323334353">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU 3080 The plan of city rebuild(除点最小生成树)">
+<meta property="og:url" content="http://blog.deng.cf/posts/oj/graph/HDU%203080%20The%20plan%20of%20city%20rebuild(%E9%99%A4%E7%82%B9%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91)/index.html">
+<meta property="og:site_name" content="dd&#39;s site \#">
+<meta property="og:description" content="题意 一个城市原来有l个村庄 e1条道路 又增加了n个村庄 e2条道路 后来后销毁了m个村庄 与m相连的道路也销毁了 求使所有未销毁村庄相互连通最小花费 不能连通输出what a pity! 还是很裸的最小生成树 把销毁掉的标记下 然后prim咯 结果是无穷大就是不能连通的 12345678910111213141516171819202122232425262728293031323334353">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-11-16T23:11:50.000Z">
+<meta property="article:modified_time" content="2022-12-21T09:36:09.301Z">
+<meta property="article:author" content="Deng">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/graph/HDU%203080%20The%20plan%20of%20city%20rebuild(%E9%99%A4%E7%82%B9%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/graph/HDU%203080%20The%20plan%20of%20city%20rebuild(%E9%99%A4%E7%82%B9%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91)/","path":"posts/oj/graph/HDU 3080 The plan of city rebuild(除点最小生成树)/","title":"HDU 3080 The plan of city rebuild(除点最小生成树)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HDU 3080 The plan of city rebuild(除点最小生成树) | dd's site \#</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dd's site \#</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-plan-of-city-rebuild"><span class="nav-text">The plan of city rebuild</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Deng"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Deng</p>
+  <div class="site-description" itemprop="description">Don't be evil.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/csJd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;csJd" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:scutjd@gmail.com" title="E-Mail → mailto:scutjd@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/HDU%203080%20The%20plan%20of%20city%20rebuild(%E9%99%A4%E7%82%B9%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HDU 3080 The plan of city rebuild(除点最小生成树) | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HDU 3080 The plan of city rebuild(除点最小生成树)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-11-16 23:11:50" itemprop="dateCreated datePublished" datetime="2014-11-16T23:11:50+00:00">2014-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题意 一个城市原来有l个村庄 e1条道路 又增加了n个村庄 e2条道路 后来后销毁了m个村庄 与m相连的道路也销毁了 求使所有未销毁村庄相互连通最小花费 不能连通输出what a pity!</p>
+<p>还是很裸的最小生成树 把销毁掉的标记下 然后prim咯 结果是无穷大就是不能连通的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">300</span>;</span><br><span class="line">int mat[N][N], des[N], d[N], ans, n, m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">prim</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(d));</span><br><span class="line">    int s = <span class="number">0</span>;  <span class="keyword">while</span>(des[s]) ++s;</span><br><span class="line">    d[s] = -<span class="number">1</span>;</span><br><span class="line">    int cur = s, next = n;</span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">1</span>; k &lt; n - m; ++k)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(des[i] || d[i] &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            d[i] = <span class="title function_">min</span>(d[i], mat[cur][i]);</span><br><span class="line">            <span class="keyword">if</span>(d[i] &lt; d[next]) next = i;</span><br><span class="line">        &#125;</span><br><span class="line">        ans += d[next], d[next] = -<span class="number">1</span>, cur = next, next = n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, l, e1, e2, a, b, c;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(mat, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(mat));</span><br><span class="line">        <span class="title function_">memset</span>(des, <span class="number">0</span>, <span class="title function_">sizeof</span>(des));</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;e1);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; e1; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">            <span class="keyword">if</span>(c &lt; mat[a][b]) mat[a][b] = mat[b][a] = c;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;e2);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; e2; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">            <span class="keyword">if</span>(c &lt; mat[a][b]) mat[a][b] = mat[b][a] = c;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        n = n + l;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;m);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line">            des[a] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ans = <span class="number">0</span>;  <span class="title function_">prim</span>();</span><br><span class="line">        <span class="keyword">if</span>(ans &lt; d[n]) <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot;what a pity!\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="The-plan-of-city-rebuild"><a href="#The-plan-of-city-rebuild" class="headerlink" title="The plan of city rebuild"></a>The plan of city rebuild</h1><p>Problem Description</p>
+<p>News comes!~City W will be rebuilt with the expectation to become a center city. There are some villages and roads in the city now, however. In order to make the city better, some new villages should be built and some old ones should be destroyed. Then the officers have to make a new plan, now you , as the designer, have the task to judge if the plan is practical, which means there are roads(direct or indirect) between every two villages(of course the village has not be destroyed), if the plan is available, please output the minimum cost, or output”what a pity!”.<br>Input</p>
+<p>Input contains an integer T in the first line, which means there are T cases, and then T lines follow.<br>Each case contains three parts. The first part contains two integers l(0&lt;l&lt;100), e1, representing the original number of villages and roads between villages(the range of village is from 0 to l-1), then follows e1 lines, each line contains three integers a, b, c (0&lt;&#x3D;a, b&lt;l, 0&lt;&#x3D;c&lt;&#x3D;1000), a, b indicating the village numbers and c indicating the road cost of village a and village b . The second part first contains an integer n(0&lt;n&lt;100), e2, representing the number of new villages and roads(the range of village is from l to l+n-1), then follows e2 lines, each line contains three integers x, y, z (0&lt;&#x3D;x, y&lt;l+n, 0&lt;&#x3D;z&lt;&#x3D;1000), x, y indicating the village numbers and z indicating the road cost of village x and village y. The third part contains an integer m(0&lt;m&lt;l+n), representing the number of deserted villages, next line comes m integers, p1,p2,…,pm,(0&lt;&#x3D;p1,p2,…,pm&lt;l+n) indicating the village number.<br>Pay attention: if one village is deserted, the roads connected are deserted, too.<br>Output</p>
+<p>For each test case, If all villages can connect with each other(direct or indirect), output the minimum cost, or output “what a pity!”.<br>Sample Input</p>
+<p>2 4 5 0 1 10 0 2 20 2 3 40 1 3 10 1 2 70 1 1 4 1 60 2 2 3 3 3 0 1 20 2 1 40 2 0 70 2 3 0 3 10 1 4 90 2 4 100 0<br>Sample Output</p>
+<p>70 160</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/oj/graph/POJ%201386%20Play%20on%20Words%EF%BC%88%E6%9C%89%E5%90%91%E6%AC%A7%E6%8B%89%E9%80%9A%E8%B7%AF%20%E8%BF%9E%E9%80%9A%E5%9B%BE%EF%BC%89/" rel="prev" title="POJ 1386 Play on Words（有向欧拉通路 连通图）">
+                  <i class="fa fa-chevron-left"></i> POJ 1386 Play on Words（有向欧拉通路 连通图）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/oj/ds/UVa%2010954%20Add%20All(%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97)/" rel="next" title="UVa 10954 Add All(优先队列)">
+                  UVa 10954 Add All(优先队列) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
