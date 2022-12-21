@@ -1390,7 +1390,7 @@ pre code {
   width: 100%;
 }
 .with-love {
-  color: #808080;
+  color: #f00;
   display: inline-block;
   margin: 0 5px;
 }
@@ -2103,6 +2103,13 @@ ul.breadcrumb li:last-child {
   border-bottom-color: #111;
   color: #111;
 }
+mjx-container[jax='CHTML'][display='true'],
+.has-jax {
+  overflow: auto hidden;
+}
+mjx-container[display='true'] + br {
+  display: none;
+}
 .use-motion .animated {
   animation-fill-mode: none;
   visibility: inherit;
@@ -2372,7 +2379,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #c6ffff;
+  background: #9159ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
