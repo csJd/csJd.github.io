@@ -1,4 +1,5 @@
 # My GitHub Pages with Hexo
-[![Build Status](https://travis-ci.com/csJd/csJd.github.io.svg?branch=hexo)](https://travis-ci.com/csJd/csJd.github.io)
+
+[![Build Status](https:/github.com/csJd/csJd.github.io/actions/workflows/pages.yml/badge.svg)](https://github.com/csJd/csJd.github.io/actions/workflows/pages.yml)
 
 [VISIT HERE](https://blog.deng.cf)
