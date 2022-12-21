@@ -111,11 +111,17 @@ deploy:
   # Zhihu: http://www.zhihu.com/people/your-user-name
   # others
 
-#百度分析ddwust
+# 百度分析ddwust
 # baidu_analytics: 09ffdce66330daa350e043a7b029ba2b
 
-#Google 分析
+# Google 分析
 # google_analytics: UA-93363626-1
 
-since: 2014
-#
+# Search https://theme-next.js.org/docs/third-party-services/search-services#Local-Search
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+
+since: 2013
