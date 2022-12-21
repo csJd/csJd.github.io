@@ -646,56 +646,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SVM Review</title>
-    <url>/posts/svm-review/</url>
-    <content><![CDATA[<h2 id="支持向量机的基本型"><a href="#支持向量机的基本型" class="headerlink" title="支持向量机的基本型"></a>支持向量机的基本型</h2><p>支持向量机（SVM）是一种二类分类模型，其学习的基本想法是求解能够正确划分训练数据集并且间隔最大的划分超平面。</p>
-<span id="more"></span>
-
-<p>划分超平面 $(\mathbf{w}, b)$ 可以由线性方程 $\mathbf{w}^T\mathbf{x} + b &#x3D; 0$ 来描述，令</p>
-<p>$$<br>  y_i(\mathbf{w}^T\mathbf{x}_i + b) \ge 1, \quad i &#x3D; 1,…, m, y_i \in {-1, 1}<br>  \tag{0}<br>$$</p>
-<blockquote>
-<p>注：若超平面 $(\mathbf{w}_t, b_t)$ 能将训练样本正确分类，即 $y_i(\mathbf{w}_t^T\mathbf{x}_i + b_t) \ge 0$，则总存在缩放变换 $\mathbf{w}^T&#x3D;\varsigma \mathbf{w}^T_t, b &#x3D; \varsigma b_t$ 使得式（0）成立</p>
-</blockquote>
-<p>此时的间隔 $\gamma$ 定义为 $\gamma &#x3D; \frac{2}{| \mathbf{w} |}$，使间隔最大化，即对以下优化问题求解：<br>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{max} \quad &amp; \frac{2}{\Vert \mathbf{w}\Vert} \<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+b) \ge 1, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{1}<br>$$</p>
-<p>这等价于：</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min} \quad &amp; \frac{1}{2}{\Vert \mathbf{w}\Vert}^2 \<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+b) \ge 1, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{2}<br>$$</p>
-<p>这是支持向量机的基本型，对求解式 (2) 使用 <a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0">拉格朗日乘数法</a> 有：<br>$$<br>  L(\mathbf{w}, b, \alpha) &#x3D; \frac{1}{2}{\Vert \mathbf{w}\Vert}^2+\sum_{i&#x3D;1}^m\alpha_i(1-y_i(\mathbf{w}^T\mathbf{x}_i+b))<br>  \tag{3}<br>$$</p>
-<p>令 $L$ 对 $\mathbf{w}, b$ 的偏导为零得</p>
-<p>$$<br>  \begin{aligned}<br>    \mathbf{w} &amp;&#x3D; \sum_{i&#x3D;1}^m\alpha_iy_i\mathbf{x}<em>i\<br>    0 &amp;&#x3D; \sum</em>{i&#x3D;1}^m\alpha_iy_i<br>  \end{aligned}<br>  \tag{4}<br>$$</p>
-<p>代入式（3）将 $\mathbf{w}$ 和 $b$ 消去有</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min}\ L(\mathbf{w},b,\alpha) &amp;&#x3D; \frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}<em>i^T\mathbf{x}<em>j) - \sum</em>{i&#x3D;1}^m\alpha_iy_i\left(\left(\sum</em>{j&#x3D;1}^m\alpha_jy_j\mathbf{x}<em>j\right)\mathbf{x}<em>i + b\right) + \sum</em>{i &#x3D; 1}^m\alpha_i\<br>    &amp;&#x3D;-\frac{1}{2}\sum</em>{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}_i^T\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i<br>  \end{aligned}<br>  \tag{5}<br>$$</p>
-<p>得到对偶问题：</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\alpha}{max} \quad &amp; -\frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}<em>i^T\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i \<br>    s.t.\quad<br>    &amp; \sum</em>{i&#x3D;1}^m\alpha_iy_i &#x3D; 0, \<br>    &amp; \alpha_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{6}<br>$$</p>
-<p>解出 $\alpha$ 后求出 $\mathbf{w}$ 与 $b$ 即可得到模型 $f(\mathbf{x}) &#x3D; \mathbf{w}^Tx + b &#x3D; \sum_{i&#x3D;1}^m\alpha_iy_i(\mathbf{x}_i^T\mathbf{x}) + b$</p>
-<p>可以使用 SMO 算法来进行求解，SMO 不断执行如下两个步骤直到收敛：</p>
-<ul>
-<li>选取一对需要更新的变量 $\alpha_i$ 和 $\alpha_j$</li>
-<li>固定 $\alpha_i$ 和 $\alpha_j$ 以外的参数，求解式（3）更新后的 $\alpha_i$ 和 $\alpha_j$</li>
-</ul>
-<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>原始的特征空间的也许并不存在一个能正确划分两类样本的超平面，此时存在一个更高维度的空间，将原始空间中的样本映射到高维度空间后是线性可分的，令 $\phi (\mathbf{x})$ 表示将 $\mathbf{x}$ 映射到高维空间后的特征向量。类似上面的基本型，可以得到此情况下的对偶问题：</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\alpha}{max} \quad &amp; -\frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j\phi(\mathbf{x}<em>i)^T\phi(\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i \<br>    s.t.\quad<br>    &amp; \sum</em>{i&#x3D;1}^m\alpha_iy_i &#x3D; 0, \<br>    &amp; \alpha_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{7}<br>$$</p>
-<p>直接计算 $\phi(\mathbf{x}_i)\cdot\phi(\mathbf{x}_j)$ 可能会很困难，设想有这样的函数：</p>
-<p>$$<br>  \kappa(\mathbf{x}_i, \mathbf{x}_j) &#x3D; \langle\phi(\mathbf{x}_i), \phi(\mathbf{x}_j)\rangle &#x3D;\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)<br>  \tag{8}<br>$$</p>
-<p>即 $\mathbf{x}_i$ 与 $\mathbf{x}_j$ 映射到高维空间后的内积等于在原始特征空间中通过函数 $\kappa(.,.)$ 计算的结果，函数 $\kappa(.,.)$ 称作 <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">核函数</a>。</p>
-<h2 id="软间隔"><a href="#软间隔" class="headerlink" title="软间隔"></a>软间隔</h2><p>往往很难确定合适的核函数使得训练样本严格线性可分，软间隔 SVM 允许某些样本不满足约束，在最大化间隔的同时，不满足约束的样本应尽可能少。使用 hinge 损失函数时，可以得到此条件下的优化目标</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min} \quad &amp; \frac{1}{2}{|\mathbf{w}|}^2 + C\sum_{i&#x3D;1}^mmax(0, 1-y_i(\mathbf{w}^T\mathbf{x}_i + b)),\quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{9}<br>$$</p>
-<p>若引入松弛变量 $\xi_i \ge 0$，可将式（9）重写为</p>
-<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b,\xi_i}{min} \quad &amp; \frac{1}{2}{|\mathbf{w}|}^2 + C\sum_{i&#x3D;1}^m\xi_i\<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+ b) \ge 1-\xi_i\<br>    &amp;\xi_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{10}<br>$$<br>这就是软间隔支持向量机。</p>
-<h2 id="与-LR-Logistic-Regression-的区别"><a href="#与-LR-Logistic-Regression-的区别" class="headerlink" title="与 LR (Logistic Regression) 的区别"></a>与 LR (Logistic Regression) 的区别</h2><ul>
-<li><p>二者的 Loss function 可以表示为一种类似的形式<br>$$<br>  \begin{aligned}<br>LR:\quad &amp;\lambda |\mathbf{w}|^2 + \sum_{i&#x3D;1}^mlog(1 + exp(-y_i\mathbf{w}^T\mathbf{x}<em>i))\<br>SVM:\quad &amp; \lambda |\mathbf{w}|^2 + \sum</em>{i&#x3D;1}^mmax{0, 1-y_i\mathbf{w}^T\mathbf{x}_i}<br>  \end{aligned}<br>$$<br>其中 $y_i \in {-1, 1}$，LR 是 Logistic Loss， SVM 是 Hinge Loss</p>
-</li>
-<li><p>SVM 只考虑支持向量（使不等式等号成立的点），LR 考虑所有点；SVM 不依赖于数据分布， LR 受数据分布影响</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Review</category>
-      </categories>
-      <tags>
-        <tag>Machine Learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python Basic Tutorial</title>
     <url>/posts/python-tutorial/</url>
     <content><![CDATA[<h1 id="Python-Basic-Tutorial（2019-01-26-SCUT）"><a href="#Python-Basic-Tutorial（2019-01-26-SCUT）" class="headerlink" title="Python Basic Tutorial（2019.01.26 @ SCUT）"></a>Python Basic Tutorial（2019.01.26 @ SCUT）</h1><ul>
@@ -910,6 +860,56 @@
       </categories>
       <tags>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SVM Review</title>
+    <url>/posts/svm-review/</url>
+    <content><![CDATA[<h2 id="支持向量机的基本型"><a href="#支持向量机的基本型" class="headerlink" title="支持向量机的基本型"></a>支持向量机的基本型</h2><p>支持向量机（SVM）是一种二类分类模型，其学习的基本想法是求解能够正确划分训练数据集并且间隔最大的划分超平面。</p>
+<span id="more"></span>
+
+<p>划分超平面 $(\mathbf{w}, b)$ 可以由线性方程 $\mathbf{w}^T\mathbf{x} + b &#x3D; 0$ 来描述，令</p>
+<p>$$<br>  y_i(\mathbf{w}^T\mathbf{x}_i + b) \ge 1, \quad i &#x3D; 1,…, m, y_i \in {-1, 1}<br>  \tag{0}<br>$$</p>
+<blockquote>
+<p>注：若超平面 $(\mathbf{w}_t, b_t)$ 能将训练样本正确分类，即 $y_i(\mathbf{w}_t^T\mathbf{x}_i + b_t) \ge 0$，则总存在缩放变换 $\mathbf{w}^T&#x3D;\varsigma \mathbf{w}^T_t, b &#x3D; \varsigma b_t$ 使得式（0）成立</p>
+</blockquote>
+<p>此时的间隔 $\gamma$ 定义为 $\gamma &#x3D; \frac{2}{| \mathbf{w} |}$，使间隔最大化，即对以下优化问题求解：<br>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{max} \quad &amp; \frac{2}{\Vert \mathbf{w}\Vert} \<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+b) \ge 1, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{1}<br>$$</p>
+<p>这等价于：</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min} \quad &amp; \frac{1}{2}{\Vert \mathbf{w}\Vert}^2 \<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+b) \ge 1, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{2}<br>$$</p>
+<p>这是支持向量机的基本型，对求解式 (2) 使用 <a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0">拉格朗日乘数法</a> 有：<br>$$<br>  L(\mathbf{w}, b, \alpha) &#x3D; \frac{1}{2}{\Vert \mathbf{w}\Vert}^2+\sum_{i&#x3D;1}^m\alpha_i(1-y_i(\mathbf{w}^T\mathbf{x}_i+b))<br>  \tag{3}<br>$$</p>
+<p>令 $L$ 对 $\mathbf{w}, b$ 的偏导为零得</p>
+<p>$$<br>  \begin{aligned}<br>    \mathbf{w} &amp;&#x3D; \sum_{i&#x3D;1}^m\alpha_iy_i\mathbf{x}<em>i\<br>    0 &amp;&#x3D; \sum</em>{i&#x3D;1}^m\alpha_iy_i<br>  \end{aligned}<br>  \tag{4}<br>$$</p>
+<p>代入式（3）将 $\mathbf{w}$ 和 $b$ 消去有</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min}\ L(\mathbf{w},b,\alpha) &amp;&#x3D; \frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}<em>i^T\mathbf{x}<em>j) - \sum</em>{i&#x3D;1}^m\alpha_iy_i\left(\left(\sum</em>{j&#x3D;1}^m\alpha_jy_j\mathbf{x}<em>j\right)\mathbf{x}<em>i + b\right) + \sum</em>{i &#x3D; 1}^m\alpha_i\<br>    &amp;&#x3D;-\frac{1}{2}\sum</em>{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}_i^T\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i<br>  \end{aligned}<br>  \tag{5}<br>$$</p>
+<p>得到对偶问题：</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\alpha}{max} \quad &amp; -\frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j(\mathbf{x}<em>i^T\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i \<br>    s.t.\quad<br>    &amp; \sum</em>{i&#x3D;1}^m\alpha_iy_i &#x3D; 0, \<br>    &amp; \alpha_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{6}<br>$$</p>
+<p>解出 $\alpha$ 后求出 $\mathbf{w}$ 与 $b$ 即可得到模型 $f(\mathbf{x}) &#x3D; \mathbf{w}^Tx + b &#x3D; \sum_{i&#x3D;1}^m\alpha_iy_i(\mathbf{x}_i^T\mathbf{x}) + b$</p>
+<p>可以使用 SMO 算法来进行求解，SMO 不断执行如下两个步骤直到收敛：</p>
+<ul>
+<li>选取一对需要更新的变量 $\alpha_i$ 和 $\alpha_j$</li>
+<li>固定 $\alpha_i$ 和 $\alpha_j$ 以外的参数，求解式（3）更新后的 $\alpha_i$ 和 $\alpha_j$</li>
+</ul>
+<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>原始的特征空间的也许并不存在一个能正确划分两类样本的超平面，此时存在一个更高维度的空间，将原始空间中的样本映射到高维度空间后是线性可分的，令 $\phi (\mathbf{x})$ 表示将 $\mathbf{x}$ 映射到高维空间后的特征向量。类似上面的基本型，可以得到此情况下的对偶问题：</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\alpha}{max} \quad &amp; -\frac{1}{2}\sum_{i&#x3D;1}^{m}\sum_{j&#x3D;1}^m \alpha_i\alpha_jy_iy_j\phi(\mathbf{x}<em>i)^T\phi(\mathbf{x}<em>j) + \sum</em>{i&#x3D;1}^m\alpha_i \<br>    s.t.\quad<br>    &amp; \sum</em>{i&#x3D;1}^m\alpha_iy_i &#x3D; 0, \<br>    &amp; \alpha_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{7}<br>$$</p>
+<p>直接计算 $\phi(\mathbf{x}_i)\cdot\phi(\mathbf{x}_j)$ 可能会很困难，设想有这样的函数：</p>
+<p>$$<br>  \kappa(\mathbf{x}_i, \mathbf{x}_j) &#x3D; \langle\phi(\mathbf{x}_i), \phi(\mathbf{x}_j)\rangle &#x3D;\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)<br>  \tag{8}<br>$$</p>
+<p>即 $\mathbf{x}_i$ 与 $\mathbf{x}_j$ 映射到高维空间后的内积等于在原始特征空间中通过函数 $\kappa(.,.)$ 计算的结果，函数 $\kappa(.,.)$ 称作 <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">核函数</a>。</p>
+<h2 id="软间隔"><a href="#软间隔" class="headerlink" title="软间隔"></a>软间隔</h2><p>往往很难确定合适的核函数使得训练样本严格线性可分，软间隔 SVM 允许某些样本不满足约束，在最大化间隔的同时，不满足约束的样本应尽可能少。使用 hinge 损失函数时，可以得到此条件下的优化目标</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b}{min} \quad &amp; \frac{1}{2}{|\mathbf{w}|}^2 + C\sum_{i&#x3D;1}^mmax(0, 1-y_i(\mathbf{w}^T\mathbf{x}_i + b)),\quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{9}<br>$$</p>
+<p>若引入松弛变量 $\xi_i \ge 0$，可将式（9）重写为</p>
+<p>$$<br>  \begin{aligned}<br>    \underset{\mathbf{w},b,\xi_i}{min} \quad &amp; \frac{1}{2}{|\mathbf{w}|}^2 + C\sum_{i&#x3D;1}^m\xi_i\<br>    s.t. \quad &amp; y_i(\mathbf{w}^T\mathbf{x}_i+ b) \ge 1-\xi_i\<br>    &amp;\xi_i \ge 0, \quad i &#x3D; 1, …, m<br>  \end{aligned}<br>  \tag{10}<br>$$<br>这就是软间隔支持向量机。</p>
+<h2 id="与-LR-Logistic-Regression-的区别"><a href="#与-LR-Logistic-Regression-的区别" class="headerlink" title="与 LR (Logistic Regression) 的区别"></a>与 LR (Logistic Regression) 的区别</h2><ul>
+<li><p>二者的 Loss function 可以表示为一种类似的形式<br>$$<br>  \begin{aligned}<br>LR:\quad &amp;\lambda |\mathbf{w}|^2 + \sum_{i&#x3D;1}^mlog(1 + exp(-y_i\mathbf{w}^T\mathbf{x}<em>i))\<br>SVM:\quad &amp; \lambda |\mathbf{w}|^2 + \sum</em>{i&#x3D;1}^mmax{0, 1-y_i\mathbf{w}^T\mathbf{x}_i}<br>  \end{aligned}<br>$$<br>其中 $y_i \in {-1, 1}$，LR 是 Logistic Loss， SVM 是 Hinge Loss</p>
+</li>
+<li><p>SVM 只考虑支持向量（使不等式等号成立的点），LR 考虑所有点；SVM 不依赖于数据分布， LR 受数据分布影响</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Review</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -2872,6 +2872,39 @@
       </tags>
   </entry>
   <entry>
+    <title>ZOJ 3699 Dakar Rally(贪心)</title>
+    <url>/posts/oj/dp/ZOJ%203699%20Dakar%20Rally(%E8%B4%AA%E5%BF%83)/</url>
+    <content><![CDATA[<p>题意 路上有 n 个加油站 每个加油站的价格可能不同 你的油箱容积为 v 问从起点开车到终点加油至少用多少钱</p>
+<p>贪心 每次都让油箱里面便宜的油最多就行了 在每个站点 i 有两种情况</p>
+<ol>
+<li><p>i 点把油加满跑完都没有更便宜的 那么在 i 点肯定要加满 然后开到 i+1 点去</p>
+</li>
+<li><p>i 点把油加满能跑到第一个比 i 点更便宜的 j 点或者到了终点 j 那么只用把油加到能到 j 点 然后直接开到 j 点</p>
+</li>
+</ol>
+<p>然后把每个点加油用的钱加起来就行了</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll len[N], cost[N], pri[N], v;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%lld&quot;</span>, &amp;n, &amp;v);</span><br><span class="line">        int flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;len[i], &amp;cost[i], &amp;pri[i]);</span><br><span class="line">            <span class="keyword">if</span>(len[i] * cost[i] &gt; v) flag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">puts</span>(<span class="string">&quot;Impossible&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int i = <span class="number">0</span>, j;</span><br><span class="line">        ll r = <span class="number">0</span>, ans = <span class="number">0</span>, t;                 <span class="comment">//r记录到i点还剩多少油</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt; n)</span><br><span class="line">        &#123;</span><br><span class="line">            j = i + <span class="number">1</span>, t = len[i] * cost[i];  <span class="comment">//t记录到下一个便宜的点用了多少油</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//往前走直到找到一个更便宜的站j  或者油箱跑完</span></span><br><span class="line">            <span class="keyword">while</span>( j &lt; n &amp;&amp; pri[j] &gt;= pri[i] &amp;&amp; v - t &gt;= cost[j] * len[j])</span><br><span class="line">            &#123;</span><br><span class="line">                t += len[j] * cost[j];</span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( j &gt;= n || pri[j] &lt; pri[i])  <span class="comment">//j点油第一个比i点便宜  加到能到j</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(r &gt; t)  r -= t;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ans += (t - r)  * pri[i];</span><br><span class="line">                    r = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                i = j;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>  <span class="comment">//油跑完都没更便宜的 加满 到下一站</span></span><br><span class="line">            &#123;</span><br><span class="line">                ans +=  (v - r) * pri[i];</span><br><span class="line">                r = v - len[i] * cost[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  Dakar Rally    Time Limit:2 Seconds Memory Limit:65536 KB</p>
+<h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>The <strong>Dakar Rally</strong> is an annual Dakar Series rally raid type of off-road race, organized by the Amaury Sport Organization. The off-road endurance race consists of a series of routes. In different routes, the competitors cross dunes, mud, camel grass, rocks, erg and so on.</p>
+<p>Because of the various circumstances, the mileages consume of the car and the prices of gas vary from each other. Please help the competitors to minimize their payment on gas.</p>
+<p>Assume that the car begins with an empty tank and each gas station has infinite gas. The racers need to finish all the routes in order as the test case descripts.</p>
+<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>There are multiple test cases. The first line of input contains an integer <em>T</em> (<em>T</em> ≤ 50) indicating the number of test cases. Then <em>T</em> test cases follow.</p>
+<p>The first line of each case contains two integers: <em>n</em> – amount of routes in the race; <em>capacity</em> – the capacity of the tank.</p>
+<p>The following <em>n</em> lines contain three integers each: <em>mileagei</em> – the mileage of the <em>ith</em> route; <em>consumei</em> – the mileage consume of the car in the <em>ith</em> route , which means the number of gas unit the car consumes in 1 mile; pricei – the price of unit gas in the gas station which locates at the beginning of the <em>ith</em> route.</p>
+<p>All integers are positive and no more than 105.</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>For each test case, print the minimal cost to finish all of the <em>n</em> routes. If it’s impossible, print “Impossible” (without the quotes).</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>2 2 30 5 6 9 4 7 10 2 30 5 6 9 4 8 10</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>550 Impossible</p>
+]]></content>
+      <categories>
+        <category>OJ</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode 115 Distinct Subsequences (DP)</title>
     <url>/posts/oj/dp/leetcode-115-distinct-subsequences/</url>
     <content><![CDATA[<p>这里通过 LeetCode 中的一道动态规划题目（<a href="https://leetcode.com/problems/distinct-subsequences">115. Distinct Subsequences</a>）来复习一下动态规划中的正反向递推和滚动数组的使用。</p>
@@ -2938,39 +2971,6 @@
 <p>也容易想到初始状态：空串和任意字符串之间的编辑距离为该串的长度，即 <code>dp[i][0] =  i; dp[0][j] = j</code></p>
 <p>结合上面的状态转移情况不难写出代码:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minDistance</span>(<span class="params">self, word1: <span class="built_in">str</span>, word2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp[i][j] -&gt; minDistance(word1[:i], word2[:j])</span></span><br><span class="line">        len1, len2 = <span class="built_in">len</span>(word1), <span class="built_in">len</span>(word2)</span><br><span class="line">        dp = [[<span class="number">0</span>] * (len2+<span class="number">1</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)]  <span class="comment"># 2 * (len2+1) array</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(len2+<span class="number">1</span>):</span><br><span class="line">            dp[<span class="number">0</span>][j] = j</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, len1+<span class="number">1</span>):</span><br><span class="line">            cur = i % <span class="number">2</span></span><br><span class="line">            dp[cur][<span class="number">0</span>] = i</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, len2+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>]:</span><br><span class="line">                    dp[cur][j] = dp[cur-<span class="number">1</span>][j-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># min(remove, insert, replace)</span></span><br><span class="line">                    dp[cur][j] = <span class="built_in">min</span>(dp[cur-<span class="number">1</span>][j], dp[cur]</span><br><span class="line">                                     [j-<span class="number">1</span>], dp[cur-<span class="number">1</span>][j-<span class="number">1</span>]) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[len1 % <span class="number">2</span>][len2]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    solu = Solution()</span><br><span class="line">    <span class="built_in">print</span>(solu.minDistance(<span class="string">&#x27;intention&#x27;</span>, <span class="string">&#x27;execution&#x27;</span>))</span><br><span class="line">    <span class="built_in">print</span>(solu.minDistance(<span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;ros&#x27;</span>))</span><br><span class="line">    <span class="built_in">print</span>(solu.minDistance(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;ros&#x27;</span>))</span><br><span class="line">    <span class="built_in">print</span>(solu.minDistance(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OJ</category>
-        <category>DP</category>
-      </categories>
-      <tags>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ZOJ 3699 Dakar Rally(贪心)</title>
-    <url>/posts/oj/dp/ZOJ%203699%20Dakar%20Rally(%E8%B4%AA%E5%BF%83)/</url>
-    <content><![CDATA[<p>题意 路上有 n 个加油站 每个加油站的价格可能不同 你的油箱容积为 v 问从起点开车到终点加油至少用多少钱</p>
-<p>贪心 每次都让油箱里面便宜的油最多就行了 在每个站点 i 有两种情况</p>
-<ol>
-<li><p>i 点把油加满跑完都没有更便宜的 那么在 i 点肯定要加满 然后开到 i+1 点去</p>
-</li>
-<li><p>i 点把油加满能跑到第一个比 i 点更便宜的 j 点或者到了终点 j 那么只用把油加到能到 j 点 然后直接开到 j 点</p>
-</li>
-</ol>
-<p>然后把每个点加油用的钱加起来就行了</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll len[N], cost[N], pri[N], v;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%lld&quot;</span>, &amp;n, &amp;v);</span><br><span class="line">        int flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;len[i], &amp;cost[i], &amp;pri[i]);</span><br><span class="line">            <span class="keyword">if</span>(len[i] * cost[i] &gt; v) flag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">puts</span>(<span class="string">&quot;Impossible&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int i = <span class="number">0</span>, j;</span><br><span class="line">        ll r = <span class="number">0</span>, ans = <span class="number">0</span>, t;                 <span class="comment">//r记录到i点还剩多少油</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt; n)</span><br><span class="line">        &#123;</span><br><span class="line">            j = i + <span class="number">1</span>, t = len[i] * cost[i];  <span class="comment">//t记录到下一个便宜的点用了多少油</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//往前走直到找到一个更便宜的站j  或者油箱跑完</span></span><br><span class="line">            <span class="keyword">while</span>( j &lt; n &amp;&amp; pri[j] &gt;= pri[i] &amp;&amp; v - t &gt;= cost[j] * len[j])</span><br><span class="line">            &#123;</span><br><span class="line">                t += len[j] * cost[j];</span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( j &gt;= n || pri[j] &lt; pri[i])  <span class="comment">//j点油第一个比i点便宜  加到能到j</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(r &gt; t)  r -= t;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ans += (t - r)  * pri[i];</span><br><span class="line">                    r = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                i = j;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>  <span class="comment">//油跑完都没更便宜的 加满 到下一站</span></span><br><span class="line">            &#123;</span><br><span class="line">                ans +=  (v - r) * pri[i];</span><br><span class="line">                r = v - len[i] * cost[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  Dakar Rally    Time Limit:2 Seconds Memory Limit:65536 KB</p>
-<h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>The <strong>Dakar Rally</strong> is an annual Dakar Series rally raid type of off-road race, organized by the Amaury Sport Organization. The off-road endurance race consists of a series of routes. In different routes, the competitors cross dunes, mud, camel grass, rocks, erg and so on.</p>
-<p>Because of the various circumstances, the mileages consume of the car and the prices of gas vary from each other. Please help the competitors to minimize their payment on gas.</p>
-<p>Assume that the car begins with an empty tank and each gas station has infinite gas. The racers need to finish all the routes in order as the test case descripts.</p>
-<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>There are multiple test cases. The first line of input contains an integer <em>T</em> (<em>T</em> ≤ 50) indicating the number of test cases. Then <em>T</em> test cases follow.</p>
-<p>The first line of each case contains two integers: <em>n</em> – amount of routes in the race; <em>capacity</em> – the capacity of the tank.</p>
-<p>The following <em>n</em> lines contain three integers each: <em>mileagei</em> – the mileage of the <em>ith</em> route; <em>consumei</em> – the mileage consume of the car in the <em>ith</em> route , which means the number of gas unit the car consumes in 1 mile; pricei – the price of unit gas in the gas station which locates at the beginning of the <em>ith</em> route.</p>
-<p>All integers are positive and no more than 105.</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>For each test case, print the minimal cost to finish all of the <em>n</em> routes. If it’s impossible, print “Impossible” (without the quotes).</p>
-<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>2 2 30 5 6 9 4 7 10 2 30 5 6 9 4 8 10</p>
-<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>550 Impossible</p>
 ]]></content>
       <categories>
         <category>OJ</category>
