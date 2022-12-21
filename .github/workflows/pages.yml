@@ -18,10 +18,10 @@ jobs:
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
 
-      - name: Use Node.js 7
+      - name: Use Node.js 18
         uses: actions/setup-node@v2
         with:
-          node-version: '7'
+          node-version: '18'
 
       - name: Cache NPM dependencies
         uses: actions/cache@v2
@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
 
       - name: Build
-        run: hexo g
+        run: npm run build  # npx hexo g
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
