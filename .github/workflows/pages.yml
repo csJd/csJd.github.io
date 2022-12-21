@@ -1,7 +1,7 @@
 # GitHub Actions for hexo on GitHub Pages
 # https://hexo.io/zh-cn/docs/github-pages.html
 
-name: Pages
+name: Build Hexo Pages
 
 on:
   push:
@@ -31,12 +31,12 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
 
-      - name: Install Dependencies
-        # install pandoc which is required by `hexo-renderer-pandoc`
-        run: wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
-        run: sudo dpkg -i pandoc-2.7.3-1-amd64.deb
-        # `npm ci` is better than `npm install`
-        run: npm ci
+      # Install Dependencies
+      # install pandoc which is required by `hexo-renderer-pandoc`
+      - run: wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
+      - run: sudo dpkg -i pandoc-2.7.3-1-amd64.deb
+      # `npm ci` is better than `npm install`
+      - run: npm ci
 
       - name: Build
         run: hexo g
