@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,108 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/POJ%203258%20River%20Hopscotch%EF%BC%88%E4%BA%8C%E5%88%86%C2%B7%E6%9C%80%E5%B0%8F%E8%B7%9D%E7%A6%BB%E6%9C%80%E5%A4%A7)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/math/POJ%203258%20River%20Hopscotch%EF%BC%88%E4%BA%8C%E5%88%86%C2%B7%E6%9C%80%E5%B0%8F%E8%B7%9D%E7%A6%BB%E6%9C%80%E5%A4%A7)/" class="post-title-link" itemprop="url">POJ 3258 River Hopscotch（二分·最小距离最大)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-09 11:33:17" itemprop="dateCreated datePublished" datetime="2015-03-09T11:33:17+00:00">2015-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 一条河两岸之间有n个石头 求取走m个石头后 使得两个石头间距离的最小值最大</p>
+<p>感觉关键是理解题意 简单的二分 二分最小距离 看要取走多少个(cnt)石头 cnt&lt;&#x3D;m的话 说明最小距离还可以增大 这样就可以二分出答案了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">50005</span>;</span><br><span class="line">int p[N], l, n, m;</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">ok</span>(<span class="params">int k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int last = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i] - p[last] &lt; k) ++cnt;</span><br><span class="line">        <span class="keyword">else</span> last = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt &lt;= m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int le, ri, mid;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;l, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        p[++n] = l;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p[i]);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">sort</span>(p, p + n);</span><br><span class="line">        le = <span class="number">0</span>, ri = l;</span><br><span class="line">        <span class="keyword">while</span>(le &lt;= ri)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (le + ri) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">ok</span>(mid)) le = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> ri = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, le - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>River Hopscotch</p>
+<p>Description<br>Every year the cows hold an event featuring a peculiar version of hopscotch that involves carefully jumping from rock to rock in a river. The excitement takes place on a long, straight river with a rock at the start and another rock at the end, <em>L</em> units away from the start (1 ≤ <em>L</em> ≤ 1,000,000,000). Along the river between the starting and ending rocks, <em>N</em> (0 ≤<em>N</em> ≤ 50,000) more rocks appear, each at an integral distance <em>Di</em> from the start (0 &lt; <em>Di</em> &lt; <em>L</em>).</p>
+<p>To play the game, each cow in turn starts at the starting rock and tries to reach the finish at the ending rock, jumping only from rock to rock. Of course, less agile cows never make it to the final rock, ending up instead in the river.</p>
+<p>Farmer John is proud of his cows and watches this event each year. But as time goes by, he tires of watching the timid cows of the other farmers limp across the short distances between rocks placed too closely together. He plans to remove several rocks in order to increase the shortest distance a cow will have to jump to reach the end. He knows he cannot remove the starting and ending rocks, but he calculates that he has enough resources to remove up to <em>M</em>rocks (0 ≤ <em>M</em> ≤ <em>N</em>).</p>
+<p>FJ wants to know exactly how much he can increase the shortest distance <em>&#x2F;<em>before&#x2F;</em></em> he starts removing the rocks. Help Farmer John determine the greatest possible shortest distance a cow has to jump after removing the optimal set of <em>M</em> rocks.</p>
+<p>Input</p>
+<p>Line 1: Three space-separated integers: <em>L</em>, <em>N</em>, and <em>M</em><br>Lines 2.. <em>N</em>+1: Each line contains a single integer indicating how far some rock is away from the starting rock. No two rocks share the same position.</p>
+<p>Output</p>
+<p>Line 1: A single integer that is the maximum of the shortest distance a cow has to jump after removing <em>M</em> rocks</p>
+<p>Sample Input</p>
+<p>25 5 2 2 14 11 21 17</p>
+<p>Sample Output</p>
+<p>4</p>
+<p>Hint</p>
+<p>Before removing any rocks, the shortest jump was a jump of 2 from 0 (the start) to 2. After removing the rocks at 2 and 14, the shortest required jump is a jump of 4 (from 17 to 21 or from 21 to 25).</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=USACO+2006+December+Silver">USACO 2006 December Silver</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1045,99 +1147,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20439%20Knight%20Moves(BFS%E5%BA%94%E7%94%A8)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/UVa%20439%20Knight%20Moves(BFS%E5%BA%94%E7%94%A8)/" class="post-title-link" itemprop="url">UVa 439 Knight Moves(BFS应用)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-01-23 18:20:47" itemprop="dateCreated datePublished" datetime="2015-01-23T18:20:47+00:00">2015-01-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 求国际象棋中骑士从一个位置移东到另一个位置所需最少步数</p>
-<p>基础的BFS应用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int x[] = &#123; -<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">int y[] = &#123; -<span class="number">1</span>, -<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, -<span class="number">2</span>, -<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int d[<span class="number">15</span>][<span class="number">15</span>], sx, sy, ex, ey;</span><br><span class="line">pair&lt;int, int&gt; q[<span class="number">105</span>], t;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cx, cy, r, c, front = <span class="number">0</span>, rear = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">memset</span>(d, -<span class="number">1</span>, <span class="title function_">sizeof</span>(d));</span><br><span class="line">    d[sx][sy] = <span class="number">0</span>;</span><br><span class="line">    q[rear++] = <span class="title function_">make_pair</span>(sx, sy);</span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear)</span><br><span class="line">    &#123;</span><br><span class="line">        t = q[front++];</span><br><span class="line">        cx = t.<span class="property">first</span>, cy = t.<span class="property">second</span>;</span><br><span class="line">        <span class="keyword">if</span>(cx == ex &amp;&amp; cy == ey) <span class="keyword">return</span> d[cx][cy];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            r = cx + x[i], c = cy + y[i];</span><br><span class="line">            <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt; <span class="number">7</span> || c &lt; <span class="number">0</span> || c &gt; <span class="number">7</span> || d[r][c] &gt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            d[r][c] = d[cx][cy] + <span class="number">1</span>;</span><br><span class="line">            q[rear++] = <span class="title function_">make_pair</span>(r, c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char a[<span class="number">5</span>], b[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%s%s&quot;</span>, a, b))</span><br><span class="line">    &#123;</span><br><span class="line">        sx = a[<span class="number">0</span>] - <span class="string">&#x27;a&#x27;</span>, sy = a[<span class="number">1</span>] - <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">        ex = b[<span class="number">0</span>] - <span class="string">&#x27;a&#x27;</span>, ey = b[<span class="number">1</span>] - <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;To get from %s to %s takes %d knight moves.\n&quot;</span>, a, b, <span class="title function_">bfs</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>A friend of you is doing research on the <em>Traveling Knight Problem (TKP)</em> where you are to find the shortest closed tour of knight moves that visits each square of a given set of <em>n</em> squares on a chessboard exactly once. He thinks that the most difficult part of the problem is determining the smallest number of knight moves between two given squares and that, once you have accomplished this, finding the tour would be easy.</p>
-<p>Of course you know that it is vice versa. So you offer him to write a program that solves the “difficult” part.</p>
-<p>Your job is to write a program that takes two squares <em>a</em> and <em>b</em> as input and then determines the number of knight moves on a shortest route from <em>a</em> to <em>b</em>.</p>
-<h2 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification"></a>Input Specification</h2><p>The input file will contain one or more test cases. Each test case consists of one line containing two squares separated by one space. A square is a string consisting of a letter (a-h) representing the column and a digit (1-8) representing the row on the chessboard.</p>
-<h2 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification"></a>Output Specification</h2><p>For each test case, print one line saying “To get from <em>xx</em> to <em>yy</em> takes <em>n</em> knight moves.”.</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>e2 e4 a1 b2 b2 c3 a1 h8 a1 h7 h8 a1 b1 c3 f6 f6</p>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>To get from e2 to e4 takes 2 knight moves. To get from a1 to b2 takes 4 knight moves. To get from b2 to c3 takes 2 knight moves. To get from a1 to h8 takes 6 knight moves. To get from a1 to h7 takes 5 knight moves. To get from h8 to a1 takes 6 knight moves. To get from b1 to c3 takes 1 knight moves. To get from f6 to f6 takes 0 knight moves.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1151,7 +1160,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

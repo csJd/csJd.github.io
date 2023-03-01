@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,102 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20540%20Team%20Queue%EF%BC%88%E5%9B%A2%E9%98%9F%E9%98%9F%E5%88%97%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/UVa%20540%20Team%20Queue%EF%BC%88%E5%9B%A2%E9%98%9F%E9%98%9F%E5%88%97%EF%BC%89/" class="post-title-link" itemprop="url">UVa 540 Team Queue（团队队列）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-01-20 20:39:29" itemprop="dateCreated datePublished" datetime="2015-01-20T20:39:29+00:00">2015-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 模拟团队队列的入队和出队</p>
+<p>STL应用 用一个队列维护团队编号 再用一个队列数组维护个体</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000005</span>;</span><br><span class="line">int team[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas = <span class="number">0</span>, n, t, a;</span><br><span class="line">    char cmd[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t), t)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Scenario #%d\n&quot;</span>, ++cas);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; t; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">            <span class="keyword">while</span>(n--)</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a), team[a] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        queue&lt;int&gt; q, qt[<span class="number">1005</span>];</span><br><span class="line">        <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, cmd), cmd[<span class="number">0</span>] != <span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cmd[<span class="number">0</span>] == <span class="string">&#x27;E&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line">                t = team[a];</span><br><span class="line">                <span class="keyword">if</span>(qt[t].<span class="title function_">empty</span>()) q.<span class="title function_">push</span>(t);</span><br><span class="line">                qt[t].<span class="title function_">push</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                t = q.<span class="title function_">front</span>();</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, qt[t].<span class="title function_">front</span>()), qt[t].<span class="title function_">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(qt[t].<span class="title function_">empty</span>()) q.<span class="title function_">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p><em>Queues</em> and <em>Priority Queues</em> are data structures which are known to most computer scientists. The<em>Team Queue</em>, however, is not so well known, though it occurs often in everyday life. At lunch time the queue in front of the Mensa is a team queue, for example.</p>
+<p>In a team queue each element belongs to a team. If an element enters the queue, it first searches the queue from head to tail to check if some of its <em>teammates</em> (elements of the same team) are already in the queue. If yes, it enters the queue right behind them. If not, it enters the queue at the tail and becomes the new last element (bad luck). Dequeuing is done like in normal queues: elements are processed from head to tail in the order they appear in the team queue.</p>
+<p>Your task is to write a program that simulates such a team queue.</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input file will contain one or more test cases. Each test case begins with the number of teams t (  <img src="/../images/dge.org-external-5-540img1.gif.png" alt="$1 \le t \le 1000$"> ). Then t team descriptions follow, each one consisting of the number of elements belonging to the team and the elements themselves. Elements are integers in the range 0 - 999999. A team may consist of up to 1000 elements.</p>
+<p>Finally, a list of commands follows. There are three different kinds of commands:</p>
+<p>The input will be terminated by a value of 0 for t.</p>
+<p><strong>Warning:</strong> A test case may contain up to 200000 (two hundred thousand) commands, so the implementation of the team queue should be efficient: both enqueing and dequeuing of an element should only take constant time.</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each test case, first print a line saying &#96;&#96; Scenario &#x2F;# k “, where k is the number of the test case. Then, for each DEQUEUE command, print the element which is dequeued on a single line. Print a blank line after each test case, even after the last one.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>2 3 101 102 103 3 201 202 203 ENQUEUE 101 ENQUEUE 201 ENQUEUE 102 ENQUEUE 202 ENQUEUE 103 ENQUEUE 203 DEQUEUE DEQUEUE DEQUEUE DEQUEUE DEQUEUE DEQUEUE STOP 2 5 259001 259002 259003 259004 259005 6 260001 260002 260003 260004 260005 260006 ENQUEUE 259001 ENQUEUE 260001 ENQUEUE 259002 ENQUEUE 259003 ENQUEUE 259004 ENQUEUE 259005 DEQUEUE DEQUEUE ENQUEUE 260002 ENQUEUE 260003 DEQUEUE DEQUEUE DEQUEUE DEQUEUE STOP 0</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>Scenario &#x2F;#1 101 102 103 201 202 203 Scenario &#x2F;#2 259001 259002 259003 259004 259005 260001</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1031,107 +1127,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/1355%20%E5%B7%A7%E5%85%8B%E5%8A%9B%20%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%82%B9+%E5%8C%BA%E9%97%B4%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/1355%20%E5%B7%A7%E5%85%8B%E5%8A%9B%20%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%82%B9+%E5%8C%BA%E9%97%B4%EF%BC%89/" class="post-title-link" itemprop="url">1355 巧克力 （线段树点+区间）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-12-11 00:47:10" itemprop="dateCreated datePublished" datetime="2014-12-11T00:47:10+00:00">2014-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>继续最水的线段树 简单粗暴</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define lc p&lt;&lt;<span class="number">1</span>,s,mid</span><br><span class="line">#define rc p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,e</span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>;</span><br><span class="line">int add[<span class="number">4</span> * N], maxv[<span class="number">4</span> * N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    maxv[p] = <span class="title function_">max</span>(maxv[p &lt;&lt; <span class="number">1</span>], maxv[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushdown</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    add[p &lt;&lt; <span class="number">1</span>] += add[p];</span><br><span class="line">    add[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] += add[p];</span><br><span class="line">    maxv[p &lt;&lt; <span class="number">1</span>] += add[p];</span><br><span class="line">    maxv[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] += add[p];</span><br><span class="line">    add[p] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    add[p] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(s == e) <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;maxv[p]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">build</span>(lc);</span><br><span class="line">        <span class="title function_">build</span>(rc);</span><br><span class="line">        <span class="title function_">pushup</span>(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int l, int r, int v, int op</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == l &amp;&amp; e == r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(op)</span><br><span class="line">        &#123;</span><br><span class="line">            add[p] += v;</span><br><span class="line">            maxv[p] += v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> maxv[p] = v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pushdown</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="title function_">update</span>(lc, l, r, v, op);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) <span class="title function_">update</span>(rc, l, r, v, op);</span><br><span class="line">    <span class="keyword">else</span> <span class="title function_">update</span>(lc, l, mid, v, op), <span class="title function_">update</span>(rc, mid + <span class="number">1</span>, r, v, op);</span><br><span class="line">    <span class="title function_">pushup</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">query</span>(<span class="params">int p, int s, int e, int l, int r</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == l &amp;&amp; e == r) <span class="keyword">return</span> maxv[p];</span><br><span class="line">    <span class="title function_">pushdown</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="keyword">return</span> <span class="title function_">query</span>(lc, l, r);</span><br><span class="line">    <span class="keyword">if</span>(l &gt; mid) <span class="keyword">return</span> <span class="title function_">query</span>(rc, l, r);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">max</span>(<span class="title function_">query</span>(lc, l, mid), <span class="title function_">query</span>(rc, mid + <span class="number">1</span>, r));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, x, y;</span><br><span class="line">    char cmd[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">build</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, cmd);</span><br><span class="line">            <span class="keyword">if</span>(!<span class="title function_">strcmp</span>(cmd, <span class="string">&quot;Ask&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">1</span>, n, x + <span class="number">1</span>, x + <span class="number">1</span>));</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">            <span class="keyword">if</span>(cmd[<span class="number">0</span>] == <span class="string">&#x27;Q&#x27;</span>)</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">1</span>, n, x + <span class="number">1</span>, y + <span class="number">1</span>));</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(cmd[<span class="number">0</span>] == <span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">                <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">1</span>, n, x + <span class="number">1</span>, x + <span class="number">1</span>, y, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">1</span>, n, x + <span class="number">1</span>, y + <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1355: 巧克力</p>
-<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>TY最喜欢做的事情就是吃巧克力，经常幻想拥有吃不完的巧克力，作为一个acmer(菜机），IcY出了个问题准备考考她，如果回答出来，那巧克力自然是源源不断的啦。</p>
-<p>IcY给出了一列排好的的巧克力，有的是德芙，有的是费列罗，它们都拥有不同的美味值……现在IcY通过魔法更改了这些巧克力，TY必须能指出排列中第K个是巧克力的美味值是多少和某一段巧克力中最美味的值是多少，才能吃到巧克力，否则，哼哼，就去乖乖的做题吧。现在，TY来寻求你的帮助，你能让poor TY吃上巧克力吗？</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>输入数据有很多组，以EOF结尾。</p>
-<p>每组数据第一行是2个整数N，M。N代表初始的巧克力数目，M代表操作数。</p>
-<p>第二行含有n个正整数，代表每块巧克力的美味值wi。每块巧克力的下标从0–n-1。</p>
-<p>接下来的M行，表示M个操作。</p>
-<p>操作分4种：</p>
-<p>Query x y 代表查询某一个区间内的美味最大值。</p>
-<p>Ask x 代表查询某一块巧克力的美味值。</p>
-<p>Change x y 代表将第x块的美味值变成y</p>
-<p>Add x y 代表讲从第x块到第y块巧克力的美味值分别增加1.</p>
-<p>（1 &lt;&#x3D; N&lt;&#x3D; 1000001&lt;&#x3D; M &lt;&#x3D; 100000Wi &lt;&#x3D; 5000）</p>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每一个Query输出一个整数，代表区间内的美味最大值。</p>
-<p>对于每一个Ask 输出一个整数，代表这块巧克力的美味值。</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>10 4 1 2 3 4 5 6 7 8 9 10 Ask 0 Change 0 1 Add 0 2 Query 0 2</p>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>1 4</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1145,7 +1140,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

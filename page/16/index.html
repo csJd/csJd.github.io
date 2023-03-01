@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,90 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/ZOJ%201649%20Rescue(%E6%9C%89%E6%95%8C%E4%BA%BA%E8%BF%B7%E5%AE%ABBFS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/ZOJ%201649%20Rescue(%E6%9C%89%E6%95%8C%E4%BA%BA%E8%BF%B7%E5%AE%ABBFS)/" class="post-title-link" itemprop="url">ZOJ 1649 Rescue(有敌人迷宫BFS)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-10-16 22:37:02" itemprop="dateCreated datePublished" datetime="2014-10-16T22:37:02+00:00">2014-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求迷宫中从a的位置到r的位置需要的最少时间 经过’.’方格需要1s 经过‘x’方格需要两秒 ‘&#x2F;#’表示墙</p>
+<p>由于有1s和2s两种情况 需要在基础迷宫bfs上加些判断</p>
+<p>令到达每个点的时间初始为无穷大 当从一个点到达该点用的时间比他本来的时间小时 更新这个点的时间并将这个点入队 扫描完全图就得到答案咯</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>;</span><br><span class="line">char mat[N][N];</span><br><span class="line">int time[N][N], sx, sy;</span><br><span class="line">int dx[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int dy[<span class="number">4</span>] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">struct grid</span><br><span class="line">&#123;</span><br><span class="line">    int x, y;</span><br><span class="line">    <span class="title function_">grid</span>(int xx = <span class="number">0</span>, int yy = <span class="number">0</span>): <span class="title function_">x</span>(xx), <span class="title function_">y</span>(<span class="params">yy</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(time, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(time));</span><br><span class="line">    time[sx][sy] = <span class="number">0</span>;</span><br><span class="line">    queue&lt;grid&gt; g;</span><br><span class="line">    g.<span class="title function_">push</span>(<span class="title function_">grid</span>(sx, sy));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!g.<span class="title function_">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        grid cur = g.<span class="title function_">front</span>();</span><br><span class="line">        g.<span class="title function_">pop</span>();</span><br><span class="line">        int cx = cur.<span class="property">x</span>, cy = cur.<span class="property">y</span>, ct = time[cx][cy];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            int nx = cx + dx[i], ny = cy + dy[i];</span><br><span class="line">            <span class="keyword">if</span>(mat[nx][ny] &amp;&amp; mat[nx][ny] != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                int tt = ct + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(mat[cx][cy] == <span class="string">&#x27;x&#x27;</span>) ++tt;</span><br><span class="line">                <span class="keyword">if</span>(tt &lt; time[nx][ny])</span><br><span class="line">                &#123;</span><br><span class="line">                    time[nx][ny] = tt;</span><br><span class="line">                    g.<span class="title function_">push</span>(<span class="title function_">grid</span>(nx, ny));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, ex, ey;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(mat, <span class="number">0</span>, <span class="title function_">sizeof</span>(mat));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, mat[i] + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j] == <span class="string">&#x27;a&#x27;</span>) sx = i, sy = j;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(mat[i][j] == <span class="string">&#x27;r&#x27;</span>) ex = i, ey = j;</span><br><span class="line">        <span class="title function_">bfs</span>();</span><br><span class="line">        <span class="keyword">if</span>(time[ex][ey] != time[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, time[ex][ey]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;Poor ANGEL has to stay in the prison all his life.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1046,103 +1130,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20548%20Tree(%E5%BB%BA%E6%A0%91,%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/UVa%20548%20Tree(%E5%BB%BA%E6%A0%91,%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86)/" class="post-title-link" itemprop="url">UVa 548 Tree(建树,递归遍历)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-23 20:22:28" itemprop="dateCreated datePublished" datetime="2014-09-23T20:22:28+00:00">2014-09-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 给你一个树的中序遍历和后序遍历 某个节点的权值为从根节点到该节点所经过节点的和 求权值最小的叶节点的值 如果存在多个 输出值最小的那个</p>
-<p>把树建好就好说了 递归递归dfs msun保存最小叶节点权值 ans保存答案</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cctype&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int maxn = <span class="number">10005</span>, <span class="variable constant_">INF</span> = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">int <span class="keyword">in</span>[maxn], post[maxn], msum, ans;</span><br><span class="line"></span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int val;</span><br><span class="line">    node *left, *right;</span><br><span class="line">    <span class="title function_">node</span>(): <span class="title function_">left</span>(<span class="variable constant_">NULL</span>), <span class="title function_">right</span>(<span class="params">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">node* <span class="title function_">build</span>(<span class="params">int le, int ri, int pos</span>)</span><br><span class="line">&#123;</span><br><span class="line">    node *cur = <span class="keyword">new</span> node;</span><br><span class="line">    cur-&gt;val = post[pos];</span><br><span class="line">    <span class="keyword">if</span>(le == ri) <span class="keyword">return</span> cur;</span><br><span class="line">    int i = le;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">in</span>[i] != post[pos]) ++i;</span><br><span class="line">    <span class="keyword">if</span>(i == le) cur-&gt;left = <span class="variable constant_">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span>  cur-&gt;left = <span class="title function_">build</span>(le, i - <span class="number">1</span>, pos - <span class="number">1</span> - (ri - i));</span><br><span class="line">    <span class="keyword">if</span>(i == ri) cur-&gt;right = <span class="variable constant_">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span> cur-&gt;right = <span class="title function_">build</span>(i + <span class="number">1</span>, ri, pos - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> cur;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dfs</span>(<span class="params">node *cur, int sum</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t = cur-&gt;val;</span><br><span class="line">    <span class="keyword">if</span>(!(cur-&gt;left || cur-&gt;right))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(sum + t &lt; msum || (sum + t == msum &amp;&amp; t &lt; ans))</span><br><span class="line">            msum = sum + t, ans = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(cur-&gt;left != <span class="variable constant_">NULL</span>) <span class="title function_">dfs</span>(cur-&gt;left, sum + t);</span><br><span class="line">    <span class="keyword">if</span>(cur-&gt;right != <span class="variable constant_">NULL</span>) <span class="title function_">dfs</span>(cur-&gt;right, sum + t);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[maxn*<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">gets</span>(s) != <span class="variable constant_">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        int t = <span class="number">0</span>, l = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; s[i] != <span class="string">&#x27;\0&#x27;</span>; ++i)</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">isdigit</span>(s[i])) t = t * <span class="number">10</span> + s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            <span class="keyword">else</span>  <span class="keyword">in</span>[++l] = t, t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">in</span>[++l] = t;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">gets</span>(s);</span><br><span class="line">        l = t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; s[i] != <span class="string">&#x27;\0&#x27;</span>; ++i)</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">isdigit</span>(s[i])) t = t * <span class="number">10</span> + s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            <span class="keyword">else</span> post[++l] = t, t = <span class="number">0</span>;</span><br><span class="line">        post[++l] = t;</span><br><span class="line"></span><br><span class="line">        node *root = <span class="title function_">build</span>(<span class="number">1</span>, l, l);</span><br><span class="line">        ans = msum = <span class="variable constant_">INF</span>;</span><br><span class="line">        <span class="title function_">dfs</span>(root, <span class="number">0</span>);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>You are to determine the value of the leaf node in a given binary tree that is the terminal node of a path of least value from the root of the binary tree to any leaf. The value of a path is the sum of values of nodes along that path.</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input file will contain a description of the binary tree given as the inorder and postorder traversal sequences of that tree. Your program will read two line (until end of file) from the input file. The first line will contain the sequence of values associated with an inorder traversal of the tree and the second line will contain the sequence of values associated with a postorder traversal of the tree. All values will be different, greater than zero and less than 10000. You may assume that no binary tree will have more than 10000 nodes or less than 1 node.</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each tree description you should output the value of the leaf node of a path of least value. In the case of multiple paths of least value you should pick the one with the least value on the terminal node.</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>3 2 1 4 5 7 6 3 1 2 5 6 7 4 7 8 11 3 5 16 12 18 8 3 11 7 16 18 12 5 255 255</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>1 3 255</p>
-<h1 id="-5"><a href="#-5" class="headerlink" title=""></a></h1><hr>
-<p>You are to determine the value of the leaf node in a given binary tree that is the terminal node of a path of least value from the root of the binary tree to any leaf. The value of a path is the sum of values of nodes along that path.</p>
-<h2 id="-6"><a href="#-6" class="headerlink" title=""></a></h2><p>The input file will contain a description of the binary tree given as the inorder and postorder traversal sequences of that tree. Your program will read two line (until end of file) from the input file. The first line will contain the sequence of values associated with an inorder traversal of the tree and the second line will contain the sequence of values associated with a postorder traversal of the tree. All values will be different, greater than zero and less than 10000. You may assume that no binary tree will have more than 10000 nodes or less than 1 node.</p>
-<h2 id="-7"><a href="#-7" class="headerlink" title=""></a></h2><p>For each tree description you should output the value of the leaf node of a path of least value. In the case of multiple paths of least value you should pick the one with the least value on the terminal node.</p>
-<h2 id="-8"><a href="#-8" class="headerlink" title=""></a></h2><p>3 2 1 4 5 7 6 3 1 2 5 6 7 4 7 8 11 3 5 16 12 18 8 3 11 7 16 18 12 5 255 255</p>
-<h2 id="-9"><a href="#-9" class="headerlink" title=""></a></h2><p>1 3 255</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1156,7 +1143,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

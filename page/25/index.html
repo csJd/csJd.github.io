@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,111 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010534%20Wavio%20Sequence%20(%20DP%20%E4%BA%8C%E5%88%86%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%20)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%2010534%20Wavio%20Sequence%20(%20DP%20%E4%BA%8C%E5%88%86%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%20)/" class="post-title-link" itemprop="url">UVa 10534 Wavio Sequence ( DP 二分 最长递增子序列 )</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-25 15:18:17" itemprop="dateCreated datePublished" datetime="2014-08-25T15:18:17+00:00">2014-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求一个序列a某一位的最长递增序列(lis)和最长递减序列(lds)中最小值的最大值</p>
+<p>开始直接用DP写了 然后就超时了 后来看到别人说要用二分把时间复杂度优化到O(n&#x2F;*logn) 果然如此 用一个栈s保存长度为i的LIS的最小尾部s[i] top为栈顶即当前LIS的长度 初始s[1]&#x3D;a[1] top&#x3D;1 遍历整个序列 当a[i]&gt;s[top]时 a[i]入栈 in[i]&#x3D;top 否则 在栈中查找（二分）第一个大于等于a[i]的下标pos 并替换 这样就增加了LIS增长的潜力 in[i]&#x3D;pos;</p>
+<p>in[i]表示以a[i]为尾部的LIS的长度 求lds的过程也是类似</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>;</span><br><span class="line">int a[N], <span class="keyword">in</span>[N], de[N], s[N], m, n, top, pos;</span><br><span class="line"></span><br><span class="line">int <span class="title class_">BinSearch</span> (int k, int le, int ri)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (le &lt;= ri)</span><br><span class="line">    &#123;</span><br><span class="line">        m = (le + ri) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (s[m] &gt;= k) ri = m - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> le = m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ri + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">lis</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    memset (s, <span class="number">0</span>, sizeof (s));</span><br><span class="line">    memset (<span class="keyword">in</span>, <span class="number">0</span>, sizeof (<span class="keyword">in</span>));</span><br><span class="line">    s[<span class="number">1</span>] = a[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">in</span>[<span class="number">1</span>] = top = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[top] &lt; a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            s[++top] = a[i];</span><br><span class="line">            <span class="keyword">in</span>[i] = top;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pos = <span class="title class_">BinSearch</span> (a[i], <span class="number">1</span>, top);</span><br><span class="line">            s[pos] = a[i];</span><br><span class="line">            <span class="keyword">in</span>[i] = pos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">lds</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    memset (s, <span class="number">0</span>, sizeof (s));</span><br><span class="line">    memset (de, <span class="number">0</span>, sizeof (de));</span><br><span class="line">    s[<span class="number">1</span>] = a[n];</span><br><span class="line">    de[n] = top = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = n - <span class="number">1</span>; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[top] &lt; a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            s[++top] = a[i];</span><br><span class="line">            de[i] = top;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pos = <span class="title class_">BinSearch</span> (a[i], <span class="number">1</span>, top);</span><br><span class="line">            s[pos] = a[i];</span><br><span class="line">            de[i] = pos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;n) != <span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        int ans = <span class="number">1</span>;</span><br><span class="line">        <span class="title function_">lis</span>();</span><br><span class="line">        <span class="title function_">lds</span>();</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (min (de[i], <span class="keyword">in</span>[i]) &gt; ans)</span><br><span class="line">                ans = min (de[i], <span class="keyword">in</span>[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, ans * <span class="number">2</span> - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有超时的DP版</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N=<span class="number">10005</span>;</span><br><span class="line">int a[N],c[N],d[N],n;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dpde</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d[i]) <span class="keyword">return</span> d[i];</span><br><span class="line">    d[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int j=i;j&lt;=n;++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;a[j])</span><br><span class="line">            d[i]=<span class="title function_">max</span>(d[i],<span class="title function_">dpde</span>(j)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dpin</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(c[i]) <span class="keyword">return</span> c[i];</span><br><span class="line">    c[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int j=i;j&gt;=<span class="number">1</span>;--j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;a[j])</span><br><span class="line">            c[i]=<span class="title function_">max</span>(c[i],<span class="title function_">dpin</span>(j)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">        int ans=<span class="number">1</span>;</span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">        <span class="title function_">memset</span>(c,<span class="number">0</span>,<span class="title function_">sizeof</span>(c));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_">min</span>(<span class="title function_">dpde</span>(i),<span class="title function_">dpin</span>(i))&gt;ans)</span><br><span class="line">                ans=<span class="title function_">min</span>(d[i],c[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans*<span class="number">2</span>-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Wavio Sequence</strong></p>
+<p>Wavio is a sequence of integers. It has some interesting properties.</p>
+<p>· Wavio is of odd length i.e. *<em>L &#x3D; 2&#x2F;<em>n + 1</em></em>.</p>
+<p>· The first <strong>(n+1)</strong> integers of Wavio sequence makes a strictly increasing sequence.</p>
+<p>· The last <strong>(n+1)</strong> integers of Wavio sequence makes a strictly decreasing sequence.</p>
+<p>· No two adjacent integers are same in a Wavio sequence.</p>
+<p>For example <strong>1, 2, 3, 4, 5, 4, 3, 2, 0</strong> is an Wavio sequence of length <strong>9</strong>. But <strong>1, 2, 3, 4, 5, 4, 3, 2, 2</strong> is not a valid wavio sequence. In this problem, you will be given a sequence of integers. You have to find out the length of the longest Wavio sequence which is a subsequence of the given sequence. Consider, the given sequence as :</p>
+<p><strong>1 2 3 2 1 2 3 4 3 2 1 5 4 1 2 3 2 2 1</strong>.</p>
+<p>Here the longest Wavio sequence is : <strong>1 2 3 4 5 4 3 2 1</strong>. So, the output will be <strong>9</strong>.</p>
+<p>Input</p>
+<p>The input file contains less than <strong>75</strong> test cases. The description of each test case is given below: Input is terminated by end of file.</p>
+<p>Each set starts with a postive integer, <strong>N(1&lt;&#x3D;N&lt;&#x3D;10000)</strong>. In next few lines there will be <strong>N</strong> integers.</p>
+<p>Output</p>
+<p>For each set of input print the length of longest wavio sequence in a line.</p>
+<h1 id="Sample-Input-Output-for-Sample-Input"><a href="#Sample-Input-Output-for-Sample-Input" class="headerlink" title="Sample Input Output for Sample Input"></a>Sample Input Output for Sample Input</h1><p><strong>10</strong> <strong>1 2 3 4 5 4 3 2 1 10</strong> <strong>19</strong> <strong>1 2 3 2 1 2 3 4 3 2 1 5 4 1 2 3 2 2 1</strong> <strong>5</strong> <strong>1 2 3 4 5</strong> **** <strong>9</strong> <strong>9</strong> <strong>1</strong></p>
+<hr>
+<p>Problemsetter: Md. Kamruzzaman, Member of Elite Problemsetters’ Panel</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1037,116 +1142,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010130%20SuperSale(DP%2001%E8%83%8C%E5%8C%85)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/UVa%2010130%20SuperSale(DP%2001%E8%83%8C%E5%8C%85)/" class="post-title-link" itemprop="url">UVa 10130 SuperSale(DP 01背包)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-22 23:14:43" itemprop="dateCreated datePublished" datetime="2014-08-22T23:14:43+00:00">2014-08-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 商畅做活动买东西 每个人每个商品只能拿一件 要拿价值尽量高的商品</p>
-<p>很简单的01背包题目 求出每个人可以拿的最大值 加起来就是结果了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">#include&lt;algorithm&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line">#define maxn <span class="number">1005</span>  </span><br><span class="line">int p[maxn],w[maxn],d[maxn],pe,t,n,g;  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);  </span><br><span class="line">    <span class="keyword">while</span> (t--)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=n;++i)  </span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;p[i],&amp;w[i]);  </span><br><span class="line">  </span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;g);  </span><br><span class="line">        int ans=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(int k=<span class="number">1</span>;k&lt;=g;++k)  </span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));  </span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;pe);  </span><br><span class="line">                <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=n;++i)  </span><br><span class="line">                &#123;  </span><br><span class="line">                    <span class="keyword">for</span>(int j=pe;j&gt;=w[i];j--)  </span><br><span class="line">                        d[j]=<span class="title function_">max</span>(d[j],d[j-w[i]]+p[i]);  </span><br><span class="line">                &#125;  </span><br><span class="line">                ans+=d[pe];  </span><br><span class="line">            &#125;  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="SuperSale"><a href="#SuperSale" class="headerlink" title="SuperSale"></a>SuperSale</h2><p>There is a SuperSale in a SuperHiperMarket. Every person can take only one object of each kind, i.e. one TV, one carrot, but for extra low price. We are going with a whole family to that SuperHiperMarket. Every person can take as many objects, as he&#x2F;she can carry out from the SuperSale. We have given list of objects with prices and their weight. We also know, what is the maximum weight that every person can stand. What is the maximal value of objects we can buy at SuperSale?</p>
-<p>The input consists ofTtest cases. The number of them (1&lt;&#x3D;T&lt;&#x3D;1000) is given on the first line of the input file.</p>
-<p>Each test case begins with a line containing a single integer numberNthat indicates the number of objects (1 &lt;&#x3D; N &lt;&#x3D; 1000). Then follows<em>N</em>lines, each containing two integers: P and W. The first integer (1&lt;&#x3D;P&lt;&#x3D;100) corresponds to the price of object. The secondinteger (1&lt;&#x3D;W&lt;&#x3D;30) corresponds to the weight of object. Next line contains one integer (1&lt;&#x3D;G&lt;&#x3D;100)it’s the number of people in our group. Next G lines contains maximal weight (1&lt;&#x3D;MW&lt;&#x3D;30) that can stand this i*-th*person from our family (1&lt;&#x3D;i&lt;&#x3D;G).</p>
-<p>For every test case your program has to determine one integer. Print out the maximal value of goods which we can buy with that family.</p>
-<p>2</p>
-<p>3</p>
-<p>72 17</p>
-<p>44 23</p>
-<p>31 24</p>
-<p>1</p>
-<p>26</p>
-<p>6</p>
-<p>64 26</p>
-<p>85 22</p>
-<p>52 4</p>
-<p>99 18</p>
-<p>39 13</p>
-<p>54 9</p>
-<p>4</p>
-<p>23</p>
-<p>20</p>
-<p>20</p>
-<p>26</p>
-<p>72</p>
-<p>514</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/26/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1160,7 +1155,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

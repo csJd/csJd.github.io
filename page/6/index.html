@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%202089%20%E4%B8%8D%E8%A6%8162(%E6%95%B0%E4%BD%8DDP%C2%B7%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%202089%20%E4%B8%8D%E8%A6%8162(%E6%95%B0%E4%BD%8DDP%C2%B7%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2)/" class="post-title-link" itemprop="url">HDU 2089 不要62(数位DP·记忆化搜索)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-22 15:50:37" itemprop="dateCreated datePublished" datetime="2015-07-22T15:50:37+00:00">2015-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 中文</p>
+<p>最基础的数位DP 这题好像也可以直接暴力来做 令dp[i][j]表示以 j 开头的 i 位数有多少个满足条件</p>
+<p>那么很容易有状态转移方程<strong>dp[i][j] &#x3D; sum{ dp[i-1][k] }, k &#x3D; 0…9, j !&#x3D; 4 &amp;&amp; !( j &#x3D;&#x3D; 6 &amp;&amp; k &#x3D;&#x3D; 2)</strong></p>
+<p>最后统计个数就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int dp[<span class="number">8</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dfs</span>(int i, int j) <span class="comment">//记忆化搜索统计以 j 开头的 i 位数满足条件的个数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(dp[i][j] &gt; -<span class="number">1</span>) <span class="keyword">return</span> dp[i][j];</span><br><span class="line"></span><br><span class="line">    dp[i][j] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; ++k)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j == <span class="number">4</span> || (j == <span class="number">6</span> &amp;&amp; k == <span class="number">2</span>)) <span class="keyword">continue</span>;</span><br><span class="line">        dp[i][j] += <span class="title function_">dfs</span>(i - <span class="number">1</span>, k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">getNum</span>(int a) <span class="comment">//统计[0,a)这个区间满足条件的数的个数</span></span><br><span class="line">&#123;</span><br><span class="line">    int s[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    int i = <span class="number">0</span>, ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(a)</span><br><span class="line">    &#123;</span><br><span class="line">        s[i++] = a % <span class="number">10</span>;</span><br><span class="line">        a /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; s[i]; ++j)</span><br><span class="line">            <span class="keyword">if</span>(!(j == <span class="number">2</span> &amp;&amp; s[i + <span class="number">1</span>] == <span class="number">6</span>))</span><br><span class="line">                ret += <span class="title function_">dfs</span>(i + <span class="number">1</span>, j);</span><br><span class="line">        <span class="keyword">if</span>(s[i] == <span class="number">4</span> || (s[i] == <span class="number">2</span> &amp;&amp; s[i + <span class="number">1</span>] == <span class="number">6</span>))</span><br><span class="line">            <span class="keyword">break</span>;    <span class="comment">//已经不满足条件了</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(dp, -<span class="number">1</span>, <span class="title function_">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) dp[<span class="number">1</span>][i] = (i != <span class="number">4</span>); <span class="comment">//边界</span></span><br><span class="line"></span><br><span class="line">    int n, m;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m), n || m)</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">getNum</span>(m + <span class="number">1</span>) - <span class="title function_">getNum</span>(n));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-07-22 15:22</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="不要62"><a href="#不要62" class="headerlink" title="不要62"></a>不要62</h1><p>Problem Description</p>
+<p>杭州人称那些傻乎乎粘嗒嗒的人为62（音：laoer）。<br>杭州交通管理局经常会扩充一些的士车牌照，新近出来一个好消息，以后上牌照，不再含有不吉利的数字了，这样一来，就可以消除个别的士司机和乘客的心理障碍，更安全地服务大众。<br>不吉利的数字为所有含有4或62的号码。例如：<br>62315 73418 88914<br>都属于不吉利号码。但是，61152虽然含有6和2，但不是62连号，所以不属于不吉利数字之列。<br>你的任务是，对于每次给出的一个牌照区间号，推断出交管局今次又要实际上给多少辆新的士车上牌照了。<br>Input</p>
+<p>输入的都是整数对n、m（0&lt;n≤m&lt;1000000），如果遇到都是0的整数对，则输入结束。<br>Output</p>
+<p>对于每个整数对，输出一个不含有不吉利数字的统计个数，该数值占一行位置。<br>Sample Input</p>
+<p>1 100 0 0<br>Sample Output</p>
+<p>80</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1041,110 +1134,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/XTU1238%20Segment%20Tree%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9C%80%E5%80%BC%E6%9B%B4%E6%96%B0)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/XTU1238%20Segment%20Tree%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8C%BA%E9%97%B4%E6%9C%80%E5%80%BC%E6%9B%B4%E6%96%B0)/" class="post-title-link" itemprop="url">XTU1238 Segment Tree (线段树·区间最值更新)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-07-05 10:18:01" itemprop="dateCreated datePublished" datetime="2015-07-05T10:18:01+00:00">2015-07-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 对一个数组有四种操作</p>
-<p>对每个操作4输出对应最小值和最大值</p>
-<p>基础的线段树 在湘潭卡了好久没写出来<br>线段树维护三个值 区间最大值 maxv, 区间最小值minv, 区间增加的值add<br>操作1是很容易实现的 操作2和3比1要复杂些 初一想要对每个值单独进行操作 这样肯定会T的 毕竟那样用线段树就没意义了 后来发现每次更新时对应区间包含的所有最大区间节点的maxv 和 minv是可以确定的</p>
-<p>然后知道了父区间的maxv,minv后 通过pashdown函数就可以在需要时再对子区间进行更新 因为子区间的所有值都是在父区间的minv和maxv之间 然后就看代码吧</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">#define lc p&lt;&lt;<span class="number">1</span>, s, mid</span><br><span class="line">#define rc p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, e</span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">200005</span>;</span><br><span class="line">int maxv[N * <span class="number">4</span>], minv[N * <span class="number">4</span>], add[N * <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    maxv[p] = <span class="title function_">max</span>(maxv[p &lt;&lt; <span class="number">1</span>], maxv[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">    minv[p] = <span class="title function_">min</span>(minv[p &lt;&lt; <span class="number">1</span>], minv[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushdown</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int l = p &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    int r = p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(add[p])</span><br><span class="line">    &#123;</span><br><span class="line">        add[l] += add[p];</span><br><span class="line">        add[r] += add[p];</span><br><span class="line">        minv[l] += add[p];</span><br><span class="line">        minv[r] += add[p];</span><br><span class="line">        maxv[l] += add[p];</span><br><span class="line">        maxv[r] += add[p];</span><br><span class="line">        add[p] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//子区间的所有值肯定都父区间的minv~maxv之间</span></span><br><span class="line">    minv[l] = <span class="title function_">max</span>(minv[l], minv[p]);</span><br><span class="line">    minv[l] = <span class="title function_">min</span>(minv[l], maxv[p]);</span><br><span class="line">    maxv[l] = <span class="title function_">max</span>(maxv[l], minv[p]);</span><br><span class="line">    maxv[l] = <span class="title function_">min</span>(maxv[l], maxv[p]);</span><br><span class="line"></span><br><span class="line">    minv[r] = <span class="title function_">max</span>(minv[r], minv[p]);</span><br><span class="line">    minv[r] = <span class="title function_">min</span>(minv[r], maxv[p]);</span><br><span class="line">    maxv[r] = <span class="title function_">max</span>(maxv[r], minv[p]);</span><br><span class="line">    maxv[r] = <span class="title function_">min</span>(maxv[r], maxv[p]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == e)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;maxv[p]);</span><br><span class="line">        minv[p] = maxv[p];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">build</span>(lc);</span><br><span class="line">    <span class="title function_">build</span>(rc);</span><br><span class="line">    <span class="title function_">pushup</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int l, int r, int v, int op</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s &gt;= l &amp;&amp; e &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(op == <span class="number">1</span>) <span class="comment">//将[l,r]区间的所有值都加上v</span></span><br><span class="line">        &#123;</span><br><span class="line">            add[p] += v;</span><br><span class="line">            minv[p] += v;</span><br><span class="line">            maxv[p] += v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">2</span>)  <span class="comment">//将[l,r]区间中所有大于v的值都改为v</span></span><br><span class="line">        &#123;</span><br><span class="line">            maxv[p] = <span class="title function_">min</span>(maxv[p], v);</span><br><span class="line">            minv[p] = <span class="title function_">min</span>(minv[p], v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>  <span class="comment">//op = 3  将[l,r]区间中的所有小于v的值都改为v</span></span><br><span class="line">        &#123;</span><br><span class="line">            maxv[p] = <span class="title function_">max</span>(v, maxv[p]);</span><br><span class="line">            minv[p] = <span class="title function_">max</span>(v, minv[p]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pushdown</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) <span class="title function_">update</span>(lc, l, r, v, op);</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) <span class="title function_">update</span>(rc, l, r, v, op);</span><br><span class="line">    <span class="title function_">pushup</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">query</span>(<span class="params">int p, int s, int e, int l, int r, int op</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == l &amp;&amp; e == r)<span class="comment">//op = 0 时查询最小值  op = 1 时查询最大值</span></span><br><span class="line">        <span class="keyword">return</span> op ? maxv[p] : minv[p];</span><br><span class="line">    <span class="title function_">pushdown</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="keyword">return</span> <span class="title function_">query</span>(lc, l, r, op);</span><br><span class="line">    <span class="keyword">if</span>(l &gt; mid) <span class="keyword">return</span> <span class="title function_">query</span>(rc, l, r, op);</span><br><span class="line">    <span class="keyword">if</span>(op) <span class="keyword">return</span> <span class="title function_">max</span>(<span class="title function_">query</span>(lc, l, mid, op), <span class="title function_">query</span>(rc, mid + <span class="number">1</span>, r, op));</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">min</span>(<span class="title function_">query</span>(lc, l, mid, op), <span class="title function_">query</span>(rc, mid + <span class="number">1</span>, r, op));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n, q, l, r, op, c, ax, <span class="keyword">in</span>;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(add, <span class="number">0</span>, <span class="title function_">sizeof</span>(add));</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;q);</span><br><span class="line">        <span class="title function_">build</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">while</span>(q--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;op, &amp;l, &amp;r);</span><br><span class="line">            <span class="keyword">if</span>(op == <span class="number">4</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ax = <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">1</span>, n, l, r, <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">in</span> = <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">1</span>, n, l, r, <span class="number">0</span>);</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, <span class="keyword">in</span>, ax);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;c);</span><br><span class="line">                <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">1</span>, n, l, r, c, op);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Segment Tree</p>
-<p>Problem Description:</p>
-<p>A contest is not integrity without problems about data structure.<br>There is an array a[1],a[2],…,a[n]. And q questions of the following 4 types: • 1 l r c - Update a[k] with a[k]+c for all l≤k≤r<br>• 2 l r c - Update a[k] with min{a[k],c} for all l≤k≤r;<br>• 3 l r c - Update a[k] with max{a[k],c} for all l≤k≤r;<br>• 4 l r - Ask for min{a[k]:l≤k≤r} and max{a[k]:l≤k≤r}.</p>
-<p>Input</p>
-<p>The first line contains a integer T(no more than 5) which represents the number of test cases.</p>
-<p>For each test case, the first line contains 2 integers n,q (1≤n,q≤200000).</p>
-<p>The second line contains n integers a1,a2,…,an which indicates the initial values of the array (|ai|≤).</p>
-<p>Each of the following q lines contains an integer t which denotes the type of i-th question. If t&#x3D;1,2,3, 3 integers l,r,c follows. If t&#x3D;4, 2 integers l,r follows. (1≤ti≤4,1≤li≤ri≤n)</p>
-<p>If t&#x3D;1, |ci|≤2000;</p>
-<p>If t&#x3D;2,3, |ci|≤10^9.</p>
-<p>Output</p>
-<p>For each question of type 4, output two integers denote the minimum and the maximum.</p>
-<p>Sample Input</p>
-<p>1<br>1 1<br>1<br>4 1 1</p>
-<p>Sample Output</p>
-<p>1 1</p>
-<p>Source<br>XTU OnlineJudge</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1158,7 +1147,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

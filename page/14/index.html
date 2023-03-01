@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,111 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/POJ%201300%20Door%20Man%EF%BC%88%E6%AC%A7%E6%8B%89%E9%80%9A%E8%B7%AF%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/POJ%201300%20Door%20Man%EF%BC%88%E6%AC%A7%E6%8B%89%E9%80%9A%E8%B7%AF%EF%BC%89/" class="post-title-link" itemprop="url">POJ 1300 Door Man（欧拉通路）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-11-11 15:55:31" itemprop="dateCreated datePublished" datetime="2014-11-11T15:55:31+00:00">2014-11-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题目描述：</p>
+<p>你是一座大庄园的管家。庄园有很多房间，编号为 0、1、2、3，…。你的主人是一个心不在 焉的人，经常沿着走廊随意地把房间的门打开。多年来，你掌握了一个诀窍：沿着一个通道，穿 过这些大房间，并把房门关上。你的问题是能否找到一条路径经过所有开着门的房间，并使得： 1) 通过门后立即把门关上； 2) 关上了的门不再打开； 3) 后回到你自己的房间（房间 0），并且所有的门都已经关闭了。 在本题中，给定房间列表，及连通房间的、开着的门，并给定一个起始房间，判断是否存在 这样的一条路径。不需要输出这样的路径，只需判断是否存在。假定任意两个房间之间都是连通 的（可能需要经过其他房间）。</p>
+<p>输入描述：</p>
+<p>输入文件包含多个（多可达 100 个）测试数据，每个测试数据之间没有空行隔开。 每个测试数据包括 3部分： 起始行－格式为“START M N”，其中 M 为管理员起始所处的房间号，N 为房间的总数（1 ≤N≤20）； 房间列表－一共 N行，每行列出了一个房间通向其他房间的房间号（只需列出比它的号码大 的房间号，可能有多个，按升序排列），比如房间 3有门通向房间 1、5、7，则房间 3的信息行内 容为“5 7”，第一行代表房间 0，后一行代表行间 N-1。有可能有些行为空行，当然后一行肯 定是空行，因为 N-1 是大的房间号；两个房间之间可能有多扇门连通。 终止行－内容为”END”。 输入文件后一行是”ENDOFINPUT”，表示输入结束。</p>
+<p>输出描述：</p>
+<p>每个测试数据对应一行输出，如果能找到一条路关闭所有的门，并且回到房间 0，则输出”YES X”，X是他关闭的门的总数，否则输出”NO”。</p>
+<p>就是判断能否构成欧拉通路·咯</p>
+<p>无向图存在欧拉通路的充要条件：</p>
+<ol>
+<li><p>是连通图</p>
+</li>
+<li><p>奇度节点个数为0或2,其中为0时为欧拉回路,为2时是以这两个点节点为端点的欧拉通路</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cctype&gt;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">21</span>;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int door, cnt, m, n, deg[N];</span><br><span class="line">    char s[N], c;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s), <span class="title function_">strcmp</span>(s, <span class="string">&quot;ENDOFINPUT&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(deg, <span class="number">0</span>, <span class="title function_">sizeof</span>(deg));</span><br><span class="line">        door = cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d %d\n&quot;</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;c))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="title function_">isdigit</span>(c)) ++door, ++deg[i], ++deg[c - <span class="string">&#x27;0&#x27;</span>];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">&#x27; &#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(deg[i] % <span class="number">2</span>) ++cnt;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s);</span><br><span class="line">        bool ok = (cnt == <span class="number">0</span> &amp;&amp; m == <span class="number">0</span> ) || (m &amp;&amp; cnt == <span class="number">2</span> &amp;&amp; deg[m] % <span class="number">2</span> );</span><br><span class="line">        <span class="keyword">if</span>(ok) <span class="title function_">printf</span>(<span class="string">&quot;YES %d\n&quot;</span>, door);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Door Man</p>
+<p>Description<br>You are a butler in a large mansion. This mansion has so many rooms that they are merely referred to by number (room 0, 1, 2, 3, etc…). Your master is a particularly absent-minded lout and continually leaves doors open throughout a particular floor of the house. Over the years, you have mastered the art of traveling in a single path through the sloppy rooms and closing the doors behind you. Your biggest problem is determining whether it is possible to find a path through the sloppy rooms where you:<br>  Always shut open doors behind you immediately after passing through<br> Never open a closed door<br> End up in your chambers (room 0) with all doors closed<br> In this problem, you are given a list of rooms and open doors between them (along with a starting room). It is not needed to determine a route, only if one is possible.</p>
+<p>Input</p>
+<p>Input to this problem will consist of a (non-empty) series of up to 100 data sets. Each data set will be formatted according to the following description, and there will be no blank lines separating data sets.<br>A single data set has 3 components:<br>  Start line - A single line, “START M N”, where M indicates the butler’s starting room, and N indicates the number of rooms in the house (1 &lt;&#x3D; N &lt;&#x3D; 20).<br> Room list - A series of N lines. Each line lists, for a single room, every open door that leads to a room of higher number. For example, if room 3 had open doors to rooms 1, 5, and 7, the line for room 3 would read “5 7”. The first line in the list represents room 0. The second line represents room 1, and so on until the last line, which represents room (N - 1). It is possible for lines to be empty (in particular, the last line will always be empty since it is the highest numbered room). On each line, the adjacent rooms are always listed in ascending order. It is possible for rooms to be connected by multiple doors!<br> End line - A single line, “END”<br> Following the final data set will be a single line, “ENDOFINPUT”.<br>Note that there will be no more than 100 doors in any single data set.</p>
+<p>Output</p>
+<p>For each data set, there will be exactly one line of output. If it is possible for the butler (by following the rules in the introduction) to walk into his chambers and close the final open door behind him, print a line “YES X”, where X is the number of doors he closed. Otherwise, print “NO”.</p>
+<p>Sample Input</p>
+<p>START 1 2 1 END START 0 5 1 2 2 3 3 4 4 END START 0 10 1 9 2 3 4 5 6 7 8 9 END ENDOFINPUT</p>
+<p>Sample Output</p>
+<p>YES 1 NO YES 10</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1045,103 +1150,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/POJ%201789%20Truck%20History%EF%BC%88%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/graph/POJ%201789%20Truck%20History%EF%BC%88%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%89/" class="post-title-link" itemprop="url">POJ 1789 Truck History（最小生成树）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-10-24 19:50:51" itemprop="dateCreated datePublished" datetime="2014-10-24T19:50:51+00:00">2014-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 有n辆卡车 每辆卡车用7个字符表示 输入n 再输入n行字符 第i行与第j行的两个字符串有多少个对应位置的字符不同 i与j之间的距离就是几 求连接所有卡车的最短长度 题目不是这个意思 这样理解就行了</p>
-<p>prim啦啦啦啦</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">2005</span>;</span><br><span class="line">int cost[N], dis[N][N], n, ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">prim</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(cost, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(cost));</span><br><span class="line">    cost[<span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">    int cur = <span class="number">1</span>, next = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cost[j] == -<span class="number">1</span> || cur == j) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(dis[cur][j] &lt; cost[j]) cost[j] = dis[cur][j];</span><br><span class="line">            <span class="keyword">if</span>(cost[j] &lt; cost[next]) next = j;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = next, next = <span class="number">0</span>, ans += cost[cur], cost[cur] = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[N][<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(dis, <span class="number">0</span>, <span class="title function_">sizeof</span>(dis));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s[i]);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">                <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">7</span>; ++k)</span><br><span class="line">                    <span class="keyword">if</span>(s[i][k] != s[j][k]) ++dis[i][j];</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">prim</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;The highest possible quality is 1/%d.\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Truck History</p>
-<p>Description<br>Advanced Cargo Movement, Ltd. uses trucks of different types. Some trucks are used for vegetable delivery, other for furniture, or for bricks. The company has its own code describing each type of a truck. The code is simply a string of exactly seven lowercase letters (each letter on each position has a very special meaning but that is unimportant for this task). At the beginning of company’s history, just a single truck type was used but later other types were derived from it, then from the new types another types were derived, and so on.<br>Today, ACM is rich enough to pay historians to study its history. One thing historians tried to find out is so called derivation plan – i.e. how the truck types were derived. They defined the distance of truck types as the number of positions with different letters in truck type codes. They also assumed that each truck type was derived from exactly one other truck type (except for the first truck type which was not derived from any other type). The quality of a derivation plan was then defined as<br><strong>1&#x2F;Σ(to,td)d(to,td)</strong><br>where the sum goes over all pairs of types in the derivation plan such that t o is the original type and t d the type derived from it and d(t o,t d) is the distance of the types.<br>Since historians failed, you are to write a program to help them. Given the codes of truck types, your program should find the highest possible quality of a derivation plan.</p>
-<p>Input</p>
-<p>The input consists of several test cases. Each test case begins with a line containing the number of truck types, N, 2 &lt;&#x3D; N &lt;&#x3D; 2 000. Each of the following N lines of input contains one truck type code (a string of seven lowercase letters). You may assume that the codes uniquely describe the trucks, i.e., no two of these N lines are the same. The input is terminated with zero at the place of number of truck types.</p>
-<p>Output</p>
-<p>For each test case, your program should output the text “The highest possible quality is 1&#x2F;Q.”, where 1&#x2F;Q is the quality of the best derivation plan.</p>
-<p>Sample Input</p>
-<p>4 aaaaaaa baaaaaa abaaaaa aabaaaa 0</p>
-<p>Sample Output</p>
-<p>The highest possible quality is 1&#x2F;3.</p>
-<p>Source</p>
-<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=CTU+Open+2003">CTU Open 2003</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1155,7 +1163,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

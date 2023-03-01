@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/POJ%201789%20Truck%20History%EF%BC%88%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/POJ%201789%20Truck%20History%EF%BC%88%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%89/" class="post-title-link" itemprop="url">POJ 1789 Truck History（最小生成树）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-10-24 19:50:51" itemprop="dateCreated datePublished" datetime="2014-10-24T19:50:51+00:00">2014-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 有n辆卡车 每辆卡车用7个字符表示 输入n 再输入n行字符 第i行与第j行的两个字符串有多少个对应位置的字符不同 i与j之间的距离就是几 求连接所有卡车的最短长度 题目不是这个意思 这样理解就行了</p>
+<p>prim啦啦啦啦</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">2005</span>;</span><br><span class="line">int cost[N], dis[N][N], n, ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">prim</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(cost, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(cost));</span><br><span class="line">    cost[<span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">    int cur = <span class="number">1</span>, next = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cost[j] == -<span class="number">1</span> || cur == j) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(dis[cur][j] &lt; cost[j]) cost[j] = dis[cur][j];</span><br><span class="line">            <span class="keyword">if</span>(cost[j] &lt; cost[next]) next = j;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = next, next = <span class="number">0</span>, ans += cost[cur], cost[cur] = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[N][<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(dis, <span class="number">0</span>, <span class="title function_">sizeof</span>(dis));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s[i]);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">                <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">7</span>; ++k)</span><br><span class="line">                    <span class="keyword">if</span>(s[i][k] != s[j][k]) ++dis[i][j];</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">prim</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;The highest possible quality is 1/%d.\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Truck History</p>
+<p>Description<br>Advanced Cargo Movement, Ltd. uses trucks of different types. Some trucks are used for vegetable delivery, other for furniture, or for bricks. The company has its own code describing each type of a truck. The code is simply a string of exactly seven lowercase letters (each letter on each position has a very special meaning but that is unimportant for this task). At the beginning of company’s history, just a single truck type was used but later other types were derived from it, then from the new types another types were derived, and so on.<br>Today, ACM is rich enough to pay historians to study its history. One thing historians tried to find out is so called derivation plan – i.e. how the truck types were derived. They defined the distance of truck types as the number of positions with different letters in truck type codes. They also assumed that each truck type was derived from exactly one other truck type (except for the first truck type which was not derived from any other type). The quality of a derivation plan was then defined as<br><strong>1&#x2F;Σ(to,td)d(to,td)</strong><br>where the sum goes over all pairs of types in the derivation plan such that t o is the original type and t d the type derived from it and d(t o,t d) is the distance of the types.<br>Since historians failed, you are to write a program to help them. Given the codes of truck types, your program should find the highest possible quality of a derivation plan.</p>
+<p>Input</p>
+<p>The input consists of several test cases. Each test case begins with a line containing the number of truck types, N, 2 &lt;&#x3D; N &lt;&#x3D; 2 000. Each of the following N lines of input contains one truck type code (a string of seven lowercase letters). You may assume that the codes uniquely describe the trucks, i.e., no two of these N lines are the same. The input is terminated with zero at the place of number of truck types.</p>
+<p>Output</p>
+<p>For each test case, your program should output the text “The highest possible quality is 1&#x2F;Q.”, where 1&#x2F;Q is the quality of the best derivation plan.</p>
+<p>Sample Input</p>
+<p>4 aaaaaaa baaaaaa abaaaaa aabaaaa 0</p>
+<p>Sample Output</p>
+<p>The highest possible quality is 1&#x2F;3.</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=CTU+Open+2003">CTU Open 2003</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1044,90 +1141,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/ZOJ%201649%20Rescue(%E6%9C%89%E6%95%8C%E4%BA%BA%E8%BF%B7%E5%AE%ABBFS)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/graph/ZOJ%201649%20Rescue(%E6%9C%89%E6%95%8C%E4%BA%BA%E8%BF%B7%E5%AE%ABBFS)/" class="post-title-link" itemprop="url">ZOJ 1649 Rescue(有敌人迷宫BFS)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-10-16 22:37:02" itemprop="dateCreated datePublished" datetime="2014-10-16T22:37:02+00:00">2014-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 求迷宫中从a的位置到r的位置需要的最少时间 经过’.’方格需要1s 经过‘x’方格需要两秒 ‘&#x2F;#’表示墙</p>
-<p>由于有1s和2s两种情况 需要在基础迷宫bfs上加些判断</p>
-<p>令到达每个点的时间初始为无穷大 当从一个点到达该点用的时间比他本来的时间小时 更新这个点的时间并将这个点入队 扫描完全图就得到答案咯</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>;</span><br><span class="line">char mat[N][N];</span><br><span class="line">int time[N][N], sx, sy;</span><br><span class="line">int dx[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int dy[<span class="number">4</span>] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">struct grid</span><br><span class="line">&#123;</span><br><span class="line">    int x, y;</span><br><span class="line">    <span class="title function_">grid</span>(int xx = <span class="number">0</span>, int yy = <span class="number">0</span>): <span class="title function_">x</span>(xx), <span class="title function_">y</span>(<span class="params">yy</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(time, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(time));</span><br><span class="line">    time[sx][sy] = <span class="number">0</span>;</span><br><span class="line">    queue&lt;grid&gt; g;</span><br><span class="line">    g.<span class="title function_">push</span>(<span class="title function_">grid</span>(sx, sy));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!g.<span class="title function_">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        grid cur = g.<span class="title function_">front</span>();</span><br><span class="line">        g.<span class="title function_">pop</span>();</span><br><span class="line">        int cx = cur.<span class="property">x</span>, cy = cur.<span class="property">y</span>, ct = time[cx][cy];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            int nx = cx + dx[i], ny = cy + dy[i];</span><br><span class="line">            <span class="keyword">if</span>(mat[nx][ny] &amp;&amp; mat[nx][ny] != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                int tt = ct + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(mat[cx][cy] == <span class="string">&#x27;x&#x27;</span>) ++tt;</span><br><span class="line">                <span class="keyword">if</span>(tt &lt; time[nx][ny])</span><br><span class="line">                &#123;</span><br><span class="line">                    time[nx][ny] = tt;</span><br><span class="line">                    g.<span class="title function_">push</span>(<span class="title function_">grid</span>(nx, ny));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, ex, ey;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(mat, <span class="number">0</span>, <span class="title function_">sizeof</span>(mat));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, mat[i] + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j] == <span class="string">&#x27;a&#x27;</span>) sx = i, sy = j;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(mat[i][j] == <span class="string">&#x27;r&#x27;</span>) ex = i, ey = j;</span><br><span class="line">        <span class="title function_">bfs</span>();</span><br><span class="line">        <span class="keyword">if</span>(time[ex][ey] != time[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, time[ex][ey]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;Poor ANGEL has to stay in the prison all his life.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1141,7 +1154,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

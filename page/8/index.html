@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,105 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/Codeforces%20534B%20Covered%20Path(%E8%B4%AA%E5%BF%83)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/Codeforces%20534B%20Covered%20Path(%E8%B4%AA%E5%BF%83)/" class="post-title-link" itemprop="url">Codeforces 534B Covered Path(贪心)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-04-13 17:29:27" itemprop="dateCreated datePublished" datetime="2015-04-13T17:29:27+00:00">2015-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 你在路上走 每秒钟的开始都可以改变自己的速度(改变速度都是瞬间完成的) 知道你开始的速度v1 结束时的速度v2 整个过程所用时间t 以及每秒最多改变的速度d 求这段时间内你最多走了多远</p>
+<p>最优的肯定是先把速度从v1升到最大 然后从最大减到v2 使得用的时间不会超多t 因为肯定是足够从v1减为或升到v2的 那么我们只用从两端往中间靠 哪边的速度小 哪边就加上d 知道两边相邻 这样就能保证每次改变的速度都最大 而且最后两端的速度差也不会大于d 也就是最优答案了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>;</span><br><span class="line">int v[N];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int v1, v2, t, d, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>, &amp;v1, &amp;v2, &amp;t, &amp;d))</span><br><span class="line">    &#123;</span><br><span class="line">        v[<span class="number">0</span>] = v1, v[t - <span class="number">1</span>] = v2;</span><br><span class="line">        int le = <span class="number">0</span>, ri = t - <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(le &lt; ri - <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(v[le] &lt; v[ri]) v[le + <span class="number">1</span>] = v[le++] + d;</span><br><span class="line">            <span class="keyword">else</span> v[ri - <span class="number">1</span>] = v[ri--] + d;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; t; ++i) ans += v[i];</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-04-13 00:27</span></span><br></pre></td></tr></table></figure>
+
+<p>B. Covered Path</p>
+<p>The on-board computer on Polycarp’s car measured that the car speed at the beginning of some section of the path equals <em>v</em>1 meters per second, and in the end it is <em>v</em>2 meters per second. We know that this section of the route took exactly <em>t</em> seconds to pass.</p>
+<p>Assuming that at each of the seconds the speed is constant, and between seconds the speed can change at most by <em>d</em> meters per second in absolute value (i.e., the difference in the speed of any two adjacent seconds does not exceed <em>d</em> in absolute value), find the maximum possible length of the path section in meters.<br>Input</p>
+<p>The first line contains two integers <em>v</em>1 and <em>v</em>2 (1 ≤ <em>v</em>1, <em>v</em>2 ≤ 100) — the speeds in meters per second at the beginning of the segment and at the end of the segment, respectively.</p>
+<p>The second line contains two integers <em>t</em> (2 ≤ <em>t</em> ≤ 100) — the time when the car moves along the segment in seconds, <em>d</em> (0 ≤ <em>d</em> ≤ 10) — the maximum value of the speed change between adjacent seconds.</p>
+<p>It is guaranteed that there is a way to complete the segment so that:</p>
+<p>Output</p>
+<p>Print the maximum possible length of the path segment in meters.<br>Sample test(s)</p>
+<p>input 5 6 4 2</p>
+<p>output 26<br>input 10 10 10 0</p>
+<p>output 100</p>
+<p>Note</p>
+<p>In the first sample the sequence of speeds of Polycarpus’ car can look as follows: 5, 7, 8, 6. Thus, the total path is 5 + 7 + 8 + 6 &#x3D; 26meters.</p>
+<p>In the second sample, as <em>d</em> &#x3D; 0, the car covers the whole segment at constant speed <em>v</em> &#x3D; 10. In <em>t</em> &#x3D; 10 seconds it covers the distance of 100 meters.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1043,100 +1142,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/HDU%201495%20%E9%9D%9E%E5%B8%B8%E5%8F%AF%E4%B9%90(BFS%20%E5%80%92%E6%B0%B4%E9%97%AE%E9%A2%98)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/search/HDU%201495%20%E9%9D%9E%E5%B8%B8%E5%8F%AF%E4%B9%90(BFS%20%E5%80%92%E6%B0%B4%E9%97%AE%E9%A2%98)/" class="post-title-link" itemprop="url">HDU 1495 非常可乐(BFS 倒水问题)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-01 09:39:11" itemprop="dateCreated datePublished" datetime="2015-04-01T09:39:11+00:00">2015-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 将体积为s的可乐 利用容积分别为n和m的两个杯子平均分为两份 至少需要倒多少次可乐</p>
-<p>可以把容器s,n,m中装的可乐量看成一种状态</p>
-<p>容器都是没有刻度的 所以每次倒可乐要么把自己倒完 要么把对方倒满</p>
-<p>每种状态可以通过一次倒水到达哪些状态 于是可以通过bfs判断到达每种状态需要倒多少次</p>
-<p>3个容器中有一个装的可乐为s&#x2F;2的状态就是答案了 s是奇数时明显不可能平分的 可以直接忽略</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>;</span><br><span class="line">int v[N][N][N], n, m, s, le, ri;</span><br><span class="line"></span><br><span class="line">struct state &#123;</span><br><span class="line">    int a, b, c, d;</span><br><span class="line">    <span class="title function_">state</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="title function_">state</span>(int e, int f, int g, int h)</span><br><span class="line">        : <span class="title function_">a</span>(e), <span class="title function_">b</span>(f), <span class="title function_">c</span>(g), <span class="title function_">d</span>(<span class="params">h</span>) &#123;&#125;</span><br><span class="line">&#125; q[N * N * N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pour</span>(<span class="params">int a, int b, int c, int d</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!v[a][b][c])</span><br><span class="line">    &#123;</span><br><span class="line">        v[a][b][c] = <span class="number">1</span>;</span><br><span class="line">        q[ri++] = <span class="title function_">state</span>(a, b, c, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int a, b, c, d;</span><br><span class="line">    le = ri = <span class="number">0</span>;</span><br><span class="line">    q[ri++] = <span class="title function_">state</span>(s, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="title function_">memset</span>(v, <span class="number">0</span>, <span class="title function_">sizeof</span>(v));</span><br><span class="line">    v[s][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">    &#123;</span><br><span class="line">        a = q[le].<span class="property">a</span>, b = q[le].<span class="property">b</span>, c = q[le].<span class="property">c</span>, d = q[le++].<span class="property">d</span>;</span><br><span class="line">        <span class="keyword">if</span>(a == s / <span class="number">2</span> || b == s / <span class="number">2</span> || c == s / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> d + (a &amp;&amp; b &amp;&amp; c != <span class="number">0</span>);</span><br><span class="line">        <span class="title function_">pour</span>(a - n + b, n, c, d);		    <span class="comment">//s-&gt;n:</span></span><br><span class="line">        <span class="title function_">pour</span>(a - m + c, b, m, d);		    <span class="comment">//s-&gt;m;</span></span><br><span class="line">        <span class="title function_">pour</span>(a + b, <span class="number">0</span>, c, d);			    <span class="comment">//n-&gt;s;</span></span><br><span class="line">        <span class="title function_">pour</span>(a + c, b, <span class="number">0</span>, d);                       <span class="comment">//m-&gt;s;</span></span><br><span class="line">        <span class="keyword">if</span>(b &gt; m - c) <span class="title function_">pour</span>(a, b - m + c, m, d);     <span class="comment">//n-&gt;m</span></span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">pour</span>(a, <span class="number">0</span>, b + c, d);</span><br><span class="line">        <span class="keyword">if</span>(c &gt; n - b) <span class="title function_">pour</span>(a, n, c - n + b, d);     <span class="comment">//m-&gt;n</span></span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">pour</span>(a, b + c, <span class="number">0</span>, d);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int ans;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;s, &amp;n, &amp;m), n)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (s % <span class="number">2</span> == <span class="number">0</span>) ans = <span class="title function_">bfs</span>();</span><br><span class="line">        <span class="keyword">if</span>(!ans) <span class="title function_">puts</span>(<span class="string">&quot;NO&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="非常可乐"><a href="#非常可乐" class="headerlink" title="非常可乐"></a>非常可乐</h1><p>Problem Description</p>
-<p>大家一定觉的运动以后喝可乐是一件很惬意的事情，但是seeyou却不这么认为。因为每次当seeyou买了可乐以后，阿牛就要求和seeyou一起分享这一瓶可乐，而且一定要喝的和seeyou一样多。但seeyou的手中只有两个杯子，它们的容量分别是N 毫升和M 毫升 可乐的体积为S （S&lt;101）毫升　(正好装满一瓶) ，它们三个之间可以相互倒可乐 (都是没有刻度的，且 S&#x3D;&#x3D;N+M，101＞S＞0，N＞0，M＞0) 。聪明的ACMER你们说他们能平分吗？如果能请输出倒可乐的最少的次数，如果不能输出”NO”。<br>Input</p>
-<p>三个整数 : S 可乐的体积 , N 和 M是两个杯子的容量，以”0 0 0”结束。<br>Output</p>
-<p>如果能平分的话请输出最少要倒的次数，否则输出”NO”。<br>Sample Input</p>
-<p>7 4 3 4 1 3 0 0 0<br>Sample Output</p>
-<p>NO 3</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1150,7 +1155,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

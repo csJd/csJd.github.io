@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">262</span>
+          <span class="site-state-item-count">263</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%202830%20Matrix%20Swapping%20II%20%EF%BC%88DP,%E6%9C%80%E5%A4%A7%E5%85%A81%E7%9F%A9%E9%98%B5%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%202830%20Matrix%20Swapping%20II%20%EF%BC%88DP,%E6%9C%80%E5%A4%A7%E5%85%A81%E7%9F%A9%E9%98%B5%EF%BC%89/" class="post-title-link" itemprop="url">HDU 2830 Matrix Swapping II （DP,最大全1矩阵）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:51:20" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:20+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你一个n&#x2F;*m矩阵 每列都可以随便交换位置 求最优交换后最大的全1子矩阵</p>
+<p>又是HDU 1505 1506的变种 但这个更容易了 因为每列都可以交换位置了 那么这一行中所有比i高的都可以与i相邻了 只需要统计这一行有多少个比i高就行了 可以在算出每一行后 把高度大的放前面去 用num[i]记录排序后的列原来的数 这样就有j列比h[i][num[j]]高了 最后的答案也就是max(j&#x2F;*h[i][num[j]])</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">char mat[N][N];</span><br><span class="line">int num[N], h[N][N], n, m, i;</span><br><span class="line"></span><br><span class="line">bool cmp (int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> h[i][a] &gt; h[i][b];</span><br><span class="line">&#125;<span class="comment">//cmp不能有=</span></span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        int ans = <span class="number">0</span>;</span><br><span class="line">        memset (h, <span class="number">0</span>, sizeof (h));</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%s&quot;</span>, mat[i] + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (mat[i][j] == <span class="string">&#x27;1&#x27;</span>)  h[i][j] = h[i - <span class="number">1</span>][j] + <span class="number">1</span>;</span><br><span class="line">                num[j] = j;</span><br><span class="line">            &#125;</span><br><span class="line">            sort (num + <span class="number">1</span>, num + m + <span class="number">1</span>, cmp);</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                ans = max (ans, j * h[i][num[j]]);</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Matrix-Swapping-II"><a href="#Matrix-Swapping-II" class="headerlink" title="Matrix Swapping II"></a>Matrix Swapping II</h1><p>Problem Description</p>
+<p>Given an N &#x2F;* M matrix with each entry equal to 0 or 1. We can find some rectangles in the matrix whose entries are all 1, and we define the maximum area of such rectangle as this matrix’s goodness.<br>We can swap any two columns any times, and we are to make the goodness of the matrix as large as possible.<br>Input</p>
+<p>There are several test cases in the input. The first line of each test case contains two integers N and M (1 ≤ N,M ≤ 1000). Then N lines follow, each contains M numbers (0 or 1), indicating the N &#x2F;* M matrix<br>Output</p>
+<p>Output one line for each test case, indicating the maximum possible goodness.<br>Sample Input</p>
+<p>3 4 1011 1001 0001 3 4 1010 1001 0001<br>Sample Output</p>
+<p>4 2 Note: Huge Input, scanf() is recommended.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1022,100 +1113,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/string/POJ%203080%20Blue%20Jeans(KMP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/string/POJ%203080%20Blue%20Jeans(KMP%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2)/" class="post-title-link" itemprop="url">POJ 3080 Blue Jeans(KMP 最长公共子串)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:50:59" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:59+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Blue Jeans</p>
-<p>Description<br>The Genographic Project is a research partnership between IBM and The National Geographic Society that is analyzing DNA from hundreds of thousands of contributors to map how the Earth was populated.<br>As an IBM researcher, you have been tasked with writing a program that will find commonalities amongst given snippets of DNA that can be correlated with individual survey information to identify new genetic markers.<br>A DNA base sequence is noted by listing the nitrogen bases in the order in which they are found in the molecule. There are four bases: adenine (A), thymine (T), guanine (G), and cytosine (C). A 6-base DNA sequence could be represented as TAGACC.<br>Given a set of DNA base sequences, determine the longest series of bases that occurs in all of the sequences.</p>
-<p>Input</p>
-<p>Input to this problem will begin with a line containing a single integer n indicating the number of datasets. Each dataset consists of the following components:</p>
-<p>Output</p>
-<p>For each dataset in the input, output the longest base subsequence common to all of the given base sequences. If the longest common subsequence is less than three bases in length, display the string “no significant commonalities” instead. If multiple subsequences of the same longest length exist, output only the subsequence that comes first in alphabetical order.</p>
-<p>Sample Input</p>
-<p>3 2 GATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 GATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATACCAGATA GATACTAGATACTAGATACTAGATACTAAAGGAAAGGGAAAAGGGGAAAAAGGGGGAAAA GATACCAGATACCAGATACCAGATACCAAAGGAAAGGGAAAAGGGGAAAAAGGGGGAAAA 3 CATCATCATCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ACATCATCATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AACATCATCATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT</p>
-<p>Sample Output</p>
-<p>no significant commonalities AGATAC CATCATCAT</p>
-<p>题意 给你n个DNA串 求它们的长度最大的公共子串 如果有多个 输出字典序最小的 长度小于3的不算</p>
-<p>每个DNA串的长度都是60 可以从子串长度为60依次递减 并枚举所有该长度子串 当某个长度的子串也为其它n-1个串的子串时 就是我们要的答案了</p>
-<p>判断是否为其它DNA串的子串直接kmp就行了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">15</span>, M = <span class="number">65</span>, L = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">bool kmp (char s[], char p[])</span><br><span class="line">&#123;</span><br><span class="line">    int next[M];</span><br><span class="line">    next[<span class="number">0</span>] = -<span class="number">1</span>, next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    int plen = strlen (p), i = <span class="number">0</span>, j,slen = strlen (s);</span><br><span class="line">    <span class="keyword">while</span> (++i &lt; plen - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j = next[i];</span><br><span class="line">        <span class="keyword">while</span> (j != -<span class="number">1</span> &amp;&amp; p[i] != p[j])</span><br><span class="line">            j = next[j];</span><br><span class="line">        next[i + <span class="number">1</span>] = j + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    i = j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; slen &amp;&amp; j &lt; plen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (j == -<span class="number">1</span> || s[i] == p[j]) ++i, ++j;</span><br><span class="line">        <span class="keyword">else</span> j = next[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j == plen;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, n, flag;</span><br><span class="line">    char s[N][M], tans[M],ans[M];</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = flag = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%s&quot;</span>, s[i]);</span><br><span class="line">        <span class="keyword">for</span> (int lans = L; lans &gt; <span class="number">2</span> &amp;&amp; flag == <span class="number">0</span>; --lans)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">strcpy</span>(ans,<span class="string">&quot;ZZ&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (int i = <span class="number">0</span>, j, k; i + lans &lt;= L; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; lans; ++j)</span><br><span class="line">                    tans[j] = s[<span class="number">0</span>][i + j];</span><br><span class="line">                tans[j] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (k = <span class="number">1</span>; k &lt; n; ++k)</span><br><span class="line">                    <span class="keyword">if</span> (!kmp (s[k], tans)) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (k == n)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="title function_">strcmp</span>(ans,tans)&gt;<span class="number">0</span>) <span class="title function_">strcpy</span>(ans,tans);</span><br><span class="line">                    flag = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">1</span>) printf (<span class="string">&quot;%s\n&quot;</span>, ans);</span><br><span class="line">        <span class="keyword">else</span> printf (<span class="string">&quot;no significant commonalities\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1129,7 +1126,7 @@
 
 <div class="copyright">
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
