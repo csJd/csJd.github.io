@@ -7,8 +7,8 @@ categories:
 - Practice
 ---
 
-[Filebrowser](https://github.com/filebrowser/filebrowser) 是一个开源的服务器文件管理和分享工具。
-可以较方便的实现服务器上文件的分享，这里记录下个人的使用经验。
+[Filebrowser](https://github.com/filebrowser/filebrowser) 是一个开源的服务器文件管理和分享工具
+可以较方便的实现服务器上文件的分享，这里记录下个人的使用经验
 
 <!-- more -->
 
@@ -25,19 +25,23 @@ curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bas
 
 ```bash
 # 初始化配置并保存至当前目录的 `filebrowser.db`
-# https://filebrowser.org/cli/filebrowser-config-init
 filebrowser config init \
-  --address 0.0.0.0 \                 # 监听地址
-  --port 443 \                        # 监听端口
-  --cert ~/ssl/domain_cert.cer \      # 可选, tls cert, 用于开启 https 访问, 不配置则为 http 访问
-  --key ~/ssl/domain_key.key \        # 可选, tls key
-  --root ~/downloads/                 # 管理的根目录
+  --address 0.0.0.0 \
+  --port 443 \
+  --root ~/downloads/
+  --cert ~/ssl/domain_cert.cer \
+  --key ~/ssl/domain_key.key \
+
+# 参数说明：https://filebrowser.org/cli/filebrowser-config-init
+# --address, --port 监听地址与端口
+# --root 待分享文件的根目录
+# --cert, --key TLS 证书和 key, 用于启用 https 访问，不配置则为 http 访问
 
 # 添加用户
 filebrowser users add {username} {password}
 ```
 
-然后启动程序，就可以通过浏览器访问 filebrowser
+然后启动程序，就可以通过浏览器访问 filebrowser (https://your_domain.com)
 
 ```bash
 filebrowser -d filebrowser.db
