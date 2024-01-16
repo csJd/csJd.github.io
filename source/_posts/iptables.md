@@ -28,7 +28,7 @@ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 # 允许 icmp packet，用于 ping
 sudo iptables -A INPUT -p icmp -j ACCEPT
 
-# 设置默认规则
+# 设置默认规则，需放到最后
 sudo iptables -P INPUT DROP  # 禁止其他传入连接
 sudo iptables -P OUTPUT ACCEPT  # 允许所有传出连接
 sudo iptables -P FORWARD ACCEPT  # 允许所有传出连接
@@ -51,10 +51,11 @@ Chain OUTPUT (policy ACCEPT 440 packets, 53272 bytes)
  pkts bytes target     prot opt in     out     source               destination
 ```
 
-想禁止 `ping`，则可删除 `INPUT` 下的第 4 条规则：
+想禁止 `ping`，则可删除 `INPUT` 下的对应规则：
 
 ```sh
-sudo iptables -D INPUT 4
+sudo iptables -D INPUT 4                   # 按规则对应序号删除
+sudo iptables -D INPUT -p icmp -j ACCEPT   # 按详细规则内容删除
 ```
 
 这样设置的防火墙规则都是临时的，重启后就会失效，`iptables-save` 可以手动导出当前配置到 `stdout`，`iptables-restore` 可从文件手动恢复导出的配置。
@@ -62,7 +63,7 @@ sudo iptables -D INPUT 4
 
 ```sh
 sudo apt install iptables-persistent
-sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+sudo iptables-save > /etc/iptables/rules.v4
 ```
 
-这样重启后防火墙的配置也会保留，更新防火墙配置后仍需手动运行 `sudo sh -c "iptables-save > /etc/iptables/rules.v4"` 保存更新的配置。
+这样重启后防火墙的配置也会保留，更新防火墙配置后仍需手动运行 `sudo iptables-save > /etc/iptables/rules.v4` 保存更新的配置。
