@@ -22,11 +22,11 @@
 
 
 
-<link rel="canonical" href="http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(N*logN))/">
+<link rel="canonical" href="http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(NlogN))/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(N*logN))/","path":"posts/oj/math/UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN))/","title":"UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN))"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"default","comments":true,"permalink":"http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(NlogN))/","path":"posts/oj/math/UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(NlogN))/","title":"UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN))"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>UVa 11426 GCD - Extreme (II) (欧拉函数应用·O(N*logN)) | dd's site \#</title>
@@ -190,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(N*logN))/">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/UVa%2011426%20GCD%20-%20Extreme%20(II)%20(%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%C2%B7O(NlogN))/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -253,6 +253,7 @@
 <p>则**gcd(2&#x2F;*x, 2&#x2F;*i) &#x3D; 2, gcd(3&#x2F;*x, 3&#x2F;*i) &#x3D; 3, …, gcd(k&#x2F;<em>x, k&#x2F;<em>i) &#x3D; k</em></em></p>
 <p>这样的x的个数就是i的欧拉函数值 那么我们求出i的欧拉函数后 所有的F(k&#x2F;*i) 都加上k 这样筛一下就能求出一定范围内所有的F函数值了 然后累加上去就是G的函数值了</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">4000005</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int phi[N];</span><br><span class="line">ll g[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">init</span>() <span class="comment">//O(N*logN) 筛欧拉函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i &lt; N; ++i) phi[i] = i;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i &lt; N; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(phi[i] == i) <span class="comment">//i是素数</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int j = i; j &lt; N; j += i)</span><br><span class="line">                phi[j] = phi[j] / i * (i - <span class="number">1</span>);</span><br><span class="line">            <span class="comment">//需要从j中删除一个素因子i  因为phi(p^k) = (p-1) * p^(k-1)</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">1</span>; j * i &lt; N; j ++)</span><br><span class="line">            g[j * i] += j * phi[i];</span><br><span class="line">        <span class="comment">//phi[i]是小于i且与i互质的数的个数 j * i &lt; N 时 j * x 肯定也小于n</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; N; i ++) g[i] += g[i - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">init</span>();</span><br><span class="line">    int n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, g[n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
