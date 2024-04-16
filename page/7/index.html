@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/HDU%201043%20Eight%20(BFS%C2%B7%E5%85%AB%E6%95%B0%E7%A0%81%C2%B7%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/HDU%201043%20Eight%20(BFS%C2%B7%E5%85%AB%E6%95%B0%E7%A0%81%C2%B7%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80)/" class="post-title-link" itemprop="url">HDU 1043 Eight (BFS·八数码·康托展开)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-05 17:00:28" itemprop="dateCreated datePublished" datetime="2015-07-05T17:00:28+00:00">2015-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 输出八数码问题从给定状态到12345678x的路径</p>
+<p>用康托展开将排列对应为整数 即这个排列在所有排列中的字典序 然后就是基础的BFS了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">5e5</span>, M = <span class="number">9</span>;</span><br><span class="line">int x[<span class="number">4</span>] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">int y[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int fac[] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>&#125;;</span><br><span class="line">int puz[N][M], nex[N], dir[N], vis[N], q[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">getCantor</span>(int a[])  <span class="comment">//康托展开  将排列转化为整数</span></span><br><span class="line">&#123;</span><br><span class="line">    int ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = i + <span class="number">1</span>; j &lt; M; ++j)</span><br><span class="line">            <span class="keyword">if</span>(a[j] &lt; a[i]) ret += fac[M - i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t[M] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    int id = <span class="title function_">getCantor</span>(t);</span><br><span class="line">    dir[id] = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">memcpy</span>(puz[id], t, <span class="title function_">sizeof</span>(t));</span><br><span class="line">    <span class="title function_">memset</span>(vis, <span class="number">0</span>, <span class="title function_">sizeof</span>(vis));</span><br><span class="line"></span><br><span class="line">    int r, c, k, nr, nc, nk, nid;</span><br><span class="line">    int front = <span class="number">0</span>, rear = <span class="number">0</span>;</span><br><span class="line">    q[rear++] = id;</span><br><span class="line">    vis[id] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear)</span><br><span class="line">    &#123;</span><br><span class="line">        int id = q[front++];</span><br><span class="line">        <span class="title function_">memcpy</span>(t, puz[id], <span class="title function_">sizeof</span>(t));</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">0</span>; t[k]; ++k);  <span class="comment">//找0的位置</span></span><br><span class="line">        r = k / <span class="number">3</span>, c = k % <span class="number">3</span>;  <span class="comment">//一维转二维</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            nr = r + x[i], nc = c + y[i], nk = nr * <span class="number">3</span> + nc;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nr &lt; <span class="number">0</span> || nr &gt; <span class="number">2</span> || nc &lt; <span class="number">0</span> || nc &gt; <span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="title function_">swap</span>(t[k], t[nk]);</span><br><span class="line">            nid = <span class="title function_">getCantor</span>(t);</span><br><span class="line">            <span class="title function_">memcpy</span>(puz[nid], t, <span class="title function_">sizeof</span>(t));</span><br><span class="line">            <span class="title function_">swap</span>(t[k], t[nk]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(vis[nid]) <span class="keyword">continue</span>;</span><br><span class="line">            vis[nid] = <span class="number">1</span>;</span><br><span class="line">            q[rear++] = nid;</span><br><span class="line">            nex[nid] = id;</span><br><span class="line">            dir[nid] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char t[<span class="number">5</span>], sdir[] = <span class="string">&quot;durl&quot;</span>;</span><br><span class="line">    int s[M], id;</span><br><span class="line">    <span class="title function_">bfs</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, t))</span><br><span class="line">    &#123;</span><br><span class="line">        s[<span class="number">0</span>] = t[<span class="number">0</span>] == <span class="string">&#x27;x&#x27;</span> ? <span class="number">0</span> : t[<span class="number">0</span>] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; M; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, t);</span><br><span class="line">            s[i] = t[<span class="number">0</span>] == <span class="string">&#x27;x&#x27;</span> ? <span class="number">0</span> : t[<span class="number">0</span>] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        id = <span class="title function_">getCantor</span>(s);</span><br><span class="line">        <span class="keyword">if</span>(!vis[id]) <span class="title function_">puts</span>(<span class="string">&quot;unsolvable&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(dir[id] &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%c&quot;</span>, sdir[dir[id]]);</span><br><span class="line">                id = nex[id];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-07-05 11:15</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Eight"><a href="#Eight" class="headerlink" title="Eight"></a>Eight</h1><p>Problem Description</p>
+<p>The 15-puzzle has been around for over 100 years; even if you don’t know it by that name, you’ve seen it. It is constructed with 15 sliding tiles, each with a number from 1 to 15 on it, and all packed into a 4 by 4 frame with one tile missing. Let’s call the missing tile ‘x’; the object of the puzzle is to arrange the tiles so that they are ordered as: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 x<br>where the only legal operation is to exchange ‘x’ with one of the tiles with which it shares an edge. As an example, the following sequence of moves solves a slightly scrambled puzzle:<br>1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 5 6 7 8 5 6 7 8 5 6 7 8 5 6 7 8 9 x 10 12 9 10 x 12 9 10 11 12 9 10 11 12 13 14 11 15 13 14 11 15 13 14 x 15 13 14 15 x r-&gt; d-&gt; r-&gt;<br>The letters in the previous row indicate which neighbor of the ‘x’ tile is swapped with the ‘x’ tile at each step; legal values are ‘r’,’l’,’u’ and ‘d’, for right, left, up, and down, respectively.<br>Not all puzzles can be solved; in 1870, a man named Sam Loyd was famous for distributing an unsolvable version of the puzzle, and<br>frustrating many people. In fact, all you have to do to make a regular puzzle into an unsolvable one is to swap two tiles (not counting the missing ‘x’ tile, of course).<br>In this problem, you will write a program for solving the less well-known 8-puzzle, composed of tiles on a three by three<br>arrangement.<br>Input</p>
+<p>You will receive, several descriptions of configuration of the 8 puzzle. One description is just a list of the tiles in their initial positions, with the rows listed from top to bottom, and the tiles listed from left to right within a row, where the tiles are represented by numbers 1 to 8, plus ‘x’. For example, this puzzle<br>1 2 3<br>x 4 6<br>7 5 8<br>is described by this list:<br>1 2 3 x 4 6 7 5 8<br>Output</p>
+<p>You will print to standard output either the word &#96;&#96;unsolvable’’, if the puzzle has no solution, or a string consisting entirely of the letters ‘r’, ‘l’, ‘u’ and ‘d’ that describes a series of moves that produce a solution. The string should include no spaces and start at the beginning of the line. Do not print a blank line between cases.<br>Sample Input</p>
+<p>2 3 4 1 5 x 7 6 8<br>Sample Output</p>
+<p>ullddrurdllurdruldr</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1030,104 +1121,6 @@
 <p>1 10 1 2 3 4 5 6 7 8 9 10 Query 1 3 Add 3 6 Query 2 7 Sub 10 2 Add 6 3 Query 3 10 End<br>Sample Output</p>
 <p>Case 1: 6 33 59<br>Author</p>
 <p>Windbreaker</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/Codeforces%20534D%20Handshakes(%E8%B4%AA%E5%BF%83)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/other/Codeforces%20534D%20Handshakes(%E8%B4%AA%E5%BF%83)/" class="post-title-link" itemprop="url">Codeforces 534D Handshakes(贪心)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-13 18:22:01" itemprop="dateCreated datePublished" datetime="2015-04-13T18:22:01+00:00">2015-04-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 房子里有n个人走进来 编号1~n 每个人走进来时房子里所有空闲的人都会和他招手 空闲的某三个人可以选择一起去打比赛 当然打比赛就变得不空闲了 给你每个人进来时和他招手的人的数量 要求输出一种可能的进房间顺序 没有可能的就输出Impossible</p>
-<p>这题放在d就比较简单了 直接贪心就可以 把招手数量为i对应的人都保存到栈s[i]里 第一个进房间的人肯定是s[0]里的 然后让i从0开始 s[i]非空时 让s[i]的栈顶的人进入房间 然后i++ 否则让s[i-1],s[i-2],s[i-3]都出栈一个 再让i&#x3D;i-3 也就是有3个人去打比赛了 一直这样循环下去直到所有人都进入房间或者i&lt;0(对应不可能的情况) 最后输出进入房间的序列就行了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line">int q[N], n;</span><br><span class="line">stack&lt;int&gt; s[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int a;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a), s[a].<span class="title function_">push</span>(i);</span><br><span class="line"></span><br><span class="line">    int p = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!s[i].<span class="title function_">empty</span>())  q[p++] = s[i++].<span class="title function_">top</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//出栈三个人去打比赛</span></span><br><span class="line">            <span class="keyword">if</span>(i &lt; <span class="number">3</span>) <span class="keyword">break</span>;</span><br><span class="line">            s[--i].<span class="title function_">pop</span>(), s[--i].<span class="title function_">pop</span>(), s[--i].<span class="title function_">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;Possible&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>, q[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, q[n - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="title function_">puts</span>(<span class="string">&quot;Impossible&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-04-13 01:57</span></span><br></pre></td></tr></table></figure>
-
-<p>D. Handshakes<br>On February, 30th <em>n</em> students came in the Center for Training Olympiad Programmers (CTOP) of the Berland State University. They came one by one, one after another. Each of them went in, and before sitting down at his desk, greeted with those who were present in the room by shaking hands. Each of the students who came in stayed in CTOP until the end of the day and never left.</p>
-<p>At any time any three students could join together and start participating in a team contest, which lasted until the end of the day. The team did not distract from the contest for a minute, so when another student came in and greeted those who were present, he did not shake hands with the members of the contest writing team. Each team consisted of exactly three students, and each student could not become a member of more than one team. Different teams could start writing contest at different times.</p>
-<p>Given how many present people shook the hands of each student, get a possible order in which the students could have come to CTOP. If such an order does not exist, then print that this is impossible.</p>
-<p>Please note that some students could work independently until the end of the day, without participating in a team contest.</p>
-<p>Input</p>
-<p>The first line contains integer <em>n</em> (1 ≤ <em>n</em> ≤ 2·105) — the number of students who came to CTOP. The next line contains <em>n</em> integers<em>a</em>1, <em>a</em>2, …, <em>a**n</em> (0 ≤ <em>a**i</em> &lt; <em>n</em>), where <em>a**i</em> is the number of students with who the <em>i</em>-th student shook hands.<br>Output</p>
-<p>If the sought order of students exists, print in the first line “Possible” and in the second line print the permutation of the students’ numbers defining the order in which the students entered the center. Number <em>i</em> that stands to the left of number <em>j</em> in this permutation means that the <em>i</em>-th student came earlier than the <em>j</em>-th student. If there are multiple answers, print any of them.</p>
-<p>If the sought order of students doesn’t exist, in a single line print “Impossible”.</p>
-<p>Sample test(s)</p>
-<p>input 5 2 1 3 0 1</p>
-<p>output Possible 4 5 1 3 2<br>input 9 0 2 3 4 1 1 0 2 2</p>
-<p>output Possible 7 5 2 1 6 8 3 4 9<br>input 4 0 2 1 1</p>
-<p>output Impossible</p>
 
       
     </div>

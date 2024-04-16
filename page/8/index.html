@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,104 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/Codeforces%20534D%20Handshakes(%E8%B4%AA%E5%BF%83)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/other/Codeforces%20534D%20Handshakes(%E8%B4%AA%E5%BF%83)/" class="post-title-link" itemprop="url">Codeforces 534D Handshakes(贪心)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-04-13 18:22:01" itemprop="dateCreated datePublished" datetime="2015-04-13T18:22:01+00:00">2015-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 房子里有n个人走进来 编号1~n 每个人走进来时房子里所有空闲的人都会和他招手 空闲的某三个人可以选择一起去打比赛 当然打比赛就变得不空闲了 给你每个人进来时和他招手的人的数量 要求输出一种可能的进房间顺序 没有可能的就输出Impossible</p>
+<p>这题放在d就比较简单了 直接贪心就可以 把招手数量为i对应的人都保存到栈s[i]里 第一个进房间的人肯定是s[0]里的 然后让i从0开始 s[i]非空时 让s[i]的栈顶的人进入房间 然后i++ 否则让s[i-1],s[i-2],s[i-3]都出栈一个 再让i&#x3D;i-3 也就是有3个人去打比赛了 一直这样循环下去直到所有人都进入房间或者i&lt;0(对应不可能的情况) 最后输出进入房间的序列就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line">int q[N], n;</span><br><span class="line">stack&lt;int&gt; s[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int a;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a), s[a].<span class="title function_">push</span>(i);</span><br><span class="line"></span><br><span class="line">    int p = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!s[i].<span class="title function_">empty</span>())  q[p++] = s[i++].<span class="title function_">top</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//出栈三个人去打比赛</span></span><br><span class="line">            <span class="keyword">if</span>(i &lt; <span class="number">3</span>) <span class="keyword">break</span>;</span><br><span class="line">            s[--i].<span class="title function_">pop</span>(), s[--i].<span class="title function_">pop</span>(), s[--i].<span class="title function_">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;Possible&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>, q[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, q[n - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="title function_">puts</span>(<span class="string">&quot;Impossible&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-04-13 01:57</span></span><br></pre></td></tr></table></figure>
+
+<p>D. Handshakes<br>On February, 30th <em>n</em> students came in the Center for Training Olympiad Programmers (CTOP) of the Berland State University. They came one by one, one after another. Each of them went in, and before sitting down at his desk, greeted with those who were present in the room by shaking hands. Each of the students who came in stayed in CTOP until the end of the day and never left.</p>
+<p>At any time any three students could join together and start participating in a team contest, which lasted until the end of the day. The team did not distract from the contest for a minute, so when another student came in and greeted those who were present, he did not shake hands with the members of the contest writing team. Each team consisted of exactly three students, and each student could not become a member of more than one team. Different teams could start writing contest at different times.</p>
+<p>Given how many present people shook the hands of each student, get a possible order in which the students could have come to CTOP. If such an order does not exist, then print that this is impossible.</p>
+<p>Please note that some students could work independently until the end of the day, without participating in a team contest.</p>
+<p>Input</p>
+<p>The first line contains integer <em>n</em> (1 ≤ <em>n</em> ≤ 2·105) — the number of students who came to CTOP. The next line contains <em>n</em> integers<em>a</em>1, <em>a</em>2, …, <em>a**n</em> (0 ≤ <em>a**i</em> &lt; <em>n</em>), where <em>a**i</em> is the number of students with who the <em>i</em>-th student shook hands.<br>Output</p>
+<p>If the sought order of students exists, print in the first line “Possible” and in the second line print the permutation of the students’ numbers defining the order in which the students entered the center. Number <em>i</em> that stands to the left of number <em>j</em> in this permutation means that the <em>i</em>-th student came earlier than the <em>j</em>-th student. If there are multiple answers, print any of them.</p>
+<p>If the sought order of students doesn’t exist, in a single line print “Impossible”.</p>
+<p>Sample test(s)</p>
+<p>input 5 2 1 3 0 1</p>
+<p>output Possible 4 5 1 3 2<br>input 9 0 2 3 4 1 1 0 2 2</p>
+<p>output Possible 7 5 2 1 6 8 3 4 9<br>input 4 0 2 1 1</p>
+<p>output Impossible</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1023,107 +1121,6 @@
 <p>3 1033 8179 1373 8017 1033 1033</p>
 <p>Sample Output</p>
 <p>6 7 0</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/POJ%201426%20Find%20The%20Multiple(BFS%20%E5%90%8C%E4%BD%99%E6%A8%A1%E5%AE%9A%E7%90%86)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/search/POJ%201426%20Find%20The%20Multiple(BFS%20%E5%90%8C%E4%BD%99%E6%A8%A1%E5%AE%9A%E7%90%86)/" class="post-title-link" itemprop="url">POJ 1426 Find The Multiple(BFS 同余模定理)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-01 21:34:24" itemprop="dateCreated datePublished" datetime="2015-04-01T21:34:24+00:00">2015-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 给你一个数n 输出一个仅由0，1组成的数m使得m是n的倍数</p>
-<p>找到一个m 是m%n&#x3D;&#x3D;0 就行了 初始让m&#x3D;1 然后bfs扩展m的位数 只有两种情况m &#x3D; m &#x2F;* 10 或 m &#x3D; m&#x2F;*10 + 1;</p>
-<p>同余模定理**(a+b) % c &#x3D; (a%c + b%c) % c, (a&#x2F;<em>b)%c &#x3D; (a%c &#x2F;</em> b%c) % c;**</p>
-<p>运用同余模定理 可以只记录余数 这样就可以避免处理大数了 因为余数不会超过n 而n是小于两百的</p>
-<p>对于已经得到过的余数 是可以跳过的 可以考虑下为什么</p>
-<p>于是只用保存每一位选的是0还是1 只要保证最后余数为0就行了</p>
-<p>*<em>1. 选0 m &#x3D; m&#x2F;<em>10 % n;</em></em></p>
-<p>*<em>2. 选1 m &#x3D; (m&#x2F;<em>10 + 1) % n;</em></em></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>;</span><br><span class="line">int q[N], p[N], d[N], n;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int le = <span class="number">0</span>, ri = <span class="number">0</span>, r = <span class="number">1</span>, cr;</span><br><span class="line">    int v[N] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    v[q[ri++] = r % n] = d[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    p[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">    &#123;</span><br><span class="line">        cr = q[le];</span><br><span class="line">        <span class="keyword">if</span>(cr == <span class="number">0</span>)  <span class="keyword">return</span> le;</span><br><span class="line">        <span class="keyword">if</span>(!v[r = cr * <span class="number">10</span> % n])</span><br><span class="line">            v[r] = <span class="number">1</span>, p[ri] = le, d[ri] = <span class="number">0</span>, q[ri++] = r;</span><br><span class="line">        <span class="keyword">if</span>(!v[r = (cr * <span class="number">10</span> + <span class="number">1</span>) % n])</span><br><span class="line">            v[r] = <span class="number">1</span>, p[ri] = le, d[ri] = <span class="number">1</span>, q[ri++] = r;</span><br><span class="line">        ++le;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(p[k] &gt;= <span class="number">0</span>) <span class="title function_">print</span>(p[k]);</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%d&quot;</span>, d[k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(<span class="title function_">bfs</span>());</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Find The Multiple</p>
-<p>Description<br>Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that n is not greater than 200 and there is a corresponding m containing no more than 100 decimal digits.</p>
-<p>Input</p>
-<p>The input file may contain multiple test cases. Each line contains a value of n (1 &lt;&#x3D; n &lt;&#x3D; 200). A line containing a zero terminates the input.</p>
-<p>Output</p>
-<p>For each value of n in the input print a line containing the corresponding value of m. The decimal representation of m must not contain more than 100 digits. If there are multiple solutions for a given value of n, any one of them is acceptable.</p>
-<p>Sample Input</p>
-<p>2 6 19 0</p>
-<p>Sample Output</p>
-<p>10 100100100100100100 111111111111111111</p>
 
       
     </div>

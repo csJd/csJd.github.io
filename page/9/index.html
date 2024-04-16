@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,107 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/POJ%201426%20Find%20The%20Multiple(BFS%20%E5%90%8C%E4%BD%99%E6%A8%A1%E5%AE%9A%E7%90%86)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/POJ%201426%20Find%20The%20Multiple(BFS%20%E5%90%8C%E4%BD%99%E6%A8%A1%E5%AE%9A%E7%90%86)/" class="post-title-link" itemprop="url">POJ 1426 Find The Multiple(BFS 同余模定理)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-04-01 21:34:24" itemprop="dateCreated datePublished" datetime="2015-04-01T21:34:24+00:00">2015-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你一个数n 输出一个仅由0，1组成的数m使得m是n的倍数</p>
+<p>找到一个m 是m%n&#x3D;&#x3D;0 就行了 初始让m&#x3D;1 然后bfs扩展m的位数 只有两种情况m &#x3D; m &#x2F;* 10 或 m &#x3D; m&#x2F;*10 + 1;</p>
+<p>同余模定理**(a+b) % c &#x3D; (a%c + b%c) % c, (a&#x2F;<em>b)%c &#x3D; (a%c &#x2F;</em> b%c) % c;**</p>
+<p>运用同余模定理 可以只记录余数 这样就可以避免处理大数了 因为余数不会超过n 而n是小于两百的</p>
+<p>对于已经得到过的余数 是可以跳过的 可以考虑下为什么</p>
+<p>于是只用保存每一位选的是0还是1 只要保证最后余数为0就行了</p>
+<p>*<em>1. 选0 m &#x3D; m&#x2F;<em>10 % n;</em></em></p>
+<p>*<em>2. 选1 m &#x3D; (m&#x2F;<em>10 + 1) % n;</em></em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>;</span><br><span class="line">int q[N], p[N], d[N], n;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int le = <span class="number">0</span>, ri = <span class="number">0</span>, r = <span class="number">1</span>, cr;</span><br><span class="line">    int v[N] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    v[q[ri++] = r % n] = d[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    p[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">    &#123;</span><br><span class="line">        cr = q[le];</span><br><span class="line">        <span class="keyword">if</span>(cr == <span class="number">0</span>)  <span class="keyword">return</span> le;</span><br><span class="line">        <span class="keyword">if</span>(!v[r = cr * <span class="number">10</span> % n])</span><br><span class="line">            v[r] = <span class="number">1</span>, p[ri] = le, d[ri] = <span class="number">0</span>, q[ri++] = r;</span><br><span class="line">        <span class="keyword">if</span>(!v[r = (cr * <span class="number">10</span> + <span class="number">1</span>) % n])</span><br><span class="line">            v[r] = <span class="number">1</span>, p[ri] = le, d[ri] = <span class="number">1</span>, q[ri++] = r;</span><br><span class="line">        ++le;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int k</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(p[k] &gt;= <span class="number">0</span>) <span class="title function_">print</span>(p[k]);</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%d&quot;</span>, d[k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(<span class="title function_">bfs</span>());</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Find The Multiple</p>
+<p>Description<br>Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that n is not greater than 200 and there is a corresponding m containing no more than 100 decimal digits.</p>
+<p>Input</p>
+<p>The input file may contain multiple test cases. Each line contains a value of n (1 &lt;&#x3D; n &lt;&#x3D; 200). A line containing a zero terminates the input.</p>
+<p>Output</p>
+<p>For each value of n in the input print a line containing the corresponding value of m. The decimal representation of m must not contain more than 100 digits. If there are multiple solutions for a given value of n, any one of them is acceptable.</p>
+<p>Sample Input</p>
+<p>2 6 19 0</p>
+<p>Sample Output</p>
+<p>10 100100100100100100 111111111111111111</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1018,103 +1119,6 @@
 <p>The only input line contains integers <em>n</em> and <em>m</em> separated with a space. They are the length and width of the hall measured in tiles (2 ≤ <em>n</em>, <em>m</em> ≤ 1 000 000).</p>
 <p>In the only line output the number of grey tiles in the hall after Scooby-Doo’s search.</p>
 <p>input output 7 5 11 2 3 3</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/CodeForces%20327D%20Block%20Tower%EF%BC%88DFS%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/search/CodeForces%20327D%20Block%20Tower%EF%BC%88DFS%EF%BC%89/" class="post-title-link" itemprop="url">CodeForces 327D Block Tower（DFS）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-03-10 23:25:09" itemprop="dateCreated datePublished" datetime="2015-03-10T23:25:09+00:00">2015-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 给你一个城市的地图 你可以在地图上的 . 上建房子&#x2F;#上不能建房子 红房子可以装200个人 蓝房子可以装100个人 只有相邻位置有蓝房子时才能建红房子 你也可以拆掉已经建成的房子 拆掉后该点又变成 .</p>
-<p>这题想到了就很容易了 因为没有限制要步数最少 可以先把左右的地方都建成蓝房子 然后就变成求连通块的题了 每个蓝房子连通块内依次拆掉建红房子 最终就只剩下一个蓝房子了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">505</span>;</span><br><span class="line">char g[N][N];</span><br><span class="line">stack&lt;pair&lt;int, int&gt; &gt; s;</span><br><span class="line">int x[] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">int y[] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int n, m, a, b, cnt, is_first;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">dfs</span>(<span class="params">int i, int j</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int r, c;</span><br><span class="line">    <span class="keyword">if</span>(is_first) is_first = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> s.<span class="title function_">push</span>(<span class="title function_">make_pair</span>(i, j));</span><br><span class="line">    g[i][j] = <span class="string">&#x27;R&#x27;</span>, cnt += <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span>(int k = <span class="number">0</span>; k &lt; <span class="number">4</span>; ++k)</span><br><span class="line">    &#123;</span><br><span class="line">        r = i + x[k], c = j + y[k];</span><br><span class="line">        <span class="keyword">if</span>(g[r][c] == <span class="string">&#x27;.&#x27;</span>) <span class="title function_">dfs</span>(r, c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, g[i] + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="string">&#x27;.&#x27;</span>)  is_first = <span class="number">1</span>, cnt -= <span class="number">2</span>, <span class="title function_">dfs</span>(i, j);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cnt);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] != <span class="string">&#x27;#&#x27;</span>) <span class="title function_">printf</span>(<span class="string">&quot;B %d %d\n&quot;</span>, i, j);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!s.<span class="title function_">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            a = s.<span class="title function_">top</span>().<span class="property">first</span>, b = s.<span class="title function_">top</span>().<span class="property">second</span>;</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;D %d %d\nR %d %d\n&quot;</span>, a, b, a, b);</span><br><span class="line">            s.<span class="title function_">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Block Tower</p>
-<p>After too much playing on paper, Iahub has switched to computer games. The game he plays is called “Block Towers”. It is played in a rectangular grid with <em>n</em> rows and <em>m</em> columns (it contains <em>n</em> × <em>m</em> cells). The goal of the game is to build your own city. Some cells in the grid are big holes, where Iahub can’t build any building. The rest of cells are empty. In some empty cell Iahub can build exactly one tower of two following types:</p>
-<p>Iahub is also allowed to destroy a building from any cell. He can do this operation as much as he wants. After destroying a building, the other buildings are not influenced, and the destroyed cell becomes empty (so Iahub can build a tower in this cell if needed, see the second example for such a case).</p>
-<p>Iahub can convince as many population as he wants to come into his city. So he needs to configure his city to allow maximum population possible. Therefore he should find a sequence of operations that builds the city in an optimal way, so that total population limit is as large as possible.</p>
-<p>He says he’s the best at this game, but he doesn’t have the optimal solution. Write a program that calculates the optimal one, to show him that he’s not as good as he thinks.<br>Input</p>
-<p>The first line of the input contains two integers <em>n</em> and <em>m</em> (1 ≤ <em>n</em>, <em>m</em> ≤ 500). Each of the next <em>n</em> lines contains <em>m</em> characters, describing the grid. The <em>j</em>-th character in the <em>i</em>-th line is ‘.’ if you’re allowed to build at the cell with coordinates (<em>i</em>, <em>j</em>) a tower (empty cell) or ‘&#x2F;#’ if there is a big hole there.</p>
-<p>Output</p>
-<p>Print an integer <em>k</em> in the first line (0 ≤ <em>k</em> ≤ 106) — the number of operations Iahub should perform to obtain optimal result.</p>
-<p>Each of the following <em>k</em> lines must contain a single operation in the following format:</p>
-<p>If there are multiple solutions you can output any of them. Note, that you shouldn’t minimize the number of operations.<br>Sample test(s)</p>
-<p>input 2 3 ..&#x2F;# .&#x2F;#.</p>
-<p>output 4 B 1 1 R 1 2 R 2 1 B 2 3<br>input 1 3 …</p>
-<p>output 5 B 1 1 B 1 2 R 1 3 D 1 2 R 1 2</p>
 
       
     </div>

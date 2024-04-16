@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/ZOJ%202913%20Bus%20Pass%20(%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%80%E8%BF%9CBFS%20HDU2377)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/ZOJ%202913%20Bus%20Pass%20(%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%80%E8%BF%9CBFS%20HDU2377)/" class="post-title-link" itemprop="url">ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-10-18 22:12:05" itemprop="dateCreated datePublished" datetime="2014-10-18T22:12:05+00:00">2014-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心</p>
+<p>最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef set&lt;int&gt;::iterator it;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10000</span>;</span><br><span class="line">int dis[N], tdis[N], link[N][<span class="number">12</span>];</span><br><span class="line">queue&lt;int&gt; q;</span><br><span class="line">set&lt;int&gt; zone;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params">int o</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(tdis, <span class="number">0</span>, <span class="title function_">sizeof</span>(tdis));</span><br><span class="line">    tdis[o] = <span class="number">1</span>;</span><br><span class="line">    q.<span class="title function_">push</span>(o);</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="title function_">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        int cur = q.<span class="title function_">front</span>();</span><br><span class="line">        q.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="keyword">if</span>(tdis[cur] &gt; dis[cur]) dis[cur] = tdis[cur];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= link[cur][<span class="number">0</span>]; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            int j = link[cur][i];</span><br><span class="line">            <span class="keyword">if</span>(tdis[j] == <span class="number">0</span>)  q.<span class="title function_">push</span>(j), tdis[j] = tdis[cur] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, nz, nr, id, mz, mr, ans, t;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        zone.<span class="title function_">clear</span>();</span><br><span class="line">        <span class="title function_">memset</span>(dis, <span class="number">0</span>, <span class="title function_">sizeof</span>(dis));</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;nz, &amp;nr);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nz; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;id, &amp;mz);</span><br><span class="line">            link[id][<span class="number">0</span>] = mz;</span><br><span class="line">            zone.<span class="title function_">insert</span>(id);</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= mz; ++i)</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;link[id][i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nr; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;mr);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= mr; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">                <span class="title function_">bfs</span>(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        it i = zone.<span class="title function_">begin</span>();</span><br><span class="line">        ans = *i;</span><br><span class="line">        <span class="keyword">for</span>(++i; i != zone.<span class="title function_">end</span>(); ++i)</span><br><span class="line">            <span class="keyword">if</span>(dis[*i] &lt; dis[ans]) ans = *i;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, dis[ans], ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  Bus Pass    Time Limit:5 Seconds Memory Limit:32768 KB</p>
+<p>You travel a lot by bus and the costs of all the seperate tickets are starting to add up.</p>
+<p>Therefore you want to see if it might be advantageous for you to buy a bus pass.</p>
+<p>The way the bus system works in your country (and also in the Netherlands) is as follows:</p>
+<p>when you buy a bus pass, you have to indicate a center zone and a star value. You are allowed to travel freely in any zone which has a distance to your center zone which is less than your star value. For example, if you have a star value of one, you can only travel in your center zone. If you have a star value of two, you can also travel in all adjacent zones, et cetera.</p>
+<p>You have a list of all bus trips you frequently make, and would like to determine the minimum star value you need to make all these trips using your buss pass. But this is not always an easy task. For example look at the following figure:</p>
+<p><img src="/../images/cn-onlinejudge-showImage.do-name=0000/2913/Bus_Pass_1.jpg.png"><br>Here you want to be able to travel from A to B and from B to D. The best center zone is 7400, for which you only need a star value of 4. Note that you do not even visit this zone on your trips!</p>
+<p><strong>Input</strong></p>
+<p>On the first line an integer<em>t</em>(1 &lt;&#x3D;<em>t</em>&lt;&#x3D; 100): the number of test cases. Then for each test case:</p>
+<p>One line with two integers<em>nz</em>(2 &lt;&#x3D;<em>nz</em>&lt;&#x3D; 9 999) and<em>nr</em>(1 &lt;&#x3D;<em>nr</em>&lt;&#x3D; 10): the number of zones and the number of bus trips, respectively.</p>
+<p><em>nz</em> lines starting with two integers <em>idi</em> (1 &lt;&#x3D; idi &lt;&#x3D; 9 999) and <em>mzi</em> (1 &lt;&#x3D; <em>mzi</em> &lt;&#x3D; 10), a number identifying the i-th zone and the number of zones adjacent to it, followed by mzi integers: the numbers of the adjacent zones.</p>
+<p><em>nr</em> lines starting with one integer <em>mri</em> (1 &lt;&#x3D; <em>mri</em> &lt;&#x3D; 20), indicating the number of zones the ith bus trip visits, followed by <em>mri</em> integers: the numbers of the zones through which the bus passes in the order in which they are visited.</p>
+<p>All zones are connected, either directly or via other zones.</p>
+<p><strong>Output</strong></p>
+<p>For each test case:</p>
+<p>One line with two integers, the minimum star value and the id of a center zone which achieves this minimum star value. If there are multiple possibilities, choose the zone with the lowest number.</p>
+<p><strong>Sample Input</strong></p>
+<p>1<br>17 2<br>7400 6 7401 7402 7403 7404 7405 7406<br>7401 6 7412 7402 7400 7406 7410 7411<br>7402 5 7412 7403 7400 7401 7411<br>7403 6 7413 7414 7404 7400 7402 7412<br>7404 5 7403 7414 7415 7405 7400<br>7405 6 7404 7415 7407 7408 7406 7400<br>7406 7 7400 7405 7407 7408 7409 7410 7401<br>7407 4 7408 7406 7405 7415<br>7408 4 7409 7406 7405 7407<br>7409 3 7410 7406 7408<br>7410 4 7411 7401 7406 7409<br>7411 5 7416 7412 7402 7401 7410<br>7412 6 7416 7411 7401 7402 7403 7413<br>7413 3 7412 7403 7414<br>7414 3 7413 7403 7404<br>7415 3 7404 7405 7407<br>7416 2 7411 7412<br>5 7409 7408 7407 7405 7415<br>6 7415 7404 7414 7413 7412 7416</p>
+<p><strong>Sample Output</strong></p>
+<p>4 7400</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1018,100 +1122,6 @@
 <p>Write <code>YES&#39; if the mobile is in equilibrium, write </code>NO’ otherwise.</p>
 <h2 id="-7"><a href="#-7" class="headerlink" title=""></a></h2><p>1 0 2 0 4 0 3 0 1 1 1 1 1 2 4 4 2 1 6 3 2</p>
 <h2 id="-8"><a href="#-8" class="headerlink" title=""></a></h2><p>YES</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20699%20The%20Falling%20Leaves(%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/UVa%20699%20The%20Falling%20Leaves(%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91)/" class="post-title-link" itemprop="url">UVa 699 The Falling Leaves(递归建树)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-24 00:48:14" itemprop="dateCreated datePublished" datetime="2014-09-24T00:48:14+00:00">2014-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 假设一棵二叉树也会落叶 而且叶子只会垂直下落 每个节点保存的值为那个节点上的叶子数 求所有叶子全部下落后 地面从左到右每堆有多少片叶子</p>
-<p>和上一题有点像 都是递归输入的 一个节点(设水平位置为p) 则它的左右儿子节点的水平位置分别为 p-1 p+1 也是可以边输入边处理的 输入完也就得到答案了 注意每个样例后面都有一个空行 包括最后一个</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int le, ri;</span><br><span class="line"><span class="keyword">const</span> int M = <span class="number">205</span>;</span><br><span class="line">int a[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">if</span>(t == -<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        a[p] += t;</span><br><span class="line">        <span class="title function_">build</span>(p - <span class="number">1</span>);</span><br><span class="line">        <span class="title function_">build</span>(p + <span class="number">1</span>);</span><br><span class="line">        le = le &lt; p ? le : p;</span><br><span class="line">        ri = ri &gt; p ? ri : p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas = <span class="number">0</span>;</span><br><span class="line">    le = M, ri = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">build</span>(M / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(le &lt;= ri)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case %d:\n&quot;</span>, ++cas);</span><br><span class="line">        <span class="keyword">for</span>(int i = le; i &lt; ri; ++i)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n\n&quot;</span>, a[ri]);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">memset</span>(a, <span class="number">0</span>, <span class="title function_">sizeof</span>(a));</span><br><span class="line">        le = M, ri = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">build</span>(M / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>Each year, fall in the North Central region is accompanied by the brilliant colors of the leaves on the trees, followed quickly by the falling leaves accumulating under the trees. If the same thing happened to binary trees, how large would the piles of leaves become?</p>
-<p>We assume each node in a binary tree “drops” a number of leaves equal to the integer value stored in that node. We also assume that these leaves drop vertically to the ground (thankfully, there’s no wind to blow them around). Finally, we assume that the nodes are positioned horizontally in such a manner that the left and right children of a node are exactly one unit to the left and one unit to the right, respectively, of their parent. Consider the following tree:</p>
-<p><img src="/../images/dge.org-external-6-p699.gif.png"></p>
-<p>The nodes containing 5 and 6 have the same horizontal position (with different vertical positions, of course). The node containing 7 is one unit to the left of those containing 5 and 6, and the node containing 3 is one unit to their right. When the “leaves” drop from these nodes, three piles are created: the leftmost one contains 7 leaves (from the leftmost node), the next contains 11 (from the nodes containing 5 and 6), and the rightmost pile contains 3. (While it is true that only leaf nodes in a tree would logically have leaves, we ignore that in this problem.)</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input contains multiple test cases, each describing a single tree. A tree is specified by giving the value in the root node, followed by the description of the left subtree, and then the description of the right subtree. If a subtree is empty, the value -1 is supplied. Thus the tree shown above is specified as 5 7 -1 6 -1 -1 3 -1 -1 . Each actual tree node contains a positive, non-zero value. The last test case is followed by a single -1 (which would otherwise represent an empty tree).</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each test case, display the case number (they are numbered sequentially, starting with 1) on a line by itself. On the next line display the number of “leaves” in each pile, from left to right, with a single space separating each value. This display must start in column 1, and will not exceed the width of an 80-character line. Follow the output for each case by a blank line. This format is illustrated in the examples below.</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>5 7 -1 6 -1 -1 3 -1 -1 8 2 9 -1 -1 6 5 -1 -1 12 -1 -1 3 7 -1 -1 -1 -1</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>Case 1: 7 11 3 Case 2: 9 7 21 15</p>
 
       
     </div>

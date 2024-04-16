@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%202870%20Largest%20Submatrix(DP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%202870%20Largest%20Submatrix(DP)/" class="post-title-link" itemprop="url">HDU 2870 Largest Submatrix(DP)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:51:22" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:22+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求最大相同字符子矩阵 其中一些字符可以转换</p>
+<p>其实就是HDU1505 1506的加强版 但是分了a,b,c三种情况 看哪次得到的面积最大</p>
+<p>对于某一个情况 可以把该字符和可以转换为该字符的位置赋值0 其它位置赋值１　这样就转化成了求最大全0矩阵的问题了</p>
+<p>对于转换后矩阵中的每个点　看他向上有多少个连续0　把这个值存在ｈ数组中　再用l数组和ｒ数组记录ｈ连续大于等于该位置的最左边位置和最右位置　这样包含(i,j)点的最大矩阵面积就是(r[i][j]-l[i][j]+1)&#x2F;*h[i][j]　面积最大的点就是最大全0矩阵了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">char s[N][N];</span><br><span class="line">int mat[N][N], l[N][N], r[N][N], h[N][N], n, m, ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> makeMat (char a, char b, char c)</span><br><span class="line">&#123;</span><br><span class="line">    memset (mat, <span class="number">0</span>, sizeof (mat));</span><br><span class="line">    memset (l, <span class="number">0</span>, sizeof (l));</span><br><span class="line">    memset (r, <span class="number">0</span>, sizeof (r));</span><br><span class="line">    memset (h, <span class="number">0</span>, sizeof (h));</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        h[i][<span class="number">0</span>] = h[i][m + <span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            l[i][j] = r[i][j] = j;</span><br><span class="line">            <span class="keyword">if</span> (s[i][j] == a || s[i][j] == b || s[i][j] == c)  mat[i][j] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (mat[i][j] == <span class="number">0</span>) h[i][j] = h[i - <span class="number">1</span>][j] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int solve (char a, char b, char c)</span><br><span class="line">&#123;</span><br><span class="line">    makeMat (a, b, c);</span><br><span class="line">    int aans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int j = m; j &gt;= <span class="number">1</span>; --j)</span><br><span class="line">            <span class="keyword">while</span> (h[i][r[i][j] + <span class="number">1</span>] &gt;= h[i][j])</span><br><span class="line">                r[i][j] = r[i][r[i][j] + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (h[i][l[i][j] - <span class="number">1</span>] &gt;= h[i][j])</span><br><span class="line">                l[i][j] = l[i][l[i][j] - <span class="number">1</span>];</span><br><span class="line">            aans = max (aans, (r[i][j] - l[i][j] + <span class="number">1</span>) * h[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> aans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%s&quot;</span>, s[i] + <span class="number">1</span>);</span><br><span class="line">        ans = max (solve (<span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>), solve (<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;c&#x27;</span>));</span><br><span class="line">        ans = max (ans, solve (<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;w&#x27;</span>));</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Largest-Submatrix"><a href="#Largest-Submatrix" class="headerlink" title="Largest Submatrix"></a>Largest Submatrix</h1><p>Problem Description</p>
+<p>Now here is a matrix with letter ‘a’,’b’,’c’,’w’,’x’,’y’,’z’ and you can change ‘w’ to ‘a’ or ‘b’, change ‘x’ to ‘b’ or ‘c’, change ‘y’ to ‘a’ or ‘c’, and change ‘z’ to ‘a’, ‘b’ or ‘c’. After you changed it, what’s the largest submatrix with the same letters you can make?<br>Input</p>
+<p>The input contains multiple test cases. Each test case begins with m and n (1 ≤ m, n ≤ 1000) on line. Then come the elements of a matrix in row-major order on m lines each with n letters. The input ends once EOF is met.<br>Output</p>
+<p>For each test case, output one line containing the number of elements of the largest submatrix of all same letters.<br>Sample Input</p>
+<p>2 4 abcw wxyz<br>Sample Output</p>
+<p>3</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1001,101 +1094,6 @@
 <p>所以有转移方程d[i][j]&#x3D;d[i-1][j-2]&#x2F;*i-2+d[i-1][j-1]&#x2F;*2(j&gt;&#x3D;2)</p>
 <p>j&lt;2时只有d[1][0]&#x3D;1（学生数大于1就有相邻的就能讲话了） 和d[2][1]&#x3D;2(学生数大于2肯定不止一对能讲话了)两个有值 可以作为初始条件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">81</span>, M = <span class="number">10001</span>;</span><br><span class="line">int d[N][M], n, m;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    d[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>, d[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; N; ++i)</span><br><span class="line">        <span class="keyword">for</span> (int j = <span class="number">2</span>; j &lt; M; ++j)</span><br><span class="line">            d[i][j] = (d[i - <span class="number">1</span>][j - <span class="number">2</span>] * (i - <span class="number">2</span>) + <span class="number">2</span> * d[i - <span class="number">1</span>][j - <span class="number">1</span>]) % <span class="number">9937</span>;</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m), n)</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n][m]);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/math/POJ%203993%20Not%20So%20Flat%20After%20All(%E8%B4%A8%E5%9B%A0%E6%95%B0)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/math/POJ%203993%20Not%20So%20Flat%20After%20All(%E8%B4%A8%E5%9B%A0%E6%95%B0)/" class="post-title-link" itemprop="url">POJ 3993 Not So Flat After All(质因数)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:51:01" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:01+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Not So Flat After All</p>
-<p>Description<br>Any positive integer v can be written as p1a1&#x2F;<em>p2a2&#x2F;</em>…&#x2F;*pnan where pi is a prime number and ai ≥ 0. For example: 24 &#x3D; 23&#x2F;*31.<br>Pick any two prime numbers p1 and p2 where p1 &#x3D; p2. Imagine a two dimensional plane where the powers of p1 are plotted on the x-axis and the powers of p2 on the y-axis. Now any number that can be written as p1a1&#x2F;*p2a2 can be plotted on this plane at location (x, y) &#x3D; (a1, a2). The figure on the right shows few examples where p1 &#x3D; 3 and p2 &#x3D; 2.<br>  <img src="/../images/es-3993_1-.png">  This idea can be extended for any N-Dimensional space where each of the N axes is assigned a unique prime number. Each N-Dimensional space has a unique set of primes.<br>We call such set the Space Identification Set or S for short. |S| (the ordinal of S) is N.<br>Any number that can be expressed as a multiplication of pi ∈ S (each raised to a power (ai ≥ 0) can be plotted in this |S|-Dimensional space. The figure at the bottom illustrates this idea for N &#x3D; 3 and S &#x3D; {2, 3, 7}. Needless to say, any number that can be plotted on space A can also be plotted on space B as long as SA <img src="/../images/ula-tex=%5Csubset.png" alt="\subset"> SB.<br>We define the distance between any two points in a given N-Dimensional space to be the sum of units traveled to get from one point to the other while following the grid lines (i.e. movement is always parallel to one of the axes.) For example, in the figure below, the distance between 168 and 882 is 4.<br>Given two positive integers, write a program that determines the minimum ordinal of a space where both numbers can be plotted in. The program also determines the distance between these two integers in that space.<br>  <img src="/../images/es-3993_2-.png"></p>
-<p>Input</p>
-<p>Your program will be tested on one or more test cases. Each test case is specified on a line with two positive integers (0 &lt; A,B &lt; 1, 000, 000) where A &#x2F;* B &gt; 1.<br>The last line is made of two zeros.</p>
-<p>Output</p>
-<p>For each test case, print the following line:<br>k. X:D<br>Where k is the test case number (starting at one,) X is the minimum ordinal needed in a space that both A and B can be plotted in. D is the distance between these two points.</p>
-<p>Sample Input</p>
-<p>168 882 770 792 0 0</p>
-<p>Sample Output</p>
-<ol>
-<li>3:4 2. 5:6</li>
-</ol>
-<p>题意 给你两个数a,b 求a,b所有的质因数个数 和每个质因数个数的差的绝对值的和 被描述得好复杂 理解了就是个水题；</p>
-<p>素数问题就先打个素数表吧 然后能被整除的就是质因数了 然后统计a，b分别能被这个数整除多少次</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000001</span>;</span><br><span class="line">int p[N], ans[N], vis[N], a, b;</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">initPrime</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int num = <span class="number">0</span>, m = sqrt (N + <span class="number">0.5</span>);</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">2</span>; i &lt;= m; ++i)</span><br><span class="line">        <span class="keyword">if</span> (vis[i] == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">for</span> (int j = i * i; j &lt;= N; j += i) vis[j] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">2</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="keyword">if</span> (vis[i] == <span class="number">0</span>) p[++num] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">initPrime</span>();</span><br><span class="line">    int cas=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b),a)</span><br><span class="line">    &#123;</span><br><span class="line">        int cnt = <span class="number">0</span>, ans = <span class="number">0</span>, ca, cb;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; a &gt; <span class="number">1</span> || b &gt; <span class="number">1</span>; ++i)</span><br><span class="line">            <span class="keyword">if</span> (a % p[i] == <span class="number">0</span> || b % p[i] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++cnt, ca = cb = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (a % p[i] == <span class="number">0</span>) a /= p[i], ++ca;</span><br><span class="line">                <span class="keyword">while</span> (b % p[i] == <span class="number">0</span>) b /= p[i], ++cb;</span><br><span class="line">                ans += (ca &gt; cb ? ca - cb : cb - ca);</span><br><span class="line">            &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d. %d:%d\n&quot;</span>, ++cas,cnt, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

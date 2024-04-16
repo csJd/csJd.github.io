@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20699%20The%20Falling%20Leaves(%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/UVa%20699%20The%20Falling%20Leaves(%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91)/" class="post-title-link" itemprop="url">UVa 699 The Falling Leaves(递归建树)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-24 00:48:14" itemprop="dateCreated datePublished" datetime="2014-09-24T00:48:14+00:00">2014-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 假设一棵二叉树也会落叶 而且叶子只会垂直下落 每个节点保存的值为那个节点上的叶子数 求所有叶子全部下落后 地面从左到右每堆有多少片叶子</p>
+<p>和上一题有点像 都是递归输入的 一个节点(设水平位置为p) 则它的左右儿子节点的水平位置分别为 p-1 p+1 也是可以边输入边处理的 输入完也就得到答案了 注意每个样例后面都有一个空行 包括最后一个</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int le, ri;</span><br><span class="line"><span class="keyword">const</span> int M = <span class="number">205</span>;</span><br><span class="line">int a[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">if</span>(t == -<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        a[p] += t;</span><br><span class="line">        <span class="title function_">build</span>(p - <span class="number">1</span>);</span><br><span class="line">        <span class="title function_">build</span>(p + <span class="number">1</span>);</span><br><span class="line">        le = le &lt; p ? le : p;</span><br><span class="line">        ri = ri &gt; p ? ri : p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas = <span class="number">0</span>;</span><br><span class="line">    le = M, ri = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">build</span>(M / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(le &lt;= ri)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case %d:\n&quot;</span>, ++cas);</span><br><span class="line">        <span class="keyword">for</span>(int i = le; i &lt; ri; ++i)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n\n&quot;</span>, a[ri]);</span><br><span class="line"></span><br><span class="line">        <span class="title function_">memset</span>(a, <span class="number">0</span>, <span class="title function_">sizeof</span>(a));</span><br><span class="line">        le = M, ri = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">build</span>(M / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p>Each year, fall in the North Central region is accompanied by the brilliant colors of the leaves on the trees, followed quickly by the falling leaves accumulating under the trees. If the same thing happened to binary trees, how large would the piles of leaves become?</p>
+<p>We assume each node in a binary tree “drops” a number of leaves equal to the integer value stored in that node. We also assume that these leaves drop vertically to the ground (thankfully, there’s no wind to blow them around). Finally, we assume that the nodes are positioned horizontally in such a manner that the left and right children of a node are exactly one unit to the left and one unit to the right, respectively, of their parent. Consider the following tree:</p>
+<p><img src="/../images/dge.org-external-6-p699.gif.png"></p>
+<p>The nodes containing 5 and 6 have the same horizontal position (with different vertical positions, of course). The node containing 7 is one unit to the left of those containing 5 and 6, and the node containing 3 is one unit to their right. When the “leaves” drop from these nodes, three piles are created: the leftmost one contains 7 leaves (from the leftmost node), the next contains 11 (from the nodes containing 5 and 6), and the rightmost pile contains 3. (While it is true that only leaf nodes in a tree would logically have leaves, we ignore that in this problem.)</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input contains multiple test cases, each describing a single tree. A tree is specified by giving the value in the root node, followed by the description of the left subtree, and then the description of the right subtree. If a subtree is empty, the value -1 is supplied. Thus the tree shown above is specified as 5 7 -1 6 -1 -1 3 -1 -1 . Each actual tree node contains a positive, non-zero value. The last test case is followed by a single -1 (which would otherwise represent an empty tree).</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each test case, display the case number (they are numbered sequentially, starting with 1) on a line by itself. On the next line display the number of “leaves” in each pile, from left to right, with a single space separating each value. This display must start in column 1, and will not exceed the width of an 80-character line. Follow the output for each case by a blank line. This format is illustrated in the examples below.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>5 7 -1 6 -1 -1 3 -1 -1 8 2 9 -1 -1 6 5 -1 -1 12 -1 -1 3 7 -1 -1 -1 -1</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>Case 1: 7 11 3 Case 2: 9 7 21 15</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1029,98 +1123,6 @@
 <p>当乌龟有可能赢的时候输出一行 “What a pity rabbit!”。否则输出一行”Good job,rabbit!”;<br>题目数据保证不会出现乌龟和兔子同时到达的情况。<br>Sample Input</p>
 <p>100 3 20 5 5 8 2 10 40 60 100 3 60 5 5 8 2 10 40 60<br>Sample Output</p>
 <p>Good job,rabbit! What a pity rabbit!</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%203008%20Warcraft%20(DP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/HDU%203008%20Warcraft%20(DP)/" class="post-title-link" itemprop="url">HDU 3008 Warcraft (DP)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:52:04" itemprop="dateCreated datePublished" datetime="2014-09-02T09:52:04+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 你去打boss 开始你的蓝和血还有boss的血都是100 每秒你先打boss一下 然后boss打你一下你减少q点血 你有n个技能 第i个技能耗蓝a[i] 对boss的伤害为b[i] 普攻伤害为1 而且你每秒回复t点蓝（恢复后不超过100） 求你最少可以多少次打死boss</p>
-<p>你最多能打100&#x2F;q或者100&#x2F;q+1次 令d[i][j]表示第i秒所剩蓝量为j时boss剩下的最少血量 m为j还未恢复蓝之前的蓝量 j &#x3D; min (100, m + t) 那么有 d[i][j] &#x3D; min (d[i][j], d[i - 1][m + a[k]] - b[k]);</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>;</span><br><span class="line">int a[N], b[N], d[N][N];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, t, q, ans, ti;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;t, &amp;q), n)</span><br><span class="line">    &#123;</span><br><span class="line">        ++n;</span><br><span class="line">        ti = (<span class="number">100</span> % q) ? (<span class="number">100</span> / q + <span class="number">1</span>) : (<span class="number">100</span> / q);</span><br><span class="line">        a[<span class="number">1</span>] = <span class="number">0</span>, b[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;a[i], &amp;b[i]);</span><br><span class="line">            </span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d));</span><br><span class="line">        d[<span class="number">0</span>][<span class="number">100</span>] = <span class="number">100</span>; ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= ti; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int m = <span class="number">0</span>; m &lt;= <span class="number">100</span>; ++m)</span><br><span class="line">            &#123;</span><br><span class="line">                int j = min (<span class="number">100</span>, m + t);</span><br><span class="line">                <span class="keyword">for</span> (int k = <span class="number">1</span>; k &lt;= n; ++k)</span><br><span class="line">                    <span class="keyword">if</span> (m + a[k] &lt;= <span class="number">100</span>)</span><br><span class="line">                        d[i][j] = min (d[i][j], d[i - <span class="number">1</span>][m + a[k]] - b[k]);</span><br><span class="line">                <span class="keyword">if</span> (d[i][j] &lt;= <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans = i, i = ti;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ans == <span class="number">0</span>) printf (<span class="string">&quot;My god\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> printf (<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Warcraft"><a href="#Warcraft" class="headerlink" title="Warcraft"></a>Warcraft</h1><p>Problem Description</p>
-<p>Have you ever played the Warcraft?It doesn’t matter whether you have played it !We will give you such an experience.There are so many Heroes in it,but you could only choose one of them.Each Hero has his own skills.When such a Skill is used ,it costs some MagicValue,but hurts the Boss at the same time.Using the skills needs intellegence,one should hurt the enemy to the most when using certain MagicValue.<br>Now we send you to complete such a duty to kill the Boss(So cool~~).To simplify the problem:you can assume the LifeValue of the monster is 100, your LifeValue is 100,but you have also a 100 MagicValue!You can choose to use the ordinary Attack(which doesn’t cost MagicValue),or a certain skill(in condition that you own this skill and the MagicValue you have at that time is no less than the skill costs),there is no free lunch so that you should pay certain MagicValue after you use one skill!But we are good enough to offer you a “ResumingCirclet”(with which you can resume the MagicValue each seconds),But you can’t own more than 100 MagicValue and resuming MagicValue is always after you attack.The Boss is cruel , be careful!<br>Input</p>
-<p>There are several test cases,intergers n ,t and q (0&lt;n&lt;&#x3D;100，1&lt;&#x3D;t&lt;&#x3D;5，q&gt;0) in the first line which mean you own n kinds of skills ,and the “ResumingCirclet” helps you resume t points of MagicValue per second and q is of course the hurt points of LifeValue the Boss attack you each time(we assume when fighting in a second the attack you show is before the Boss).Then n lines follow,each has 2 intergers ai and bi(0&lt;ai,bi&lt;&#x3D;100).which means using i skill costs you ai MagicValue and costs the Boss bi LifeValue.The last case is n&#x3D;t&#x3D;q&#x3D;0.<br>Output</p>
-<p>Output an interger min (the minimun time you need to kill the Boss)in one line .But if you die(the LifeValue is no more than 0) ,output “My god”!<br>Sample Input</p>
-<p>4 2 25 10 5 20 10 30 28 76 70 4 2 25 10 5 20 10 30 28 77 70 0 0 0<br>Sample Output</p>
-<p>4 My god</p>
-<p><em>Hint</em> Hint: When fighting,you can only choose one kind of skill or just to use the ordinary attack in the whole second,the ordinary attack costs the Boss 1 points of LifeValue,the Boss can only use ordinary attack which costs a whole second at a time.Good Luck To You!</p>
 
       
     </div>

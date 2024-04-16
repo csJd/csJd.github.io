@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,102 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/HDU%201505%20City%20Game%EF%BC%88DP%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%201505%20City%20Game%EF%BC%88DP%EF%BC%89/" class="post-title-link" itemprop="url">HDU 1505 City Game（DP）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:50:40" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:40+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1506的升级版 只是多了一维 h要自己算 详情看上一篇</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">int mat[N][N], le[N][N], ri[N][N], h[N][N], cas, n, m;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">5</span>];</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        memset (mat, <span class="number">0</span>, sizeof (mat));</span><br><span class="line">        memset (h, <span class="number">0</span>, sizeof (h));</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            h[i][<span class="number">0</span>] = h[i][m + <span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                scanf (<span class="string">&quot;%s&quot;</span>, s), mat[i][j] = s[<span class="number">0</span>];</span><br><span class="line">                le[i][j] = ri[i][j] = j;</span><br><span class="line">                <span class="keyword">if</span> (mat[i][j] == <span class="string">&#x27;F&#x27;</span>) h[i][j] = h[i - <span class="number">1</span>][j] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (int j = m; j &gt;= <span class="number">1</span>; --j)</span><br><span class="line">                <span class="keyword">while</span> (h[i][ri[i][j] + <span class="number">1</span>] &gt;= h[i][j])</span><br><span class="line">                    ri[i][j] = ri[i][ri[i][j] + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> (h[i][le[i][j] - <span class="number">1</span>] &gt;= h[i][j])</span><br><span class="line">                    le[i][j] = le[i][le[i][j] - <span class="number">1</span>];</span><br><span class="line">                ans = max (ans, (ri[i][j] - le[i][j] + <span class="number">1</span>) * h[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, ans * <span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="City-Game"><a href="#City-Game" class="headerlink" title="City Game"></a>City Game</h1><p>Problem Description</p>
+<p>Bob is a strategy game programming specialist. In his new city building game the gaming environment is as follows: a city is built up by areas, in which there are streets, trees,factories and buildings. There is still some space in the area that is unoccupied. The strategic task of his game is to win as much rent money from these free spaces. To win rent money you must erect buildings, that can only be rectangular, as long and wide as you can. Bob is trying to find a way to build the biggest possible building in each area. But he comes across some problems – he is not allowed to destroy already existing buildings, trees, factories and streets in the area he is building in.<br>Each area has its width and length. The area is divided into a grid of equal square units.The rent paid for each unit on which you’re building stands is 3$.<br>Your task is to help Bob solve this problem. The whole city is divided into K areas. Each one of the areas is rectangular and has a different grid size with its own length M and width N.The existing occupied units are marked with the symbol R. The unoccupied units are marked with the symbol F.<br>Input</p>
+<p>The first line of the input contains an integer K – determining the number of datasets. Next lines contain the area descriptions. One description is defined in the following way: The first line contains two integers-area length M&lt;&#x3D;1000 and width N&lt;&#x3D;1000, separated by a blank space. The next M lines contain N symbols that mark the reserved or free grid units,separated by a blank space. The symbols used are:<br>R – reserved unit<br>F – free unit<br>In the end of each area description there is a separating line.<br>Output</p>
+<p>For each data set in the input print on a separate line, on the standard output, the integer that represents the profit obtained by erecting the largest building in the area encoded by the data set.<br>Sample Input</p>
+<p>2 5 6 R F F F F F F F F F F F R R R F F F F F F F F F F F F F F F 5 5 R R R R R R R R R R R R R R R R R R R R R R R R R<br>Sample Output</p>
+<p>45 0</p>
+<h1 id="City-Game-1"><a href="#City-Game-1" class="headerlink" title="City Game"></a>City Game</h1><p>Problem Description</p>
+<p>Bob is a strategy game programming specialist. In his new city building game the gaming environment is as follows: a city is built up by areas, in which there are streets, trees,factories and buildings. There is still some space in the area that is unoccupied. The strategic task of his game is to win as much rent money from these free spaces. To win rent money you must erect buildings, that can only be rectangular, as long and wide as you can. Bob is trying to find a way to build the biggest possible building in each area. But he comes across some problems – he is not allowed to destroy already existing buildings, trees, factories and streets in the area he is building in.<br>Each area has its width and length. The area is divided into a grid of equal square units.The rent paid for each unit on which you’re building stands is 3$.<br>Your task is to help Bob solve this problem. The whole city is divided into K areas. Each one of the areas is rectangular and has a different grid size with its own length M and width N.The existing occupied units are marked with the symbol R. The unoccupied units are marked with the symbol F.<br>Input</p>
+<p>The first line of the input contains an integer K – determining the number of datasets. Next lines contain the area descriptions. One description is defined in the following way: The first line contains two integers-area length M&lt;&#x3D;1000 and width N&lt;&#x3D;1000, separated by a blank space. The next M lines contain N symbols that mark the reserved or free grid units,separated by a blank space. The symbols used are:<br>R – reserved unit<br>F – free unit<br>In the end of each area description there is a separating line.<br>Output</p>
+<p>For each data set in the input print on a separate line, on the standard output, the integer that represents the profit obtained by erecting the largest building in the area encoded by the data set.<br>Sample Input</p>
+<p>2 5 6 R F F F F F F F F F F F R R R F F F F F F F F F F F F F F F 5 5 R R R R R R R R R R R R R R R R R R R R R R R R R<br>Sample Output</p>
+<p>45 0</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1049,111 +1145,6 @@
 <p>那么当t&gt;&#x3D;0时 有转移方程 d[i]&#x3D;min(d[i],d[j]+t&#x2F;*t) ;</p>
 <p>有了方程程序就好写了:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>;</span><br><span class="line">int s[N], d[N], a[N], t, cas, m, n;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">            s[i] = s[i - <span class="number">1</span>] + a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d)); d[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">            &#123;</span><br><span class="line">                t = m - (s[i] - s[j] + i - j - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= <span class="number">0</span>)  d[i] = min (d[i], d[j] + t * t);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/string/UVa%20213%20Message%20Decoding(World%20Finals1991%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/string/UVa%20213%20Message%20Decoding(World%20Finals1991%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2)/" class="post-title-link" itemprop="url">UVa 213 Message Decoding(World Finals1991，字符串)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:50:17" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:17+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>Some message encoding schemes require that an encoded message be sent in two parts. The first part, called the header, contains the characters of the message. The second part contains a pattern that represents the message. You must write a program that can decode messages under such a scheme.</p>
-<p>The heart of the encoding scheme for your program is a sequence of &#96;&#96;key” strings of 0’s and 1’s as follows:</p>
-<p><img src="/../images/dge.org-external-2-213img1.gif.png" alt="displaymath26"></p>
-<p>The first key in the sequence is of length 1, the next 3 are of length 2, the next 7 of length 3, the next 15 of length 4, etc. If two adjacent keys have the same length, the second can be obtained from the first by adding 1 (base 2). Notice that there are no keys in the sequence that consist only of 1’s.</p>
-<p>The keys are mapped to the characters in the header in order. That is, the first key (0) is mapped to the first character in the header, the second key (00) to the second character in the header, the <em>k</em>th key is mapped to the <em>k</em>th character in the header. For example, suppose the header is:</p>
-<p>AB&#x2F;#TANCnrtXc</p>
-<p>Then 0 is mapped to A, 00 to B, 01 to &#x2F;#, 10 to T, 000 to A, …, 110 to X, and 0000 to c.</p>
-<p>The encoded message contains only 0’s and 1’s and possibly carriage returns, which are to be ignored. The message is divided into segments. The first 3 digits of a segment give the binary representation of the length of the keys in the segment. For example, if the first 3 digits are 010, then the remainder of the segment consists of keys of length 2 (00, 01, or 10). The end of the segment is a string of 1’s which is the same length as the length of the keys in the segment. So a segment of keys of length 2 is terminated by 11. The entire encoded message is terminated by 000 (which would signify a segment in which the keys have length 0). The message is decoded by translating the keys in the segments one-at-a-time into the header characters to which they have been mapped.</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The input file contains several data sets. Each data set consists of a header, which is on a single line by itself, and a message, which may extend over several lines. The length of the header is limited only by the fact that key strings have a maximum length of 7 (111 in binary). If there are multiple copies of a character in a header, then several keys will map to that character. The encoded message contains only 0’s and 1’s, and it is a legitimate encoding according to the described scheme. That is, the message segments begin with the 3-digit length sequence and end with the appropriate sequence of 1’s. The keys in any given segment are all of the same length, and they all correspond to characters in the header. The message is terminated by 000.</p>
-<p>Carriage returns may appear anywhere within the message part. They are <em>not</em> to be considered as part of the message.</p>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each data set, your program must write its decoded message on a separate line. There should not be blank lines between messages.</p>
-<h2 id="Sample-input"><a href="#Sample-input" class="headerlink" title="Sample input"></a>Sample input</h2><p>TNM AEIOU 0010101100011 1010001001110110011 11000 $&#x2F;#&#x2F;*&#x2F;*\ 0100000101101100011100101000</p>
-<h2 id="Sample-output"><a href="#Sample-output" class="headerlink" title="Sample output"></a>Sample output</h2><p>TAN ME &#x2F;#&#x2F;#&#x2F;*$</p>
-<p>题意 编写一个解码程序 对数字串进行解码</p>
-<p>输入第一行是一个解码key key从左到右每个字符分别对应0,00,01,10,000,001,011,100,101,110,0000,0001,…,1101,1110,00000,…….</p>
-<p>长度为len的字符编码有2^n-1个 而且恰好以二进制方式从0到2^n-2递增 而且字符编码的最大长度为7 可以有2^7-1&#x3D;127个字符</p>
-<p>我们只需开一个key[len][val]数组 里面存的是长度为len的第val+1个字符编码 然后解码时对应输出每个字符就行</p>
-<p>如样例2 解码key为”S&#x2F;#&#x2F;*&#x2F;*&quot;</p>
-<p>key[1][0]对应编码’0’存的字符为’$’ key[2][0]对应编码’00’存的字符为’&#x2F;#’</p>
-<p>key[2][1]对应编码’01’存的字符为’&#x2F;<em>‘ key[2][2]对应编码’10’存的字符为’&#x2F;</em>‘</p>
-<p>key[3][0]对应编码’000’存的字符为’&#39;</p>
-<p>需要解码的文本由多个小节组成 每个小节的前三个数字代表小节中每个编码的长度（用二进制表示，例如010表示2） 然后是该长度的不定个字符编码 以全1结束 如长度为2时 ‘11’就表示结束 长度为000时表示需要编码的文本结束；</p>
-<p>此题是算法竞赛入门经典第二版中的例题 第83页 里面有详细的讲解；</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cctype&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1000</span>;</span><br><span class="line">char s[N], key[<span class="number">8</span>][<span class="number">1</span> &lt;&lt; <span class="number">8</span>], c;</span><br><span class="line">int val, len, l;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">read</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    len = <span class="number">1</span>; l = strlen (s);</span><br><span class="line">    <span class="keyword">for</span> (int i = val = <span class="number">0</span>; i &lt; l; ++i)</span><br><span class="line">        <span class="keyword">if</span> (val &lt; ( (<span class="number">1</span> &lt;&lt; len) - <span class="number">1</span>)) </span><br><span class="line">            key[len][val++] = s[i];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            val = <span class="number">0</span>;</span><br><span class="line">            key[++len][val++] = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> print ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (int i = val = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span> scanf (<span class="string">&quot;%c&quot;</span>, &amp;c); <span class="keyword">while</span> (!isdigit (c));</span><br><span class="line">        val = val * <span class="number">2</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (val &gt;= ( (<span class="number">1</span> &lt;&lt; len) - <span class="number">1</span>))  <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        printf (<span class="string">&quot;%c&quot;</span>, key[len][val]);</span><br><span class="line">        <span class="title function_">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int l1, l2, l3;</span><br><span class="line">    <span class="keyword">while</span> (gets (s) != <span class="variable constant_">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!s[<span class="number">0</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        memset (key, <span class="number">0</span>, sizeof (key));</span><br><span class="line">        <span class="title function_">read</span>();</span><br><span class="line">        <span class="keyword">while</span> (scanf (<span class="string">&quot;%1d%1d%1d&quot;</span>, &amp;l1, &amp;l2, &amp;l3), len = <span class="number">4</span> * l1 + <span class="number">2</span> * l2 + l3)</span><br><span class="line">            print ();</span><br><span class="line">        printf (<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

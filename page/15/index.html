@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/HDU%201874%20%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B%E7%BB%AD%20(%E5%9F%BA%E7%A1%80%E6%9C%80%E7%9F%AD%E8%B7%AF)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/HDU%201874%20%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B%E7%BB%AD%20(%E5%9F%BA%E7%A1%80%E6%9C%80%E7%9F%AD%E8%B7%AF)/" class="post-title-link" itemprop="url">HDU 1874 畅通工程续 (基础最短路)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-10-26 16:55:09" itemprop="dateCreated datePublished" datetime="2014-10-26T16:55:09+00:00">2014-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 中文</p>
+<p>最基础的最短路 注意边可能多次给出 取最小的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">205</span>, M = <span class="number">1005</span>;</span><br><span class="line">int mat[N][N], v[N], d[N], n, m, s, t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dijkstra</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(d, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(d));</span><br><span class="line">    <span class="title function_">memset</span>(v, <span class="number">0</span>, <span class="title function_">sizeof</span>(v));</span><br><span class="line">    <span class="keyword">for</span>(int i = d[s] = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int cur=n;   <span class="comment">//d[n]是INF,cur为当前未标记且到s距离最小的点</span></span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">            <span class="keyword">if</span>(!v[j] &amp;&amp; d[j] &lt; d[cur]) cur = j;</span><br><span class="line"></span><br><span class="line">        v[cur] = <span class="number">1</span>; <span class="keyword">if</span>(cur == t) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(d[j] &gt; d[cur] + mat[cur][j])</span><br><span class="line">                d[j] = d[cur] + mat[cur][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int a, b, x;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(mat, <span class="number">0x3f</span>, <span class="title function_">sizeof</span>(mat));</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;a, &amp;b, &amp;x);</span><br><span class="line">            <span class="keyword">if</span>(mat[a][b]&gt;x)   <span class="comment">//注意路径可能有多条</span></span><br><span class="line">                mat[a][b] = mat[b][a] = x;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;s, &amp;t);</span><br><span class="line">        <span class="title function_">dijkstra</span>();</span><br><span class="line">        <span class="keyword">if</span>(d[t] &gt;= d[n]) <span class="title function_">printf</span>(<span class="string">&quot;-1\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, d[t]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="畅通工程续"><a href="#畅通工程续" class="headerlink" title="畅通工程续"></a>畅通工程续</h1><p>Problem Description</p>
+<p>某省自从实行了很多年的畅通工程计划后，终于修建了很多路。不过路多了也不好，每次要从一个城镇到另一个城镇时，都有许多种道路方案可以选择，而某些方案要比另一些方案行走的距离要短很多。这让行人很困扰。<br>现在，已知起点和终点，请你计算出要从起点到终点，最短需要行走多少距离。<br>Input</p>
+<p>本题目包含多组数据，请处理到文件结束。<br>每组数据第一行包含两个正整数N和M(0&lt;N&lt;200,0&lt;M&lt;1000)，分别代表现有城镇的数目和已修建的道路的数目。城镇分别以0～N-1编号。<br>接下来是M行道路信息。每一行有三个整数A,B,X(0&lt;&#x3D;A,B&lt;N,A!&#x3D;B,0&lt;X&lt;10000),表示城镇A和城镇B之间有一条长度为X的双向道路。<br>再接下一行有两个整数S,T(0&lt;&#x3D;S,T&lt;N)，分别代表起点和终点。<br>Output</p>
+<p>对于每组数据，请在一行里输出最短需要行走的距离。如果不存在从S到T的路线，就输出-1.<br>Sample Input</p>
+<p>3 3 0 1 1 0 2 3 1 2 1 0 2 3 1 0 1 1 1 2<br>Sample Output</p>
+<p>2 -1</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1019,110 +1110,6 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>, M = <span class="number">10050</span>;</span><br><span class="line">double x[N], y[N], ans;</span><br><span class="line">int n, m , par[N];</span><br><span class="line"></span><br><span class="line">struct edge &#123;</span><br><span class="line">    int u, v;</span><br><span class="line">    double w;</span><br><span class="line">&#125; e[M];</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">cmp</span>(<span class="params">edge a, edge b</span>)  &#123; <span class="keyword">return</span> a.<span class="property">w</span> &lt; b.<span class="property">w</span>;&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title class_">Find</span>(int x)</span><br><span class="line">&#123;</span><br><span class="line">    int r = x;</span><br><span class="line">    <span class="keyword">while</span>(par[r] &gt;= <span class="number">0</span>) r = par[r];</span><br><span class="line">    <span class="keyword">while</span>(x != r) <span class="comment">//压缩</span></span><br><span class="line">    &#123;</span><br><span class="line">        int tmp = par[x];</span><br><span class="line">        par[x] = r;</span><br><span class="line">        x = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title class_">Union</span>(int u, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int ru = <span class="title class_">Find</span>(u), rv = <span class="title class_">Find</span>(v), tmp = par[ru] + par[rv];</span><br><span class="line">    <span class="keyword">if</span>(par[ru] &gt; par[rv])</span><br><span class="line">        par[ru] = rv, par[rv] = tmp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        par[rv] = ru, par[ru] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">kruskal</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cur = <span class="number">0</span>, u, v;</span><br><span class="line">    <span class="title function_">memset</span>(par, -<span class="number">1</span>, <span class="title function_">sizeof</span>(par)); <span class="comment">//初始化并查集</span></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        u = e[i].<span class="property">u</span>, v = e[i].<span class="property">v</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Find</span>(u) != <span class="title class_">Find</span>(v))</span><br><span class="line">        &#123;</span><br><span class="line">            ans += e[i].<span class="property">w</span>;</span><br><span class="line">            ++cur;</span><br><span class="line">            <span class="title class_">Union</span>(u, v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cur &gt;= n - <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cas) <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        m = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%lf%lf&quot;</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                double dis = <span class="title function_">sqrt</span>((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]));</span><br><span class="line">                e[++m].<span class="property">u</span> = i, e[m].<span class="property">v</span> = j, e[m].<span class="property">w</span> = dis;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">sort</span>(e + <span class="number">1</span>, e + <span class="number">1</span> + m, cmp);</span><br><span class="line">        ans = <span class="number">0</span>; <span class="title function_">kruskal</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case #%d:\nThe minimal distance is: %.2f\n&quot;</span>, ++cas, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Swordfish    Time Limit:2 Seconds Memory Limit:65536 KB    There exists a world within our world<br>A world beneath what we call cyberspace.<br>A world protected by firewalls,<br>passwords and the most advanced<br>security systems.<br>In this world we hide<br>our deepest secrets,<br>our most incriminating information,<br>and of course, a shole lot of money.<br>This is the world of Swordfish.<br>  We all remember that in the movie Swordfish, Gabriel broke into the World Bank Investors Group in West Los Angeles, to rob $9.5 billion. And he needed Stanley, the best hacker in the world, to help him break into the password protecting the bank system. Stanley’s lovely daughter Holly was seized by Gabriel, so he had to work for him. But at the last moment, Stanley made some little trick in his hacker mission: he injected a trojan horse in the bank system, so the money would jump from one account to another account every 60 seconds, and would continue jumping in the next 10 years. Only Stanley knew when and where to get the money. If Gabriel killed Stanley, he would never get a single dollar. Stanley wanted Gabriel to release all these hostages and he would help him to find the money back.<br>You who has watched the movie know that Gabriel at last got the money by threatening to hang Ginger to death. Why not Gabriel go get the money himself? Because these money keep jumping, and these accounts are scattered in different cities. In order to gather up these money Gabriel would need to build money transfering tunnels to connect all these cities. Surely it will be really expensive to construct such a transfering tunnel, so Gabriel wants to find out the minimal total length of the tunnel required to connect all these cites. Now he asks you to write a computer program to find out the minimal length. Since Gabriel will get caught at the end of it anyway, so you can go ahead and write the program without feeling guilty about helping a criminal.<br>Input:<br>The input contains several test cases. Each test case begins with a line contains only one integer N (0 &lt;&#x3D; N &lt;&#x3D;100), which indicates the number of cities you have to connect. The next N lines each contains two real numbers X and Y(-10000 &lt;&#x3D; X,Y &lt;&#x3D; 10000), which are the citie’s Cartesian coordinates (to make the problem simple, we can assume that we live in a flat world). The input is terminated by a case with N&#x3D;0 and you must not print any output for this case.<br>Output:<br>You need to help Gabriel calculate the minimal length of tunnel needed to connect all these cites. You can saftly assume that such a tunnel can be built directly from one city to another. For each of the input cases, the output shall consist of two lines: the first line contains “Case &#x2F;#n:”, where n is the case number (starting from 1); and the next line contains “The minimal distance is: d”, where d is the minimal distance, rounded to 2 decimal places. Output a blank line between two test cases.<br>Sample Input:<br> 5 0 0 0 1 1 1 1 0 0.5 0.5 0 Sample Output:<br> Case &#x2F;#1: The minimal distance is: 2.83</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/graph/ZOJ%202913%20Bus%20Pass%20(%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%80%E8%BF%9CBFS%20HDU2377)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/graph/ZOJ%202913%20Bus%20Pass%20(%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%80%E8%BF%9CBFS%20HDU2377)/" class="post-title-link" itemprop="url">ZOJ 2913 Bus Pass (最近的最远BFS HDU2377)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-10-18 22:12:05" itemprop="dateCreated datePublished" datetime="2014-10-18T22:12:05+00:00">2014-10-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 在所有城市中找一个中心满足这个中心到所有公交站点距离的最大值最小 输出最小距离和满足最小距离编号最小的中心</p>
-<p>最基础的BFS 对每个公交站点BFS dis[i]表示编号为i的点到所有公交站点距离的最大值 bfs完所有站点后 dis[i]最小的点就是要求的点咯</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef set&lt;int&gt;::iterator it;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10000</span>;</span><br><span class="line">int dis[N], tdis[N], link[N][<span class="number">12</span>];</span><br><span class="line">queue&lt;int&gt; q;</span><br><span class="line">set&lt;int&gt; zone;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params">int o</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(tdis, <span class="number">0</span>, <span class="title function_">sizeof</span>(tdis));</span><br><span class="line">    tdis[o] = <span class="number">1</span>;</span><br><span class="line">    q.<span class="title function_">push</span>(o);</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="title function_">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        int cur = q.<span class="title function_">front</span>();</span><br><span class="line">        q.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="keyword">if</span>(tdis[cur] &gt; dis[cur]) dis[cur] = tdis[cur];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= link[cur][<span class="number">0</span>]; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            int j = link[cur][i];</span><br><span class="line">            <span class="keyword">if</span>(tdis[j] == <span class="number">0</span>)  q.<span class="title function_">push</span>(j), tdis[j] = tdis[cur] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, nz, nr, id, mz, mr, ans, t;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        zone.<span class="title function_">clear</span>();</span><br><span class="line">        <span class="title function_">memset</span>(dis, <span class="number">0</span>, <span class="title function_">sizeof</span>(dis));</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;nz, &amp;nr);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nz; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;id, &amp;mz);</span><br><span class="line">            link[id][<span class="number">0</span>] = mz;</span><br><span class="line">            zone.<span class="title function_">insert</span>(id);</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= mz; ++i)</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;link[id][i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= nr; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;mr);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt;= mr; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">                <span class="title function_">bfs</span>(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        it i = zone.<span class="title function_">begin</span>();</span><br><span class="line">        ans = *i;</span><br><span class="line">        <span class="keyword">for</span>(++i; i != zone.<span class="title function_">end</span>(); ++i)</span><br><span class="line">            <span class="keyword">if</span>(dis[*i] &lt; dis[ans]) ans = *i;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, dis[ans], ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  Bus Pass    Time Limit:5 Seconds Memory Limit:32768 KB</p>
-<p>You travel a lot by bus and the costs of all the seperate tickets are starting to add up.</p>
-<p>Therefore you want to see if it might be advantageous for you to buy a bus pass.</p>
-<p>The way the bus system works in your country (and also in the Netherlands) is as follows:</p>
-<p>when you buy a bus pass, you have to indicate a center zone and a star value. You are allowed to travel freely in any zone which has a distance to your center zone which is less than your star value. For example, if you have a star value of one, you can only travel in your center zone. If you have a star value of two, you can also travel in all adjacent zones, et cetera.</p>
-<p>You have a list of all bus trips you frequently make, and would like to determine the minimum star value you need to make all these trips using your buss pass. But this is not always an easy task. For example look at the following figure:</p>
-<p><img src="/../images/cn-onlinejudge-showImage.do-name=0000/2913/Bus_Pass_1.jpg.png"><br>Here you want to be able to travel from A to B and from B to D. The best center zone is 7400, for which you only need a star value of 4. Note that you do not even visit this zone on your trips!</p>
-<p><strong>Input</strong></p>
-<p>On the first line an integer<em>t</em>(1 &lt;&#x3D;<em>t</em>&lt;&#x3D; 100): the number of test cases. Then for each test case:</p>
-<p>One line with two integers<em>nz</em>(2 &lt;&#x3D;<em>nz</em>&lt;&#x3D; 9 999) and<em>nr</em>(1 &lt;&#x3D;<em>nr</em>&lt;&#x3D; 10): the number of zones and the number of bus trips, respectively.</p>
-<p><em>nz</em> lines starting with two integers <em>idi</em> (1 &lt;&#x3D; idi &lt;&#x3D; 9 999) and <em>mzi</em> (1 &lt;&#x3D; <em>mzi</em> &lt;&#x3D; 10), a number identifying the i-th zone and the number of zones adjacent to it, followed by mzi integers: the numbers of the adjacent zones.</p>
-<p><em>nr</em> lines starting with one integer <em>mri</em> (1 &lt;&#x3D; <em>mri</em> &lt;&#x3D; 20), indicating the number of zones the ith bus trip visits, followed by <em>mri</em> integers: the numbers of the zones through which the bus passes in the order in which they are visited.</p>
-<p>All zones are connected, either directly or via other zones.</p>
-<p><strong>Output</strong></p>
-<p>For each test case:</p>
-<p>One line with two integers, the minimum star value and the id of a center zone which achieves this minimum star value. If there are multiple possibilities, choose the zone with the lowest number.</p>
-<p><strong>Sample Input</strong></p>
-<p>1<br>17 2<br>7400 6 7401 7402 7403 7404 7405 7406<br>7401 6 7412 7402 7400 7406 7410 7411<br>7402 5 7412 7403 7400 7401 7411<br>7403 6 7413 7414 7404 7400 7402 7412<br>7404 5 7403 7414 7415 7405 7400<br>7405 6 7404 7415 7407 7408 7406 7400<br>7406 7 7400 7405 7407 7408 7409 7410 7401<br>7407 4 7408 7406 7405 7415<br>7408 4 7409 7406 7405 7407<br>7409 3 7410 7406 7408<br>7410 4 7411 7401 7406 7409<br>7411 5 7416 7412 7402 7401 7410<br>7412 6 7416 7411 7401 7402 7403 7413<br>7413 3 7412 7403 7414<br>7414 3 7413 7403 7404<br>7415 3 7404 7405 7407<br>7416 2 7411 7412<br>5 7409 7408 7407 7405 7415<br>6 7415 7404 7414 7413 7412 7416</p>
-<p><strong>Sample Output</strong></p>
-<p>4 7400</p>
 
       
     </div>

@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/UVa%20136%20Ugly%20Numbers(%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/UVa%20136%20Ugly%20Numbers(%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97)/" class="post-title-link" itemprop="url">UVa 136 Ugly Numbers(优先队列)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-01-20 20:52:48" itemprop="dateCreated datePublished" datetime="2015-01-20T20:52:48+00:00">2015-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 质因数只可能有2,3,5的数称为丑数 输出第1500个丑数</p>
+<p>STL优队列应用 1是丑数 丑数的2,3,5倍都是丑数 用优先队列模拟就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line"></span><br><span class="line"><span class="comment">//priority_queue&lt;ll, vector&lt;ll&gt;, greater&lt;ll&gt; &gt; q;</span></span><br><span class="line">struct cmp&#123;</span><br><span class="line">    bool operator () (ll a, ll b)    &#123; <span class="keyword">return</span> a &gt; b; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;ll, vector&lt;ll&gt;, cmp&gt; q;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set&lt;ll&gt; cnt;</span><br><span class="line">int ugly[<span class="number">3</span>] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    ll a, b;</span><br><span class="line">    q.<span class="title function_">push</span>(<span class="number">1</span>);</span><br><span class="line">    cnt.<span class="title function_">insert</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>;; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        a = q.<span class="title function_">top</span>();</span><br><span class="line">        q.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">1500</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            b = a * ugly[j];</span><br><span class="line">            <span class="keyword">if</span>(!cnt.<span class="title function_">count</span>(b))</span><br><span class="line">                cnt.<span class="title function_">insert</span>(b), q.<span class="title function_">push</span>(b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;The 1500&#x27;th ugly number is %lld.\n&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p>Ugly numbers are numbers whose only prime factors are 2, 3 or 5. The sequence</p>
+<p>1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, …</p>
+<p>shows the first 11 ugly numbers. By convention, 1 is included.</p>
+<p>Write a program to find and print the 1500’th ugly number.</p>
+<h2 id="Input-and-Output"><a href="#Input-and-Output" class="headerlink" title="Input and Output"></a>Input and Output</h2><p>There is no input to this program. Output should consist of a single line as shown below, with <number> replaced by the number computed.</p>
+<h2 id="Sample-output"><a href="#Sample-output" class="headerlink" title="Sample output"></a>Sample output</h2><p>The 1500’th ugly number is <number>.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1017,98 +1109,6 @@
 <p>在100%的数据中n, m&lt;&#x3D;100000，词典的字母表大小&lt;&#x3D;26.</p>
 <p>本题按通过的数据量排名哦～</p>
 <p>对于小Hi的每一个询问，输出一个整数Ans,表示词典中以小Hi给出的字符串为前缀的单词的个数。<br>样例输入 5 babaab babbbaaaa abba aaaaabaa babaababb 5 babb baabaaa bab bb bbabbaab 样例输出 1 0 3 0 0</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/ds/HDU%201754%20I%20Hate%20It(%E5%85%A5%E9%97%A8%E7%BA%BF%E6%AE%B5%E6%A0%91)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/HDU%201754%20I%20Hate%20It(%E5%85%A5%E9%97%A8%E7%BA%BF%E6%AE%B5%E6%A0%91)/" class="post-title-link" itemprop="url">HDU 1754 I Hate It(入门线段树)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-12-11 10:19:07" itemprop="dateCreated datePublished" datetime="2014-12-11T10:19:07+00:00">2014-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 中文</p>
-<p>最基础的线段树了 只涉及到了点的修改</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define lc p&lt;&lt;<span class="number">1</span>,s,mid</span><br><span class="line">#define rc p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,e</span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">200005</span>;</span><br><span class="line">int maxv[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p</span>)</span><br><span class="line">&#123;</span><br><span class="line">    maxv[p] = <span class="title function_">max</span>(maxv[p &lt;&lt; <span class="number">1</span>], maxv[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == e) <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;maxv[p]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">build</span>(lc);</span><br><span class="line">        <span class="title function_">build</span>(rc);</span><br><span class="line">        <span class="title function_">pushup</span>(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int a, int b</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == e &amp;&amp; e == a)</span><br><span class="line">    &#123;</span><br><span class="line">        maxv[p] = b;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(a &lt;= mid) <span class="title function_">update</span>(lc, a, b);</span><br><span class="line">    <span class="keyword">else</span> <span class="title function_">update</span>(rc, a, b);</span><br><span class="line">    <span class="title function_">pushup</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">query</span>(<span class="params">int p, int s, int e, int l, int r</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s &gt;= l &amp;&amp; e &lt;= r) <span class="keyword">return</span> maxv[p];</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="keyword">return</span> <span class="title function_">query</span>(lc, l, r);</span><br><span class="line">    <span class="keyword">if</span>(l &gt; mid) <span class="keyword">return</span> <span class="title function_">query</span>(rc, l, r);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">max</span>(<span class="title function_">query</span>(lc, l, mid), <span class="title function_">query</span>(rc, mid + <span class="number">1</span>, r));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, m, a, b;</span><br><span class="line">    char c[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">build</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, c, &amp;a, &amp;b);</span><br><span class="line">            <span class="keyword">if</span>(c[<span class="number">0</span>] == <span class="string">&#x27;Q&#x27;</span>) <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">1</span>, n, a, b));</span><br><span class="line">            <span class="keyword">else</span> <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">1</span>, n, a, b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="I-Hate-It"><a href="#I-Hate-It" class="headerlink" title="I Hate It"></a>I Hate It</h1><p>Problem Description</p>
-<p>很多学校流行一种比较的习惯。老师们很喜欢询问，从某某到某某当中，分数最高的是多少。<br>这让很多学生很反感。<br>不管你喜不喜欢，现在需要你做的是，就是按照老师的要求，写一个程序，模拟老师的询问。当然，老师有时候需要更新某位同学的成绩。<br>Input</p>
-<p>本题目包含多组测试，请处理到文件结束。<br>在每个测试的第一行，有两个正整数 N 和 M ( 0&lt;N&lt;&#x3D;200000,0&lt;M&lt;5000 )，分别代表学生的数目和操作的数目。<br>学生ID编号分别从1编到N。<br>第二行包含N个整数，代表这N个学生的初始成绩，其中第i个数代表ID为i的学生的成绩。<br>接下来有M行。每一行有一个字符 C (只取’Q’或’U’) ，和两个正整数A，B。<br>当C为’Q’的时候，表示这是一条询问操作，它询问ID从A到B(包括A,B)的学生当中，成绩最高的是多少。<br>当C为’U’的时候，表示这是一条更新操作，要求把ID为A的学生的成绩更改为B。<br>Output</p>
-<p>对于每一次询问操作，在一行里面输出最高成绩。<br>Sample Input</p>
-<p>5 6 1 2 3 4 5 Q 1 5 U 3 6 Q 3 4 Q 4 5 U 2 9 Q 1 5<br>Sample Output</p>
-<p>5 6 5 9</p>
-<p><em>Hint</em> Huge input,the C function scanf() will work better than cin</p>
 
       
     </div>

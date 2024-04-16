@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010465%20Homer%20Simpson(DP%20%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%2010465%20Homer%20Simpson(DP%20%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85)/" class="post-title-link" itemprop="url">UVa 10465 Homer Simpson(DP 完全背包)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-23 09:52:12" itemprop="dateCreated datePublished" datetime="2014-08-23T09:52:12+00:00">2014-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>﻿﻿</p>
+<p>题意 霍默辛普森吃汉堡 有两种汉堡 一中吃一个需要m分钟 另一种吃一个需要n分钟 他共有t分钟时间要我们输出他在尽量用掉所有时间的前提下最多能吃多少个汉堡 如果时间无法用完 输出他吃的汉堡数和剩余喝酒的时间</p>
+<p>很明显的完全背包问题 求两次 一次对个数 一次对时间就行了 时间用不完的情况下就输出时间的</p>
+<p>d1为个数的 d2为时间的 dt保存时间</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define maxn <span class="number">10005</span></span><br><span class="line">using namespace std;</span><br><span class="line">int w[<span class="number">2</span>],t,d1[maxn],d2[maxn],dt[maxn];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;w[<span class="number">0</span>],&amp;w[<span class="number">1</span>],&amp;t)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(d1,<span class="number">0x8f</span>,<span class="title function_">sizeof</span>(d1));</span><br><span class="line">        <span class="title function_">memset</span>(dt,<span class="number">0</span>,<span class="title function_">sizeof</span>(dt));</span><br><span class="line">        <span class="title function_">memset</span>(d2,<span class="number">0</span>,<span class="title function_">sizeof</span>(d2));</span><br><span class="line">        d1[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">2</span>; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j=w[i]; j&lt;=t; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                d1[j]=<span class="title function_">max</span>(d1[j],d1[j-w[i]]+<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>((dt[j]&lt;dt[j-w[i]]+w[i])||((dt[j]==dt[j-w[i]]+w[i])&amp;&amp;(d2[j]&lt;d2[j-w[i]]+<span class="number">1</span>)))</span><br><span class="line">                &#123;</span><br><span class="line">                    dt[j]=dt[j-w[i]]+w[i];</span><br><span class="line">                    d2[j]=d2[j-w[i]]+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(dt[t]==t)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,d1[t]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,d2[t],t-dt[t]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> Homer Simpson   <img src="/../images/dge.org-external-104-p10465.jpg.png"> Homer Simpson, a very smart guy, likes eating Krusty-burgers. It takes Homer m minutes to eat a Krusty- burger. However, there�s a new type of burger in Apu�s Kwik-e-Mart. Homer likes those too. It takes him n minutes to eat one of these burgers. Given t minutes, you have to find out the maximum number of burgers Homer can eat without wasting any time. If he must waste time, he can have beer.</p>
+<p>Input<br>Input consists of several test cases. Each test case consists of three integers m, n, t (0 &lt; m,n,t &lt; 10000). Input is terminated by EOF.</p>
+<p>Output<br>For each test case, print in a single line the maximum number of burgers Homer can eat without having beer. If homer must have beer, then also print the time he gets for drinking, separated by a single space. It is preferable that Homer drinks as little beer as possible.<br>Sample Input<br>3 5 54<br>3 5 55</p>
+<p>Sample Output<br>18<br>17</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1092,99 +1182,6 @@
 <p>1 5 10 1 2 3 4 5 5 4 3 2 1<br>Sample Output</p>
 <p>14
 ﻿﻿</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20624%20CD%20%EF%BC%88DP%2001%E8%83%8C%E5%8C%85%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/UVa%20624%20CD%20%EF%BC%88DP%2001%E8%83%8C%E5%8C%85%EF%BC%89/" class="post-title-link" itemprop="url">UVa 624 CD （DP 01背包）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-22 09:38:23" itemprop="dateCreated datePublished" datetime="2014-08-22T09:38:23+00:00">2014-08-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 你要把CD上的歌录到tape上 使得剩余磁带空间最小 很容易看出是01背包问题 输出路径也很容易 直接递归</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int s,n,val[<span class="number">30</span>],d[<span class="number">1000005</span>],pre[<span class="number">1000005</span>];</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">print</span>(pre[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>,i-pre[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d &quot;</span>,i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;s,&amp;n)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));</span><br><span class="line">        <span class="title function_">memset</span>(pre,<span class="number">0</span>,<span class="title function_">sizeof</span>(pre));</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;val[i]);</span><br><span class="line">            <span class="keyword">for</span>(int j=s; j&gt;=val[i]; --j)</span><br><span class="line">                <span class="keyword">if</span>(d[j-val[i]]+val[i]&gt;d[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    d[j]=d[j-val[i]]+val[i];</span><br><span class="line">                    pre[j]=j-val[i];</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">print</span>(d[s]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;sum:%d\n&quot;</span>,d[s]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>You have a long drive by car ahead. You have a tape recorder, but unfortunately your best music is on CDs. You need to have it on tapes so the problem to solve is: you have a tapeNminutes long. How to choose tracks from CD to get most out of tape space and have as short unused space as possible.</p>
-<p>Assumptions:</p>
-<p>Program should find the set of tracks which fills the tape best and print it in the same sequence as the tracks are stored on the CD</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>Any number of lines. Each one contains valueN, (after space) number of tracks and durations of the tracks. For example from first line in sample data:N&#x3D;5, number of tracks&#x3D;3, first track lasts for 1 minute, second one 3 minutes, next one 4 minutes</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>Set of tracks (and durations) which are the correct solutions and string &#96;&#96;sum:” and sum of duration times.</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>5 3 1 3 4 10 4 9 8 4 2 20 4 10 5 7 4 90 8 10 23 1 2 3 4 5 7 45 8 4 10 44 43 12 9 8 2</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>1 4 sum:5 8 2 sum:10 10 5 4 sum:19 10 23 1 2 3 4 5 7 sum:55 4 10 12 9 8 2 sum:45</p>
-<p>Miguel A. Revilla<br>2000-01-10</p>
-<p>﻿﻿</p>
 
       
     </div>

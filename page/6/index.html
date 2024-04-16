@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,118 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/other/ZOJ%203427%20Array%20Slicing%20%EF%BC%88scanf%E4%BD%BF%E7%94%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/other/ZOJ%203427%20Array%20Slicing%20%EF%BC%88scanf%E4%BD%BF%E7%94%A8%EF%BC%89/" class="post-title-link" itemprop="url">ZOJ 3427 Array Slicing （scanf使用）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-24 16:00:46" itemprop="dateCreated datePublished" datetime="2015-07-24T16:00:46+00:00">2015-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 Watashi发明了一种蛋疼(eggache) 语言 你要为这个语言实现一个 array slicing 函数 这个函数的功能是 有一个数组初始为空 每次给你一个区间[ l, r) 和一些数 你要输出数组中下标在[l, r) 之间的数 然后删除这些数 然后把给你的那些数插入到数组的下标为 l 的位置</p>
+<p>签到模拟题 一直没看懂题意 看了Watashi的scanf高端用法 弱到连scanf都不会用了 强行到<a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/cstdio/scanf/?kw=scanf">cpp</a>预习了一下 先记录一下那些并不了解的scanf用法吧</p>
+<p>int scanf ( const char &#x2F;* format, … );</p>
+<p>format 由这些内容组成</p>
+<ul>
+<li><strong>空白字符:</strong> scanf在读入时会忽略下一个非空白字符之前的所有空白字符 <a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/cctype/isspace/">空白字符</a>包含 ‘ ‘’\t’, ‘\n’, ‘\v’, ‘\f’, ‘\r<br>&#x2F;* 表示这个格式说明符所对应的内容读而不存 也不用为其指定参数 (注意区别 printf &#x2F;* 需要一个整型参数 表示至少输出多少位 不足用空格代替)</li>
+</ul>
+<p>width 表示最多读取多少位字符<br>length 有的话一定是这几个之一 hh , h , l , ll , j , z , t , L 对应同种数据的不同位数类型如 int(d) 和 long long(lld)   重点是 specifier <em>specifier</em> 描述 Characters extracted i Integer Any number of digits, optionally preceded by a sign (+ or -).<br><a target="_blank" rel="noopener" href="http://www.cplusplus.com/isdigit">Decimal digits</a> assumed by default (0-9), but a 0 prefix introduces octal digits (0-7), and 0x <a target="_blank" rel="noopener" href="http://www.cplusplus.com/isxdigit">hexadecimal digits</a> (0-f).<br><em>Signed</em> argument. d <em>or</em> u<br> Decimal integer Any number of <a target="_blank" rel="noopener" href="http://www.cplusplus.com/isdigit">decimal digits</a> (0-9), optionally preceded by a sign (+ or -).<br>d is for a <em>signed</em> argument, and u for an <em>unsigned</em>. o Octal integer Any number of octal digits (0-7), optionally preceded by a sign (+ or -).<br><em>Unsigned</em> argument. x Hexadecimal integer Any number of <a target="_blank" rel="noopener" href="http://www.cplusplus.com/isxdigit">hexadecimal digits</a> (0-9, a-f, A-F), optionally preceded by 0x or 0X, and all optionally preceded by a sign (+ or -).<br><em>Unsigned</em> argument. f, e, g Floating point number A series of <a target="_blank" rel="noopener" href="http://www.cplusplus.com/isdigit">decimal</a> digits, optionally containing a decimal point, optionally preceeded by a sign (+ or -) and optionally followed by the e or E character and a decimal integer (or some of the other sequences supported by <a target="_blank" rel="noopener" href="http://www.cplusplus.com/strtod">strtod</a>).<br>Implementations complying with C99 also support hexadecimal floating-point format when preceded by</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0X</span><br></pre></td></tr></table></figure>
+<p>. a c Character The next character. If a <em>width</em> other than 1 is specified, the function reads exactly <em>width</em>characters and stores them in the successive locations of the array passed as argument. No null character is appended at the end. s String of characters Any number of non-whitespace characters, stopping at the first <a target="_blank" rel="noopener" href="http://www.cplusplus.com/isspace">whitespace</a> character found. A terminating null character is automatically added at the end of the stored sequence. p Pointer address A sequence of characters representing a pointer. The particular format used depends on the system and library implementation, but it is the same as the one used to format %p in <a target="_blank" rel="noopener" href="http://www.cplusplus.com/fprintf">fprintf</a>. [<em>characters</em>] Scanset Any number of the characters specified between the brackets.<br>A dash (-) that is not the first character may produce non-portable behavior in some library implementations. [^<em>characters</em>] Negated scanset Any number of characters none of them specified as <em>characters</em> between the brackets. n Count No input is consumed.<br>The number of characters read so far from <a target="_blank" rel="noopener" href="http://www.cplusplus.com/stdin">stdin</a> is stored in the pointed location. % % A % followed by another % matches a single %.<br>除了 n 之外 specifier至少匹配一个输入的字符 否则读入会在当前字符终止 n需要一个指向int的参数 保存在这之前读取了多少位字符  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">500</span>];</span><br><span class="line">    int n;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%s%n&quot;</span>, s, &amp;n);</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%s  %d\n&quot;</span>, s, n);</span><br><span class="line">    <span class="comment">//输入hello</span></span><br><span class="line">    <span class="comment">//输出hello 5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> printf中也可以使用%n表示这条语句这之前输出了多少位字符  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;hello%n&quot;</span>, &amp;n);</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot; %d\n&quot;</span>, n);</span><br><span class="line">    <span class="comment">//输出hello 5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>specifier可以是[…]、[^…]这两种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a></p>
+<p>[…]表示读取括号中包含的字符 遇到其他字符就结束这个specifier</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">500</span>];</span><br><span class="line">    int n;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot; %[0-9]%n&quot;</span>, s, &amp;n);<span class="comment">//%[0-9]只读取数字  遇到非数字结束</span></span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%s %d\n&quot;</span>, s, n);</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot; %[ab]%n&quot;</span>, s, &amp;n);</span><br><span class="line">    <span class="title function_">printf</span>(<span class="string">&quot;%s %d\n&quot;</span>, s, n);</span><br><span class="line">    <span class="comment">//输入&quot;   12345abc&quot;  前面有三个空格</span></span><br><span class="line">    <span class="comment">//输出12345 8  ab 2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>[^…]表示读取除括号中字符之外的所有字符 遇到括号中的字符就结束这个specifier</p>
+<p>当然这些东西sscanf也适用</p>
+<p>感觉预习了scanf之后这个题的输入就很好处理了 直接用list的<a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/list/list/splice/">splice</a>函数就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char s[<span class="number">5000</span>], *ps;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    list&lt;int&gt; a, b;</span><br><span class="line">    int l, r, n, v;</span><br><span class="line">    list&lt;int&gt;::iterator it;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot; [ %d : %d ]%[^\n]&quot;</span>, &amp;l, &amp;r, s))</span><br><span class="line">    &#123;</span><br><span class="line">        b.<span class="title function_">clear</span>();</span><br><span class="line">        ps = s;</span><br><span class="line">        <span class="keyword">while</span>(<span class="title function_">sscanf</span>(ps, <span class="string">&quot;%*[^-0-9]%d%n&quot;</span>, &amp;v, &amp;n) &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//过滤掉非&#x27;-&#x27;和数字再读入一个数</span></span><br><span class="line">            <span class="comment">//n记录scanf读了多少个字符</span></span><br><span class="line">            ps = ps + n;  <span class="comment">//读了n个字符所以要前进n位</span></span><br><span class="line">            b.<span class="title function_">push_back</span>(v);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">advance</span>(it = a.<span class="title function_">begin</span>(), l);</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d%s&quot;</span>, *it, l &lt; r - <span class="number">1</span> ? <span class="string">&quot;, &quot;</span> : <span class="string">&quot;&quot;</span>);</span><br><span class="line">            it = a.<span class="title function_">erase</span>(it);</span><br><span class="line">            l++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        a.<span class="title function_">splice</span>(it, b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Array Slicing    Time Limit:2 Seconds Memory Limit:65536 KB</p>
+<p>Array slicing is an operation that extracts certain elements from an array and packages them as another array. Now you’re asked to implements the array slicing operations for a new programming language – <em>eggache&#x2F;</em>* (pronounced “eggache star”). The grammar of array slicing in <em>eggache&#x2F;</em>* is:<br>[ <em>begin</em> : <em>end</em> ] &#x3D; <em>x1</em>, <em>x2</em>, …, <em>xk</em>, …<br>where begin ≤ end are indices indicating the range of slice. Redundant whitespaces should be ignored. For each operation, the original slice should be printed first, then these elements will be replaced with the new elements provided. See sample for more details.</p>
+<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>There is only one case for this problem, which contains about 50 lines of array slicing operations. It’s guaranteed that all operations are valid and the absolute values of all integers never exceed 100. <strong>The array is empty ([]) before the first operation.</strong></p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>The output produced by array slicing operations in the <em>eggache&#x2F;</em>* programming language.</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>[ 0 : 0] &#x3D; 1 2 3 4 5 6 7 8 9 [ 1 : 1] &#x3D; -1 [ 1 : 1] &#x3D; [ 0 : 8] &#x3D; 9 8 7 6 5 4 3 2 1 [ 2 : 8] &#x3D; -2, -3, -5, -7 [ 0 : 9] &#x3D; 000 [ 0 : 1] &#x3D; 1, 2, 8 [ 2 : 2] &#x3D; 4 [ 0 : 4] &#x3D;</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>1, -1, 2, 3, 4, 5, 6, 7 7, 6, 5, 4, 3, 2 9, 8, -2, -3, -5, -7, 1, 8, 9 0 1, 2, 4, 8</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1025,97 +1137,6 @@
 <p>8 3 1 3 -1 -3 5 3 6 7</p>
 <p>Sample Output</p>
 <p>-1 -3 -3 -3 3 3 3 3 5 5 6 7</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/search/HDU%201043%20Eight%20(BFS%C2%B7%E5%85%AB%E6%95%B0%E7%A0%81%C2%B7%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/search/HDU%201043%20Eight%20(BFS%C2%B7%E5%85%AB%E6%95%B0%E7%A0%81%C2%B7%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80)/" class="post-title-link" itemprop="url">HDU 1043 Eight (BFS·八数码·康托展开)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-07-05 17:00:28" itemprop="dateCreated datePublished" datetime="2015-07-05T17:00:28+00:00">2015-07-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 输出八数码问题从给定状态到12345678x的路径</p>
-<p>用康托展开将排列对应为整数 即这个排列在所有排列中的字典序 然后就是基础的BFS了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">5e5</span>, M = <span class="number">9</span>;</span><br><span class="line">int x[<span class="number">4</span>] = &#123; -<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">int y[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">int fac[] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>&#125;;</span><br><span class="line">int puz[N][M], nex[N], dir[N], vis[N], q[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">getCantor</span>(int a[])  <span class="comment">//康托展开  将排列转化为整数</span></span><br><span class="line">&#123;</span><br><span class="line">    int ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = i + <span class="number">1</span>; j &lt; M; ++j)</span><br><span class="line">            <span class="keyword">if</span>(a[j] &lt; a[i]) ret += fac[M - i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int t[M] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    int id = <span class="title function_">getCantor</span>(t);</span><br><span class="line">    dir[id] = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">memcpy</span>(puz[id], t, <span class="title function_">sizeof</span>(t));</span><br><span class="line">    <span class="title function_">memset</span>(vis, <span class="number">0</span>, <span class="title function_">sizeof</span>(vis));</span><br><span class="line"></span><br><span class="line">    int r, c, k, nr, nc, nk, nid;</span><br><span class="line">    int front = <span class="number">0</span>, rear = <span class="number">0</span>;</span><br><span class="line">    q[rear++] = id;</span><br><span class="line">    vis[id] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear)</span><br><span class="line">    &#123;</span><br><span class="line">        int id = q[front++];</span><br><span class="line">        <span class="title function_">memcpy</span>(t, puz[id], <span class="title function_">sizeof</span>(t));</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">0</span>; t[k]; ++k);  <span class="comment">//找0的位置</span></span><br><span class="line">        r = k / <span class="number">3</span>, c = k % <span class="number">3</span>;  <span class="comment">//一维转二维</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            nr = r + x[i], nc = c + y[i], nk = nr * <span class="number">3</span> + nc;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nr &lt; <span class="number">0</span> || nr &gt; <span class="number">2</span> || nc &lt; <span class="number">0</span> || nc &gt; <span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="title function_">swap</span>(t[k], t[nk]);</span><br><span class="line">            nid = <span class="title function_">getCantor</span>(t);</span><br><span class="line">            <span class="title function_">memcpy</span>(puz[nid], t, <span class="title function_">sizeof</span>(t));</span><br><span class="line">            <span class="title function_">swap</span>(t[k], t[nk]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(vis[nid]) <span class="keyword">continue</span>;</span><br><span class="line">            vis[nid] = <span class="number">1</span>;</span><br><span class="line">            q[rear++] = nid;</span><br><span class="line">            nex[nid] = id;</span><br><span class="line">            dir[nid] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char t[<span class="number">5</span>], sdir[] = <span class="string">&quot;durl&quot;</span>;</span><br><span class="line">    int s[M], id;</span><br><span class="line">    <span class="title function_">bfs</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, t))</span><br><span class="line">    &#123;</span><br><span class="line">        s[<span class="number">0</span>] = t[<span class="number">0</span>] == <span class="string">&#x27;x&#x27;</span> ? <span class="number">0</span> : t[<span class="number">0</span>] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; M; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, t);</span><br><span class="line">            s[i] = t[<span class="number">0</span>] == <span class="string">&#x27;x&#x27;</span> ? <span class="number">0</span> : t[<span class="number">0</span>] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        id = <span class="title function_">getCantor</span>(s);</span><br><span class="line">        <span class="keyword">if</span>(!vis[id]) <span class="title function_">puts</span>(<span class="string">&quot;unsolvable&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(dir[id] &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%c&quot;</span>, sdir[dir[id]]);</span><br><span class="line">                id = nex[id];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Last modified :   2015-07-05 11:15</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Eight"><a href="#Eight" class="headerlink" title="Eight"></a>Eight</h1><p>Problem Description</p>
-<p>The 15-puzzle has been around for over 100 years; even if you don’t know it by that name, you’ve seen it. It is constructed with 15 sliding tiles, each with a number from 1 to 15 on it, and all packed into a 4 by 4 frame with one tile missing. Let’s call the missing tile ‘x’; the object of the puzzle is to arrange the tiles so that they are ordered as: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 x<br>where the only legal operation is to exchange ‘x’ with one of the tiles with which it shares an edge. As an example, the following sequence of moves solves a slightly scrambled puzzle:<br>1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 5 6 7 8 5 6 7 8 5 6 7 8 5 6 7 8 9 x 10 12 9 10 x 12 9 10 11 12 9 10 11 12 13 14 11 15 13 14 11 15 13 14 x 15 13 14 15 x r-&gt; d-&gt; r-&gt;<br>The letters in the previous row indicate which neighbor of the ‘x’ tile is swapped with the ‘x’ tile at each step; legal values are ‘r’,’l’,’u’ and ‘d’, for right, left, up, and down, respectively.<br>Not all puzzles can be solved; in 1870, a man named Sam Loyd was famous for distributing an unsolvable version of the puzzle, and<br>frustrating many people. In fact, all you have to do to make a regular puzzle into an unsolvable one is to swap two tiles (not counting the missing ‘x’ tile, of course).<br>In this problem, you will write a program for solving the less well-known 8-puzzle, composed of tiles on a three by three<br>arrangement.<br>Input</p>
-<p>You will receive, several descriptions of configuration of the 8 puzzle. One description is just a list of the tiles in their initial positions, with the rows listed from top to bottom, and the tiles listed from left to right within a row, where the tiles are represented by numbers 1 to 8, plus ‘x’. For example, this puzzle<br>1 2 3<br>x 4 6<br>7 5 8<br>is described by this list:<br>1 2 3 x 4 6 7 5 8<br>Output</p>
-<p>You will print to standard output either the word &#96;&#96;unsolvable’’, if the puzzle has no solution, or a string consisting entirely of the letters ‘r’, ‘l’, ‘u’ and ‘d’ that describes a series of moves that produce a solution. The string should include no spaces and start at the beginning of the line. Do not print a blank line between cases.<br>Sample Input</p>
-<p>2 3 4 1 5 x 7 6 8<br>Sample Output</p>
-<p>ullddrurdllurdruldr</p>
 
       
     </div>

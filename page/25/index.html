@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">263</span>
+          <span class="site-state-item-count">264</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%20348%20Optimal%20Array%20Multiplication%20Sequence%20(DP%20%E6%9C%80%E4%BC%98%E7%9F%A9%E9%98%B5%E9%93%BE%E4%B9%98)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%20348%20Optimal%20Array%20Multiplication%20Sequence%20(DP%20%E6%9C%80%E4%BC%98%E7%9F%A9%E9%98%B5%E9%93%BE%E4%B9%98)/" class="post-title-link" itemprop="url">UVa 348 Optimal Array Multiplication Sequence (DP 最优矩阵链乘)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-25 21:24:16" itemprop="dateCreated datePublished" datetime="2014-08-25T21:24:16+00:00">2014-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>﻿﻿</p>
+<p>题意 求给定数目矩阵的最优链乘 并输出路径</p>
+<p>矩阵链乘在小白第二版 P277有讲解 也是经典的动态规划 有了转移方程题目就好做了 设d[i][j]为矩阵i到矩阵j的最优链乘 初始状态d[i][i]&#x3D;0 k为i，j之间的一个矩阵 x[i],y[i]分别表示第i个矩阵的行和列 则有d[i][j]&#x3D;min{d[i][k]+d[k+1][j]+x[i]&#x2F;*y[k]&#x2F;*y[j]}<br>感觉这题比较难的就是路径打印了 仔细观察一下结构 其实也不难 记录每个k值 直接递归就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line">#define maxn <span class="number">11</span>  </span><br><span class="line">#define <span class="variable constant_">INF</span> <span class="number">0x3f3f3f3f</span>  </span><br><span class="line">#define t <span class="title function_">dp</span>(i,k)+<span class="title function_">dp</span>(k+<span class="number">1</span>,j)+x[i]*y[k]*y[j]  </span><br><span class="line">int d[maxn][maxn],pre[maxn][maxn],x[maxn],y[maxn],n;  </span><br><span class="line">int <span class="title function_">dp</span>(<span class="params">int i,int j</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">if</span>(d[i][j]&lt;<span class="variable constant_">INF</span>) <span class="keyword">return</span> d[i][j];  </span><br><span class="line">    <span class="keyword">for</span>(int k=i; k&lt;j; ++k)  </span><br><span class="line">        <span class="keyword">if</span>(d[i][j]&gt;t)  </span><br><span class="line">        &#123;  </span><br><span class="line">            d[i][j]=t;  </span><br><span class="line">            pre[i][j]=k;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="keyword">return</span> d[i][j];  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">void</span> <span class="title function_">print</span>(<span class="params">int i,int j</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    int k=pre[i][j];  </span><br><span class="line">    <span class="keyword">if</span>(k)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;(&quot;</span>);  </span><br><span class="line">        <span class="title function_">print</span>(i,k);  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot; x &quot;</span>);  </span><br><span class="line">        <span class="title function_">print</span>(k+<span class="number">1</span>,j);  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;)&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;A%d&quot;</span>,i);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    int k=<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0x3f</span>,<span class="title function_">sizeof</span>(d));  </span><br><span class="line">        <span class="title function_">memset</span>(pre,<span class="number">0</span>,<span class="title function_">sizeof</span>(pre));  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>; i&lt;=n; ++i)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x[i],&amp;y[i]);  </span><br><span class="line">            d[i][i]=<span class="number">0</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="title function_">dp</span>(<span class="number">1</span>,n);  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case %d: &quot;</span>,k);  </span><br><span class="line">        <span class="title function_">print</span>(<span class="number">1</span>,n);  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);  </span><br><span class="line">        k++;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p>Given two arrays <em>A</em> and <em>B</em>, we can determine the array <em>C</em> &#x3D; <em>A B</em> using the standard definition of matrix multiplication:</p>
+<p><img src="/../images/dge.org-external-3-348img13.gif.png"></p>
+<p>The number of columns in the <em>A</em> array must be the same as the number of rows in the <em>B</em> array. Notationally, let’s say that <em>rows</em>(<em>A</em>) and <em>columns</em>(<em>A</em>) are the number of rows and columns, respectively, in the <em>A</em> array. The number of individual multiplications required to compute the entire <em>C</em> array (which will have the same number of rows as <em>A</em> and the same number of columns as <em>B</em>) is then <em>rows</em>(<em>A</em>)<em>columns</em>(<em>B</em>) <em>columns</em>(<em>A</em>). For example, if <em>A</em> is a <img src="/../images/dge.org-external-3-348img1.gif.png" alt="tex2html_wrap_inline67"> array, and <em>B</em> is a <img src="/../images/dge.org-external-3-348img2.gif.png" alt="tex2html_wrap_inline71"> array, it will take<img src="/../images/dge.org-external-3-348img3.gif.png" alt="tex2html_wrap_inline73"> , or 3000 multiplications to compute the <em>C</em> array.</p>
+<p>To perform multiplication of more than two arrays we have a choice of how to proceed. For example, if <em>X</em>, <em>Y</em>, and <em>Z</em> are arrays, then to compute <em>X Y Z</em> we could either compute (<em>X Y</em>) <em>Z</em> or <em>X</em> (<em>Y Z</em>). Suppose <em>X</em>is a <img src="/../images/dge.org-external-3-348img4.gif.png" alt="tex2html_wrap_inline103"> array, <em>Y</em> is a <img src="/../images/dge.org-external-3-348img1.gif.png" alt="tex2html_wrap_inline67"> array, and <em>Z</em> is a <img src="/../images/dge.org-external-3-348img5.gif.png" alt="tex2html_wrap_inline111"> array. Let’s look at the number of multiplications required to compute the product using the two different sequences:</p>
+<p>(<em>X Y</em>) <em>Z</em></p>
+<p><em>X</em> (<em>Y Z</em>)</p>
+<p>Clearly we’ll be able to compute (<em>X Y</em>) <em>Z</em> using fewer individual multiplications.</p>
+<p>Given the size of each array in a sequence of arrays to be multiplied, you are to determine an optimal computational sequence. Optimality, for this problem, is relative to the number of individual multiplications required.</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>For each array in the multiple sequences of arrays to be multiplied you will be given only the dimensions of the array. Each sequence will consist of an integer <em>N</em> which indicates the number of arrays to be multiplied, and then <em>N</em> pairs of integers, each pair giving the number of rows and columns in an array; the order in which the dimensions are given is the same as the order in which the arrays are to be multiplied. A value of zero for <em>N</em> indicates the end of the input. <em>N</em> will be no larger than 10.</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>Assume the arrays are named <img src="/../images/dge.org-external-3-348img12.gif.png" alt="tex2html_wrap_inline157"> . Your output for each input case is to be a line containing a parenthesized expression clearly indicating the order in which the arrays are to be multiplied. Prefix the output for each case with the case number (they are sequentially numbered, starting with 1). Your output should strongly resemble that shown in the samples shown below. If, by chance, there are multiple correct sequences, any of these will be accepted as a valid answer.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>3 1 5 5 20 20 1 3 5 10 10 20 20 35 6 30 35 35 15 15 5 5 10 10 20 20 25 0</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>Case 1: (A1 x (A2 x A3)) Case 2: ((A1 x A2) x A3) Case 3: ((A1 x (A2 x A3)) x ((A4 x A5) x A6))</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1034,96 +1134,6 @@
 <p>The first line contains the number of test cases<strong>N</strong>. Each test case starts with a line containing the name (it’s a single string), the number of rows<strong>R</strong>and the number of columns<strong>C</strong>. After that follow<strong>R</strong>lines with<strong>C</strong>numbers each, defining the heights.<strong>R</strong>and C won’t be bigger than<strong>100</strong>,<strong>N</strong>not bigger than<strong>15</strong>and the heights are always in the range from<strong>0</strong>to<strong>100</strong>.</p>
 <p>For each test case, print a line containing the name of the area, a colon, a space and the length of the longest run one can slide down in that area.<br><strong>Sample Input</strong> 2 Feldberg 10 5 56 14 51 58 88 26 94 24 39 41 24 16 8 51 51 76 72 77 43 10 38 50 59 84 81 5 23 37 71 77 96 10 93 53 82 94 15 96 69 9 74 0 62 38 96 37 54 55 82 38 Spiral 5 5 1 2 3 4 5 16 17 18 19 6 15 24 25 20 7 14 23 22 21 8 13 12 11 10 9</p>
 <p><strong>Sample Output</strong><br>Feldberg: 7 Spiral: 25</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.deng.cf/posts/oj/dp/UVa%2010465%20Homer%20Simpson(DP%20%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/UVa%2010465%20Homer%20Simpson(DP%20%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85)/" class="post-title-link" itemprop="url">UVa 10465 Homer Simpson(DP 完全背包)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-23 09:52:12" itemprop="dateCreated datePublished" datetime="2014-08-23T09:52:12+00:00">2014-08-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>﻿﻿</p>
-<p>题意 霍默辛普森吃汉堡 有两种汉堡 一中吃一个需要m分钟 另一种吃一个需要n分钟 他共有t分钟时间要我们输出他在尽量用掉所有时间的前提下最多能吃多少个汉堡 如果时间无法用完 输出他吃的汉堡数和剩余喝酒的时间</p>
-<p>很明显的完全背包问题 求两次 一次对个数 一次对时间就行了 时间用不完的情况下就输出时间的</p>
-<p>d1为个数的 d2为时间的 dt保存时间</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define maxn <span class="number">10005</span></span><br><span class="line">using namespace std;</span><br><span class="line">int w[<span class="number">2</span>],t,d1[maxn],d2[maxn],dt[maxn];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;w[<span class="number">0</span>],&amp;w[<span class="number">1</span>],&amp;t)!=<span class="variable constant_">EOF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">memset</span>(d1,<span class="number">0x8f</span>,<span class="title function_">sizeof</span>(d1));</span><br><span class="line">        <span class="title function_">memset</span>(dt,<span class="number">0</span>,<span class="title function_">sizeof</span>(dt));</span><br><span class="line">        <span class="title function_">memset</span>(d2,<span class="number">0</span>,<span class="title function_">sizeof</span>(d2));</span><br><span class="line">        d1[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">2</span>; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j=w[i]; j&lt;=t; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                d1[j]=<span class="title function_">max</span>(d1[j],d1[j-w[i]]+<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>((dt[j]&lt;dt[j-w[i]]+w[i])||((dt[j]==dt[j-w[i]]+w[i])&amp;&amp;(d2[j]&lt;d2[j-w[i]]+<span class="number">1</span>)))</span><br><span class="line">                &#123;</span><br><span class="line">                    dt[j]=dt[j-w[i]]+w[i];</span><br><span class="line">                    d2[j]=d2[j-w[i]]+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(dt[t]==t)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>,d1[t]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,d2[t],t-dt[t]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> Homer Simpson   <img src="/../images/dge.org-external-104-p10465.jpg.png"> Homer Simpson, a very smart guy, likes eating Krusty-burgers. It takes Homer m minutes to eat a Krusty- burger. However, there�s a new type of burger in Apu�s Kwik-e-Mart. Homer likes those too. It takes him n minutes to eat one of these burgers. Given t minutes, you have to find out the maximum number of burgers Homer can eat without wasting any time. If he must waste time, he can have beer.</p>
-<p>Input<br>Input consists of several test cases. Each test case consists of three integers m, n, t (0 &lt; m,n,t &lt; 10000). Input is terminated by EOF.</p>
-<p>Output<br>For each test case, print in a single line the maximum number of burgers Homer can eat without having beer. If homer must have beer, then also print the time he gets for drinking, separated by a single space. It is preferable that Homer drinks as little beer as possible.<br>Sample Input<br>3 5 54<br>3 5 55</p>
-<p>Sample Output<br>18<br>17</p>
 
       
     </div>
