@@ -7,21 +7,20 @@ categories:
 - Practice
 ---
 
-[Filebrowser](https://github.com/filebrowser/filebrowser) 是一个开源的服务器文件管理和分享工具
-可以较方便的实现服务器上文件的分享，这里记录下个人的使用经验
+[Filebrowser](https://github.com/filebrowser/filebrowser) 是一个开源的服务器文件管理和分享工具，可以较方便的实现服务器上文件的分享，这里记录下个人的使用经验。
 
 <!-- more -->
 
 ## 安装和配置
 
-一行代码就可以完成安装
+一行代码就可以完成安装：
 
 ```bash
 # https://filebrowser.org/installation
 curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 ```
 
-初始化配置
+初始化配置：
 
 ```bash
 # 初始化配置并保存至当前目录的 `filebrowser.db`
@@ -49,9 +48,9 @@ filebrowser -d filebrowser.db
 
 ## 创建 systemd 服务
 filebrowser 自身没有作为 daemon 运行的选项，可以自己创建一个 [systemd 服务](https://www.freedesktop.org/software/systemd/man/systemd.service.html)，
-从而方便开机启动和服务重启等
+从而方便开机启动和服务重启等。
 
-创建用户级的 systemd 服务
+创建用户级的 systemd 服务：
 
 ```conf
 # vim ~/.config/systemd/user/filebrowser.service

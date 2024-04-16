@@ -15,14 +15,15 @@ categories:
 
 Windows 默认没有启用 NFS 客户端，需要手动启用。任务栏搜索「启用或关闭Windows功能」,然后找到「NFS服务」勾选即可启用 Windows NFS 客户端。
 可执行 `showmount` 命令测试是否启用成功。
+
 ```bash
 showmount -e [yourNfsServerIP]
 ```
 
 启用之后就可以在文件资源管理器地址栏和使用 SMB 一样挂载 NFS 地址了，如输入 `\\10.0.0.1\share`。
 
-
 ## 挂载后无写入权限
+
 Windows 挂载 NFS 后可能发现没有写入权限，这是因为 Windows 挂载 NFS 时找不到 Windows 用户和 Unix 用户的映射关系，然后默认将用户映射为「匿名用户」。
 
 > Access to Network File System (NFS) file servers requires UNIX-style user and group identities, which are not the same as Windows user and group identities. To enable users to access NFS shared resources, Client for NFS can retrieve UNIX-style identity data from Active Directory (if the schema includes the appropriate attributes), or from a User Name Mapping server. If Active Directory does not include UNIX-style identity attributes and a User Name Mapping server is not available on your network, then Client for NFS will attempt to access NFS resources anonymously.
@@ -38,6 +39,7 @@ Windows Registry Editor Version 5.00
 "AnonymousGID"=dword:00000000
 "AnonymousUID"=dword:00000000
 ```
+
 导入后需重启 NFS 客户端或者重启电脑。
 
 ```cmd
@@ -48,6 +50,7 @@ nfsadmin client start
 参考：https://superuser.com/questions/103970/how-to-set-identity-for-windows-client-for-nfs-without-identity-server
 
 ## 挂载后中文文件名为乱码
+
 这是因为 Linux 文件名一般都使用 `UTF-8` 编码，而 Windows 不是，可以通过以下方式修改。
 
 任务栏搜索「区域」（控制面板选项），或者运行 `intl.cpl`，点击「管理」选项卡 -> 更改系统区域设置 -> 勾选使用 UTF-8。
