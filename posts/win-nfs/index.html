@@ -256,6 +256,7 @@
 <p>匿名用户默认 <code>uid=-2;gid=-2</code> ，即 Linux 上的 <code>nobody</code> 用户（<code>uid=65534;gid=65534</code>），而 <code>nobody</code> 用户有没有 NFS 服务器上共享目录的写入权限。如需写入可以登录 NFS 服务器开启该目录的其他用户写入权限。如果没权限登录该服务器，则可以通过注册表修改 Windows 映射匿名用户的 <code>uid</code> 和 <code>gid</code> 为 <code>0</code> ，对应 Linux 的 <code>root</code> 用户（如果 NFS 服务器开启了 <code>root_squash</code> 选项，该方法会失效）。</p>
 <p>修改方法：新建文本文档，输入以下内容并保存为 <code>nfs_uid0.reg</code>，然后双击该文件即可导入至注册表完成修改。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default]</span><br><span class="line">&quot;AnonymousGID&quot;=dword:00000000</span><br><span class="line">&quot;AnonymousUID&quot;=dword:00000000</span><br></pre></td></tr></table></figure>
+
 <p>导入后需重启 NFS 客户端或者重启电脑。</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nfsadmin client stop</span><br><span class="line">nfsadmin client <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
 
