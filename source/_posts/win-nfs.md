@@ -22,6 +22,12 @@ showmount -e [yourNfsServerIP]
 
 启用之后就可以在文件资源管理器地址栏和使用 SMB 一样挂载 NFS 地址了，如输入 `\\10.0.0.1\share`。
 
+也可以使用 `cmd` （注意不是 `powershell`）的 `mount` 命令进行挂载为网络盘符，详见[微软官方文档](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mount)。
+
+```cmd
+mount -o nolock \\10.0.0.1\share N:
+```
+
 ## 挂载后无写入权限
 
 Windows 挂载 NFS 后可能发现没有写入权限，这是因为 Windows 挂载 NFS 时找不到 Windows 用户和 Unix 用户的映射关系，然后默认将用户映射为「匿名用户」。
@@ -56,3 +62,5 @@ nfsadmin client start
 任务栏搜索「区域」（控制面板选项），或者运行 `intl.cpl`，点击「管理」选项卡 -> 更改系统区域设置 -> 勾选使用 UTF-8。
 
 ![win-utf-8](https://raw.githubusercontent.com/csJd/csJd.github.io/res/win-utf-8.png)
+
+注：修改后可能有个别程序出现乱码情况，请根据个人需要决定是否修改。
