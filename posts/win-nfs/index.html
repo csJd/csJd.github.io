@@ -249,6 +249,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount -e [yourNfsServerIP]</span><br></pre></td></tr></table></figure>
 
 <p>启用之后就可以在文件资源管理器地址栏和使用 SMB 一样挂载 NFS 地址了，如输入 <code>\\10.0.0.1\share</code>。</p>
+<p>也可以使用 <code>cmd</code> （注意不是 <code>powershell</code>）的 <code>mount</code> 命令进行挂载为网络盘符，详见<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mount">微软官方文档</a>。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o nolock \\<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>\share N:</span><br></pre></td></tr></table></figure>
+
 <h2 id="挂载后无写入权限"><a href="#挂载后无写入权限" class="headerlink" title="挂载后无写入权限"></a>挂载后无写入权限</h2><p>Windows 挂载 NFS 后可能发现没有写入权限，这是因为 Windows 挂载 NFS 时找不到 Windows 用户和 Unix 用户的映射关系，然后默认将用户映射为「匿名用户」。</p>
 <blockquote>
 <p>Access to Network File System (NFS) file servers requires UNIX-style user and group identities, which are not the same as Windows user and group identities. To enable users to access NFS shared resources, Client for NFS can retrieve UNIX-style identity data from Active Directory (if the schema includes the appropriate attributes), or from a User Name Mapping server. If Active Directory does not include UNIX-style identity attributes and a User Name Mapping server is not available on your network, then Client for NFS will attempt to access NFS resources anonymously.</p>
@@ -264,6 +267,7 @@
 <h2 id="挂载后中文文件名为乱码"><a href="#挂载后中文文件名为乱码" class="headerlink" title="挂载后中文文件名为乱码"></a>挂载后中文文件名为乱码</h2><p>这是因为 Linux 文件名一般都使用 <code>UTF-8</code> 编码，而 Windows 不是，可以通过以下方式修改。</p>
 <p>任务栏搜索「区域」（控制面板选项），或者运行 <code>intl.cpl</code>，点击「管理」选项卡 -&gt; 更改系统区域设置 -&gt; 勾选使用 UTF-8。</p>
 <p><img src="https://raw.githubusercontent.com/csJd/csJd.github.io/res/win-utf-8.png" alt="win-utf-8"></p>
+<p>注：修改后可能有个别程序出现乱码情况，请根据个人需要决定是否修改。</p>
 
     </div>
 
