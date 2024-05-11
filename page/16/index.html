@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,92 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/graph/ZOJ%201203%20Swordfish(%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%20kruskal)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/graph/ZOJ%201203%20Swordfish(%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%20kruskal)/" class="post-title-link" itemprop="url">ZOJ 1203 Swordfish(最小生成树 kruskal)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-10-22 09:39:13" itemprop="dateCreated datePublished" datetime="2014-10-22T09:39:13+00:00">2014-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Graph/" itemprop="url" rel="index"><span itemprop="name">Graph</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你n个点的坐标 每个点都可与其它n-1个点相连 求这n个点的最小生成树的权重</p>
+<p>裸的最小生成树 直接kruskal咯</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">105</span>, M = <span class="number">10050</span>;</span><br><span class="line">double x[N], y[N], ans;</span><br><span class="line">int n, m , par[N];</span><br><span class="line"></span><br><span class="line">struct edge &#123;</span><br><span class="line">    int u, v;</span><br><span class="line">    double w;</span><br><span class="line">&#125; e[M];</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">cmp</span>(<span class="params">edge a, edge b</span>)  &#123; <span class="keyword">return</span> a.<span class="property">w</span> &lt; b.<span class="property">w</span>;&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title class_">Find</span>(int x)</span><br><span class="line">&#123;</span><br><span class="line">    int r = x;</span><br><span class="line">    <span class="keyword">while</span>(par[r] &gt;= <span class="number">0</span>) r = par[r];</span><br><span class="line">    <span class="keyword">while</span>(x != r) <span class="comment">//压缩</span></span><br><span class="line">    &#123;</span><br><span class="line">        int tmp = par[x];</span><br><span class="line">        par[x] = r;</span><br><span class="line">        x = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title class_">Union</span>(int u, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int ru = <span class="title class_">Find</span>(u), rv = <span class="title class_">Find</span>(v), tmp = par[ru] + par[rv];</span><br><span class="line">    <span class="keyword">if</span>(par[ru] &gt; par[rv])</span><br><span class="line">        par[ru] = rv, par[rv] = tmp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        par[rv] = ru, par[ru] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">kruskal</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cur = <span class="number">0</span>, u, v;</span><br><span class="line">    <span class="title function_">memset</span>(par, -<span class="number">1</span>, <span class="title function_">sizeof</span>(par)); <span class="comment">//初始化并查集</span></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        u = e[i].<span class="property">u</span>, v = e[i].<span class="property">v</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Find</span>(u) != <span class="title class_">Find</span>(v))</span><br><span class="line">        &#123;</span><br><span class="line">            ans += e[i].<span class="property">w</span>;</span><br><span class="line">            ++cur;</span><br><span class="line">            <span class="title class_">Union</span>(u, v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cur &gt;= n - <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cas) <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        m = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%lf%lf&quot;</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">1</span>; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                double dis = <span class="title function_">sqrt</span>((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]));</span><br><span class="line">                e[++m].<span class="property">u</span> = i, e[m].<span class="property">v</span> = j, e[m].<span class="property">w</span> = dis;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">sort</span>(e + <span class="number">1</span>, e + <span class="number">1</span> + m, cmp);</span><br><span class="line">        ans = <span class="number">0</span>; <span class="title function_">kruskal</span>();</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;Case #%d:\nThe minimal distance is: %.2f\n&quot;</span>, ++cas, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Swordfish    Time Limit:2 Seconds Memory Limit:65536 KB    There exists a world within our world<br>A world beneath what we call cyberspace.<br>A world protected by firewalls,<br>passwords and the most advanced<br>security systems.<br>In this world we hide<br>our deepest secrets,<br>our most incriminating information,<br>and of course, a shole lot of money.<br>This is the world of Swordfish.<br>  We all remember that in the movie Swordfish, Gabriel broke into the World Bank Investors Group in West Los Angeles, to rob $9.5 billion. And he needed Stanley, the best hacker in the world, to help him break into the password protecting the bank system. Stanley’s lovely daughter Holly was seized by Gabriel, so he had to work for him. But at the last moment, Stanley made some little trick in his hacker mission: he injected a trojan horse in the bank system, so the money would jump from one account to another account every 60 seconds, and would continue jumping in the next 10 years. Only Stanley knew when and where to get the money. If Gabriel killed Stanley, he would never get a single dollar. Stanley wanted Gabriel to release all these hostages and he would help him to find the money back.<br>You who has watched the movie know that Gabriel at last got the money by threatening to hang Ginger to death. Why not Gabriel go get the money himself? Because these money keep jumping, and these accounts are scattered in different cities. In order to gather up these money Gabriel would need to build money transfering tunnels to connect all these cities. Surely it will be really expensive to construct such a transfering tunnel, so Gabriel wants to find out the minimal total length of the tunnel required to connect all these cites. Now he asks you to write a computer program to find out the minimal length. Since Gabriel will get caught at the end of it anyway, so you can go ahead and write the program without feeling guilty about helping a criminal.<br>Input:<br>The input contains several test cases. Each test case begins with a line contains only one integer N (0 &lt;&#x3D; N &lt;&#x3D;100), which indicates the number of cities you have to connect. The next N lines each contains two real numbers X and Y(-10000 &lt;&#x3D; X,Y &lt;&#x3D; 10000), which are the citie’s Cartesian coordinates (to make the problem simple, we can assume that we live in a flat world). The input is terminated by a case with N&#x3D;0 and you must not print any output for this case.<br>Output:<br>You need to help Gabriel calculate the minimal length of tunnel needed to connect all these cites. You can saftly assume that such a tunnel can be built directly from one city to another. For each of the input cases, the output shall consist of two lines: the first line contains “Case &#x2F;#n:”, where n is the case number (starting from 1); and the next line contains “The minimal distance is: d”, where d is the minimal distance, rounded to 2 decimal places. Output a blank line between two test cases.<br>Sample Input:<br> 5 0 0 0 1 1 1 1 0 0.5 0.5 0 Sample Output:<br> Case &#x2F;#1: The minimal distance is: 2.83</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1011,117 +1097,6 @@
 <p>3 10 100 100 110 10010 1100<br>Sample Output</p>
 <p>Case &#x2F;#1: 10 Case &#x2F;#2: 10 Case &#x2F;#3: 110<br>Source</p>
 <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/search.php?field=problem&key=2014+ACM/ICPC+Asia+Regional+Shanghai+Online&source=1&searchmode=source">2014 ACM&#x2F;ICPC Asia Regional Shanghai Online</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/ds/UVa%20839%20Not%20so%20Mobile(%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E8%BE%93%E5%85%A5)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/UVa%20839%20Not%20so%20Mobile(%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E8%BE%93%E5%85%A5)/" class="post-title-link" itemprop="url">UVa 839 Not so Mobile(树的递归输入)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-24 09:17:07" itemprop="dateCreated datePublished" datetime="2014-09-24T09:17:07+00:00">2014-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 判断一个树状天平是否平衡 每个测试样例每行4个数 wl,dl,wr,dr 当wl&#x2F;*dl&#x3D;wr&#x2F;*dr时 视为这个天平平衡 当wl或wr等于0是 下一行将是一个子天平 如果子天平平衡 wl为子天平的wl+wr 否则整个天平不平衡</p>
-<p>容易看出 输入是递归的 所以我们可以直接递归 边输入边判断</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">bool <span class="title function_">solve</span>(<span class="params">int &amp;w</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int wl, dl, wr, dr;</span><br><span class="line">    bool mobl = <span class="literal">true</span>, mobr = <span class="literal">true</span>;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;wl, &amp;dl, &amp;wr, &amp;dr);</span><br><span class="line">    <span class="keyword">if</span>(!wl) mobl = <span class="title function_">solve</span>(wl);</span><br><span class="line">    <span class="keyword">if</span>(!wr) mobr = <span class="title function_">solve</span>(wr);</span><br><span class="line">    w = wl + wr;</span><br><span class="line">    <span class="keyword">return</span> mobl &amp;&amp; mobr &amp;&amp; (wl * dl == wr * dr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, w;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="title function_">solve</span>(w) ? <span class="string">&quot;YES\n&quot;</span> : <span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(cas) <span class="title function_">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>Before being an ubiquous communications gadget, a <em>mobile</em> was just a structure made of strings and wires suspending colourfull things. This kind of mobile is usually found hanging over cradles of small babies.</p>
-<p><img src="/../images/dge.org-external-8-p839a.jpg.png" alt="\epsfbox{p839a.eps}"></p>
-<p>The figure illustrates a simple mobile. It is just a wire, suspended by a string, with an object on each side. It can also be seen as a kind of lever with the fulcrum on the point where the string ties the wire. From the lever principle we know that to balance a simple mobile the product of the weight of the objects by their distance to the fulcrum must be equal. That is <strong>W</strong>l×<strong>D</strong>l &#x3D; <strong>W</strong>r×<strong>D</strong>rwhere <strong>D</strong>l is the left distance, <strong>D</strong>r is the right distance, <strong>W</strong>l is the left weight and <strong>W</strong>r is the right weight.</p>
-<p>In a more complex mobile the object may be replaced by a sub-mobile, as shown in the next figure. In this case it is not so straightforward to check if the mobile is balanced so we need you to write a program that, given a description of a mobile as input, checks whether the mobile is in equilibrium or not.</p>
-<p><img src="/../images/dge.org-external-8-p839b.jpg.png" alt="\epsfbox{p839b.eps}"></p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs.</p>
-<p>The input is composed of several lines, each containing 4 integers separated by a single space. The 4 integers represent the distances of each object to the fulcrum and their weights, in the format: <strong>W</strong>l <strong>D</strong>l <strong>W</strong>r <strong>D</strong>r</p>
-<p>If <strong>W</strong>l or <strong>W</strong>r is zero then there is a sub-mobile hanging from that end and the following lines define the the sub-mobile. In this case we compute the weight of the sub-mobile as the sum of weights of all its objects, disregarding the weight of the wires and strings. If both <strong>W</strong>l and <strong>W</strong>rare zero then the following lines define two sub-mobiles: first the left then the right one.</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line.</p>
-<p>Write <code>YES&#39; if the mobile is in equilibrium, write </code>NO’ otherwise.</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>1 0 2 0 4 0 3 0 1 1 1 1 1 2 4 4 2 1 6 3 2</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>YES<br>#</p>
-<hr>
-<p>Before being an ubiquous communications gadget, a <em>mobile</em> was just a structure made of strings and wires suspending colourfull things. This kind of mobile is usually found hanging over cradles of small babies.</p>
-<p><img src="/../images/dge.org-external-8-p839a.jpg.png" alt="\epsfbox{p839a.eps}"></p>
-<p>The figure illustrates a simple mobile. It is just a wire, suspended by a string, with an object on each side. It can also be seen as a kind of lever with the fulcrum on the point where the string ties the wire. From the lever principle we know that to balance a simple mobile the product of the weight of the objects by their distance to the fulcrum must be equal. That is <strong>W</strong>l×<strong>D</strong>l &#x3D; <strong>W</strong>r×<strong>D</strong>rwhere <strong>D</strong>l is the left distance, <strong>D</strong>r is the right distance, <strong>W</strong>l is the left weight and <strong>W</strong>r is the right weight.</p>
-<p>In a more complex mobile the object may be replaced by a sub-mobile, as shown in the next figure. In this case it is not so straightforward to check if the mobile is balanced so we need you to write a program that, given a description of a mobile as input, checks whether the mobile is in equilibrium or not.</p>
-<p><img src="/../images/dge.org-external-8-p839b.jpg.png" alt="\epsfbox{p839b.eps}"></p>
-<h2 id="-5"><a href="#-5" class="headerlink" title=""></a></h2><p>The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs.</p>
-<p>The input is composed of several lines, each containing 4 integers separated by a single space. The 4 integers represent the distances of each object to the fulcrum and their weights, in the format: <strong>W</strong>l <strong>D</strong>l <strong>W</strong>r <strong>D</strong>r</p>
-<p>If <strong>W</strong>l or <strong>W</strong>r is zero then there is a sub-mobile hanging from that end and the following lines define the the sub-mobile. In this case we compute the weight of the sub-mobile as the sum of weights of all its objects, disregarding the weight of the wires and strings. If both <strong>W</strong>l and <strong>W</strong>rare zero then the following lines define two sub-mobiles: first the left then the right one.</p>
-<h2 id="-6"><a href="#-6" class="headerlink" title=""></a></h2><p>For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line.</p>
-<p>Write <code>YES&#39; if the mobile is in equilibrium, write </code>NO’ otherwise.</p>
-<h2 id="-7"><a href="#-7" class="headerlink" title=""></a></h2><p>1 0 2 0 4 0 3 0 1 1 1 1 1 2 4 4 2 1 6 3 2</p>
-<h2 id="-8"><a href="#-8" class="headerlink" title=""></a></h2><p>YES</p>
 
       
     </div>

@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,101 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/search/POJ%203126%20Prime%20Path(BFS%20%E6%95%B0%E5%AD%97%E5%A4%84%E7%90%86)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/POJ%203126%20Prime%20Path(BFS%20%E6%95%B0%E5%AD%97%E5%A4%84%E7%90%86)/" class="post-title-link" itemprop="url">POJ 3126 Prime Path(BFS 数字处理)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-04-02 07:48:30" itemprop="dateCreated datePublished" datetime="2015-04-02T07:48:30+00:00">2015-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你两个4位素数a, b 你每次可以改变a的一位数但要求改变后仍为素数 求a至少改变多少次才能变成b</p>
+<p>基础的bfs 注意数的处理就行了 出队一个数 然后入队所有可以由这个素数经过一次改变而来的素数 知道得到b</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10000</span>;</span><br><span class="line">int p[N], v[N], d[N], q[N], a, b;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">initPrime</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_">memset</span>(v, <span class="number">0</span> , <span class="title function_">sizeof</span>(v));</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i * i &lt; N; ++i)</span><br><span class="line">        <span class="keyword">if</span>(!v[i]) <span class="keyword">for</span>(int j = i; i * j &lt; N; ++j)  v[i * j] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">2</span>; i &lt; N ; ++i) p[i] = !v[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">bfs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int c, t, le = <span class="number">0</span>, ri = <span class="number">0</span>;</span><br><span class="line">    <span class="title function_">memset</span>(v, <span class="number">0</span>, <span class="title function_">sizeof</span>(v));</span><br><span class="line">    q[ri++] = a, v[a] = <span class="number">1</span>, d[a] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(le &lt; ri)</span><br><span class="line">    &#123;</span><br><span class="line">        c = q[le++];</span><br><span class="line">        <span class="keyword">if</span>( c == b) <span class="keyword">return</span> d[c];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; N; i *= <span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; <span class="number">10</span>; ++j)   <span class="comment">//把c第i数量级的数改为j</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">1000</span> &amp;&amp; j == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                t = c / (i * <span class="number">10</span>) * i * <span class="number">10</span> + i * j + c % i;</span><br><span class="line">                <span class="keyword">if</span>(p[t] &amp;&amp; !v[t])</span><br><span class="line">                    v[t] = <span class="number">1</span>, d[t] = d[c] + <span class="number">1</span>, q[ri++] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="title function_">initPrime</span>();</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">        <span class="keyword">if</span>((a = <span class="title function_">bfs</span>()) != -<span class="number">1</span>) <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_">puts</span>(<span class="string">&quot;Impossible&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Prime Path</p>
+<p>Description<br><img src="/../images/es-3126_1.jpg.png"> The ministers of the cabinet were quite upset by the message from the Chief of Security stating that they would all have to change the four-digit room numbers on their offices.<br>— It is a matter of security to change such things every now and then, to keep the enemy in the dark.<br>— But look, I have chosen my number 1033 for good reasons. I am the Prime minister, you know!<br>— I know, so therefore your new number 8179 is also a prime. You will just have to paste four new digits over the four old ones on your office door.<br>— No, it’s not that simple. Suppose that I change the first digit to an 8, then the number will read 8033 which is not a prime!<br>— I see, being the prime minister you cannot stand having a non-prime number on your door even for a few seconds.<br>— Correct! So I must invent a scheme for going from 1033 to 8179 by a path of prime numbers where only one digit is changed from one prime to the next prime.<br>Now, the minister of finance, who had been eavesdropping, intervened.<br>— No unnecessary expenditure, please! I happen to know that the price of a digit is one pound.<br>— Hmm, in that case I need a computer program to minimize the cost. You don’t know some very cheap software gurus, do you?<br>— In fact, I do. You see, there is this programming contest going on… Help the prime minister to find the cheapest prime path between any two given four-digit primes! The first digit must be nonzero, of course. Here is a solution in the case above.<br> 1033<br>1733<br>3733<br>3739<br>3779<br>8779<br>8179 The cost of this solution is 6 pounds. Note that the digit 1 which got pasted over in step 2 can not be reused in the last step – a new 1 must be purchased.</p>
+<p>Input</p>
+<p>One line with a positive number: the number of test cases (at most 100). Then for each test case, one line with two numbers separated by a blank. Both numbers are four-digit primes (without leading zeros).</p>
+<p>Output</p>
+<p>One line for each case, either with a number stating the minimal cost or containing the word Impossible.</p>
+<p>Sample Input</p>
+<p>3 1033 8179 1373 8017 1033 1033</p>
+<p>Sample Output</p>
+<p>6 7 0</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1029,96 +1124,6 @@
 <p><a target="_blank" rel="noopener" href="http://hihocoder.com/contest/hiho37/problem/1#">提示：非有序数组的二分查找之二</a></p>
 <h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。</p>
 <h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br>样例输入 10 4 1732 4176 2602 6176 1303 6207 3125 1 1011 6600 样例输出 1732</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/math/URAL%201762%20Search%20for%20a%20Hiding-Place(%E6%95%B0%E5%AD%A6%C2%B7%E6%A8%A1%E6%8B%9F)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/math/URAL%201762%20Search%20for%20a%20Hiding-Place(%E6%95%B0%E5%AD%A6%C2%B7%E6%A8%A1%E6%8B%9F)/" class="post-title-link" itemprop="url">URAL 1762 Search for a Hiding-Place(数学·模拟)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-03-11 21:32:21" itemprop="dateCreated datePublished" datetime="2015-03-11T21:32:21+00:00">2015-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 你在一个n&#x2F;*m个白色正方形格子组成的矩形的某个顶点格子 你沿着45度角的方向走 到了边界就改变方向90度 每次经过一个格子都改变他原来的颜（白或灰） 求你走到另一个顶点格子时矩形中有多少格子是灰色的</p>
-<p>这题可以用公式也可以直接模拟 模拟就是一直向右移n-1位 每次超过边界就可以把边界向右移m-1位 用cnt记录超过边界的次数 那么每次都会经过cnt个已经走过的格子 (每个格子最多经过2次) 答案也就减去2&#x2F;*cnt 直到刚好到达边界</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    ll n, m, cur, cnt, ans, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; m) <span class="title function_">swap</span>(n, m);</span><br><span class="line">        cur = ans = <span class="number">1</span>, cnt = <span class="number">0</span>, k = m;</span><br><span class="line">        <span class="keyword">while</span>(cur != k)</span><br><span class="line">        &#123;</span><br><span class="line">            cur += n - <span class="number">1</span>, ans += n - <span class="number">1</span> - <span class="number">2</span> * cnt;</span><br><span class="line">            <span class="keyword">if</span>(cur &gt; k) k += m - <span class="number">1</span>, ++cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Search-for-a-Hiding-Place"><a href="#Search-for-a-Hiding-Place" class="headerlink" title="Search for a Hiding-Place"></a>Search for a Hiding-Place</h2><p><img src="/../images/-image-get.aspx-76e9e33b-e7d0-476b-b059-544383bb9e8d.png" alt="Problem illustration"></p>
-<p>Scooby-Doo is fond of adventures. This time he wanted to find a hiding-place in a vampire castle. After a long search, Scooby ended up in a huge rectangular hall with four entrances, one in each corner, through one of which he had entered. The floor was paved with white square tiles. Scooby thought that the hiding-place was under one of these tiles. He started searching for it by turning the tiles over, the grey side up. He began his search from a corner moving at an angle of 45° to the walls. Each time he came to a wall, he made a 90° turn. If he stepped on a grey tile, he turned it back the white side up. The search went on until Scooby reached an entrance at one of the corners. Then, not having found the hiding-place, the tired dog sighed and went out to have a snack.<br>Given the dimensions of the hall, calculate the total number of tiles that were turned the grey side up at the end of the search.</p>
-<p>The only input line contains integers <em>n</em> and <em>m</em> separated with a space. They are the length and width of the hall measured in tiles (2 ≤ <em>n</em>, <em>m</em> ≤ 1 000 000).</p>
-<p>In the only line output the number of grey tiles in the hall after Scooby-Doo’s search.</p>
-<p>input output 7 5 11 2 3 3</p>
 
       
     </div>

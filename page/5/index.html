@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/ds/HDU%203308%20LCIS%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0%C2%B7%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/ds/HDU%203308%20LCIS%20(%E7%BA%BF%E6%AE%B5%E6%A0%91%C2%B7%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0%C2%B7%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6)/" class="post-title-link" itemprop="url">HDU 3308 LCIS (线段树·单点更新·区间合并)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-08-11 09:01:24" itemprop="dateCreated datePublished" datetime="2015-08-11T09:01:24+00:00">2015-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 给你一个数组 有更新值和查询两种操作 对于每次查询 输出对应区间的最长连续递增子序列的长度</p>
+<p>基础的线段树区间合并 线段树维护三个值 对应区间的LCIS长度(lcis) 对应区间以左端点为起点的LCIS长度(lle) 对应区间以右端点为终点的LCIS长度(lri) 然后用val存储数组对应位置的值 当val[mid + 1] &gt; val[mid] 的时候就要进行区间合并操作了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#define lc lp, s, mid</span><br><span class="line">#define rc rp, mid+<span class="number">1</span>, e</span><br><span class="line">#define lp p&lt;&lt;<span class="number">1</span></span><br><span class="line">#define rp p&lt;&lt;<span class="number">1</span>|<span class="number">1</span></span><br><span class="line">#define mid ((s+e)&gt;&gt;<span class="number">1</span>)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>, M = N * <span class="number">4</span>;</span><br><span class="line">int lcis[M], lle[M], lri[M], val[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">pushup</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    lcis[p] = <span class="title function_">max</span>(lcis[lp], lcis[rp]);</span><br><span class="line">    lle[p] = lle[lp], lri[p] = lri[rp];</span><br><span class="line">    <span class="keyword">if</span>(val[mid + <span class="number">1</span>] &gt; val[mid]) <span class="comment">//合并条件</span></span><br><span class="line">    &#123;</span><br><span class="line">        lcis[p] = <span class="title function_">max</span>(lcis[p], lri[lp] + lle[rp]);</span><br><span class="line">        <span class="keyword">if</span>(lle[lp] == mid + <span class="number">1</span> - s) lle[p] += lle[rp];</span><br><span class="line">        <span class="keyword">if</span>(lri[rp] == e - mid) lri[p] += lri[lp];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">build</span>(<span class="params">int p, int s, int e</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == e)</span><br><span class="line">    &#123;</span><br><span class="line">        lcis[p] = lle[p] = lri[p] = <span class="number">1</span>;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;val[s]);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">build</span>(lc);</span><br><span class="line">    <span class="title function_">build</span>(rc);</span><br><span class="line">    <span class="title function_">pushup</span>(p, s, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span>(<span class="params">int p, int s, int e, int x, int v</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == e)</span><br><span class="line">    &#123;</span><br><span class="line">        val[s] = v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid) <span class="title function_">update</span>(lc, x, v);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(x &gt; mid) <span class="title function_">update</span>(rc, x, v);</span><br><span class="line">    <span class="title function_">pushup</span>(p, s, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">query</span>(<span class="params">int p, int s, int e, int l, int r</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= s &amp;&amp; e &lt;= r) <span class="keyword">return</span> lcis[p];</span><br><span class="line">    int ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(val[mid + <span class="number">1</span>] &gt; val[mid])</span><br><span class="line">        ret = <span class="title function_">min</span>(r, mid + lle[rp]) - <span class="title function_">max</span>(l, mid + <span class="number">1</span> - lri[lp]) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid)  ret = <span class="title function_">max</span>(ret, <span class="title function_">query</span>(lc, l, r));</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid)  ret = <span class="title function_">max</span>(ret, <span class="title function_">query</span>(rc, l, r));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int T, n, m, a, b;</span><br><span class="line">    char op[<span class="number">5</span>];</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="title function_">build</span>(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, op, &amp;a, &amp;b);</span><br><span class="line">            <span class="keyword">if</span>(op[<span class="number">0</span>] == <span class="string">&#x27;Q&#x27;</span>)</span><br><span class="line">                <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">query</span>(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a, b));</span><br><span class="line">            <span class="keyword">else</span> <span class="title function_">update</span>(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a, b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="LCIS"><a href="#LCIS" class="headerlink" title="LCIS"></a>LCIS</h1><p>Problem Description</p>
+<p>Given n integers.<br>You have two operations:<br>U A B: replace the Ath number by B. (index counting from 0)<br>Q A B: output the length of the longest consecutive increasing subsequence (LCIS) in [a, b].<br>Input</p>
+<p>T in the first line, indicating the case number.<br>Each case starts with two integers n , m(0&lt;n,m&lt;&#x3D;10 5).<br>The next line has n integers(0&lt;&#x3D;val&lt;&#x3D;10 5).<br>The next m lines each has an operation:<br>U A B(0&lt;&#x3D;A,n , 0&lt;&#x3D;B&#x3D;10 5)<br>OR<br>Q A B(0&lt;&#x3D;A&lt;&#x3D;B&lt; n).<br>Output</p>
+<p>For each Q, output the answer.<br>Sample Input</p>
+<p>1 10 10 7 7 3 3 5 9 9 8 1 8 Q 6 6 U 3 4 Q 0 1 Q 0 5 Q 4 7 Q 3 5 Q 0 2 Q 4 6 U 6 10 Q 0 9<br>Sample Output</p>
+<p>1 1 4 2 3 1 2 5</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1065,96 +1156,6 @@
 <p>Your output should contain all the hat’s words, one per line, in alphabetical order.<br>Sample Input</p>
 <p>a ahat hat hatword hziee word<br>Sample Output</p>
 <p>ahat hatword</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/search/ZOJ%203436%20July%20Number(DFS)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/search/ZOJ%203436%20July%20Number(DFS)/" class="post-title-link" itemprop="url">ZOJ 3436 July Number(DFS)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-07-26 17:08:26" itemprop="dateCreated datePublished" datetime="2015-07-26T17:08:26+00:00">2015-07-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 把一个数替换为这个数相邻数字差组成的数 知道这个数只剩一位数 若最后的一位数是7 则称原来的数为 July Number 给你一个区间 求这个区间中July Number的个数</p>
-<p>从7开始DFS 位数多的数总能由位数小的数推出</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1e6</span>;</span><br><span class="line">int july[N], n;</span><br><span class="line">set&lt;int&gt; ans;</span><br><span class="line"></span><br><span class="line">int pw[] = &#123;<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">10000</span>, <span class="number">100000</span>, <span class="number">1000000</span>, <span class="number">10000000</span>, <span class="number">100000000</span>&#125;;</span><br><span class="line"><span class="comment">//剩余长度, 当前位要填的数，通过什么数来搜索, 路径</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dfs</span>(<span class="params">int len, int d, int bas, int cur</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d &lt; <span class="number">0</span> || d &gt; <span class="number">9</span>) <span class="keyword">return</span>;  <span class="comment">//要填的数不合法</span></span><br><span class="line">    <span class="keyword">if</span>(!len)</span><br><span class="line">    &#123;</span><br><span class="line">        july[n++] = cur * <span class="number">10</span> + d;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    int k = pw[len - <span class="number">1</span>];</span><br><span class="line">    <span class="title function_">dfs</span>(len - <span class="number">1</span>, d - bas / k, bas % k, cur * <span class="number">10</span> + d);</span><br><span class="line">    <span class="title function_">dfs</span>(len - <span class="number">1</span>, d + bas / k, bas % k, cur * <span class="number">10</span> + d);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    ans.<span class="title function_">insert</span>(<span class="number">7</span>);</span><br><span class="line">    set&lt;int&gt;::iterator it;</span><br><span class="line">    <span class="keyword">for</span>(int l = <span class="number">2</span>; l &lt; <span class="number">10</span>; ++l)</span><br><span class="line">    &#123;</span><br><span class="line">        n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(it = ans.<span class="title function_">begin</span>(); it != ans.<span class="title function_">end</span>(); ++it)</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">                <span class="title function_">dfs</span>(l - <span class="number">1</span>, i, *it, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i) ans.<span class="title function_">insert</span>(july[i]);</span><br><span class="line">        <span class="comment">//printf(&quot;%d\n&quot;, ans.size());</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int a, b = n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(it = ans.<span class="title function_">begin</span>(); it != ans.<span class="title function_">end</span>(); ++it) </span><br><span class="line">        july[n++] = *it;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b))</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">upper_bound</span>(july, july + n, b) - <span class="title function_">lower_bound</span>(july, july + n, a));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  July Number    Time Limit:2 Seconds Memory Limit:65536 KB</p>
-<p>The digital difference of a positive number is constituted by the difference between each two neighboring digits (with the leading zeros omitted). For example the digital difference of 1135 is 022 &#x3D; 22. The repeated digital difference, or differential root, can be obtained by caculating the digital difference until a single-digit number is reached. A number whose differential root is 7 is also called July Number. Your job is to tell how many July Numbers are there lying in the given interval [<em>a</em>, <em>b</em>].</p>
-<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>There are multiple cases. Each case contains two integers <em>a</em> and <em>b</em>. 1 ≤ <em>a</em> ≤ <em>b</em> ≤ 109.</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>One integer <em>k</em>, the number of July Numbers.</p>
-<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>1 10</p>
-<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>1<br>Author: HE, Ningxu<br>Contest: ZOJ Monthly, November 2010</p>
 
       
     </div>

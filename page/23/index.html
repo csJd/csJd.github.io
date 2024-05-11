@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,108 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/POJ%203390%20Print%20Words%20in%20Lines(DP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/POJ%203390%20Print%20Words%20in%20Lines(DP)/" class="post-title-link" itemprop="url">POJ 3390 Print Words in Lines(DP)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:50:19" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:19+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Print Words in Lines</p>
+<p><strong>Time Limit:</strong> 1000MS  <strong>Memory Limit:</strong> 65536K <strong>Total Submissions:</strong> 1624  <strong>Accepted:</strong> 864</p>
+<p>Description<br>We have a paragraph of text to print. A text is a sequence of words and each word consists of characters. When we print a text, we print the words from the text one at a time, according to the order the words appear in the text. The words are printed in lines, and we can print at most <em>M</em> characters in a line. If there is space available, we could print more than one word in a line. However, when we print more than one word in a line, we need to place exactly one space character between two adjacent words in a line. For example, when we are given a text like the following:<br>This is a text of fourteen words and the longest word has ten characters</p>
+<p>Now we can print this text into lines of no more than 20 characters as the following.</p>
+<p>This is<br>a text of<br>fourteen words<br>and the longest<br>word<br>has ten characters</p>
+<p>However, when you print less than 20 characters in a line, you need to pay a penalty, which is equal to the square of the difference between 20 and the actual number of characters you printed in that line. For example in the first line we actually printed seven characters so the penalty is (20 − 7)2 &#x3D; 169. The total penalty is the sum of all penalties from all lines. Given the text and the number of maximum number of characters allowed in a line, compute the minimum penalty to print the text.</p>
+<p>Input</p>
+<p>The first line of the input is the number of test cases (<em>C</em>). The first line of a test case is the maximum number of characters allowed in a line (<em>M</em>). The second line of a test case is the number of words in the text (<em>N</em>). The following <em>N</em> lines are the length (in character) of each word in the text. It is guaranteed that no word will have more than <em>M</em> characters, <em>N</em> is at most 10000, and <em>M</em> is at most 100.</p>
+<p>Output</p>
+<p>The output has <em>C</em> lines. Each line has the minimum penalty one needs to pay in order to print the text in that test case.</p>
+<p>Sample Input</p>
+<p>2 20 14 4 2 1 4 2 8 5 3 3 7 4 3 3 10 30 14 4 2 1 4 2 8 5 3 3 7 4 3 3 10</p>
+<p>Sample Output</p>
+<p>33 146</p>
+<p>Source</p>
+<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=Kaohsiung+2006">Kaohsiung 2006</a></p>
+<p>题意 把n个单词排版 每行最多m个字符 不同单词间有空格 每行最后一个单词后没空格 空格占一个字符 当一行的字符数与m的差为t时 就会扣t&#x2F;*t分 求最少扣分</p>
+<p>令a[i]表示第i个单词的长度 s[i]表示从第一个单词到第i个单词单词长度和d[i]表示前i个单词排版后最少扣的分</p>
+<p>则t&#x3D;m-(s[i] - s[j] + i - j - 1)表示把从第j+1个单词到第i个单词放在一行时这行的字符长度与m的差</p>
+<p>那么当t&gt;&#x3D;0时 有转移方程 d[i]&#x3D;min(d[i],d[j]+t&#x2F;*t) ;</p>
+<p>有了方程程序就好写了:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>;</span><br><span class="line">int s[N], d[N], a[N], t, cas, m, n;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">            s[i] = s[i - <span class="number">1</span>] + a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d)); d[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">            &#123;</span><br><span class="line">                t = m - (s[i] - s[j] + i - j - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= <span class="number">0</span>)  d[i] = min (d[i], d[j] + t * t);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1015,103 +1117,6 @@
 <p>output 4</p>
 <p>Note</p>
 <p>In the first sample he can pay4dollars and increase the height of pylon with number0by4units. Then he can safely pass to the last pylon.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/other/Codeforce%20264%20A%20Caisa%20and%20Sugar(%E7%AE%80%E5%8D%95)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/other/Codeforce%20264%20A%20Caisa%20and%20Sugar(%E7%AE%80%E5%8D%95)/" class="post-title-link" itemprop="url">Codeforce 264 A Caisa and Sugar(简单)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-30 18:29:17" itemprop="dateCreated datePublished" datetime="2014-08-30T18:29:17+00:00">2014-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Caisa去商店买Sugar 商店找零的最低单位为元 低于1元的部分每分找一个糖果 商店有n种Suger Caisa有s元钱 她只买一种Sugar 输入n s 再输入n行 每行两个数a b 表示第i种Sugar的单价为a元b分 求Sugar最多能被找多少糖果</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int  n, s, cos;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;s))</span><br><span class="line">    &#123;</span><br><span class="line">        s *= <span class="number">100</span>;</span><br><span class="line">        int flag = <span class="number">0</span>, a, b, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (n--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">            cos = a * <span class="number">100</span> + b;</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; cos * j &lt;= s; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                ans = max (ans, (s - cos) % <span class="number">100</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, flag ? ans : -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Caisais going to have a party and he needs to buy the ingredients for a big chocolate cake. For that he is going to the biggest supermarket in town.</p>
-<p>Unfortunately, he has just<em>s</em>dollars for sugar. But that’s not a reason to be sad, because there are<em>n</em>types of sugar in the supermarket, maybe he able to buy one. But that’s not all. The supermarket has very unusual exchange politics: instead of cents the sellers give sweets to a buyer as a change. Of course, the number of given sweets always doesn’t exceed99, because each seller maximizes the number of dollars in the change (100cents can be replaced with a dollar).</p>
-<p>Caisa wants to buy only one type of sugar, also he wants to maximize the number of sweets in the change. What is the maximum number of sweets he can get? Note, that Caisa doesn’t want to minimize the cost of the sugar, he only wants to get maximum number of sweets as change.<br>Input</p>
-<p>The first line contains two space-separated integers<em>n</em>, <em>s</em>(1 ≤ <em>n</em>, <em>s</em> ≤ 100).</p>
-<p>The<em>i</em>-th of the next<em>n</em>lines contains two integers<em>x**i</em>,<em>y**i</em>(1 ≤ <em>x**i</em> ≤ 100; 0 ≤ <em>y**i</em> &lt; 100), where<em>x**i</em>represents the number of dollars and<em>y**i</em>the number of cents needed in order to buy the<em>i</em>-th type of sugar.</p>
-<p>Output</p>
-<p>Print a single integer representing the maximum number of sweetshe can buy, or-1if he can’t buy any type of sugar.<br>Sample test(s)</p>
-<p>input 5 10 3 90 12 0 9 70 5 50 7 0</p>
-<p>output 50<br>input 5 5 10 10 20 20 30 30 40 40 50 50</p>
-<p>output -1</p>
-<p>Note</p>
-<p>In the first test sample Caisa can buy the fourth type of sugar, in such a case he will take50sweets as a change.</p>
-<p>﻿﻿</p>
 
       
     </div>

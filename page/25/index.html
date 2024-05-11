@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/UVa%2010003%20Cutting%20Sticks(DP%20%E6%9C%80%E4%BC%98%E6%9C%A8%E6%A3%8D%E5%88%87%E5%89%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/UVa%2010003%20Cutting%20Sticks(DP%20%E6%9C%80%E4%BC%98%E6%9C%A8%E6%A3%8D%E5%88%87%E5%89%B2)/" class="post-title-link" itemprop="url">UVa 10003 Cutting Sticks(DP 最优木棍切割)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-25 21:29:38" itemprop="dateCreated datePublished" datetime="2014-08-25T21:29:38+00:00">2014-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 要把一根长为l的木棍切成n+1段 切割的位置分别为c[1],c[2],…,c[n] 每次切割的成本为当前切割的那一段的长度 如长度100的切成两段成本为100 求完成切割的最小成本</p>
+<p>和最优矩阵链乘那题很像 不用打印路径更简单了 在木棍上加两个点c[0]&#x3D;0 c[n+1]&#x3D;l d[i][j]表示把这段木棍的第i到j个点完成切割的最小成本 如果j&#x3D;i+1 不需要切割 成本为0 这是边界条件 j&gt;i+1时 可以在i和j间取一点k 那么有d[i][j]&#x3D;min{d[i][k]+d[k][j]+c[j]-c[i]} 即在k处切断 这个切割的成本为c[j]-c[i]</p>
+<p>所以有转移方程d[i][j]&#x3D;min{d[i][k]+d[k][j]+c[j]-c[i]} i&lt;k&lt;j</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">55</span>, <span class="variable constant_">INF</span> = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">int d[N][N], c[N];</span><br><span class="line"></span><br><span class="line">int dp (int i, int j)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (d[i][j] &lt; <span class="variable constant_">INF</span>)  <span class="keyword">return</span> d[i][j];</span><br><span class="line">    <span class="keyword">for</span> (int k = i+<span class="number">1</span>; k &lt; j; ++k)</span><br><span class="line">        d[i][j] = min (d[i][j], dp (i, k) + dp (k , j) + c[j] - c[i]);</span><br><span class="line">    <span class="keyword">return</span> d[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int l, n;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;l), l)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;c[i]);</span><br><span class="line">        c[++n] = l;</span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d));</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt;= n-<span class="number">1</span>; ++i) d[i][i+<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        printf (<span class="string">&quot;The minimum cutting is %d.\n&quot;</span>, dp (<span class="number">0</span>, n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
+<p>You have to cut a wood stick into pieces. The most affordable company, The Analog Cutting Machinery, Inc. (ACM), charges money according to the length of the stick being cut. Their procedure of work requires that they only make one cut at a time.</p>
+<p>It is easy to notice that different selections in the order of cutting can led to different prices. For example, consider a stick of length 10 meters that has to be cut at 2, 4 and 7 meters from one end. There are several choices. One can be cutting first at 2, then at 4, then at 7. This leads to a price of 10 + 8 + 6 &#x3D; 24 because the first stick was of 10 meters, the resulting of 8 and the last one of 6. Another choice could be cutting at 4, then at 2, then at 7. This would lead to a price of 10 + 4 + 6 &#x3D; 20, which is a better price.</p>
+<p>Your boss trusts your computer abilities to find out the minimum cost for cutting a given stick.</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input will consist of several input cases. The first line of each test case will contain a positive number<em>l</em>that represents the length of the stick to be cut. You can assume<em>l</em>&lt; 1000. The next line will contain the number<em>n</em>(<em>n</em>&lt; 50) of cuts to be made.</p>
+<p>The next line consists of<em>n</em>positive numbers<em>c**i</em>(0 &lt;<em>c**i</em>&lt;<em>l</em>) representing the places where the cuts have to be done, given in strictly increasing order.</p>
+<p>An input case with<em>l</em>&#x3D; 0 will represent the end of the input.</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>You have to print the cost of the optimal solution of the cutting problem, that is the minimum cost of cutting the given stick. Format the output as shown below.</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>100 3 25 50 75 10 4 4 5 7 8 0</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>The minimum cutting is 200. The minimum cutting is 22.</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1041,99 +1138,6 @@
 <p>For each test case, print one line containing the case number (they are numbered sequentially starting from 1) and the height of the tallest possible tower in the format “Case <em>case</em>: maximum height &#x3D; <em>height</em>“</p>
 <h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>1 10 20 30 2 6 8 10 5 5 5 7 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 5 31 41 59 26 53 58 97 93 23 84 62 64 33 83 27 0</p>
 <h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>Case 1: maximum height &#x3D; 40 Case 2: maximum height &#x3D; 21 Case 3: maximum height &#x3D; 28 Case 4: maximum height &#x3D; 342</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/UVa%2010285%20Longest%20Run%20on%20a%20Snowboard(DP%20%E4%BA%8C%E7%BB%B4%E6%9C%80%E9%95%BF%E9%80%92%E5%87%8F%E5%AD%90%E5%BA%8F%E5%88%97)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/UVa%2010285%20Longest%20Run%20on%20a%20Snowboard(DP%20%E4%BA%8C%E7%BB%B4%E6%9C%80%E9%95%BF%E9%80%92%E5%87%8F%E5%AD%90%E5%BA%8F%E5%88%97)/" class="post-title-link" itemprop="url">UVa 10285 Longest Run on a Snowboard(DP 二维最长递减子序列)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-23 10:06:31" itemprop="dateCreated datePublished" datetime="2014-08-23T10:06:31+00:00">2014-08-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 输入一个城市的滑雪地图 你可以从高的地方滑到伤下左右低的地方 求这个城市的最长滑雪线路长度 即在一个矩阵中找出最长递减连续序列</p>
-<p>令d[i][j]为以格子map(i,j)为起点的最长序列 则有状态转移方程d[i][j]&#x3D;max{d[a][b]}+1 a,b为与i,j相邻且值比i,j小的所有点</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;  </span><br><span class="line">#include&lt;cstring&gt;  </span><br><span class="line">#include&lt;algorithm&gt;  </span><br><span class="line">using namespace std;  </span><br><span class="line">#define maxn <span class="number">105</span>  </span><br><span class="line">#define a i+x[k]  </span><br><span class="line">#define b j+y[k]  </span><br><span class="line">int ma[maxn][maxn],d[maxn][maxn],r,c,n,ans;  </span><br><span class="line">int x[<span class="number">4</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,-<span class="number">1</span>&#125;,y[<span class="number">4</span>]=&#123;-<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;  </span><br><span class="line">  </span><br><span class="line">int <span class="title function_">dp</span>(<span class="params">int i,int j</span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">if</span>(d[i][j]&gt;<span class="number">0</span>) <span class="keyword">return</span> d[i][j];  </span><br><span class="line">    d[i][j]=<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">for</span>(int k=<span class="number">0</span>;k&lt;<span class="number">4</span>;++k)  </span><br><span class="line">    <span class="keyword">if</span>((ma[i][j]&gt;ma[a][b])&amp;&amp;(a&gt;<span class="number">0</span>&amp;&amp;a&lt;=r)&amp;&amp;(b&gt;<span class="number">0</span>&amp;&amp;b&lt;=c))  </span><br><span class="line">    &#123;  </span><br><span class="line">        d[i][j]=<span class="title function_">max</span>(d[i][j],<span class="title function_">dp</span>(a,b)+<span class="number">1</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> d[i][j];  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)  </span><br><span class="line">&#123;  </span><br><span class="line">    char name[<span class="number">100</span>];  </span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);  </span><br><span class="line">    <span class="keyword">for</span>(int cas=<span class="number">1</span>;cas&lt;=n;++cas)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>,name,&amp;r,&amp;c);  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=r;++i)  </span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=c;++j)  </span><br><span class="line">                <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;ma[i][j]);  </span><br><span class="line">  </span><br><span class="line">        <span class="title function_">memset</span>(d,<span class="number">0</span>,<span class="title function_">sizeof</span>(d));  </span><br><span class="line">        ans=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">1</span>;i&lt;=r;++i)  </span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">1</span>;j&lt;=c;++j)  </span><br><span class="line">                ans=<span class="title function_">max</span>(<span class="title function_">dp</span>(i,j),ans);  </span><br><span class="line">  </span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%s: %d\n&quot;</span>,name,ans);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Longest Run on a Snowboard</strong></p>
-<p>Michael likes snowboarding. That’s not very surprising, since snowboarding is really great. The bad thing is that in order to gain speed, the area must slide downwards. Another disadvantage is that when you’ve reached the bottom of the hill you have to walk up again or wait for the ski-lift.</p>
-<p>Michael would like to know how long the longest run in an area is. That area is given by a grid of numbers, defining the heights at those points. Look at this example:<br><strong>1 2 3 4 5</strong> <strong>16 17 18 19 6</strong> <strong>15 24 25 20 7</strong> <strong>14 23 22 21 8</strong> <strong>13 12 11 10 9</strong></p>
-<p>One can slide down from one point to a connected other one if and only if the height decreases. One point is connected to another if it’s at left, at right, above or below it. In the sample map, a possible slide would be<strong>24-17-16-1</strong>(start at<strong>24</strong>, end at<strong>1</strong>). Of course if you would go<strong>25-24-23-…-3-2-1</strong>, it would be a much longer run. In fact, it’s the longest possible.</p>
-<p><strong>Input</strong></p>
-<p>The first line contains the number of test cases<strong>N</strong>. Each test case starts with a line containing the name (it’s a single string), the number of rows<strong>R</strong>and the number of columns<strong>C</strong>. After that follow<strong>R</strong>lines with<strong>C</strong>numbers each, defining the heights.<strong>R</strong>and C won’t be bigger than<strong>100</strong>,<strong>N</strong>not bigger than<strong>15</strong>and the heights are always in the range from<strong>0</strong>to<strong>100</strong>.</p>
-<p>For each test case, print a line containing the name of the area, a colon, a space and the length of the longest run one can slide down in that area.<br><strong>Sample Input</strong> 2 Feldberg 10 5 56 14 51 58 88 26 94 24 39 41 24 16 8 51 51 76 72 77 43 10 38 50 59 84 81 5 23 37 71 77 96 10 93 53 82 94 15 96 69 9 74 0 62 38 96 37 54 55 82 38 Spiral 5 5 1 2 3 4 5 16 17 18 19 6 15 24 25 20 7 14 23 22 21 8 13 12 11 10 9</p>
-<p><strong>Sample Output</strong><br>Feldberg: 7 Spiral: 25</p>
 
       
     </div>

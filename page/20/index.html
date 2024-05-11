@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/HDU%201421%20%E6%90%AC%E5%AF%9D%E5%AE%A4(DP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%201421%20%E6%90%AC%E5%AF%9D%E5%AE%A4(DP)/" class="post-title-link" itemprop="url">HDU 1421 搬寝室(DP)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:51:24" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:24+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 中文</p>
+<p>先把物品重量从小到大排序 d[i][j]表示前i件物品选j对的最小疲劳<br>若选了第i个物品 那么和它一对的必是第i-1个物品 注意是前i件<br>i&#x3D;j&#x2F;*2时 没有选择 d[i][j]&#x3D;d[i-2][j-1]+(w[i]-w[i-1])^2<br>i&gt;j&#x2F;*2时 存在第i个选或者不选之分<br>若选了第i个的话 那么问题就转化为在i-2个物品中选j-1个了<br>若不选第i个的话 问题转化为在i-1个物品中选j个了</p>
+<p>那么就有转移方程d[i][j]&#x3D;min(d[i-1][j],d[i-2][j-1]+(w[i]-w[i-1])^2)</p>
+<p>d是初始化为无穷大的 所以i&#x3D;j&#x2F;*2时 d[i-1][j]是等于无穷大的 所以状态转移方程可以统一为</p>
+<p>d[i][j]&#x3D;min(d[i-1][j],d[i-2][j-1]+(w[i]-w[i-1])^2)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">2014</span>;</span><br><span class="line">int w[N], d[N][N / <span class="number">2</span>], n, k;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">        sort (w + <span class="number">1</span>, w + n + <span class="number">1</span>);</span><br><span class="line">        memset (d, <span class="number">0x7f</span>, sizeof (d));</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt;= n; ++i)  d[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; j * <span class="number">2</span> &lt;= i; ++j)</span><br><span class="line">                d[i][j] = min (d[i - <span class="number">1</span>][j], d[i - <span class="number">2</span>][j - <span class="number">1</span>] + (w[i] - w[i - <span class="number">1</span>]) * (w[i] - w[i - <span class="number">1</span>]));</span><br><span class="line">                </span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n][k]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="搬寝室"><a href="#搬寝室" class="headerlink" title="搬寝室"></a>搬寝室</h1><p>Problem Description</p>
+<p>搬寝室是很累的,xhd深有体会.时间追述2006年7月9号,那天xhd迫于无奈要从27号楼搬到3号楼,因为10号要封楼了.看着寝室里的n件物品,xhd开始发呆,因为n是一个小于2000的整数,实在是太多了,于是xhd决定随便搬2&#x2F;*k件过去就行了.但还是会很累,因为2&#x2F;*k也不小是一个不大于n的整数.幸运的是xhd根据多年的搬东西的经验发现每搬一次的疲劳度是和左右手的物品的重量差的平方成正比(这里补充一句,xhd每次搬两件东西,左手一件右手一件).例如xhd左手拿重量为3的物品,右手拿重量为6的物品,则他搬完这次的疲劳度为(6-3)^2 &#x3D; 9.现在可怜的xhd希望知道搬完这2&#x2F;*k件物品后的最佳状态是怎样的(也就是最低的疲劳度),请告诉他吧.<br>Input</p>
+<p>每组输入数据有两行,第一行有两个数n,k(2&lt;&#x3D;2&#x2F;*k&lt;&#x3D;n&lt;2000).第二行有n个整数分别表示n件物品的重量(重量是一个小于2^15的正整数).<br>Output</p>
+<p>对应每组输入数据,输出数据只有一个表示他的最少的疲劳度,每个一行.<br>Sample Input</p>
+<p>2 1 1 3<br>Sample Output</p>
+<p>4</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -996,104 +1090,6 @@
 <p>4</p>
 <p>题意 给你两个DNA序列 求第一个第一个序列至少经过多次删除 、替换 或添加碱基得到第二个序列 其实分析一下可以发现 只要求出两个序列的最长公共子序列 这部分就可以不动了 然后较长序列的长度减去最长公共子序列的长度就是答案了</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>;</span><br><span class="line">int la, lb, d[N][N];</span><br><span class="line">char a[N], b[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">lcs</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    memset (d, <span class="number">0</span>, sizeof (d));</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= la; ++i)</span><br><span class="line">        <span class="keyword">for</span> (int j = <span class="number">1</span>; j &lt;= lb; ++j)</span><br><span class="line">            <span class="keyword">if</span> (a[i] == b[j]) d[i][j] = d[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> d[i][j] = max (d[i - <span class="number">1</span>][j], d[i][j - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%s%d%s&quot;</span>, &amp;la, a + <span class="number">1</span>, &amp;lb, b + <span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_">lcs</span>();</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, max (la, lb) - d[la][lb]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/POJ%203934%20Queue(DP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/POJ%203934%20Queue(DP)/" class="post-title-link" itemprop="url">POJ 3934 Queue(DP)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:51:03" itemprop="dateCreated datePublished" datetime="2014-09-02T09:51:03+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Queue</p>
-<p>Description<br>Linda is a teacher in ACM kindergarten. She is in charge of n kids. Because the dinning hall is a little bit far away from the classroom, those n kids have to walk in line to the dinning hall every day. When they are walking in line, if and only if two kids can see each other, they will talk to each other. Two kids can see each other if and only if all kids between them are shorter then both of them, or there are no kids between them. Kids do not only look forward, they may look back and talk to kids behind them. Linda don’t want them to talk too much (for it’s not safe), but she also don’t want them to be too quiet(for it’s boring), so Linda decides that she must form a line in which there are exactly m pairs of kids who can see each other. Linda wants to know, in how many different ways can she form such a line. Can you help her?<br>Note: All kids are different in height.</p>
-<p>Input</p>
-<p>Input consists of multiple test cases. Each test case is one line containing two integers. The first integer is n, and the second one is m. (0 &lt; n &lt;&#x3D; 80, 0 &lt;&#x3D; m &lt;&#x3D; 10000).<br>Input ends by a line containing two zeros.</p>
-<p>Output</p>
-<p>For each test case, output one line containing the reminder of the number of ways divided by 9937.</p>
-<p>Sample Input</p>
-<p>1 0 2 0 3 2 0 0</p>
-<p>Sample Output</p>
-<p>1 0 4</p>
-<p>题意 linda在一个幼儿园当老师 他要把n个学生排成一列 使只有m对学生能够讲话 当两个学生相邻或者他们之间的所有人都比他们矮时 他们就能够讲话</p>
-<p>每个学生的身高都不同</p>
-<p>令d[i][j]表示把i个学生排成一列使j对学生能够讲话的方法数</p>
-<p>可以把i个学生分成i-1个学生和一个最矮的学生 把这个学生放在i-1个学生中任意两个学生之间都不会影响原来的结果 但是能讲话的学生对数增加了2 有i-2种放法</p>
-<p>或者把这个最矮的学生放在两边 这样能讲话的对数只增加了1 有两种放法</p>
-<p>所以有转移方程d[i][j]&#x3D;d[i-1][j-2]&#x2F;*i-2+d[i-1][j-1]&#x2F;*2(j&gt;&#x3D;2)</p>
-<p>j&lt;2时只有d[1][0]&#x3D;1（学生数大于1就有相邻的就能讲话了） 和d[2][1]&#x3D;2(学生数大于2肯定不止一对能讲话了)两个有值 可以作为初始条件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">81</span>, M = <span class="number">10001</span>;</span><br><span class="line">int d[N][M], n, m;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    d[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>, d[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt; N; ++i)</span><br><span class="line">        <span class="keyword">for</span> (int j = <span class="number">2</span>; j &lt; M; ++j)</span><br><span class="line">            d[i][j] = (d[i - <span class="number">1</span>][j - <span class="number">2</span>] * (i - <span class="number">2</span>) + <span class="number">2</span> * d[i - <span class="number">1</span>][j - <span class="number">1</span>]) % <span class="number">9937</span>;</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m), n)</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n][m]);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

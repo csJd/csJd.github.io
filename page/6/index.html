@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/search/ZOJ%203436%20July%20Number(DFS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/search/ZOJ%203436%20July%20Number(DFS)/" class="post-title-link" itemprop="url">ZOJ 3436 July Number(DFS)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-26 17:08:26" itemprop="dateCreated datePublished" datetime="2015-07-26T17:08:26+00:00">2015-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Search/" itemprop="url" rel="index"><span itemprop="name">Search</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 把一个数替换为这个数相邻数字差组成的数 知道这个数只剩一位数 若最后的一位数是7 则称原来的数为 July Number 给你一个区间 求这个区间中July Number的个数</p>
+<p>从7开始DFS 位数多的数总能由位数小的数推出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1e6</span>;</span><br><span class="line">int july[N], n;</span><br><span class="line">set&lt;int&gt; ans;</span><br><span class="line"></span><br><span class="line">int pw[] = &#123;<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">10000</span>, <span class="number">100000</span>, <span class="number">1000000</span>, <span class="number">10000000</span>, <span class="number">100000000</span>&#125;;</span><br><span class="line"><span class="comment">//剩余长度, 当前位要填的数，通过什么数来搜索, 路径</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">dfs</span>(<span class="params">int len, int d, int bas, int cur</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(d &lt; <span class="number">0</span> || d &gt; <span class="number">9</span>) <span class="keyword">return</span>;  <span class="comment">//要填的数不合法</span></span><br><span class="line">    <span class="keyword">if</span>(!len)</span><br><span class="line">    &#123;</span><br><span class="line">        july[n++] = cur * <span class="number">10</span> + d;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    int k = pw[len - <span class="number">1</span>];</span><br><span class="line">    <span class="title function_">dfs</span>(len - <span class="number">1</span>, d - bas / k, bas % k, cur * <span class="number">10</span> + d);</span><br><span class="line">    <span class="title function_">dfs</span>(len - <span class="number">1</span>, d + bas / k, bas % k, cur * <span class="number">10</span> + d);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    ans.<span class="title function_">insert</span>(<span class="number">7</span>);</span><br><span class="line">    set&lt;int&gt;::iterator it;</span><br><span class="line">    <span class="keyword">for</span>(int l = <span class="number">2</span>; l &lt; <span class="number">10</span>; ++l)</span><br><span class="line">    &#123;</span><br><span class="line">        n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(it = ans.<span class="title function_">begin</span>(); it != ans.<span class="title function_">end</span>(); ++it)</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">                <span class="title function_">dfs</span>(l - <span class="number">1</span>, i, *it, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i) ans.<span class="title function_">insert</span>(july[i]);</span><br><span class="line">        <span class="comment">//printf(&quot;%d\n&quot;, ans.size());</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int a, b = n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(it = ans.<span class="title function_">begin</span>(); it != ans.<span class="title function_">end</span>(); ++it) </span><br><span class="line">        july[n++] = *it;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b))</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">upper_bound</span>(july, july + n, b) - <span class="title function_">lower_bound</span>(july, july + n, a));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  July Number    Time Limit:2 Seconds Memory Limit:65536 KB</p>
+<p>The digital difference of a positive number is constituted by the difference between each two neighboring digits (with the leading zeros omitted). For example the digital difference of 1135 is 022 &#x3D; 22. The repeated digital difference, or differential root, can be obtained by caculating the digital difference until a single-digit number is reached. A number whose differential root is 7 is also called July Number. Your job is to tell how many July Numbers are there lying in the given interval [<em>a</em>, <em>b</em>].</p>
+<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>There are multiple cases. Each case contains two integers <em>a</em> and <em>b</em>. 1 ≤ <em>a</em> ≤ <em>b</em> ≤ 109.</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>One integer <em>k</em>, the number of July Numbers.</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>1 10</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>1<br>Author: HE, Ningxu<br>Contest: ZOJ Monthly, November 2010</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1039,104 +1129,6 @@
 <h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>For each test case, print the minimal cost to finish all of the <em>n</em> routes. If it’s impossible, print “Impossible” (without the quotes).</p>
 <h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>2 2 30 5 6 9 4 7 10 2 30 5 6 9 4 8 10</p>
 <h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>550 Impossible</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/ds/POJ%202823%20Sliding%20Window(%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/ds/POJ%202823%20Sliding%20Window(%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97)/" class="post-title-link" itemprop="url">POJ 2823 Sliding Window(单调队列)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-07-06 00:28:21" itemprop="dateCreated datePublished" datetime="2015-07-06T00:28:21+00:00">2015-07-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/Data-structure/" itemprop="url" rel="index"><span itemprop="name">Data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 长度为n的数组上有个长度为k的滑窗从左向右移动 求每次移动后滑窗区间的最小值和最大值 输出两行 第一行所有最小值 第二行所有最大值</p>
-<p>可以用线段树来做 但是单调队列更简单</p>
-<p>单调递增队列： 队尾单调入队(入队元素大于队尾元素时直接入队 否则队尾出队直到队尾元素小于入队元素或者队列为空) 队首队尾都可以出队</p>
-<p>求最小值时 先判断队首元素是否在滑窗之内 不在队首就出队 然后队首元素就是滑窗中的最小值了 求最大值用单减队列就行了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line">int a[N], q[N], t[N];</span><br><span class="line">int front, rear, n, k;</span><br><span class="line"></span><br><span class="line">#define <span class="variable constant_">NOTMONO</span> (!op &amp;&amp; a[i] &lt; q[rear - <span class="number">1</span>]) || (op &amp;&amp; a[i] &gt; q[rear - <span class="number">1</span>])</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">getMonoQueue</span>(int op) <span class="comment">//op = 0 时单增队列  op = 1 时单减队列</span></span><br><span class="line">&#123;</span><br><span class="line">    front = rear = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>( rear &gt; front &amp;&amp; (<span class="variable constant_">NOTMONO</span>)) --rear;</span><br><span class="line">        t[rear] = i;      <span class="comment">//记录滑窗滑到i点的时间</span></span><br><span class="line">        q[rear++] = a[i];</span><br><span class="line">        <span class="keyword">while</span>(t[front] &lt;= i - k) ++front;  <span class="comment">//保证队首元素在滑窗之内</span></span><br><span class="line">        <span class="keyword">if</span>(i &gt; k - <span class="number">2</span>)</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d%c&quot;</span>, q[front], i == n - <span class="number">1</span> ? <span class="string">&#x27;\n&#x27;</span> : <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="title function_">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        <span class="title function_">getMonoQueue</span>(<span class="number">0</span>); <span class="comment">//单增队列维护最小值</span></span><br><span class="line">        <span class="title function_">getMonoQueue</span>(<span class="number">1</span>); <span class="comment">//单减队列维护最大值</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Last modified :   2015-07-06 12:16</span></span><br></pre></td></tr></table></figure>
-
-<p>Sliding Window</p>
-<p>Description<br>An array of size <em>n</em> ≤ 10 6 is given to you. There is a sliding window of size <em>k</em> which is moving from the very left of the array to the very right. You can only see the <em>k</em> numbers in the window. Each time the sliding window moves rightwards by one position. Following is an example:<br>The array is [1 3 -1 -3 5 3 6 7], and <em>k</em> is 3. Window position Minimum value Maximum value [1 3 -1] -3 5 3 6 7 -1 3 1 [3 -1 -3] 5 3 6 7 -3 3 1 3 [-1 -3 5] 3 6 7 -3 5 1 3 -1 [-3 5 3] 6 7 -3 5 1 3 -1 -3 [5 3 6] 7 3 6 1 3 -1 -3 5 [3 6 7] 3 7</p>
-<p>Your task is to determine the maximum and minimum values in the sliding window at each position.</p>
-<p>Input</p>
-<p>The input consists of two lines. The first line contains two integers <em>n</em> and <em>k</em> which are the lengths of the array and the sliding window. There are <em>n</em> integers in the second line.</p>
-<p>Output</p>
-<p>There are two lines in the output. The first line gives the minimum values in the window at each position, from left to right, respectively. The second line gives the maximum values.</p>
-<p>Sample Input</p>
-<p>8 3 1 3 -1 -3 5 3 6 7</p>
-<p>Sample Output</p>
-<p>-1 -3 -3 -3 3 3 3 3 5 5 6 7</p>
 
       
     </div>

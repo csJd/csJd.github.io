@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/other/Codeforce%20264%20A%20Caisa%20and%20Sugar(%E7%AE%80%E5%8D%95)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/other/Codeforce%20264%20A%20Caisa%20and%20Sugar(%E7%AE%80%E5%8D%95)/" class="post-title-link" itemprop="url">Codeforce 264 A Caisa and Sugar(简单)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-08-30 18:29:17" itemprop="dateCreated datePublished" datetime="2014-08-30T18:29:17+00:00">2014-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Caisa去商店买Sugar 商店找零的最低单位为元 低于1元的部分每分找一个糖果 商店有n种Suger Caisa有s元钱 她只买一种Sugar 输入n s 再输入n行 每行两个数a b 表示第i种Sugar的单价为a元b分 求Sugar最多能被找多少糖果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int  n, s, cos;</span><br><span class="line">    <span class="keyword">while</span> (~scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;s))</span><br><span class="line">    &#123;</span><br><span class="line">        s *= <span class="number">100</span>;</span><br><span class="line">        int flag = <span class="number">0</span>, a, b, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (n--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">            cos = a * <span class="number">100</span> + b;</span><br><span class="line">            <span class="keyword">for</span> (int j = <span class="number">1</span>; cos * j &lt;= s; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                ans = max (ans, (s - cos) % <span class="number">100</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, flag ? ans : -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Caisais going to have a party and he needs to buy the ingredients for a big chocolate cake. For that he is going to the biggest supermarket in town.</p>
+<p>Unfortunately, he has just<em>s</em>dollars for sugar. But that’s not a reason to be sad, because there are<em>n</em>types of sugar in the supermarket, maybe he able to buy one. But that’s not all. The supermarket has very unusual exchange politics: instead of cents the sellers give sweets to a buyer as a change. Of course, the number of given sweets always doesn’t exceed99, because each seller maximizes the number of dollars in the change (100cents can be replaced with a dollar).</p>
+<p>Caisa wants to buy only one type of sugar, also he wants to maximize the number of sweets in the change. What is the maximum number of sweets he can get? Note, that Caisa doesn’t want to minimize the cost of the sugar, he only wants to get maximum number of sweets as change.<br>Input</p>
+<p>The first line contains two space-separated integers<em>n</em>, <em>s</em>(1 ≤ <em>n</em>, <em>s</em> ≤ 100).</p>
+<p>The<em>i</em>-th of the next<em>n</em>lines contains two integers<em>x**i</em>,<em>y**i</em>(1 ≤ <em>x**i</em> ≤ 100; 0 ≤ <em>y**i</em> &lt; 100), where<em>x**i</em>represents the number of dollars and<em>y**i</em>the number of cents needed in order to buy the<em>i</em>-th type of sugar.</p>
+<p>Output</p>
+<p>Print a single integer representing the maximum number of sweetshe can buy, or-1if he can’t buy any type of sugar.<br>Sample test(s)</p>
+<p>input 5 10 3 90 12 0 9 70 5 50 7 0</p>
+<p>output 50<br>input 5 5 10 10 20 20 30 30 40 40 50 50</p>
+<p>output -1</p>
+<p>Note</p>
+<p>In the first test sample Caisa can buy the fourth type of sugar, in such a case he will take50sweets as a change.</p>
+<p>﻿﻿</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1050,103 +1147,6 @@
 <p>Print a blank line between two successive test cases.</p>
 <h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>3 1 2 2 2 1 2 3 3 3 3 3 3 3 2 1 1 1 1 10 1 5 10 3 6 5 2 6 7 3 6 9 5 7 3 2 1 9 1 3 3 5 8 10 6 6 2 2 4 4 1 2 3 4 5 6 10 9 8 7 6 5 6 1 2 3 4 7 1 2 3 3 2 1 3 2 1 1 2 3 0</p>
 <h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>Case &#x2F;#1 2 2 front 3 front Case &#x2F;#2 8 1 bottom 2 back 3 right 4 left 6 top 8 front 9 front 10 top</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/UVa%2010003%20Cutting%20Sticks(DP%20%E6%9C%80%E4%BC%98%E6%9C%A8%E6%A3%8D%E5%88%87%E5%89%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/UVa%2010003%20Cutting%20Sticks(DP%20%E6%9C%80%E4%BC%98%E6%9C%A8%E6%A3%8D%E5%88%87%E5%89%B2)/" class="post-title-link" itemprop="url">UVa 10003 Cutting Sticks(DP 最优木棍切割)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-08-25 21:29:38" itemprop="dateCreated datePublished" datetime="2014-08-25T21:29:38+00:00">2014-08-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 要把一根长为l的木棍切成n+1段 切割的位置分别为c[1],c[2],…,c[n] 每次切割的成本为当前切割的那一段的长度 如长度100的切成两段成本为100 求完成切割的最小成本</p>
-<p>和最优矩阵链乘那题很像 不用打印路径更简单了 在木棍上加两个点c[0]&#x3D;0 c[n+1]&#x3D;l d[i][j]表示把这段木棍的第i到j个点完成切割的最小成本 如果j&#x3D;i+1 不需要切割 成本为0 这是边界条件 j&gt;i+1时 可以在i和j间取一点k 那么有d[i][j]&#x3D;min{d[i][k]+d[k][j]+c[j]-c[i]} 即在k处切断 这个切割的成本为c[j]-c[i]</p>
-<p>所以有转移方程d[i][j]&#x3D;min{d[i][k]+d[k][j]+c[j]-c[i]} i&lt;k&lt;j</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">55</span>, <span class="variable constant_">INF</span> = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">int d[N][N], c[N];</span><br><span class="line"></span><br><span class="line">int dp (int i, int j)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (d[i][j] &lt; <span class="variable constant_">INF</span>)  <span class="keyword">return</span> d[i][j];</span><br><span class="line">    <span class="keyword">for</span> (int k = i+<span class="number">1</span>; k &lt; j; ++k)</span><br><span class="line">        d[i][j] = min (d[i][j], dp (i, k) + dp (k , j) + c[j] - c[i]);</span><br><span class="line">    <span class="keyword">return</span> d[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int l, n;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;l), l)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;c[i]);</span><br><span class="line">        c[++n] = l;</span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d));</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt;= n-<span class="number">1</span>; ++i) d[i][i+<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        printf (<span class="string">&quot;The minimum cutting is %d.\n&quot;</span>, dp (<span class="number">0</span>, n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><hr>
-<p>You have to cut a wood stick into pieces. The most affordable company, The Analog Cutting Machinery, Inc. (ACM), charges money according to the length of the stick being cut. Their procedure of work requires that they only make one cut at a time.</p>
-<p>It is easy to notice that different selections in the order of cutting can led to different prices. For example, consider a stick of length 10 meters that has to be cut at 2, 4 and 7 meters from one end. There are several choices. One can be cutting first at 2, then at 4, then at 7. This leads to a price of 10 + 8 + 6 &#x3D; 24 because the first stick was of 10 meters, the resulting of 8 and the last one of 6. Another choice could be cutting at 4, then at 2, then at 7. This would lead to a price of 10 + 4 + 6 &#x3D; 20, which is a better price.</p>
-<p>Your boss trusts your computer abilities to find out the minimum cost for cutting a given stick.</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>The input will consist of several input cases. The first line of each test case will contain a positive number<em>l</em>that represents the length of the stick to be cut. You can assume<em>l</em>&lt; 1000. The next line will contain the number<em>n</em>(<em>n</em>&lt; 50) of cuts to be made.</p>
-<p>The next line consists of<em>n</em>positive numbers<em>c**i</em>(0 &lt;<em>c**i</em>&lt;<em>l</em>) representing the places where the cuts have to be done, given in strictly increasing order.</p>
-<p>An input case with<em>l</em>&#x3D; 0 will represent the end of the input.</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>You have to print the cost of the optimal solution of the cutting problem, that is the minimum cost of cutting the given stick. Format the output as shown below.</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>100 3 25 50 75 10 4 4 5 7 8 0</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><p>The minimum cutting is 200. The minimum cutting is 22.</p>
-<p>﻿﻿</p>
 
       
     </div>

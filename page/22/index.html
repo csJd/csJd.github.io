@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/HDU%201506%20Largest%20Rectangle%20in%20a%20Histogram(DP%C2%B7%E5%8D%95%E8%B0%83%E6%A0%88)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/dp/HDU%201506%20Largest%20Rectangle%20in%20a%20Histogram(DP%C2%B7%E5%8D%95%E8%B0%83%E6%A0%88)/" class="post-title-link" itemprop="url">HDU 1506 Largest Rectangle in a Histogram(DP·单调栈)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-09-02 09:50:42" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:42+00:00">2014-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 求条形图中最大矩形的面积 输入给你条的个数 每个条的高度hi （以下等于也视为高）</p>
+<p>只要知道第i个条左边连续多少个（a）比他高 右边连续多少个（b）比他高 那么以这个条为最大高度的面积就是<strong>hi&#x2F;*(a+b+1);</strong></p>
+<p>但是直接枚举每一个的话肯定会超时的 超时代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll h[N]; int n,wide[N];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%I64d&quot;</span>, &amp;h[i]);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            wide[i] = <span class="number">1</span>;</span><br><span class="line">            int k = i;</span><br><span class="line">            <span class="keyword">while</span> (k &gt; <span class="number">1</span> &amp;&amp; h[--k] &gt;= h[i]) ++wide[i];</span><br><span class="line">            k = i;</span><br><span class="line">            <span class="keyword">while</span> (k &lt; n &amp;&amp; h[++k] &gt;= h[i]) ++wide[i];</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (h[i]*wide[i] &gt; ans) ans = h[i] * wide[i];</span><br><span class="line">        printf (<span class="string">&quot;%I64d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现 当第i-1个比第i个高的时候 比第i-1个高的所有也一定比第i个高</p>
+<p>于是可以用到动态规划的思想</p>
+<p>令left[i]表示包括i在内比i高的连续序列中最左边一个的下标 right[i]为最右边一个的下标</p>
+<p>那么有 当**h[left[i]-1]&gt;&#x3D;h[i]]<strong>时</strong>left[i]&#x3D;left[left[i]-1]**从前往后可以递推出left[i]</p>
+<p>同理 当**h[right[i]+1]&gt;&#x3D;h[i]]<strong>时</strong>right[i]&#x3D;right[right[i]+1]**从后往前可递推出righ[i]</p>
+<p>最后答案就等于**max{(right[i]-left[i]+1)&#x2F;*h[i]}**了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">100005</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll h[N];</span><br><span class="line">int n, left[N], right[N];</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (scanf (<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            scanf (<span class="string">&quot;%I64d&quot;</span>, &amp;h[i]), left[i] = right[i] = i;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        h[<span class="number">0</span>] = h[n + <span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)      <span class="comment">//求left[i]</span></span><br><span class="line">            <span class="keyword">while</span> (h[left[i] - <span class="number">1</span>] &gt;= h[i])</span><br><span class="line">                left[i] = left[left[i] - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (int i = n; i &gt;= <span class="number">1</span>; --i)      <span class="comment">//求right[i]</span></span><br><span class="line">            <span class="keyword">while</span> (h[right[i] + <span class="number">1</span>] &gt;= h[i])</span><br><span class="line">                right[i] = right[right[i] + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (h[i] * (right[i] - left[i] + <span class="number">1</span>) &gt; ans) ans = h[i] * ll (right[i] - left[i] + <span class="number">1</span>);</span><br><span class="line">        printf (<span class="string">&quot;%I64d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后还有单调栈写法 比DP操作起来更容易</p>
+<p>通过单调栈可以在 O(n) 时间内找到数组中在 h[i] 左边(右边)离 h[i] 最近的大于 h[i] 那个数(或者下标) 这里是取下标 知道 h[i] 左边最近和右边最近的高度小于 h[i] 的两个下标后 那么就知道以这个矩形高度为基准的大矩形的面积了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll h[N], s[N], le[N], ri[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int n, top;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n), n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%I64d&quot;</span>, &amp;h[i]);</span><br><span class="line"></span><br><span class="line">        top = <span class="number">0</span>, s[<span class="number">0</span>] = <span class="number">0</span>;   <span class="comment">//le[i]保存i左边第一个小于h[i]的下标</span></span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(top &amp;&amp; h[s[top]] &gt;= h[i]) --top;</span><br><span class="line">            le[i] = s[top];</span><br><span class="line">            s[++top] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        top = <span class="number">0</span>, s[<span class="number">0</span>] = n + <span class="number">1</span>;  <span class="comment">//ri[i]保存i右边最后一个大于等于h[i]的下标</span></span><br><span class="line">        <span class="keyword">for</span>(int i = n; i &gt; <span class="number">0</span>; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(top &amp;&amp; h[s[top]] &gt;= h[i]) --top;</span><br><span class="line">            ri[i] = s[top] - <span class="number">1</span>;</span><br><span class="line">            s[++top] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ll ans = h[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span>(h[i] * (ri[i] - le[i]) &gt; ans)</span><br><span class="line">                ans =  h[i] * (ri[i] - le[i]);</span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%I64d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Largest-Rectangle-in-a-Histogram"><a href="#Largest-Rectangle-in-a-Histogram" class="headerlink" title="Largest Rectangle in a Histogram"></a>Largest Rectangle in a Histogram</h1><p>Problem Description</p>
+<p>A histogram is a polygon composed of a sequence of rectangles aligned at a common base line. The rectangles have equal widths but may have different heights. For example, the figure on the left shows the histogram that consists of rectangles with the heights 2, 1, 4, 5, 1, 3, 3, measured in units where 1 is the width of the rectangles:<br><img src="/../images/cn-data-images-1506-1.gif.png"><br>Usually, histograms are used to represent discrete distributions, e.g., the frequencies of characters in texts. Note that the order of the rectangles, i.e., their heights, is important. Calculate the area of the largest rectangle in a histogram that is aligned at the common base line, too. The figure on the right shows the largest aligned rectangle for the depicted histogram.<br>Input</p>
+<p>The input contains several test cases. Each test case describes a histogram and starts with an integer n, denoting the number of rectangles it is composed of. You may assume that 1 &lt;&#x3D; n &lt;&#x3D; 100000. Then follow n integers h1, …, hn, where 0 &lt;&#x3D; hi &lt;&#x3D; 1000000000. These numbers denote the heights of the rectangles of the histogram in left-to-right order. The width of each rectangle is 1. A zero follows the input for the last test case.<br>Output</p>
+<p>For each test case output on a single line the area of the largest rectangle in the specified histogram. Remember that this rectangle must be aligned at the common base line.<br>Sample Input</p>
+<p>7 2 1 4 5 1 3 3 4 1000 1000 1000 1000 0<br>Sample Output</p>
+<p>8 4000<br>#</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1043,108 +1147,6 @@
 <p>直接dfs 依次对访问每个点编号 遇到已经访问过的点就是环了 编号相减就是环的长度</p>
 <p>用数组存图会超内存 所以要用vector存</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">4500</span>;</span><br><span class="line">vector&lt;int&gt; ma[N];</span><br><span class="line">int vis[N], a, b, cas, n, m, ans;</span><br><span class="line">int dfs (int i, int no)</span><br><span class="line">&#123;</span><br><span class="line">    vis[i] = no;</span><br><span class="line">    <span class="keyword">for</span> (int j = <span class="number">0</span>; j &lt; ma[i].<span class="title function_">size</span>(); ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[ma[i][j]]) dfs (ma[i][j], no + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span> ans = max (ans, no - vis[ma[i][j]] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i) ma[i].<span class="title function_">clear</span>();</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">            ma[a].<span class="property">push_back</span> (b);</span><br><span class="line">            ma[b].<span class="property">push_back</span> (a);</span><br><span class="line">        &#125;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        memset (vis, <span class="number">0</span>, sizeof (vis));</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (!vis[i]) dfs (i, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (ans &gt;= <span class="number">3</span>) printf (<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">        <span class="keyword">else</span> printf (<span class="string">&quot;0\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/dp/POJ%203390%20Print%20Words%20in%20Lines(DP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/dp/POJ%203390%20Print%20Words%20in%20Lines(DP)/" class="post-title-link" itemprop="url">POJ 3390 Print Words in Lines(DP)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-09-02 09:50:19" itemprop="dateCreated datePublished" datetime="2014-09-02T09:50:19+00:00">2014-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Print Words in Lines</p>
-<p><strong>Time Limit:</strong> 1000MS  <strong>Memory Limit:</strong> 65536K <strong>Total Submissions:</strong> 1624  <strong>Accepted:</strong> 864</p>
-<p>Description<br>We have a paragraph of text to print. A text is a sequence of words and each word consists of characters. When we print a text, we print the words from the text one at a time, according to the order the words appear in the text. The words are printed in lines, and we can print at most <em>M</em> characters in a line. If there is space available, we could print more than one word in a line. However, when we print more than one word in a line, we need to place exactly one space character between two adjacent words in a line. For example, when we are given a text like the following:<br>This is a text of fourteen words and the longest word has ten characters</p>
-<p>Now we can print this text into lines of no more than 20 characters as the following.</p>
-<p>This is<br>a text of<br>fourteen words<br>and the longest<br>word<br>has ten characters</p>
-<p>However, when you print less than 20 characters in a line, you need to pay a penalty, which is equal to the square of the difference between 20 and the actual number of characters you printed in that line. For example in the first line we actually printed seven characters so the penalty is (20 − 7)2 &#x3D; 169. The total penalty is the sum of all penalties from all lines. Given the text and the number of maximum number of characters allowed in a line, compute the minimum penalty to print the text.</p>
-<p>Input</p>
-<p>The first line of the input is the number of test cases (<em>C</em>). The first line of a test case is the maximum number of characters allowed in a line (<em>M</em>). The second line of a test case is the number of words in the text (<em>N</em>). The following <em>N</em> lines are the length (in character) of each word in the text. It is guaranteed that no word will have more than <em>M</em> characters, <em>N</em> is at most 10000, and <em>M</em> is at most 100.</p>
-<p>Output</p>
-<p>The output has <em>C</em> lines. Each line has the minimum penalty one needs to pay in order to print the text in that test case.</p>
-<p>Sample Input</p>
-<p>2 20 14 4 2 1 4 2 8 5 3 3 7 4 3 3 10 30 14 4 2 1 4 2 8 5 3 3 7 4 3 3 10</p>
-<p>Sample Output</p>
-<p>33 146</p>
-<p>Source</p>
-<p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=Kaohsiung+2006">Kaohsiung 2006</a></p>
-<p>题意 把n个单词排版 每行最多m个字符 不同单词间有空格 每行最后一个单词后没空格 空格占一个字符 当一行的字符数与m的差为t时 就会扣t&#x2F;*t分 求最少扣分</p>
-<p>令a[i]表示第i个单词的长度 s[i]表示从第一个单词到第i个单词单词长度和d[i]表示前i个单词排版后最少扣的分</p>
-<p>则t&#x3D;m-(s[i] - s[j] + i - j - 1)表示把从第j+1个单词到第i个单词放在一行时这行的字符长度与m的差</p>
-<p>那么当t&gt;&#x3D;0时 有转移方程 d[i]&#x3D;min(d[i],d[j]+t&#x2F;*t) ;</p>
-<p>有了方程程序就好写了:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">10005</span>;</span><br><span class="line">int s[N], d[N], a[N], t, cas, m, n;</span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    scanf (<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span> (cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf (<span class="string">&quot;%d%d&quot;</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf (<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">            s[i] = s[i - <span class="number">1</span>] + a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        memset (d, <span class="number">0x3f</span>, sizeof (d)); d[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span> (int j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">            &#123;</span><br><span class="line">                t = m - (s[i] - s[j] + i - j - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= <span class="number">0</span>)  d[i] = min (d[i], d[j] + t * t);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        printf (<span class="string">&quot;%d\n&quot;</span>, d[n]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/string/UVa%201593%20Alignment%20of%20Code(%E5%AD%97%E7%AC%A6%E4%B8%B2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/string/UVa%201593%20Alignment%20of%20Code(%E5%AD%97%E7%AC%A6%E4%B8%B2)/" class="post-title-link" itemprop="url">UVa 1593 Alignment of Code(字符串)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-01-21 00:49:29" itemprop="dateCreated datePublished" datetime="2015-01-21T00:49:29+00:00">2015-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 按要求对齐代码</p>
+<p>字符串流的应用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>, M = <span class="number">200</span>;</span><br><span class="line">string s[N][M], line;</span><br><span class="line">int cw[M], cn[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int r = <span class="number">0</span>, c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">getline</span>(cin, line))</span><br><span class="line">    &#123;</span><br><span class="line">        stringstream <span class="title function_">ss</span>(line);</span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; s[r][c])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[r][c].<span class="title function_">length</span>() &gt; cw[c])</span><br><span class="line">                cw[c] = s[r][c].<span class="title function_">length</span>();</span><br><span class="line">            ++c;</span><br><span class="line">        &#125;</span><br><span class="line">        cn[r++] = c;</span><br><span class="line">        c = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; r; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; cn[i] - <span class="number">1</span>; ++j)</span><br><span class="line">            cout &lt;&lt; left &lt;&lt; <span class="title function_">setw</span>(cw[j] + <span class="number">1</span>) &lt;&lt; s[i][j];</span><br><span class="line">        cout &lt;&lt; s[i][cn[i] - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You are working in a team that writes Incredibly Customizable Programming Codewriter (ICPC) which is basically a text editor with bells and whistles. You are working on a module that takes a piece of code containing some definitions or other tabular information and aligns each column on a fixed vertical position, while keeping the resulting code as short as possible, making sure that only whitespaces that are absolutely required stay in the code. So, that the first words on each line are printed at position <em>p</em>1 &#x3D; 1; the second words on each line are printed at the minimal possible position <em>p</em>2, such that all first words end at or before position <em>p</em>2 - 2; the third words on each line are printed at the minimal possible position <em>p</em>3, such that all second words end at or before position <em>p</em>3 - 2, etc.</p>
+<p>For the purpose of this problem, the code consists of multiple lines. Each line consists of one or more words separated by spaces. Each word can contain uppercase and lowercase Latin letters, all ASCII punctuation marks, separators, and other non-whitespace ASCII characters (ASCII codes 33 to 126 inclusive). Whitespace consists of space characters (ASCII code 32).</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>The input file contains one or more lines of the code up to the end of file. All lines (including the last one) are terminated by a standard end-of-line sequence in the file. Each line contains at least one word, each word is 1 to 80 characters long (inclusive). Words are separated by one or more spaces. Lines of the code can have both leading and trailing spaces. Each line in the input file is at most 180 characters long. There are at most 1000 lines in the input file.</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>Write to the output file the reformatted, aligned code that consists of the same number of lines, with the same words in the same order, without trailing and leading spaces, separated by one or more spaces such that <em>i</em>-th word on each line starts at the same position <em>p</em>i.</p>
+<p>Note for the Sample:</p>
+<p>The &#96;<img src="/../images/dge.org-external-15-4983img1-.png" alt="$ \sqcup$">‘ character in the example below denotes a space character in the actual files (ASCII code 32).</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>start: integer; &#x2F;&#x2F; begins here stop: integer; &#x2F;&#x2F; ends here s: string; c: char; &#x2F;&#x2F; temp</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>start: integer; &#x2F;&#x2F; begins here stop: integer; &#x2F;&#x2F; ends here s: string; c: char; &#x2F;&#x2F; temp</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1000,115 +1093,6 @@
 <p>ullddrurdllurdruldr</p>
 <p>Source</p>
 <p><a target="_blank" rel="noopener" href="http://poj.org/searchproblem?field=source&key=South+Central+USA+1998">South Central USA 1998</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/string/hihoCoder%201014%20Trie%E6%A0%91(%E5%9F%BA%E7%A1%80%E5%AD%97%E5%85%B8%E6%A0%91)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/string/hihoCoder%201014%20Trie%E6%A0%91(%E5%9F%BA%E7%A1%80%E5%AD%97%E5%85%B8%E6%A0%91)/" class="post-title-link" itemprop="url">hihoCoder 1014 Trie树(基础字典树)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-12-11 16:40:28" itemprop="dateCreated datePublished" datetime="2014-12-11T16:40:28+00:00">2014-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 中文</p>
-<p>最基础的字典树应用噢噢噢噢</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct trie</span><br><span class="line">&#123;</span><br><span class="line">    trie *chi[<span class="number">26</span>];</span><br><span class="line">    int num;</span><br><span class="line">    <span class="title function_">trie</span>(<span class="params"></span>)</span><br><span class="line">    &#123;</span><br><span class="line">        num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i)</span><br><span class="line">            chi[i] = <span class="variable constant_">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*root;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">insertTrie</span>(<span class="params">char s[]</span>)</span><br><span class="line">&#123;</span><br><span class="line">    trie *p = root;</span><br><span class="line">    p-&gt;num++;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; s[i]; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int j = s[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;chi[j] == <span class="variable constant_">NULL</span>)</span><br><span class="line">            p-&gt;chi[j] = <span class="keyword">new</span> trie;</span><br><span class="line">        p = p-&gt;chi[j];</span><br><span class="line">        p-&gt;num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">searchTrie</span>(<span class="params">char s[]</span>)</span><br><span class="line">&#123;</span><br><span class="line">    trie *p = root;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; p &amp;&amp; s[i]; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int j = s[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        p = p-&gt;chi[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!p) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> p-&gt;num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    char s[<span class="number">12</span>];</span><br><span class="line">    int n, m;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        root = <span class="keyword">new</span> trie;</span><br><span class="line">        <span class="keyword">while</span>(n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s);</span><br><span class="line">            <span class="title function_">insertTrie</span>(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;m);</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%s&quot;</span>, s);</span><br><span class="line">            <span class="title function_">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="title function_">searchTrie</span>(s));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>时间限制: 10000ms</p>
-<p>单点时限: 1000ms<br>内存限制: 256MB</p>
-<p>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。</p>
-<p>这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？”</p>
-<p>身经百战的小Ho答道：“怎么会不能呢！你每给我一个字符串，我就依次遍历词典里的所有单词，检查你给我的字符串是不是这个单词的前缀不就是了？”</p>
-<p>小Hi笑道：“你啊，还是太年轻了！~假设这本词典里有10万个单词，我询问你一万次，你得要算到哪年哪月去？”</p>
-<p>小Ho低头算了一算，看着那一堆堆的0，顿时感觉自己这辈子都要花在上面了…</p>
-<p>小Hi看着小Ho的囧样，也是继续笑道：“让我来提高一下你的知识水平吧~你知道树这样一种数据结构么？”</p>
-<p>小Ho想了想，说道：“知道~它是一种基础的数据结构，就像<a target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)">这里</a>说的一样！”</p>
-<p>小Hi满意的点了点头，说道：“那你知道我怎么样用一棵树来表示整个词典么？”</p>
-<p>小Ho摇摇头表示自己不清楚。</p>
-<p><a target="_blank" rel="noopener" href="http://hihocoder.com/problemset/problem/1014#">提示一：Trie树的建立</a></p>
-<p>“你看，我们现在得到了这样一棵树，那么你看，如果我给你一个字符串ap，你要怎么找到所有以ap开头的单词呢？”小Hi又开始考校小Ho。</p>
-<p>“唔…一个个遍历所有的单词？”小Ho还是不忘自己最开始提出来的算法。</p>
-<p>“笨！这棵树难道就白构建了！”小Hi教训完小Ho，继续道：“看好了！”</p>
-<p><a target="_blank" rel="noopener" href="http://hihocoder.com/problemset/problem/1014#">提示二：如何使用Trie树</a></p>
-<p><a target="_blank" rel="noopener" href="http://hihocoder.com/problemset/problem/1014#">提示三：在建立Trie树时同时进行统计！</a></p>
-<p>“那么现在！赶紧去用代码实现吧！”小Hi如是说道</p>
-<p>输入的第一行为一个正整数n，表示词典的大小，其后n行，每一行一个单词（不保证是英文单词，也有可能是火星文单词哦），单词由不超过10个的小写英文字母组成，可能存在相同的单词，此时应将其视作不同的单词。接下来的一行为一个正整数m，表示小Hi询问的次数，其后m行，每一行一个字符串，该字符串由不超过10个的小写英文字母组成，表示小Hi的一个询问。</p>
-<p>在20%的数据中n, m&lt;&#x3D;10，词典的字母表大小&lt;&#x3D;2.</p>
-<p>在60%的数据中n, m&lt;&#x3D;1000，词典的字母表大小&lt;&#x3D;5.</p>
-<p>在100%的数据中n, m&lt;&#x3D;100000，词典的字母表大小&lt;&#x3D;26.</p>
-<p>本题按通过的数据量排名哦～</p>
-<p>对于小Hi的每一个询问，输出一个整数Ans,表示词典中以小Hi给出的字符串为前缀的单词的个数。<br>样例输入 5 babaab babbbaaaa abba aaaaabaa babaababb 5 babb baabaaa bab bb bbabbaab 样例输出 1 0 3 0 0</p>
 
       
     </div>

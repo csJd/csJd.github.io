@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">264</span>
+          <span class="site-state-item-count">265</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,6 +180,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/other/UVa%201152%204Values%20whose%20Sum%20is%200/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Deng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dd's site \#">
+      <meta itemprop="description" content="Don't be evil.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dd's site \#">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/oj/other/UVa%201152%204Values%20whose%20Sum%20is%200/" class="post-title-link" itemprop="url">UVa 1152 4Values whose Sum is 0</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-01-29 10:49:22" itemprop="dateCreated datePublished" datetime="2015-01-29T10:49:22+00:00">2015-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OJ/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题意 从4个n元集中各挑出一个数 使它们的和为零有多少种方法</p>
+<p>直接n^4枚举肯定会超时的 可以把两个集合的元素和放在数组里 然后排序 枚举另外两个集合中两元素和 看数组中是否有其相反数就行了 复杂度为n^2&#x2F;*logn</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">#define <span class="title function_">l</span>(i) <span class="title function_">lower_bound</span>(s,s+m,i)</span><br><span class="line">#define <span class="title function_">u</span>(i) <span class="title function_">upper_bound</span>(s,s+m,i)</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">4005</span>;</span><br><span class="line">int a[N], b[N], c[N], d[N], s[N * N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int cas, m, k, n;</span><br><span class="line">    long long ans;</span><br><span class="line">    <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = m = <span class="number">0</span>;</span><br><span class="line">        <span class="title function_">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="title function_">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>, &amp;a[i], &amp;b[i], &amp;c[i], &amp;d[i]);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">                s[m++] = a[i] + b[j];</span><br><span class="line">        <span class="title function_">sort</span>(s, s + m);</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">                k = -c[i] - d[j], ans += (<span class="title function_">u</span>(k) - <span class="title function_">l</span>(k));</span><br><span class="line"></span><br><span class="line">        <span class="title function_">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        <span class="keyword">if</span>(cas) <span class="title function_">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The SUM problem can be formulated as follows: given four lists <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em> of integer values, compute how many quadruplet (<em>a</em>, <em>b</em>, <em>c</em>, <em>d</em> ) <img src="/../images/dge.org-external-11-3506img1-.png" alt="$ \in$"> <em>A</em> x <em>B</em> x <em>C</em> x <em>D</em> are such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> &#x3D; 0 . In the following, we assume that all lists have the same size <em>n</em> .</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs.</strong></p>
+<p>The first line of the input file contains the size of the lists <em>n</em> (this value can be as large as 4000). We then have <em>n</em> lines containing four integer values (with absolute value as large as 228 ) that belong respectively to <em>A</em>, <em>B</em>, <em>C</em> and <em>D</em> .</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p><strong>For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line.</strong></p>
+<p>For each input file, your program has to write the number quadruplets whose sum is zero.</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>1 6 -45 22 42 -16 -41 -27 56 30 -36 53 -37 77 -36 30 -75 -46 26 -38 -10 62 -32 -54 -6 45</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>5</p>
+<p>Sample Explanation: Indeed, the sum of the five following quadruplets is zero: (-45, -27, 42, 30), (26, 30, -10, -46), (-32, 22, 56, -46),(-32, 30, -75, 77), (-32, -54, 56, 30).</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1006,99 +1099,6 @@
 <h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>Your output should contain all the compound words, one per line, in alphabetical order.</p>
 <h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>a alien born less lien never nevertheless new newborn the zebra</p>
 <h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>alien newborn</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://csjd.github.io/posts/oj/string/UVa%201593%20Alignment%20of%20Code(%E5%AD%97%E7%AC%A6%E4%B8%B2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Deng">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dd's site \#">
-      <meta itemprop="description" content="Don't be evil.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dd's site \#">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/oj/string/UVa%201593%20Alignment%20of%20Code(%E5%AD%97%E7%AC%A6%E4%B8%B2)/" class="post-title-link" itemprop="url">UVa 1593 Alignment of Code(字符串)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-01-21 00:49:29" itemprop="dateCreated datePublished" datetime="2015-01-21T00:49:29+00:00">2015-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OJ/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意 按要求对齐代码</p>
-<p>字符串流的应用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.<span class="property">h</span>&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"><span class="keyword">const</span> int N = <span class="number">1005</span>, M = <span class="number">200</span>;</span><br><span class="line">string s[N][M], line;</span><br><span class="line">int cw[M], cn[N];</span><br><span class="line"></span><br><span class="line">int <span class="title function_">main</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int r = <span class="number">0</span>, c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="title function_">getline</span>(cin, line))</span><br><span class="line">    &#123;</span><br><span class="line">        stringstream <span class="title function_">ss</span>(line);</span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; s[r][c])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[r][c].<span class="title function_">length</span>() &gt; cw[c])</span><br><span class="line">                cw[c] = s[r][c].<span class="title function_">length</span>();</span><br><span class="line">            ++c;</span><br><span class="line">        &#125;</span><br><span class="line">        cn[r++] = c;</span><br><span class="line">        c = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; r; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j = <span class="number">0</span>; j &lt; cn[i] - <span class="number">1</span>; ++j)</span><br><span class="line">            cout &lt;&lt; left &lt;&lt; <span class="title function_">setw</span>(cw[j] + <span class="number">1</span>) &lt;&lt; s[i][j];</span><br><span class="line">        cout &lt;&lt; s[i][cn[i] - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>You are working in a team that writes Incredibly Customizable Programming Codewriter (ICPC) which is basically a text editor with bells and whistles. You are working on a module that takes a piece of code containing some definitions or other tabular information and aligns each column on a fixed vertical position, while keeping the resulting code as short as possible, making sure that only whitespaces that are absolutely required stay in the code. So, that the first words on each line are printed at position <em>p</em>1 &#x3D; 1; the second words on each line are printed at the minimal possible position <em>p</em>2, such that all first words end at or before position <em>p</em>2 - 2; the third words on each line are printed at the minimal possible position <em>p</em>3, such that all second words end at or before position <em>p</em>3 - 2, etc.</p>
-<p>For the purpose of this problem, the code consists of multiple lines. Each line consists of one or more words separated by spaces. Each word can contain uppercase and lowercase Latin letters, all ASCII punctuation marks, separators, and other non-whitespace ASCII characters (ASCII codes 33 to 126 inclusive). Whitespace consists of space characters (ASCII code 32).</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>The input file contains one or more lines of the code up to the end of file. All lines (including the last one) are terminated by a standard end-of-line sequence in the file. Each line contains at least one word, each word is 1 to 80 characters long (inclusive). Words are separated by one or more spaces. Lines of the code can have both leading and trailing spaces. Each line in the input file is at most 180 characters long. There are at most 1000 lines in the input file.</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>Write to the output file the reformatted, aligned code that consists of the same number of lines, with the same words in the same order, without trailing and leading spaces, separated by one or more spaces such that <em>i</em>-th word on each line starts at the same position <em>p</em>i.</p>
-<p>Note for the Sample:</p>
-<p>The &#96;<img src="/../images/dge.org-external-15-4983img1-.png" alt="$ \sqcup$">‘ character in the example below denotes a space character in the actual files (ASCII code 32).</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>start: integer; &#x2F;&#x2F; begins here stop: integer; &#x2F;&#x2F; ends here s: string; c: char; &#x2F;&#x2F; temp</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><p>start: integer; &#x2F;&#x2F; begins here stop: integer; &#x2F;&#x2F; ends here s: string; c: char; &#x2F;&#x2F; temp</p>
 
       
     </div>
