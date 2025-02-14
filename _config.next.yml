@@ -52,9 +52,9 @@ darkmode: true
 
 favicon:
   #small: /images/favicon-16x16-next.png
-  small: /uploads/favicon.ico
+  small: /uploads/favicon-emoji.svg
   #medium: /images/favicon-32x32-next.png
-  medium: /uploads/favicon.ico
+  medium: /uploads/favicon-emoji.svg
   apple_touch_icon: /images/apple-touch-icon-next.png
   safari_pinned_tab: /images/logo.svg
   #android_manifest: /manifest.json
