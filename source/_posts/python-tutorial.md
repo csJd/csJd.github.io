@@ -9,6 +9,8 @@ date: 2019-01-26 09:22:16
 
 # Python Basic Tutorial（2019.01.26 @ SCUT）
 
+<!--more-->
+
 - [Python Basic Tutorial（2019.01.26 @ SCUT）](#python-basic-tutorial20190126--scut)
   - [Prerequisites](#prerequisites)
   - [Python tutorial ( Forked from CS231)](#python-tutorial--forked-from-cs231)
