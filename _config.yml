@@ -5,12 +5,12 @@
 
 # Site
 title: dd's site \#
-subtitle:
+subtitle: ''
 description: Don't be evil.
 keywords:
 author: Deng
-language:
-timezone:
+language: en
+timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
