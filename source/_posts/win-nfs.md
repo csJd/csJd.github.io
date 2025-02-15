@@ -2,9 +2,10 @@
 title: 在 Windows 上使用 NFS
 date: 2024-04-15 22:00:00
 tags:
-- Practice
+- NFS
+- Windows 
 categories:
-- Practice
+- Experience
 ---
 
 [NFS](https://en.wikipedia.org/wiki/Network_File_System) 协议在 Linux 上使用较广，Windows 其实也有官方的 [NFS 客户端](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview)，只是默认没有使用，这里记录下在 Windows 使用 NFS 遇到的一些问题和解决方案。

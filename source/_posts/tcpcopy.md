@@ -2,9 +2,10 @@
 title: TCPCopy
 date: 2022-12-21 15:16:56
 tags:
-- Practice
+- Network
+- Tools
 categories:
-- Practice
+- Experience
 ---
 
 [TCPCopy](https://github.com/session-replay-tools/tcpcopy) 是一个开源的 TCP 服务器测试工具，

@@ -1,7 +1,7 @@
 ---
 title: 使用 iptables 设置防火墙
 tags:
-  - Practice
+  - Network
 categories:
   - Experience
 date: 2020-03-11 14:59:07

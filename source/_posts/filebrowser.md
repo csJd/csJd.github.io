@@ -2,9 +2,9 @@
 title: 使用 Filebrowser 分享文件 
 date: 2023-03-01 15:16:56
 tags:
-- Practice
+- Tools
 categories:
-- Practice
+- Experience
 ---
 
 [Filebrowser](https://github.com/filebrowser/filebrowser) 是一个开源的服务器文件管理和分享工具，可以较方便的实现服务器上文件的分享，这里记录下个人的使用经验。

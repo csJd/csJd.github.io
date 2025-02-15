@@ -3,8 +3,10 @@ title: 使用 Travis CI 自动构建 Hexo 博客
 date: 2018-02-16 13:36:10
 tags:
 - Hexo
-- Practice
-categories: Experience
+- CI
+- Tools
+categories: 
+- Experience
 ---
 
 [Travis CI](https://travis-ci.com/) 提供的持续集成服务可以在我们将 Commit push 到 Github 后自动执行用户定义的一系列任务。这里记录一下使用 Travis CI 对 Hexo 静态博客自动部署到 Github Pages 的过程。

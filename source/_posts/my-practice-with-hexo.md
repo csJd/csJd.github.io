@@ -3,8 +3,8 @@ title: 我的 Hexo 使用实践（一）
 date: 2017-02-26 09:36:10
 tags:
 - Hexo
-- Practice
-categories: Experience
+categories: 
+- Experience
 ---
 
 此博客是由 Github Pages 和 Hexo 搭建的，分享以下我的使用实践。

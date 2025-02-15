@@ -3,8 +3,8 @@ title: 我的 Hexo 使用实践（二）
 date: 2017-02-26 13:36:10
 tags:
 - Hexo
-- Practice
-categories: Experience
+categories: 
+- Experience
 ---
 
 将 Blog 成功搭到 Github 后就要考虑一些配置问题了，需要更加美观的主题，换了电脑或者重装系统后还需要快速的从以前的配置恢复，下面就解决这些问题。

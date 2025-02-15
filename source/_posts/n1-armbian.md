@@ -2,9 +2,10 @@
 title: 在 Phicomm N1 盒子上使用 Armbian
 date: 2024-05-10 23:00:00
 tags:
-- Practice
+- N1
+- Armbian
 categories:
-- Practice
+- Experience
 ---
 
 [Armbian](https://www.armbian.com/) 是用于单板机（SBCs）的轻量级 Debian/Ubuntu 系统，可以把电视盒子等设备变为一个小型 Linux 服务器。这里记录下在 N1 盒子上使用 Armbian 的过程。

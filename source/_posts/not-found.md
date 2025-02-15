@@ -2,9 +2,10 @@
 title: 在 VPS 上搭建 NOT FOUND Server
 date: 2017-02-27 13:10:10
 tags:
-- Practice
+- Network
 - VPS
-categories: Tutorials
+categories: 
+- Experience
 ---
 
 分享在 Ubuntu 18.04 VPS 上搭建 Shadowsocks Server 的方法。

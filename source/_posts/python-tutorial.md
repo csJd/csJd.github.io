@@ -3,7 +3,7 @@ title: Python Basic Tutorial
 tags:
   - Python
 categories:
-  - Tutorials
+  - Experience
 date: 2019-01-26 09:22:16
 ---
 

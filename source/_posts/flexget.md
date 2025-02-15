@@ -1,7 +1,8 @@
 ---
 title: FlexGet 自动 PT 下载设置
 tags:
-  - Practice
+  - PT
+  - Tools
 categories:
   - Experience
 date: 2020-02-17 12:19:07

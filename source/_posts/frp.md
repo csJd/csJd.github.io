@@ -1,9 +1,10 @@
 ---
 title: FRP 内网穿透应用 - SSH
 tags:
-  - Practice
+  - Network
+  - Tools
 categories:
-  - Practice
+  - Experience
 date: 2019-06-06 15:33:31
 ---
 

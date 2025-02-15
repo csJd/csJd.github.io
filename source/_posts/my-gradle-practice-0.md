@@ -3,7 +3,7 @@ title: 我的 Gradle 使用实践（零）
 tags:
   - Gradle
 categories:
-  - Practice
+  - Experience
 date: 2017-03-11 23:14:38
 ---
 Gradle 是一款非常强大的构建工具，最近学习了下 Gradle 的基础使用，这里记录下我的使用实践。

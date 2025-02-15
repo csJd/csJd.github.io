@@ -1,7 +1,8 @@
 ---
 title: 双系统安装指北
 tags:
-  - Practice
+  - OS
+  - Windows
 categories:
   - Experience
 date: 2018-11-21 20:08:07

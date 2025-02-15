@@ -1,9 +1,9 @@
 ---
 title: AWS Educate & Amazon Lightsail
 tags:
-  - Practice
+  - VPS
 categories:
-  - Practice
+  - Experience
 date: 2019-07-20 22:19:31
 ---
 
