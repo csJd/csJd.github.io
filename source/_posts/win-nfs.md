@@ -8,7 +8,7 @@ categories:
 - Experience
 ---
 
-[NFS](https://en.wikipedia.org/wiki/Network_File_System) 协议在 Linux 上使用较广，Windows 其实也有官方的 [NFS 客户端](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview)，只是默认没有使用，这里记录下在 Windows 使用 NFS 遇到的一些问题和解决方案。
+[NFS](https://en.wikipedia.org/wiki/Network_File_System) 协议在 Linux 上使用较广，Windows 其实也有官方的 [NFS 客户端](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview)，只是默认没有启用，这里记录下在 Windows 使用 NFS 遇到的一些问题和解决方案。
 
 <!-- more -->
 
